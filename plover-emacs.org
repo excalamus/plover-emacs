@@ -1,0 +1,199 @@
+#+TITLE: Plover with Emacs
+#+EXPORT_FILE_NAME: ./docs/index.html
+#+STARTUP: showall
+
+#+begin_src js :tangle plover-emacs.json :exports none
+{
+#+end_src
+
+* Execute extended command and Quit
+Perhaps the two most important bindings are =M-x=
+(=execute-extended-command=) and =C-g= (=keyboard-quit=).  We
+definitely want single one-handed strokes for these.  I put them on
+the right because I am right handed and want to be able to switch
+between the board and the mouse quickly.
+
+=ULT= sounds like "Alt".
+#+begin_src js :tangle plover-emacs.json :exports code
+"ULT": "{#Alt_L(x)}",
+#+end_src
+
+=-RPB= was not taken and "control" has an 'r' and an 'n' in it.
+Honestly, there's not much of an association.  It's simply available
+and easy to write.
+#+begin_src js :tangle plover-emacs.json :exports code
+"-RPB": "{#Control(g)}",
+#+end_src
+
+* COMMENT Leader
+#+begin_src js :tangle plover-emacs.json :exports code
+"KWR-RBG": "{#Page_Down}",
+#+end_src
+
+* Function keys
+It doesn't seem like =*= is used at all with numbers.  So, we can use
+that to differentiate the F keys.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"1*": "{#F1}",
+"2*": "{#F2}",
+"3*": "{#F3}",
+"4*": "{#F4}",
+"5*": "{#F5}",
+"*6": "{#F6}",
+"*7": "{#F7}",
+"*8": "{#F8}",
+"*9": "{#F9}",
+"10*": "{#F10}",
+"1*D": "{#F11}",
+"2*D": "{#F12}",
+#+end_src
+
+
+* Escape, Meta, Alt, Control, Shift
+Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
+means that we can then use the rest of the board to represent phrases
+containing that word.  For example, =THA= ("that") leaves the board
+open for phrases like "that was", "that will", "that had", etc. by
+adding a single key.
+
+We can use this principle with =SH= (Shift), =KR= (Control), and =PH=
+(Meta/Alt).  By default, =SH= is "shh", =PH= is "pH", and =KR= is
+"consider".  All of these strokes are far more important than their
+default mappings.  Additionally, =KHR= is also mapped to "consider".
+This means we can apprehend each stroke without much penalty to the
+overall Plover theory.
+
+#+begin_src js :tangle plover-emacs.json :exports none
+}
+#+end_src
+
+* Single stroke modifiers
+From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json][modifiers-single-stroke]]:
+
+- =*RPLT= as super
+- =*RBLT= as super-alt
+- =*RPBLT= as super-shift
+- =*RBL= as control
+
+#+begin_src js :exports none
+{
+"A*RPLT": "{#Super_L(a)}",
+"PW*RPLT": "{#Super_L(b)}",
+"KR*RPLT": "{#Super_L(c)}",
+"TK*RPLT": "{#Super_L(d)}",
+"*ERPLT": "{#Super_L(e)}",
+"TP*RPLT": "{#Super_L(f)}",
+"TKPW*RPLT": "{#Super_L(g)}",
+"H*RPLT": "{#Super_L(h)}",
+"*EURPLT": "{#Super_L(i)}",
+"SKWR*RPLT": "{#Super_L(j)}",
+"K*RPLT": "{#Super_L(k)}",
+"HR*RPLT": "{#Super_L(l)}",
+"PH*RPLT": "{#Super_L(m)}",
+"TPH*RPLT": "{#Super_L(n)}",
+"O*RPLT": "{#Super_L(o)}",
+"P*RPLT": "{#Super_L(p)}",
+"KW*RPLT": "{#Super_L(q)}",
+"R*RPLT": "{#Super_L(r)}",
+"S*RPLT": "{#Super_L(s)}",
+"T*RPLT": "{#Super_L(t)}",
+"*URPLT": "{#Super_L(u)}",
+"SR*RPLT": "{#Super_L(v)}",
+"W*RPLT": "{#Super_L(w)}",
+"KP*RPLT": "{#Super_L(x)}",
+"KWR*RPLT": "{#Super_L(y)}",
+"STKPW*RPLT": "{#Super_L(z)}",
+"A*RBLT": "{#Super_L(Alt_L(a))}",
+"PW*RBLT": "{#Super_L(Alt_L(b))}",
+"KR*RBLT": "{#Super_L(Alt_L(c))}",
+"TK*RBLT": "{#Super_L(Alt_L(d))}",
+"*ERBLT": "{#Super_L(Alt_L(e))}",
+"TP*RBLT": "{#Super_L(Alt_L(f))}",
+"TKPW*RBLT": "{#Super_L(Alt_L(g))}",
+"H*RBLT": "{#Super_L(Alt_L(h))}",
+"*EURBLT": "{#Super_L(Alt_L(i))}",
+"SKWR*RBLT": "{#Super_L(Alt_L(j))}",
+"K*RBLT": "{#Super_L(Alt_L(k))}",
+"HR*RBLT": "{#Super_L(Alt_L(l))}",
+"PH*RBLT": "{#Super_L(Alt_L(m))}",
+"TPH*RBLT": "{#Super_L(Alt_L(n))}",
+"O*RBLT": "{#Super_L(Alt_L(o))}",
+"P*RBLT": "{#Super_L(Alt_L(p))}",
+"KW*RBLT": "{#Super_L(Alt_L(q))}",
+"R*RBLT": "{#Super_L(Alt_L(r))}",
+"S*RBLT": "{#Super_L(Alt_L(s))}",
+"T*RBLT": "{#Super_L(Alt_L(t))}",
+"*URBLT": "{#Super_L(Alt_L(u))}",
+"SR*RBLT": "{#Super_L(Alt_L(v))}",
+"W*RBLT": "{#Super_L(Alt_L(w))}",
+"KP*RBLT": "{#Super_L(Alt_L(x))}",
+"KWR*RBLT": "{#Super_L(Alt_L(y))}",
+"STKPW*RBLT": "{#Super_L(Alt_L(z))}",
+"A*RPBLT": "{#Super_L(Shift_L(a))}",
+"PW*RPBLT": "{#Super_L(Shift_L(b))}",
+"KR*RPBLT": "{#Super_L(Shift_L(c))}",
+"TK*RPBLT": "{#Super_L(Shift_L(d))}",
+"*ERPBLT": "{#Super_L(Shift_L(e))}",
+"TP*RPBLT": "{#Super_L(Shift_L(f))}",
+"TKPW*RPBLT": "{#Super_L(Shift_L(g))}",
+"H*RPBLT": "{#Super_L(Shift_L(h))}",
+"*EURPBLT": "{#Super_L(Shift_L(i))}",
+"SKWR*RPBLT": "{#Super_L(Shift_L(j))}",
+"K*RPBLT": "{#Super_L(Shift_L(k))}",
+"HR*RPBLT": "{#Super_L(Shift_L(l))}",
+"PH*RPBLT": "{#Super_L(Shift_L(m))}",
+"TPH*RPBLT": "{#Super_L(Shift_L(n))}",
+"O*RPBLT": "{#Super_L(Shift_L(o))}",
+"P*RPBLT": "{#Super_L(Shift_L(p))}",
+"KW*RPBLT": "{#Super_L(Shift_L(q))}",
+"R*RPBLT": "{#Super_L(Shift_L(r))}",
+"S*RPBLT": "{#Super_L(Shift_L(s))}",
+"T*RPBLT": "{#Super_L(Shift_L(t))}",
+"*URPBLT": "{#Super_L(Shift_L(u))}",
+"SR*RPBLT": "{#Super_L(Shift_L(v))}",
+"W*RPBLT": "{#Super_L(Shift_L(w))}",
+"KP*RPBLT": "{#Super_L(Shift_L(x))}",
+"KWR*RPBLT": "{#Super_L(Shift_L(y))}",
+"STKPW*RPBLT": "{#Super_L(Shift_L(z))}",
+"1-RG": "{^}{#Control_L(F1)}{^}",
+"2-RG": "{^}{#Control_L(F2)}{^}",
+"3-RG": "{^}{#Control_L(F3)}{^}",
+"4-RG": "{^}{#Control_L(F4)}{^}",
+"5-RG": "{^}{#Control_L(F5)}{^}",
+"KR-6": "{^}{#Control_L(F6)}{^}",
+"KR-7": "{^}{#Control_L(F7)}{^}",
+"KR-8": "{^}{#Control_L(F8)}{^}",
+"KR-9": "{^}{#Control_L(F9)}{^}",
+"10-RG": "{^}{#Control_L(F10)}{^}",
+"11-RG": "{^}{#Control_L(F11)}{^}",
+"12-RG": "{^}{#Control_L(F12)}{^}",
+"A*RBL": "{#Control_L(a)}",
+"PW*RBL": "{#Control_L(b)}",
+"KR*RBL": "{#Control_L(c)}",
+"TK*RBL": "{#Control_L(d)}",
+"*ERBL": "{#Control_L(e)}",
+"TP*RBL": "{#Control_L(f)}",
+"TKPW*RBL": "{#Control_L(g)}",
+"H*RBL": "{#Control_L(h)}",
+"*EURBL": "{#Control_L(i)}",
+"SKWR*RBL": "{#Control_L(j)}",
+"K*RBL": "{#Control_L(k)}",
+"HR*RBL": "{#Control_L(l)}",
+"PH*RBL": "{#Control_L(m)}",
+"TPH*RBL": "{#Control_L(n)}",
+"O*RBL": "{#Control_L(o)}",
+"P*RBL": "{#Control_L(p)}",
+"KW*RBL": "{#Control_L(q)}",
+"R*RBL": "{#Control_L(r)}",
+"S*RBL": "{#Control_L(s)}",
+"T*RBL": "{#Control_L(t)}",
+"*URBL": "{#Control_L(u)}",
+"SR*RBL": "{#Control_L(v)}",
+"W*RBL": "{#Control_L(w)}",
+"KP*RBL": "{#Control_L(x)}",
+"KWR*RBL": "{#Control_L(y)}",
+"STKPW*RBL": "{#Control_L(z)}",
+"WUZ/WUZ": "{#}"
+}
+#+end_src
