@@ -85,7 +85,7 @@ a modifier key.
 The idea is to map all Emacs bindings to chains.  In this way, all
 bindings can at least be expressed in multiple strokes.  For example,
 
-- =C-x f= would be =KR-F=
+- =C-x f= would be =KR/T-PLZ/F=
 - =C-c C-c= would be =KR/KR*/KR/KR*=
 - etc.
 
