@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-16 Tue 09:24 -->
+<!-- 2021-02-17 Wed 21:58 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -246,17 +246,27 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org5ceb80b">1. Execute extended command and Quit</a></li>
-<li><a href="#org71674ab">2. Function keys</a></li>
-<li><a href="#orgab0369f">3. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org0acf0e2">4. Single stroke modifiers</a></li>
+<li><a href="#org5150571">1. Opening bracket</a></li>
+<li><a href="#orgf7afac3">2. Execute extended command and Quit</a></li>
+<li><a href="#org7d85e70">3. Function keys</a></li>
+<li><a href="#orga154e13">4. Chaining</a></li>
+<li><a href="#org8791977">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org8c2375a">6. Closing bracket</a></li>
+<li><a href="#org1eae9a7">7. Notes</a>
+<ul>
+<li><a href="#org0c3115a">7.1. Possible bindings</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org5ceb80b" class="outline-2">
-<h2 id="org5ceb80b"><span class="section-number-2">1</span> Execute extended command and Quit</h2>
-<div class="outline-text-2" id="text-1">
+<div id="outline-container-org5150571" class="outline-2">
+<h2 id="org5150571"><span class="section-number-2">1</span> Opening bracket</h2>
+</div>
+<div id="outline-container-orgf7afac3" class="outline-2">
+<h2 id="orgf7afac3"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
 (<code>execute-extended-command</code>) and <code>C-g</code> (<code>keyboard-quit</code>).  We
@@ -285,9 +295,9 @@ and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org71674ab" class="outline-2">
-<h2 id="org71674ab"><span class="section-number-2">2</span> Function keys</h2>
-<div class="outline-text-2" id="text-2">
+<div id="outline-container-org7d85e70" class="outline-2">
+<h2 id="org7d85e70"><span class="section-number-2">3</span> Function keys</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
 that to differentiate the F keys.
@@ -312,9 +322,33 @@ that to differentiate the F keys.
 </div>
 
 
-<div id="outline-container-orgab0369f" class="outline-2">
-<h2 id="orgab0369f"><span class="section-number-2">3</span> Escape, Meta, Alt, Control, Shift</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orga154e13" class="outline-2">
+<h2 id="orga154e13"><span class="section-number-2">4</span> Chaining</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+It's possible to chain strokes together, for lack of a better way to
+express it.  For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  This can be
+achieved in Plover with:
+</p>
+<div class="org-src-container">
+<pre class="src src-js">"KR*EU": "{#Control_L(x) 8 m}"
+</pre>
+</div>
+
+<p>
+To pass capitalized letters, you must use <code>Shift()</code>.  For example,
+<code>C-x 8 R</code> writes <code>®</code>.  In Plover, this is:
+</p>
+<div class="org-src-container">
+<pre class="src src-js">"KR*EU": "{#Control_L(x) 8 Shift(r)}"
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org8791977" class="outline-2">
+<h2 id="org8791977"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div class="outline-text-2" id="text-5">
 <p>
 Mark Kislingbury <a href="http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf">advises</a> to put small words on the left.  Steno order
 means that we can then use the rest of the board to represent phrases
@@ -331,12 +365,40 @@ default mappings.  Additionally, <code>KHR</code> is also mapped to "consider".
 This means we can apprehend each stroke without much penalty to the
 overall Plover theory.
 </p>
+
+<p>
+This should mean we can write commands in a way that simulates holding
+a modifier key.
+</p>
+
+<p>
+The idea is to map all Emacs bindings to chains.  In this way, all
+bindings can at least be expressed in multiple strokes.  For example,
+</p>
+
+<ul class="org-ul">
+<li><code>C-x f</code> would be <code>KR-F</code></li>
+<li><code>C-c C-c</code> would be <code>KR/KR*/KR/KR*</code></li>
+<li>etc.</li>
+</ul>
+
+<p>
+Of course we would want more efficient bindings than those. But the
+idea, I think, covers all the cases completely and intuitively.
+</p>
 </div>
 </div>
 
-<div id="outline-container-org0acf0e2" class="outline-2">
-<h2 id="org0acf0e2"><span class="section-number-2">4</span> Single stroke modifiers</h2>
-<div class="outline-text-2" id="text-4">
+<div id="outline-container-org8c2375a" class="outline-2">
+<h2 id="org8c2375a"><span class="section-number-2">6</span> Closing bracket</h2>
+</div>
+<div id="outline-container-org1eae9a7" class="outline-2">
+<h2 id="org1eae9a7"><span class="section-number-2">7</span> Notes</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org0c3115a" class="outline-3">
+<h3 id="org0c3115a"><span class="section-number-3">7.1</span> Possible bindings</h3>
+<div class="outline-text-3" id="text-7-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
 </p>
@@ -347,11 +409,135 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 <li><code>*RPBLT</code> as super-shift</li>
 <li><code>*RBL</code> as control</li>
 </ul>
+
+<div class="org-src-container">
+<pre class="src src-js">{
+"A*RPLT": "{#Super_L(a)}",
+"PW*RPLT": "{#Super_L(b)}",
+"KR*RPLT": "{#Super_L(c)}",
+"TK*RPLT": "{#Super_L(d)}",
+"*ERPLT": "{#Super_L(e)}",
+"TP*RPLT": "{#Super_L(f)}",
+"TKPW*RPLT": "{#Super_L(g)}",
+"H*RPLT": "{#Super_L(h)}",
+"*EURPLT": "{#Super_L(i)}",
+"SKWR*RPLT": "{#Super_L(j)}",
+"K*RPLT": "{#Super_L(k)}",
+"HR*RPLT": "{#Super_L(l)}",
+"PH*RPLT": "{#Super_L(m)}",
+"TPH*RPLT": "{#Super_L(n)}",
+"O*RPLT": "{#Super_L(o)}",
+"P*RPLT": "{#Super_L(p)}",
+"KW*RPLT": "{#Super_L(q)}",
+"R*RPLT": "{#Super_L(r)}",
+"S*RPLT": "{#Super_L(s)}",
+"T*RPLT": "{#Super_L(t)}",
+"*URPLT": "{#Super_L(u)}",
+"SR*RPLT": "{#Super_L(v)}",
+"W*RPLT": "{#Super_L(w)}",
+"KP*RPLT": "{#Super_L(x)}",
+"KWR*RPLT": "{#Super_L(y)}",
+"STKPW*RPLT": "{#Super_L(z)}",
+"A*RBLT": "{#Super_L(Alt_L(a))}",
+"PW*RBLT": "{#Super_L(Alt_L(b))}",
+"KR*RBLT": "{#Super_L(Alt_L(c))}",
+"TK*RBLT": "{#Super_L(Alt_L(d))}",
+"*ERBLT": "{#Super_L(Alt_L(e))}",
+"TP*RBLT": "{#Super_L(Alt_L(f))}",
+"TKPW*RBLT": "{#Super_L(Alt_L(g))}",
+"H*RBLT": "{#Super_L(Alt_L(h))}",
+"*EURBLT": "{#Super_L(Alt_L(i))}",
+"SKWR*RBLT": "{#Super_L(Alt_L(j))}",
+"K*RBLT": "{#Super_L(Alt_L(k))}",
+"HR*RBLT": "{#Super_L(Alt_L(l))}",
+"PH*RBLT": "{#Super_L(Alt_L(m))}",
+"TPH*RBLT": "{#Super_L(Alt_L(n))}",
+"O*RBLT": "{#Super_L(Alt_L(o))}",
+"P*RBLT": "{#Super_L(Alt_L(p))}",
+"KW*RBLT": "{#Super_L(Alt_L(q))}",
+"R*RBLT": "{#Super_L(Alt_L(r))}",
+"S*RBLT": "{#Super_L(Alt_L(s))}",
+"T*RBLT": "{#Super_L(Alt_L(t))}",
+"*URBLT": "{#Super_L(Alt_L(u))}",
+"SR*RBLT": "{#Super_L(Alt_L(v))}",
+"W*RBLT": "{#Super_L(Alt_L(w))}",
+"KP*RBLT": "{#Super_L(Alt_L(x))}",
+"KWR*RBLT": "{#Super_L(Alt_L(y))}",
+"STKPW*RBLT": "{#Super_L(Alt_L(z))}",
+"A*RPBLT": "{#Super_L(Shift_L(a))}",
+"PW*RPBLT": "{#Super_L(Shift_L(b))}",
+"KR*RPBLT": "{#Super_L(Shift_L(c))}",
+"TK*RPBLT": "{#Super_L(Shift_L(d))}",
+"*ERPBLT": "{#Super_L(Shift_L(e))}",
+"TP*RPBLT": "{#Super_L(Shift_L(f))}",
+"TKPW*RPBLT": "{#Super_L(Shift_L(g))}",
+"H*RPBLT": "{#Super_L(Shift_L(h))}",
+"*EURPBLT": "{#Super_L(Shift_L(i))}",
+"SKWR*RPBLT": "{#Super_L(Shift_L(j))}",
+"K*RPBLT": "{#Super_L(Shift_L(k))}",
+"HR*RPBLT": "{#Super_L(Shift_L(l))}",
+"PH*RPBLT": "{#Super_L(Shift_L(m))}",
+"TPH*RPBLT": "{#Super_L(Shift_L(n))}",
+"O*RPBLT": "{#Super_L(Shift_L(o))}",
+"P*RPBLT": "{#Super_L(Shift_L(p))}",
+"KW*RPBLT": "{#Super_L(Shift_L(q))}",
+"R*RPBLT": "{#Super_L(Shift_L(r))}",
+"S*RPBLT": "{#Super_L(Shift_L(s))}",
+"T*RPBLT": "{#Super_L(Shift_L(t))}",
+"*URPBLT": "{#Super_L(Shift_L(u))}",
+"SR*RPBLT": "{#Super_L(Shift_L(v))}",
+"W*RPBLT": "{#Super_L(Shift_L(w))}",
+"KP*RPBLT": "{#Super_L(Shift_L(x))}",
+"KWR*RPBLT": "{#Super_L(Shift_L(y))}",
+"STKPW*RPBLT": "{#Super_L(Shift_L(z))}",
+"1-RG": "{^}{#Control_L(F1)}{^}",
+"2-RG": "{^}{#Control_L(F2)}{^}",
+"3-RG": "{^}{#Control_L(F3)}{^}",
+"4-RG": "{^}{#Control_L(F4)}{^}",
+"5-RG": "{^}{#Control_L(F5)}{^}",
+"KR-6": "{^}{#Control_L(F6)}{^}",
+"KR-7": "{^}{#Control_L(F7)}{^}",
+"KR-8": "{^}{#Control_L(F8)}{^}",
+"KR-9": "{^}{#Control_L(F9)}{^}",
+"10-RG": "{^}{#Control_L(F10)}{^}",
+"11-RG": "{^}{#Control_L(F11)}{^}",
+"12-RG": "{^}{#Control_L(F12)}{^}",
+"A*RBL": "{#Control_L(a)}",
+"PW*RBL": "{#Control_L(b)}",
+"KR*RBL": "{#Control_L(c)}",
+"TK*RBL": "{#Control_L(d)}",
+"*ERBL": "{#Control_L(e)}",
+"TP*RBL": "{#Control_L(f)}",
+"TKPW*RBL": "{#Control_L(g)}",
+"H*RBL": "{#Control_L(h)}",
+"*EURBL": "{#Control_L(i)}",
+"SKWR*RBL": "{#Control_L(j)}",
+"K*RBL": "{#Control_L(k)}",
+"HR*RBL": "{#Control_L(l)}",
+"PH*RBL": "{#Control_L(m)}",
+"TPH*RBL": "{#Control_L(n)}",
+"O*RBL": "{#Control_L(o)}",
+"P*RBL": "{#Control_L(p)}",
+"KW*RBL": "{#Control_L(q)}",
+"R*RBL": "{#Control_L(r)}",
+"S*RBL": "{#Control_L(s)}",
+"T*RBL": "{#Control_L(t)}",
+"*URBL": "{#Control_L(u)}",
+"SR*RBL": "{#Control_L(v)}",
+"W*RBL": "{#Control_L(w)}",
+"KP*RBL": "{#Control_L(x)}",
+"KWR*RBL": "{#Control_L(y)}",
+"STKPW*RBL": "{#Control_L(z)}",
+"WUZ/WUZ": "{#}"
+}
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-16 Tue 09:24</p>
+<p class="date">Created: 2021-02-17 Wed 21:58</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

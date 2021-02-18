@@ -2,6 +2,7 @@
 #+EXPORT_FILE_NAME: ./docs/index.html
 #+STARTUP: showall
 
+* Opening bracket
 #+begin_src js :tangle plover-emacs.json :exports none
 {
 #+end_src
@@ -50,6 +51,20 @@ that to differentiate the F keys.
 #+end_src
 
 
+* Chaining
+It's possible to chain strokes together, for lack of a better way to
+express it.  For example, in Emacs =C-x 8 m= writes =µ=.  This can be
+achieved in Plover with:
+#+begin_src js :exports code
+"KR*EU": "{#Control_L(x) 8 m}"
+#+end_src
+
+To pass capitalized letters, you must use =Shift()=.  For example,
+=C-x 8 R= writes =®=.  In Plover, this is:
+#+begin_src js :exports code :tangle no
+"KR*EU": "{#Control_L(x) 8 Shift(r)}"
+#+end_src
+
 * Escape, Meta, Alt, Control, Shift
 Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
 means that we can then use the rest of the board to represent phrases
@@ -64,11 +79,26 @@ default mappings.  Additionally, =KHR= is also mapped to "consider".
 This means we can apprehend each stroke without much penalty to the
 overall Plover theory.
 
+This should mean we can write commands in a way that simulates holding
+a modifier key.
+
+The idea is to map all Emacs bindings to chains.  In this way, all
+bindings can at least be expressed in multiple strokes.  For example,
+
+- =C-x f= would be =KR-F=
+- =C-c C-c= would be =KR/KR*/KR/KR*=
+- etc.
+
+Of course we would want more efficient bindings than those. But the
+idea, I think, covers all the cases completely and intuitively.
+
+* Closing bracket
 #+begin_src js :tangle plover-emacs.json :exports none
 }
 #+end_src
 
-* Single stroke modifiers
+* Notes
+** Possible bindings
 From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json][modifiers-single-stroke]]:
 
 - =*RPLT= as super
@@ -76,7 +106,7 @@ From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/ma
 - =*RPBLT= as super-shift
 - =*RBL= as control
 
-#+begin_src js :exports none
+#+begin_src js :exports code
 {
 "A*RPLT": "{#Super_L(a)}",
 "PW*RPLT": "{#Super_L(b)}",
