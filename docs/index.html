@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-21 Sun 00:23 -->
+<!-- 2021-02-21 Sun 00:24 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -223,23 +223,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org8d92895">1. Opening bracket</a></li>
-<li><a href="#org367a328">2. Execute extended command and Quit</a></li>
-<li><a href="#orgb5afc72">3. Function keys</a></li>
-<li><a href="#org135cf98">4. Chaining</a></li>
-<li><a href="#org70ee4d2">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#orgaa0bc9d">6. Notes</a>
+<li><a href="#orgf1a57cc">1. Opening bracket</a></li>
+<li><a href="#orgb77e118">2. Execute extended command and Quit</a></li>
+<li><a href="#org079464e">3. Function keys</a></li>
+<li><a href="#orgea02750">4. Chaining</a></li>
+<li><a href="#org008d6ec">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org823ffe2">6. Notes</a>
 <ul>
-<li><a href="#org478f457">6.1. Possible bindings</a></li>
+<li><a href="#org1a28100">6.1. Possible bindings</a></li>
 </ul>
 </li>
-<li><a href="#org3625eb1">7. Closing bracket</a></li>
+<li><a href="#org468d378">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org8d92895" class="outline-2">
-<h2 id="org8d92895"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-orgf1a57cc" class="outline-2">
+<h2 id="orgf1a57cc"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
@@ -253,7 +253,7 @@ and add-ons.
 </p>
 
 
-<div id="org273c165" class="figure">
+<div id="orgfb4a968" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
@@ -272,8 +272,8 @@ interactive process, you would type <code>M-x other-window</code>.
 </div>
 </div>
 
-<div id="outline-container-org367a328" class="outline-2">
-<h2 id="org367a328"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div id="outline-container-orgb77e118" class="outline-2">
+<h2 id="orgb77e118"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -290,7 +290,7 @@ when using a mouse.
 <code>ULT</code> sounds like "Alt".
 </p>
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"ULT"</span>: <span style="color: #CC9393;">"{#Alt_L(x)}"</span>,
+<pre class="src src-js"><span style="color: #718c00;">"ULT"</span>: <span style="color: #718c00;">"{#Alt_L(x)}"</span>,
 </pre>
 </div>
 
@@ -299,14 +299,14 @@ The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
 much of an association.  It's simply available and easy to write.
 </p>
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"-RPB"</span>: <span style="color: #CC9393;">"{#Control(g)}"</span>,
+<pre class="src src-js"><span style="color: #718c00;">"-RPB"</span>: <span style="color: #718c00;">"{#Control(g)}"</span>,
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgb5afc72" class="outline-2">
-<h2 id="orgb5afc72"><span class="section-number-2">3</span> Function keys</h2>
+<div id="outline-container-org079464e" class="outline-2">
+<h2 id="org079464e"><span class="section-number-2">3</span> Function keys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
@@ -314,25 +314,25 @@ that to differentiate the F keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"*"</span>: <span style="color: #CC9393;">"{#F1}"</span>,
-<span style="color: #CC9393;">"2*"</span>: <span style="color: #CC9393;">"{#F2}"</span>,
-<span style="color: #CC9393;">"3*"</span>: <span style="color: #CC9393;">"{#F3}"</span>,
-<span style="color: #CC9393;">"4*"</span>: <span style="color: #CC9393;">"{#F4}"</span>,
-<span style="color: #CC9393;">"5*"</span>: <span style="color: #CC9393;">"{#F5}"</span>,
-<span style="color: #CC9393;">"*6"</span>: <span style="color: #CC9393;">"{#F6}"</span>,
-<span style="color: #CC9393;">"*7"</span>: <span style="color: #CC9393;">"{#F7}"</span>,
-<span style="color: #CC9393;">"*8"</span>: <span style="color: #CC9393;">"{#F8}"</span>,
-<span style="color: #CC9393;">"*9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
-<span style="color: #CC9393;">"10*"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
-<span style="color: #CC9393;">"1*D"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
-<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
+<pre class="src src-js"><span style="color: #718c00;">"*"</span>: <span style="color: #718c00;">"{#F1}"</span>,
+<span style="color: #718c00;">"2*"</span>: <span style="color: #718c00;">"{#F2}"</span>,
+<span style="color: #718c00;">"3*"</span>: <span style="color: #718c00;">"{#F3}"</span>,
+<span style="color: #718c00;">"4*"</span>: <span style="color: #718c00;">"{#F4}"</span>,
+<span style="color: #718c00;">"5*"</span>: <span style="color: #718c00;">"{#F5}"</span>,
+<span style="color: #718c00;">"*6"</span>: <span style="color: #718c00;">"{#F6}"</span>,
+<span style="color: #718c00;">"*7"</span>: <span style="color: #718c00;">"{#F7}"</span>,
+<span style="color: #718c00;">"*8"</span>: <span style="color: #718c00;">"{#F8}"</span>,
+<span style="color: #718c00;">"*9"</span>: <span style="color: #718c00;">"{#F9}"</span>,
+<span style="color: #718c00;">"10*"</span>: <span style="color: #718c00;">"{#F10}"</span>,
+<span style="color: #718c00;">"1*D"</span>: <span style="color: #718c00;">"{#F11}"</span>,
+<span style="color: #718c00;">"2*D"</span>: <span style="color: #718c00;">"{#F12}"</span>,
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org135cf98" class="outline-2">
-<h2 id="org135cf98"><span class="section-number-2">4</span> Chaining</h2>
+<div id="outline-container-orgea02750" class="outline-2">
+<h2 id="orgea02750"><span class="section-number-2">4</span> Chaining</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It's possible to chain strokes together, for lack of a better way to
@@ -340,7 +340,7 @@ express it.  For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>. 
 achieved in Plover with:
 </p>
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"KR*EU"</span>: <span style="color: #CC9393;">"{#Control_L(x) 8 m}"</span>
+<pre class="src src-js"><span style="color: #718c00;">"KR*EU"</span>: <span style="color: #718c00;">"{#Control_L(x) 8 m}"</span>
 </pre>
 </div>
 
@@ -349,14 +349,14 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 <code>C-x 8 R</code> writes <code>®</code>.  In Plover, this is:
 </p>
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"KR*EU"</span>: <span style="color: #CC9393;">"{#Control_L(x) 8 Shift(r)}"</span>
+<pre class="src src-js"><span style="color: #718c00;">"KR*EU"</span>: <span style="color: #718c00;">"{#Control_L(x) 8 Shift(r)}"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org70ee4d2" class="outline-2">
-<h2 id="org70ee4d2"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org008d6ec" class="outline-2">
+<h2 id="org008d6ec"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -365,7 +365,7 @@ dictionary:
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"TPEFBG"</span>: <span style="color: #CC9393;">"{#Escape}"</span>,
+<pre class="src src-js"><span style="color: #718c00;">"TPEFBG"</span>: <span style="color: #718c00;">"{#Escape}"</span>,
 </pre>
 </div>
 
@@ -409,12 +409,12 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-orgaa0bc9d" class="outline-2">
-<h2 id="orgaa0bc9d"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-org823ffe2" class="outline-2">
+<h2 id="org823ffe2"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org478f457" class="outline-3">
-<h3 id="org478f457"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div id="outline-container-org1a28100" class="outline-3">
+<h3 id="org1a28100"><span class="section-number-3">6.1</span> Possible bindings</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
@@ -429,123 +429,123 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 
 <div class="org-src-container">
 <pre class="src src-js">{
-<span style="color: #CC9393;">"A*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(a)}"</span>,
-<span style="color: #CC9393;">"PW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(b)}"</span>,
-<span style="color: #CC9393;">"KR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(c)}"</span>,
-<span style="color: #CC9393;">"TK*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(d)}"</span>,
-<span style="color: #CC9393;">"*ERPLT"</span>: <span style="color: #CC9393;">"{#Super_L(e)}"</span>,
-<span style="color: #CC9393;">"TP*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(f)}"</span>,
-<span style="color: #CC9393;">"TKPW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(g)}"</span>,
-<span style="color: #CC9393;">"H*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(h)}"</span>,
-<span style="color: #CC9393;">"*EURPLT"</span>: <span style="color: #CC9393;">"{#Super_L(i)}"</span>,
-<span style="color: #CC9393;">"SKWR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(j)}"</span>,
-<span style="color: #CC9393;">"K*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(k)}"</span>,
-<span style="color: #CC9393;">"HR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(l)}"</span>,
-<span style="color: #CC9393;">"PH*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(m)}"</span>,
-<span style="color: #CC9393;">"TPH*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(n)}"</span>,
-<span style="color: #CC9393;">"O*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(o)}"</span>,
-<span style="color: #CC9393;">"P*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(p)}"</span>,
-<span style="color: #CC9393;">"KW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(q)}"</span>,
-<span style="color: #CC9393;">"R*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(r)}"</span>,
-<span style="color: #CC9393;">"S*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(s)}"</span>,
-<span style="color: #CC9393;">"T*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(t)}"</span>,
-<span style="color: #CC9393;">"*URPLT"</span>: <span style="color: #CC9393;">"{#Super_L(u)}"</span>,
-<span style="color: #CC9393;">"SR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(v)}"</span>,
-<span style="color: #CC9393;">"W*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(w)}"</span>,
-<span style="color: #CC9393;">"KP*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(x)}"</span>,
-<span style="color: #CC9393;">"KWR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(y)}"</span>,
-<span style="color: #CC9393;">"STKPW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(z)}"</span>,
-<span style="color: #CC9393;">"A*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(a))}"</span>,
-<span style="color: #CC9393;">"PW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(b))}"</span>,
-<span style="color: #CC9393;">"KR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(c))}"</span>,
-<span style="color: #CC9393;">"TK*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(d))}"</span>,
-<span style="color: #CC9393;">"*ERBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(e))}"</span>,
-<span style="color: #CC9393;">"TP*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(f))}"</span>,
-<span style="color: #CC9393;">"TKPW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(g))}"</span>,
-<span style="color: #CC9393;">"H*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(h))}"</span>,
-<span style="color: #CC9393;">"*EURBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(i))}"</span>,
-<span style="color: #CC9393;">"SKWR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(j))}"</span>,
-<span style="color: #CC9393;">"K*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(k))}"</span>,
-<span style="color: #CC9393;">"HR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(l))}"</span>,
-<span style="color: #CC9393;">"PH*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(m))}"</span>,
-<span style="color: #CC9393;">"TPH*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(n))}"</span>,
-<span style="color: #CC9393;">"O*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(o))}"</span>,
-<span style="color: #CC9393;">"P*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(p))}"</span>,
-<span style="color: #CC9393;">"KW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(q))}"</span>,
-<span style="color: #CC9393;">"R*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(r))}"</span>,
-<span style="color: #CC9393;">"S*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(s))}"</span>,
-<span style="color: #CC9393;">"T*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(t))}"</span>,
-<span style="color: #CC9393;">"*URBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(u))}"</span>,
-<span style="color: #CC9393;">"SR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(v))}"</span>,
-<span style="color: #CC9393;">"W*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(w))}"</span>,
-<span style="color: #CC9393;">"KP*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(x))}"</span>,
-<span style="color: #CC9393;">"KWR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(y))}"</span>,
-<span style="color: #CC9393;">"STKPW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(z))}"</span>,
-<span style="color: #CC9393;">"A*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(a))}"</span>,
-<span style="color: #CC9393;">"PW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(b))}"</span>,
-<span style="color: #CC9393;">"KR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(c))}"</span>,
-<span style="color: #CC9393;">"TK*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(d))}"</span>,
-<span style="color: #CC9393;">"*ERPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(e))}"</span>,
-<span style="color: #CC9393;">"TP*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(f))}"</span>,
-<span style="color: #CC9393;">"TKPW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(g))}"</span>,
-<span style="color: #CC9393;">"H*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(h))}"</span>,
-<span style="color: #CC9393;">"*EURPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(i))}"</span>,
-<span style="color: #CC9393;">"SKWR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(j))}"</span>,
-<span style="color: #CC9393;">"K*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(k))}"</span>,
-<span style="color: #CC9393;">"HR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(l))}"</span>,
-<span style="color: #CC9393;">"PH*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(m))}"</span>,
-<span style="color: #CC9393;">"TPH*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(n))}"</span>,
-<span style="color: #CC9393;">"O*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(o))}"</span>,
-<span style="color: #CC9393;">"P*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(p))}"</span>,
-<span style="color: #CC9393;">"KW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(q))}"</span>,
-<span style="color: #CC9393;">"R*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(r))}"</span>,
-<span style="color: #CC9393;">"S*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(s))}"</span>,
-<span style="color: #CC9393;">"T*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(t))}"</span>,
-<span style="color: #CC9393;">"*URPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(u))}"</span>,
-<span style="color: #CC9393;">"SR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(v))}"</span>,
-<span style="color: #CC9393;">"W*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(w))}"</span>,
-<span style="color: #CC9393;">"KP*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(x))}"</span>,
-<span style="color: #CC9393;">"KWR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(y))}"</span>,
-<span style="color: #CC9393;">"STKPW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(z))}"</span>,
-<span style="color: #CC9393;">"1-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F1)}{^}"</span>,
-<span style="color: #CC9393;">"2-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F2)}{^}"</span>,
-<span style="color: #CC9393;">"3-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F3)}{^}"</span>,
-<span style="color: #CC9393;">"4-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F4)}{^}"</span>,
-<span style="color: #CC9393;">"5-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F5)}{^}"</span>,
-<span style="color: #CC9393;">"KR-6"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F6)}{^}"</span>,
-<span style="color: #CC9393;">"KR-7"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F7)}{^}"</span>,
-<span style="color: #CC9393;">"KR-8"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F8)}{^}"</span>,
-<span style="color: #CC9393;">"KR-9"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F9)}{^}"</span>,
-<span style="color: #CC9393;">"10-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F10)}{^}"</span>,
-<span style="color: #CC9393;">"11-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F11)}{^}"</span>,
-<span style="color: #CC9393;">"12-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F12)}{^}"</span>,
-<span style="color: #CC9393;">"A*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(a)}"</span>,
-<span style="color: #CC9393;">"PW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(b)}"</span>,
-<span style="color: #CC9393;">"KR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(c)}"</span>,
-<span style="color: #CC9393;">"TK*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(d)}"</span>,
-<span style="color: #CC9393;">"*ERBL"</span>: <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
-<span style="color: #CC9393;">"TP*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(f)}"</span>,
-<span style="color: #CC9393;">"TKPW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(g)}"</span>,
-<span style="color: #CC9393;">"H*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(h)}"</span>,
-<span style="color: #CC9393;">"*EURBL"</span>: <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
-<span style="color: #CC9393;">"SKWR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(j)}"</span>,
-<span style="color: #CC9393;">"K*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(k)}"</span>,
-<span style="color: #CC9393;">"HR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(l)}"</span>,
-<span style="color: #CC9393;">"PH*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(m)}"</span>,
-<span style="color: #CC9393;">"TPH*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(n)}"</span>,
-<span style="color: #CC9393;">"O*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(o)}"</span>,
-<span style="color: #CC9393;">"P*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(p)}"</span>,
-<span style="color: #CC9393;">"KW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(q)}"</span>,
-<span style="color: #CC9393;">"R*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(r)}"</span>,
-<span style="color: #CC9393;">"S*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(s)}"</span>,
-<span style="color: #CC9393;">"T*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(t)}"</span>,
-<span style="color: #CC9393;">"*URBL"</span>: <span style="color: #CC9393;">"{#Control_L(u)}"</span>,
-<span style="color: #CC9393;">"SR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(v)}"</span>,
-<span style="color: #CC9393;">"W*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
-<span style="color: #CC9393;">"KP*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(x)}"</span>,
-<span style="color: #CC9393;">"KWR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(y)}"</span>,
-<span style="color: #CC9393;">"STKPW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(z)}"</span>,
-<span style="color: #CC9393;">"WUZ/WUZ"</span>: <span style="color: #CC9393;">"{#}"</span>
+<span style="color: #718c00;">"A*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(a)}"</span>,
+<span style="color: #718c00;">"PW*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(b)}"</span>,
+<span style="color: #718c00;">"KR*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(c)}"</span>,
+<span style="color: #718c00;">"TK*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(d)}"</span>,
+<span style="color: #718c00;">"*ERPLT"</span>: <span style="color: #718c00;">"{#Super_L(e)}"</span>,
+<span style="color: #718c00;">"TP*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(f)}"</span>,
+<span style="color: #718c00;">"TKPW*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(g)}"</span>,
+<span style="color: #718c00;">"H*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(h)}"</span>,
+<span style="color: #718c00;">"*EURPLT"</span>: <span style="color: #718c00;">"{#Super_L(i)}"</span>,
+<span style="color: #718c00;">"SKWR*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(j)}"</span>,
+<span style="color: #718c00;">"K*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(k)}"</span>,
+<span style="color: #718c00;">"HR*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(l)}"</span>,
+<span style="color: #718c00;">"PH*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(m)}"</span>,
+<span style="color: #718c00;">"TPH*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(n)}"</span>,
+<span style="color: #718c00;">"O*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(o)}"</span>,
+<span style="color: #718c00;">"P*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(p)}"</span>,
+<span style="color: #718c00;">"KW*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(q)}"</span>,
+<span style="color: #718c00;">"R*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(r)}"</span>,
+<span style="color: #718c00;">"S*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(s)}"</span>,
+<span style="color: #718c00;">"T*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(t)}"</span>,
+<span style="color: #718c00;">"*URPLT"</span>: <span style="color: #718c00;">"{#Super_L(u)}"</span>,
+<span style="color: #718c00;">"SR*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(v)}"</span>,
+<span style="color: #718c00;">"W*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(w)}"</span>,
+<span style="color: #718c00;">"KP*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(x)}"</span>,
+<span style="color: #718c00;">"KWR*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(y)}"</span>,
+<span style="color: #718c00;">"STKPW*RPLT"</span>: <span style="color: #718c00;">"{#Super_L(z)}"</span>,
+<span style="color: #718c00;">"A*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(a))}"</span>,
+<span style="color: #718c00;">"PW*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(b))}"</span>,
+<span style="color: #718c00;">"KR*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(c))}"</span>,
+<span style="color: #718c00;">"TK*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(d))}"</span>,
+<span style="color: #718c00;">"*ERBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(e))}"</span>,
+<span style="color: #718c00;">"TP*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(f))}"</span>,
+<span style="color: #718c00;">"TKPW*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(g))}"</span>,
+<span style="color: #718c00;">"H*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(h))}"</span>,
+<span style="color: #718c00;">"*EURBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(i))}"</span>,
+<span style="color: #718c00;">"SKWR*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(j))}"</span>,
+<span style="color: #718c00;">"K*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(k))}"</span>,
+<span style="color: #718c00;">"HR*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(l))}"</span>,
+<span style="color: #718c00;">"PH*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(m))}"</span>,
+<span style="color: #718c00;">"TPH*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(n))}"</span>,
+<span style="color: #718c00;">"O*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(o))}"</span>,
+<span style="color: #718c00;">"P*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(p))}"</span>,
+<span style="color: #718c00;">"KW*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(q))}"</span>,
+<span style="color: #718c00;">"R*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(r))}"</span>,
+<span style="color: #718c00;">"S*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(s))}"</span>,
+<span style="color: #718c00;">"T*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(t))}"</span>,
+<span style="color: #718c00;">"*URBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(u))}"</span>,
+<span style="color: #718c00;">"SR*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(v))}"</span>,
+<span style="color: #718c00;">"W*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(w))}"</span>,
+<span style="color: #718c00;">"KP*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(x))}"</span>,
+<span style="color: #718c00;">"KWR*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(y))}"</span>,
+<span style="color: #718c00;">"STKPW*RBLT"</span>: <span style="color: #718c00;">"{#Super_L(Alt_L(z))}"</span>,
+<span style="color: #718c00;">"A*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(a))}"</span>,
+<span style="color: #718c00;">"PW*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(b))}"</span>,
+<span style="color: #718c00;">"KR*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(c))}"</span>,
+<span style="color: #718c00;">"TK*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(d))}"</span>,
+<span style="color: #718c00;">"*ERPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(e))}"</span>,
+<span style="color: #718c00;">"TP*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(f))}"</span>,
+<span style="color: #718c00;">"TKPW*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(g))}"</span>,
+<span style="color: #718c00;">"H*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(h))}"</span>,
+<span style="color: #718c00;">"*EURPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(i))}"</span>,
+<span style="color: #718c00;">"SKWR*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(j))}"</span>,
+<span style="color: #718c00;">"K*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(k))}"</span>,
+<span style="color: #718c00;">"HR*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(l))}"</span>,
+<span style="color: #718c00;">"PH*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(m))}"</span>,
+<span style="color: #718c00;">"TPH*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(n))}"</span>,
+<span style="color: #718c00;">"O*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(o))}"</span>,
+<span style="color: #718c00;">"P*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(p))}"</span>,
+<span style="color: #718c00;">"KW*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(q))}"</span>,
+<span style="color: #718c00;">"R*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(r))}"</span>,
+<span style="color: #718c00;">"S*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(s))}"</span>,
+<span style="color: #718c00;">"T*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(t))}"</span>,
+<span style="color: #718c00;">"*URPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(u))}"</span>,
+<span style="color: #718c00;">"SR*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(v))}"</span>,
+<span style="color: #718c00;">"W*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(w))}"</span>,
+<span style="color: #718c00;">"KP*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(x))}"</span>,
+<span style="color: #718c00;">"KWR*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(y))}"</span>,
+<span style="color: #718c00;">"STKPW*RPBLT"</span>: <span style="color: #718c00;">"{#Super_L(Shift_L(z))}"</span>,
+<span style="color: #718c00;">"1-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F1)}{^}"</span>,
+<span style="color: #718c00;">"2-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F2)}{^}"</span>,
+<span style="color: #718c00;">"3-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F3)}{^}"</span>,
+<span style="color: #718c00;">"4-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F4)}{^}"</span>,
+<span style="color: #718c00;">"5-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F5)}{^}"</span>,
+<span style="color: #718c00;">"KR-6"</span>: <span style="color: #718c00;">"{^}{#Control_L(F6)}{^}"</span>,
+<span style="color: #718c00;">"KR-7"</span>: <span style="color: #718c00;">"{^}{#Control_L(F7)}{^}"</span>,
+<span style="color: #718c00;">"KR-8"</span>: <span style="color: #718c00;">"{^}{#Control_L(F8)}{^}"</span>,
+<span style="color: #718c00;">"KR-9"</span>: <span style="color: #718c00;">"{^}{#Control_L(F9)}{^}"</span>,
+<span style="color: #718c00;">"10-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F10)}{^}"</span>,
+<span style="color: #718c00;">"11-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F11)}{^}"</span>,
+<span style="color: #718c00;">"12-RG"</span>: <span style="color: #718c00;">"{^}{#Control_L(F12)}{^}"</span>,
+<span style="color: #718c00;">"A*RBL"</span>: <span style="color: #718c00;">"{#Control_L(a)}"</span>,
+<span style="color: #718c00;">"PW*RBL"</span>: <span style="color: #718c00;">"{#Control_L(b)}"</span>,
+<span style="color: #718c00;">"KR*RBL"</span>: <span style="color: #718c00;">"{#Control_L(c)}"</span>,
+<span style="color: #718c00;">"TK*RBL"</span>: <span style="color: #718c00;">"{#Control_L(d)}"</span>,
+<span style="color: #718c00;">"*ERBL"</span>: <span style="color: #718c00;">"{#Control_L(e)}"</span>,
+<span style="color: #718c00;">"TP*RBL"</span>: <span style="color: #718c00;">"{#Control_L(f)}"</span>,
+<span style="color: #718c00;">"TKPW*RBL"</span>: <span style="color: #718c00;">"{#Control_L(g)}"</span>,
+<span style="color: #718c00;">"H*RBL"</span>: <span style="color: #718c00;">"{#Control_L(h)}"</span>,
+<span style="color: #718c00;">"*EURBL"</span>: <span style="color: #718c00;">"{#Control_L(i)}"</span>,
+<span style="color: #718c00;">"SKWR*RBL"</span>: <span style="color: #718c00;">"{#Control_L(j)}"</span>,
+<span style="color: #718c00;">"K*RBL"</span>: <span style="color: #718c00;">"{#Control_L(k)}"</span>,
+<span style="color: #718c00;">"HR*RBL"</span>: <span style="color: #718c00;">"{#Control_L(l)}"</span>,
+<span style="color: #718c00;">"PH*RBL"</span>: <span style="color: #718c00;">"{#Control_L(m)}"</span>,
+<span style="color: #718c00;">"TPH*RBL"</span>: <span style="color: #718c00;">"{#Control_L(n)}"</span>,
+<span style="color: #718c00;">"O*RBL"</span>: <span style="color: #718c00;">"{#Control_L(o)}"</span>,
+<span style="color: #718c00;">"P*RBL"</span>: <span style="color: #718c00;">"{#Control_L(p)}"</span>,
+<span style="color: #718c00;">"KW*RBL"</span>: <span style="color: #718c00;">"{#Control_L(q)}"</span>,
+<span style="color: #718c00;">"R*RBL"</span>: <span style="color: #718c00;">"{#Control_L(r)}"</span>,
+<span style="color: #718c00;">"S*RBL"</span>: <span style="color: #718c00;">"{#Control_L(s)}"</span>,
+<span style="color: #718c00;">"T*RBL"</span>: <span style="color: #718c00;">"{#Control_L(t)}"</span>,
+<span style="color: #718c00;">"*URBL"</span>: <span style="color: #718c00;">"{#Control_L(u)}"</span>,
+<span style="color: #718c00;">"SR*RBL"</span>: <span style="color: #718c00;">"{#Control_L(v)}"</span>,
+<span style="color: #718c00;">"W*RBL"</span>: <span style="color: #718c00;">"{#Control_L(w)}"</span>,
+<span style="color: #718c00;">"KP*RBL"</span>: <span style="color: #718c00;">"{#Control_L(x)}"</span>,
+<span style="color: #718c00;">"KWR*RBL"</span>: <span style="color: #718c00;">"{#Control_L(y)}"</span>,
+<span style="color: #718c00;">"STKPW*RBL"</span>: <span style="color: #718c00;">"{#Control_L(z)}"</span>,
+<span style="color: #718c00;">"WUZ/WUZ"</span>: <span style="color: #718c00;">"{#}"</span>
 }
 </pre>
 </div>
@@ -553,8 +553,8 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 </div>
 </div>
 
-<div id="outline-container-org3625eb1" class="outline-2">
-<h2 id="org3625eb1"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org468d378" class="outline-2">
+<h2 id="org468d378"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -574,7 +574,7 @@ key was common and the notation stuck.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-21 Sun 00:23</p>
+<p class="date">Created: 2021-02-21 Sun 00:24</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
