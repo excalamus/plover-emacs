@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-21 Sun 00:24 -->
+<!-- 2021-02-21 Sun 00:38 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -223,23 +223,28 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf1a57cc">1. Opening bracket</a></li>
-<li><a href="#orgb77e118">2. Execute extended command and Quit</a></li>
-<li><a href="#org079464e">3. Function keys</a></li>
-<li><a href="#orgea02750">4. Chaining</a></li>
-<li><a href="#org008d6ec">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org823ffe2">6. Notes</a>
+<li><a href="#org50d2afc">1. Opening bracket</a></li>
+<li><a href="#orga5a531d">2. Execute extended command and Quit</a></li>
+<li><a href="#org67f6a90">3. Function keys</a></li>
+<li><a href="#org64d21fa">4. Chaining</a></li>
+<li><a href="#orga6601e0">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org21b6998">6. Notes</a>
 <ul>
-<li><a href="#org1a28100">6.1. Possible bindings</a></li>
+<li><a href="#org0d220c4">6.1. Possible bindings</a></li>
 </ul>
 </li>
-<li><a href="#org468d378">7. Closing bracket</a></li>
+<li><a href="#orgb7c92e7">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
+<hr />
 
-<div id="outline-container-orgf1a57cc" class="outline-2">
-<h2 id="orgf1a57cc"><span class="section-number-2">1</span> Opening bracket</h2>
+<p>
+Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
+</p>
+
+<div id="outline-container-org50d2afc" class="outline-2">
+<h2 id="org50d2afc"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
@@ -249,31 +254,31 @@ Emacs is community developed and allows you to run, change, and
 distribute it, more or less, however you want (as compared to
 similarly purposed software).  It has been developed for more than 40
 years and, although it might not look fancy, has countless features
-and add-ons.
+and add-ons<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 
 
-<div id="orgfb4a968" class="figure">
+<div id="orga9c36cd" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
 </div>
 
 <p>
-Emacs works by binding every key to a programming command<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.  For
+Emacs works by binding every key to a programming command<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.  For
 example, pressing 'a' calls the <code>self-insert-command</code> which inserts
 the character you type, 'a'.  Commands can also be bound to key
 combinations.  To change windows, you press 'Control + x + o' (notated
 <code>C-x o</code>) to call <code>other-window</code>.  Commands not bound to a key or key
 combination are accessed through an interactive process initiated with
-'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.  To change windows using the
+'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.  To change windows using the
 interactive process, you would type <code>M-x other-window</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-orgb77e118" class="outline-2">
-<h2 id="orgb77e118"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div id="outline-container-orga5a531d" class="outline-2">
+<h2 id="orga5a531d"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -305,8 +310,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org079464e" class="outline-2">
-<h2 id="org079464e"><span class="section-number-2">3</span> Function keys</h2>
+<div id="outline-container-org67f6a90" class="outline-2">
+<h2 id="org67f6a90"><span class="section-number-2">3</span> Function keys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
@@ -331,8 +336,8 @@ that to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-orgea02750" class="outline-2">
-<h2 id="orgea02750"><span class="section-number-2">4</span> Chaining</h2>
+<div id="outline-container-org64d21fa" class="outline-2">
+<h2 id="org64d21fa"><span class="section-number-2">4</span> Chaining</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It's possible to chain strokes together, for lack of a better way to
@@ -355,8 +360,8 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 </div>
 </div>
 
-<div id="outline-container-org008d6ec" class="outline-2">
-<h2 id="org008d6ec"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-orga6601e0" class="outline-2">
+<h2 id="orga6601e0"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -409,12 +414,12 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-org823ffe2" class="outline-2">
-<h2 id="org823ffe2"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-org21b6998" class="outline-2">
+<h2 id="org21b6998"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org1a28100" class="outline-3">
-<h3 id="org1a28100"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div id="outline-container-org0d220c4" class="outline-3">
+<h3 id="org0d220c4"><span class="section-number-3">6.1</span> Possible bindings</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
@@ -553,18 +558,26 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 </div>
 </div>
 
-<div id="outline-container-org468d378" class="outline-2">
-<h2 id="org468d378"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-orgb7c92e7" class="outline-2">
+<h2 id="orgb7c92e7"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
 <div id="text-footnotes">
 
 <div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
-Technically to a <a href="https://en.wikipedia.org/wiki/Emacs_Lisp#Example">Lisp</a> function.
+For example, the code blocks shown on this webpage are directly
+used to generate the Plover dictionary.  Further, this webpage is
+itself generated using Emacs.  All of this happens from a single
+source file.  We could even go so far as to host this webpage with
+Emacs if we wanted :)
 </p></div></div>
 
 <div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+Technically to a <a href="https://en.wikipedia.org/wiki/Emacs_Lisp#Example">Lisp</a> function.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.3" class="footnum" href="#fnr.3">3</a></sup> <div class="footpara"><p class="footpara">
 "M" for "meta".  The Meta key, similar to use as the Alt key,
 existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
@@ -574,7 +587,7 @@ key was common and the notation stuck.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-21 Sun 00:24</p>
+<p class="date">Created: 2021-02-21 Sun 00:38</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

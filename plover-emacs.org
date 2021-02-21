@@ -3,6 +3,10 @@
 #+STARTUP: showall
 #+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
 
+----------------
+
+Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
+
 * Opening bracket
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
 as well as researchers and hobbiests worldwide.  Originally released
@@ -11,7 +15,7 @@ Emacs is community developed and allows you to run, change, and
 distribute it, more or less, however you want (as compared to
 similarly purposed software).  It has been developed for more than 40
 years and, although it might not look fancy, has countless features
-and add-ons.
+and add-ons[fn:3].
 
 #+CAPTION: Screenshot of the Emacs text editor.
 [[file:./emacs.png]]
@@ -262,6 +266,12 @@ From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/ma
 #+end_src
 
 * Footnotes
+
+[fn:3] For example, the code blocks shown on this webpage are directly
+used to generate the Plover dictionary.  Further, this webpage is
+itself generated using Emacs.  All of this happens from a single
+source file.  We could even go so far as to host this webpage with
+Emacs if we wanted :)
 
 [fn:2] "M" for "meta".  The Meta key, similar to use as the Alt key,
 existed before the Alt key.  When Emacs was first created, the Meta
