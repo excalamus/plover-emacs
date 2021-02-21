@@ -14,7 +14,7 @@ years and, although it might not look fancy, has countless features
 and add-ons.
 
 #+CAPTION: Screenshot of the Emacs text editor.
-[[file:./emacs.png]]
+[[file:./docs/emacs.png]]
 
 Emacs works by binding every key to a programming command[fn:1].  For
 example, pressing 'a' calls the =self-insert-command= which inserts
@@ -62,7 +62,7 @@ It doesn't seem like =*= is used at all with numbers.  So, we can use
 that to differentiate the F keys.
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"1*": "{#F1}",
+*": "{#F1}",
 "2*": "{#F2}",
 "3*": "{#F3}",
 "4*": "{#F4}",

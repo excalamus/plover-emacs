@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-20 Sat 16:23 -->
+<!-- 2021-02-21 Sun 00:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -223,64 +223,67 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org354a9da">1. Opening bracket</a></li>
-<li><a href="#org532796a">2. Execute extended command and Quit</a></li>
-<li><a href="#org220febe">3. Function keys</a></li>
-<li><a href="#orgf7e5c2b">4. Chaining</a></li>
-<li><a href="#orgdc0c00a">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org9924ed5">6. Notes</a>
+<li><a href="#org73bc84c">1. Opening bracket</a></li>
+<li><a href="#orgecc59dc">2. Execute extended command and Quit</a></li>
+<li><a href="#org77313d5">3. Function keys</a></li>
+<li><a href="#orgada2dbd">4. Chaining</a></li>
+<li><a href="#org19d035a">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#orge92d9a7">6. Notes</a>
 <ul>
-<li><a href="#orga993565">6.1. Possible bindings</a></li>
+<li><a href="#org4907d2b">6.1. Possible bindings</a></li>
 </ul>
 </li>
-<li><a href="#orge348b64">7. Closing bracket</a></li>
+<li><a href="#org71271a6">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org354a9da" class="outline-2">
-<h2 id="org354a9da"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org73bc84c" class="outline-2">
+<h2 id="org73bc84c"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
-as well as researchers, hobbiests, and thousands of others worldwide.
-Originally released in 1976, it is the flagship software of the <a href="https://www.gnu.org/philosophy/free-sw.html">GNU
-project</a>.  Like Plover, Emacs is community developed and allows you to
-run, change, and distribute it, more or less, however you want (as
-compared to similarly purposed software).  It has been developed for
-more than 40 years and, although it might not look fancy, has
-countless features and add-ons.
+as well as researchers and hobbiests worldwide.  Originally released
+in 1976, it is the flagship software of the <a href="https://www.gnu.org/philosophy/free-sw.html">GNU project</a>.  Like Plover,
+Emacs is community developed and allows you to run, change, and
+distribute it, more or less, however you want (as compared to
+similarly purposed software).  It has been developed for more than 40
+years and, although it might not look fancy, has countless features
+and add-ons.
 </p>
 
 
-<div id="org40ee017" class="figure">
-<p><img src="./emacs.png" alt="emacs.png" />
+<div id="org1a75c4f" class="figure">
+<p><img src="./docs/emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
 </div>
 
 <p>
-Emacs binds every key to a programming command<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.  For example,
-pressing 'a' calls the <code>self-insert-command</code> which inserts the
-character you type, 'a'.  Commands can also be bound to key
+Emacs works by binding every key to a programming command<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.  For
+example, pressing 'a' calls the <code>self-insert-command</code> which inserts
+the character you type, 'a'.  Commands can also be bound to key
 combinations.  To change windows, you press 'Control + x + o' (notated
-<code>C-x o</code>) to call <code>other-window</code>.  Commands not bound to a key, or key
-combination, are accessed through an interactive process initiated
-with 'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.  To change windows using the
+<code>C-x o</code>) to call <code>other-window</code>.  Commands not bound to a key or key
+combination are accessed through an interactive process initiated with
+'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.  To change windows using the
 interactive process, you would type <code>M-x other-window</code>.
 </p>
 </div>
 </div>
 
-<div id="outline-container-org532796a" class="outline-2">
-<h2 id="org532796a"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div id="outline-container-orgecc59dc" class="outline-2">
+<h2 id="orgecc59dc"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
-(<code>execute-extended-command</code>) and <code>C-g</code> (<code>keyboard-quit</code>).  We
-definitely want single one-handed strokes for these.  I put them on
-the right because I am right handed and want to be able to switch
-between the board and the mouse quickly.
+(<code>execute-extended-command</code>) and <code>C-g</code> (<code>keyboard-quit</code>).  They
+deserve single-handed, single strokes.
+</p>
+
+<p>
+For people who are right-handed, the following allow for quick access
+when using a mouse.
 </p>
 
 <p>
@@ -292,9 +295,8 @@ between the board and the mouse quickly.
 </div>
 
 <p>
-<code>-RPB</code> was not taken and "control" has an 'r' and an 'n' in it.
-Honestly, there's not much of an association.  It's simply available
-and easy to write.
+The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
+much of an association.  It's simply available and easy to write.
 </p>
 <div class="org-src-container">
 <pre class="src src-js"><span style="color: #CC9393;">"-RPB"</span>: <span style="color: #CC9393;">"{#Control(g)}"</span>,
@@ -303,8 +305,8 @@ and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org220febe" class="outline-2">
-<h2 id="org220febe"><span class="section-number-2">3</span> Function keys</h2>
+<div id="outline-container-org77313d5" class="outline-2">
+<h2 id="org77313d5"><span class="section-number-2">3</span> Function keys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
@@ -312,25 +314,25 @@ that to differentiate the F keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"1*"</span>: <span style="color: #CC9393;">"{#F1}"</span>,
-<span style="color: #CC9393;">"2*"</span>: <span style="color: #CC9393;">"{#F2}"</span>,
-<span style="color: #CC9393;">"3*"</span>: <span style="color: #CC9393;">"{#F3}"</span>,
-<span style="color: #CC9393;">"4*"</span>: <span style="color: #CC9393;">"{#F4}"</span>,
-<span style="color: #CC9393;">"5*"</span>: <span style="color: #CC9393;">"{#F5}"</span>,
-<span style="color: #CC9393;">"*6"</span>: <span style="color: #CC9393;">"{#F6}"</span>,
-<span style="color: #CC9393;">"*7"</span>: <span style="color: #CC9393;">"{#F7}"</span>,
-<span style="color: #CC9393;">"*8"</span>: <span style="color: #CC9393;">"{#F8}"</span>,
-<span style="color: #CC9393;">"*9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
-<span style="color: #CC9393;">"10*"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
-<span style="color: #CC9393;">"1*D"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
-<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
+<pre class="src src-js">*<span style="color: #CC9393;">": "</span>{#F1}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>2*<span style="color: #CC9393;">": "</span>{#F2}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>3*<span style="color: #CC9393;">": "</span>{#F3}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>4*<span style="color: #CC9393;">": "</span>{#F4}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>5*<span style="color: #CC9393;">": "</span>{#F5}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>*6<span style="color: #CC9393;">": "</span>{#F6}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>*7<span style="color: #CC9393;">": "</span>{#F7}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>*8<span style="color: #CC9393;">": "</span>{#F8}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>*9<span style="color: #CC9393;">": "</span>{#F9}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>10*<span style="color: #CC9393;">": "</span>{#F10}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>1*D<span style="color: #CC9393;">": "</span>{#F11}<span style="color: #CC9393;">",</span>
+<span style="color: #CC9393;">"</span>2*D<span style="color: #CC9393;">": "</span>{#F12}<span style="color: #CC9393;">",</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgf7e5c2b" class="outline-2">
-<h2 id="orgf7e5c2b"><span class="section-number-2">4</span> Chaining</h2>
+<div id="outline-container-orgada2dbd" class="outline-2">
+<h2 id="orgada2dbd"><span class="section-number-2">4</span> Chaining</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It's possible to chain strokes together, for lack of a better way to
@@ -353,8 +355,8 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 </div>
 </div>
 
-<div id="outline-container-orgdc0c00a" class="outline-2">
-<h2 id="orgdc0c00a"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org19d035a" class="outline-2">
+<h2 id="org19d035a"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -407,12 +409,12 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-org9924ed5" class="outline-2">
-<h2 id="org9924ed5"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-orge92d9a7" class="outline-2">
+<h2 id="orge92d9a7"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orga993565" class="outline-3">
-<h3 id="orga993565"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div id="outline-container-org4907d2b" class="outline-3">
+<h3 id="org4907d2b"><span class="section-number-3">6.1</span> Possible bindings</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
@@ -551,8 +553,8 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 </div>
 </div>
 
-<div id="outline-container-orge348b64" class="outline-2">
-<h2 id="orge348b64"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org71271a6" class="outline-2">
+<h2 id="org71271a6"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -572,7 +574,7 @@ key was common and the notation stuck.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-20 Sat 16:23</p>
+<p class="date">Created: 2021-02-21 Sun 00:16</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
