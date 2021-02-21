@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-21 Sun 00:21 -->
+<!-- 2021-02-21 Sun 00:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -223,23 +223,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf9fcaff">1. Opening bracket</a></li>
-<li><a href="#org17427f5">2. Execute extended command and Quit</a></li>
-<li><a href="#org345fe51">3. Function keys</a></li>
-<li><a href="#orga1f0b2e">4. Chaining</a></li>
-<li><a href="#orgd6beec6">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org9457af2">6. Notes</a>
+<li><a href="#org8d92895">1. Opening bracket</a></li>
+<li><a href="#org367a328">2. Execute extended command and Quit</a></li>
+<li><a href="#orgb5afc72">3. Function keys</a></li>
+<li><a href="#org135cf98">4. Chaining</a></li>
+<li><a href="#org70ee4d2">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#orgaa0bc9d">6. Notes</a>
 <ul>
-<li><a href="#org66ef6fc">6.1. Possible bindings</a></li>
+<li><a href="#org478f457">6.1. Possible bindings</a></li>
 </ul>
 </li>
-<li><a href="#org6f59a83">7. Closing bracket</a></li>
+<li><a href="#org3625eb1">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgf9fcaff" class="outline-2">
-<h2 id="orgf9fcaff"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org8d92895" class="outline-2">
+<h2 id="org8d92895"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
@@ -253,7 +253,7 @@ and add-ons.
 </p>
 
 
-<div id="org1d922b7" class="figure">
+<div id="org273c165" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
@@ -272,8 +272,8 @@ interactive process, you would type <code>M-x other-window</code>.
 </div>
 </div>
 
-<div id="outline-container-org17427f5" class="outline-2">
-<h2 id="org17427f5"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div id="outline-container-org367a328" class="outline-2">
+<h2 id="org367a328"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -305,8 +305,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org345fe51" class="outline-2">
-<h2 id="org345fe51"><span class="section-number-2">3</span> Function keys</h2>
+<div id="outline-container-orgb5afc72" class="outline-2">
+<h2 id="orgb5afc72"><span class="section-number-2">3</span> Function keys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
@@ -314,25 +314,25 @@ that to differentiate the F keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">*<span style="color: #CC9393;">": "</span>{#F1}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>2*<span style="color: #CC9393;">": "</span>{#F2}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>3*<span style="color: #CC9393;">": "</span>{#F3}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>4*<span style="color: #CC9393;">": "</span>{#F4}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>5*<span style="color: #CC9393;">": "</span>{#F5}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>*6<span style="color: #CC9393;">": "</span>{#F6}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>*7<span style="color: #CC9393;">": "</span>{#F7}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>*8<span style="color: #CC9393;">": "</span>{#F8}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>*9<span style="color: #CC9393;">": "</span>{#F9}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>10*<span style="color: #CC9393;">": "</span>{#F10}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>1*D<span style="color: #CC9393;">": "</span>{#F11}<span style="color: #CC9393;">",</span>
-<span style="color: #CC9393;">"</span>2*D<span style="color: #CC9393;">": "</span>{#F12}<span style="color: #CC9393;">",</span>
+<pre class="src src-js"><span style="color: #CC9393;">"*"</span>: <span style="color: #CC9393;">"{#F1}"</span>,
+<span style="color: #CC9393;">"2*"</span>: <span style="color: #CC9393;">"{#F2}"</span>,
+<span style="color: #CC9393;">"3*"</span>: <span style="color: #CC9393;">"{#F3}"</span>,
+<span style="color: #CC9393;">"4*"</span>: <span style="color: #CC9393;">"{#F4}"</span>,
+<span style="color: #CC9393;">"5*"</span>: <span style="color: #CC9393;">"{#F5}"</span>,
+<span style="color: #CC9393;">"*6"</span>: <span style="color: #CC9393;">"{#F6}"</span>,
+<span style="color: #CC9393;">"*7"</span>: <span style="color: #CC9393;">"{#F7}"</span>,
+<span style="color: #CC9393;">"*8"</span>: <span style="color: #CC9393;">"{#F8}"</span>,
+<span style="color: #CC9393;">"*9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
+<span style="color: #CC9393;">"10*"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
+<span style="color: #CC9393;">"1*D"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
+<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orga1f0b2e" class="outline-2">
-<h2 id="orga1f0b2e"><span class="section-number-2">4</span> Chaining</h2>
+<div id="outline-container-org135cf98" class="outline-2">
+<h2 id="org135cf98"><span class="section-number-2">4</span> Chaining</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It's possible to chain strokes together, for lack of a better way to
@@ -355,8 +355,8 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 </div>
 </div>
 
-<div id="outline-container-orgd6beec6" class="outline-2">
-<h2 id="orgd6beec6"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org70ee4d2" class="outline-2">
+<h2 id="org70ee4d2"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -409,12 +409,12 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-org9457af2" class="outline-2">
-<h2 id="org9457af2"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-orgaa0bc9d" class="outline-2">
+<h2 id="orgaa0bc9d"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org66ef6fc" class="outline-3">
-<h3 id="org66ef6fc"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div id="outline-container-org478f457" class="outline-3">
+<h3 id="org478f457"><span class="section-number-3">6.1</span> Possible bindings</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
@@ -553,8 +553,8 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 </div>
 </div>
 
-<div id="outline-container-org6f59a83" class="outline-2">
-<h2 id="org6f59a83"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org3625eb1" class="outline-2">
+<h2 id="org3625eb1"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -574,7 +574,7 @@ key was common and the notation stuck.
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-21 Sun 00:21</p>
+<p class="date">Created: 2021-02-21 Sun 00:23</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
