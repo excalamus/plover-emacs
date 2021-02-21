@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-17 Wed 22:01 -->
+<!-- 2021-02-20 Sat 16:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -39,7 +39,7 @@
   }
   pre.src {
     position: relative;
-    overflow: visible;
+    overflow: auto;
     padding-top: 1.2em;
   }
   pre.src:before {
@@ -192,51 +192,28 @@
   .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
+<link rel="stylesheet" type="text/css" href="style.css" />
 <script type="text/javascript">
-/*
-@licstart  The following is the entire license notice for the
-JavaScript code in this tag.
-
-Copyright (C) 2012-2020 Free Software Foundation, Inc.
-
-The JavaScript code in this tag is free software: you can
-redistribute it and/or modify it under the terms of the GNU
-General Public License (GNU GPL) as published by the Free Software
-Foundation, either version 3 of the License, or (at your option)
-any later version.  The code is distributed WITHOUT ANY WARRANTY;
-without even the implied warranty of MERCHANTABILITY or FITNESS
-FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
-
-As additional permission under GNU GPL version 3 section 7, you
-may distribute non-source (e.g., minimized or compacted) forms of
-that code without the copy of the GNU GPL normally required by
-section 4, provided you include this license notice and a URL
-through which recipients can access the Corresponding Source.
-
-
-@licend  The above is the entire license notice
-for the JavaScript code in this tag.
-*/
+// @license magnet:?xt=urn:btih:e95b018ef3580986a04669f1b5879592219e2a7a&dn=public-domain.txt Public Domain
 <!--/*--><![CDATA[/*><!--*/
- function CodeHighlightOn(elem, id)
- {
-   var target = document.getElementById(id);
-   if(null != target) {
-     elem.cacheClassElem = elem.className;
-     elem.cacheClassTarget = target.className;
-     target.className = "code-highlighted";
-     elem.className   = "code-highlighted";
-   }
- }
- function CodeHighlightOff(elem, id)
- {
-   var target = document.getElementById(id);
-   if(elem.cacheClassElem)
-     elem.className = elem.cacheClassElem;
-   if(elem.cacheClassTarget)
-     target.className = elem.cacheClassTarget;
- }
-/*]]>*///-->
+     function CodeHighlightOn(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.add("code-highlighted");
+         target.classList.add("code-highlighted");
+       }
+     }
+     function CodeHighlightOff(elem, id)
+     {
+       var target = document.getElementById(id);
+       if(null != target) {
+         elem.classList.remove("code-highlighted");
+         target.classList.remove("code-highlighted");
+       }
+     }
+    /*]]>*///-->
+// @license-end
 </script>
 </head>
 <body>
@@ -246,26 +223,57 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org722e0f0">1. Opening bracket</a></li>
-<li><a href="#orgd29c7ca">2. Execute extended command and Quit</a></li>
-<li><a href="#orgeb34d36">3. Function keys</a></li>
-<li><a href="#org7a11742">4. Chaining</a></li>
-<li><a href="#org9afe25f">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#orgb565d59">6. Closing bracket</a></li>
-<li><a href="#orgb0eda22">7. Notes</a>
+<li><a href="#org354a9da">1. Opening bracket</a></li>
+<li><a href="#org532796a">2. Execute extended command and Quit</a></li>
+<li><a href="#org220febe">3. Function keys</a></li>
+<li><a href="#orgf7e5c2b">4. Chaining</a></li>
+<li><a href="#orgdc0c00a">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org9924ed5">6. Notes</a>
 <ul>
-<li><a href="#orgb0a4cdd">7.1. Possible bindings</a></li>
+<li><a href="#orga993565">6.1. Possible bindings</a></li>
 </ul>
 </li>
+<li><a href="#orge348b64">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org722e0f0" class="outline-2">
-<h2 id="org722e0f0"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org354a9da" class="outline-2">
+<h2 id="org354a9da"><span class="section-number-2">1</span> Opening bracket</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+<a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
+as well as researchers, hobbiests, and thousands of others worldwide.
+Originally released in 1976, it is the flagship software of the <a href="https://www.gnu.org/philosophy/free-sw.html">GNU
+project</a>.  Like Plover, Emacs is community developed and allows you to
+run, change, and distribute it, more or less, however you want (as
+compared to similarly purposed software).  It has been developed for
+more than 40 years and, although it might not look fancy, has
+countless features and add-ons.
+</p>
+
+
+<div id="org40ee017" class="figure">
+<p><img src="./emacs.png" alt="emacs.png" />
+</p>
+<p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
 </div>
-<div id="outline-container-orgd29c7ca" class="outline-2">
-<h2 id="orgd29c7ca"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+
+<p>
+Emacs binds every key to a programming command<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.  For example,
+pressing 'a' calls the <code>self-insert-command</code> which inserts the
+character you type, 'a'.  Commands can also be bound to key
+combinations.  To change windows, you press 'Control + x + o' (notated
+<code>C-x o</code>) to call <code>other-window</code>.  Commands not bound to a key, or key
+combination, are accessed through an interactive process initiated
+with 'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.2" class="footref" href="#fn.2">2</a></sup>.  To change windows using the
+interactive process, you would type <code>M-x other-window</code>.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org532796a" class="outline-2">
+<h2 id="org532796a"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -279,7 +287,7 @@ between the board and the mouse quickly.
 <code>ULT</code> sounds like "Alt".
 </p>
 <div class="org-src-container">
-<pre class="src src-js">"ULT": "{#Alt_L(x)}",
+<pre class="src src-js"><span style="color: #CC9393;">"ULT"</span>: <span style="color: #CC9393;">"{#Alt_L(x)}"</span>,
 </pre>
 </div>
 
@@ -289,14 +297,14 @@ Honestly, there's not much of an association.  It's simply available
 and easy to write.
 </p>
 <div class="org-src-container">
-<pre class="src src-js">"-RPB": "{#Control(g)}",
+<pre class="src src-js"><span style="color: #CC9393;">"-RPB"</span>: <span style="color: #CC9393;">"{#Control(g)}"</span>,
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgeb34d36" class="outline-2">
-<h2 id="orgeb34d36"><span class="section-number-2">3</span> Function keys</h2>
+<div id="outline-container-org220febe" class="outline-2">
+<h2 id="org220febe"><span class="section-number-2">3</span> Function keys</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
@@ -304,26 +312,25 @@ that to differentiate the F keys.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-js">"1*": "{#F1}",
-"2*": "{#F2}",
-"3*": "{#F3}",
-"4*": "{#F4}",
-"5*": "{#F5}",
-"*6": "{#F6}",
-"*7": "{#F7}",
-"*8": "{#F8}",
-"*9": "{#F9}",
-"10*": "{#F10}",
-"1*D": "{#F11}",
-"2*D": "{#F12}",
+<pre class="src src-js"><span style="color: #CC9393;">"1*"</span>: <span style="color: #CC9393;">"{#F1}"</span>,
+<span style="color: #CC9393;">"2*"</span>: <span style="color: #CC9393;">"{#F2}"</span>,
+<span style="color: #CC9393;">"3*"</span>: <span style="color: #CC9393;">"{#F3}"</span>,
+<span style="color: #CC9393;">"4*"</span>: <span style="color: #CC9393;">"{#F4}"</span>,
+<span style="color: #CC9393;">"5*"</span>: <span style="color: #CC9393;">"{#F5}"</span>,
+<span style="color: #CC9393;">"*6"</span>: <span style="color: #CC9393;">"{#F6}"</span>,
+<span style="color: #CC9393;">"*7"</span>: <span style="color: #CC9393;">"{#F7}"</span>,
+<span style="color: #CC9393;">"*8"</span>: <span style="color: #CC9393;">"{#F8}"</span>,
+<span style="color: #CC9393;">"*9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
+<span style="color: #CC9393;">"10*"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
+<span style="color: #CC9393;">"1*D"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
+<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
 </pre>
 </div>
 </div>
 </div>
 
-
-<div id="outline-container-org7a11742" class="outline-2">
-<h2 id="org7a11742"><span class="section-number-2">4</span> Chaining</h2>
+<div id="outline-container-orgf7e5c2b" class="outline-2">
+<h2 id="orgf7e5c2b"><span class="section-number-2">4</span> Chaining</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It's possible to chain strokes together, for lack of a better way to
@@ -331,7 +338,7 @@ express it.  For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>. 
 achieved in Plover with:
 </p>
 <div class="org-src-container">
-<pre class="src src-js">"KR*EU": "{#Control_L(x) 8 m}"
+<pre class="src src-js"><span style="color: #CC9393;">"KR*EU"</span>: <span style="color: #CC9393;">"{#Control_L(x) 8 m}"</span>
 </pre>
 </div>
 
@@ -340,15 +347,26 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 <code>C-x 8 R</code> writes <code>®</code>.  In Plover, this is:
 </p>
 <div class="org-src-container">
-<pre class="src src-js">"KR*EU": "{#Control_L(x) 8 Shift(r)}"
+<pre class="src src-js"><span style="color: #CC9393;">"KR*EU"</span>: <span style="color: #CC9393;">"{#Control_L(x) 8 Shift(r)}"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org9afe25f" class="outline-2">
-<h2 id="org9afe25f"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-orgdc0c00a" class="outline-2">
+<h2 id="orgdc0c00a"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
+<p>
+The Escape key is distributed with Plover in the <code>commands.json</code>
+dictionary.  For completeness, let's also put it in the Emacs
+dictionary:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"TPEFBG"</span>: <span style="color: #CC9393;">"{#Escape}"</span>,
+</pre>
+</div>
+
 <p>
 Mark Kislingbury <a href="http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf">advises</a> to put small words on the left.  Steno order
 means that we can then use the rest of the board to represent phrases
@@ -389,16 +407,13 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-orgb565d59" class="outline-2">
-<h2 id="orgb565d59"><span class="section-number-2">6</span> Closing bracket</h2>
+<div id="outline-container-org9924ed5" class="outline-2">
+<h2 id="org9924ed5"><span class="section-number-2">6</span> Notes</h2>
+<div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgb0eda22" class="outline-2">
-<h2 id="orgb0eda22"><span class="section-number-2">7</span> Notes</h2>
-<div class="outline-text-2" id="text-7">
-</div>
-<div id="outline-container-orgb0a4cdd" class="outline-3">
-<h3 id="orgb0a4cdd"><span class="section-number-3">7.1</span> Possible bindings</h3>
-<div class="outline-text-3" id="text-7-1">
+<div id="outline-container-orga993565" class="outline-3">
+<h3 id="orga993565"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
 </p>
@@ -412,133 +427,153 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 
 <div class="org-src-container">
 <pre class="src src-js">{
-"A*RPLT": "{#Super_L(a)}",
-"PW*RPLT": "{#Super_L(b)}",
-"KR*RPLT": "{#Super_L(c)}",
-"TK*RPLT": "{#Super_L(d)}",
-"*ERPLT": "{#Super_L(e)}",
-"TP*RPLT": "{#Super_L(f)}",
-"TKPW*RPLT": "{#Super_L(g)}",
-"H*RPLT": "{#Super_L(h)}",
-"*EURPLT": "{#Super_L(i)}",
-"SKWR*RPLT": "{#Super_L(j)}",
-"K*RPLT": "{#Super_L(k)}",
-"HR*RPLT": "{#Super_L(l)}",
-"PH*RPLT": "{#Super_L(m)}",
-"TPH*RPLT": "{#Super_L(n)}",
-"O*RPLT": "{#Super_L(o)}",
-"P*RPLT": "{#Super_L(p)}",
-"KW*RPLT": "{#Super_L(q)}",
-"R*RPLT": "{#Super_L(r)}",
-"S*RPLT": "{#Super_L(s)}",
-"T*RPLT": "{#Super_L(t)}",
-"*URPLT": "{#Super_L(u)}",
-"SR*RPLT": "{#Super_L(v)}",
-"W*RPLT": "{#Super_L(w)}",
-"KP*RPLT": "{#Super_L(x)}",
-"KWR*RPLT": "{#Super_L(y)}",
-"STKPW*RPLT": "{#Super_L(z)}",
-"A*RBLT": "{#Super_L(Alt_L(a))}",
-"PW*RBLT": "{#Super_L(Alt_L(b))}",
-"KR*RBLT": "{#Super_L(Alt_L(c))}",
-"TK*RBLT": "{#Super_L(Alt_L(d))}",
-"*ERBLT": "{#Super_L(Alt_L(e))}",
-"TP*RBLT": "{#Super_L(Alt_L(f))}",
-"TKPW*RBLT": "{#Super_L(Alt_L(g))}",
-"H*RBLT": "{#Super_L(Alt_L(h))}",
-"*EURBLT": "{#Super_L(Alt_L(i))}",
-"SKWR*RBLT": "{#Super_L(Alt_L(j))}",
-"K*RBLT": "{#Super_L(Alt_L(k))}",
-"HR*RBLT": "{#Super_L(Alt_L(l))}",
-"PH*RBLT": "{#Super_L(Alt_L(m))}",
-"TPH*RBLT": "{#Super_L(Alt_L(n))}",
-"O*RBLT": "{#Super_L(Alt_L(o))}",
-"P*RBLT": "{#Super_L(Alt_L(p))}",
-"KW*RBLT": "{#Super_L(Alt_L(q))}",
-"R*RBLT": "{#Super_L(Alt_L(r))}",
-"S*RBLT": "{#Super_L(Alt_L(s))}",
-"T*RBLT": "{#Super_L(Alt_L(t))}",
-"*URBLT": "{#Super_L(Alt_L(u))}",
-"SR*RBLT": "{#Super_L(Alt_L(v))}",
-"W*RBLT": "{#Super_L(Alt_L(w))}",
-"KP*RBLT": "{#Super_L(Alt_L(x))}",
-"KWR*RBLT": "{#Super_L(Alt_L(y))}",
-"STKPW*RBLT": "{#Super_L(Alt_L(z))}",
-"A*RPBLT": "{#Super_L(Shift_L(a))}",
-"PW*RPBLT": "{#Super_L(Shift_L(b))}",
-"KR*RPBLT": "{#Super_L(Shift_L(c))}",
-"TK*RPBLT": "{#Super_L(Shift_L(d))}",
-"*ERPBLT": "{#Super_L(Shift_L(e))}",
-"TP*RPBLT": "{#Super_L(Shift_L(f))}",
-"TKPW*RPBLT": "{#Super_L(Shift_L(g))}",
-"H*RPBLT": "{#Super_L(Shift_L(h))}",
-"*EURPBLT": "{#Super_L(Shift_L(i))}",
-"SKWR*RPBLT": "{#Super_L(Shift_L(j))}",
-"K*RPBLT": "{#Super_L(Shift_L(k))}",
-"HR*RPBLT": "{#Super_L(Shift_L(l))}",
-"PH*RPBLT": "{#Super_L(Shift_L(m))}",
-"TPH*RPBLT": "{#Super_L(Shift_L(n))}",
-"O*RPBLT": "{#Super_L(Shift_L(o))}",
-"P*RPBLT": "{#Super_L(Shift_L(p))}",
-"KW*RPBLT": "{#Super_L(Shift_L(q))}",
-"R*RPBLT": "{#Super_L(Shift_L(r))}",
-"S*RPBLT": "{#Super_L(Shift_L(s))}",
-"T*RPBLT": "{#Super_L(Shift_L(t))}",
-"*URPBLT": "{#Super_L(Shift_L(u))}",
-"SR*RPBLT": "{#Super_L(Shift_L(v))}",
-"W*RPBLT": "{#Super_L(Shift_L(w))}",
-"KP*RPBLT": "{#Super_L(Shift_L(x))}",
-"KWR*RPBLT": "{#Super_L(Shift_L(y))}",
-"STKPW*RPBLT": "{#Super_L(Shift_L(z))}",
-"1-RG": "{^}{#Control_L(F1)}{^}",
-"2-RG": "{^}{#Control_L(F2)}{^}",
-"3-RG": "{^}{#Control_L(F3)}{^}",
-"4-RG": "{^}{#Control_L(F4)}{^}",
-"5-RG": "{^}{#Control_L(F5)}{^}",
-"KR-6": "{^}{#Control_L(F6)}{^}",
-"KR-7": "{^}{#Control_L(F7)}{^}",
-"KR-8": "{^}{#Control_L(F8)}{^}",
-"KR-9": "{^}{#Control_L(F9)}{^}",
-"10-RG": "{^}{#Control_L(F10)}{^}",
-"11-RG": "{^}{#Control_L(F11)}{^}",
-"12-RG": "{^}{#Control_L(F12)}{^}",
-"A*RBL": "{#Control_L(a)}",
-"PW*RBL": "{#Control_L(b)}",
-"KR*RBL": "{#Control_L(c)}",
-"TK*RBL": "{#Control_L(d)}",
-"*ERBL": "{#Control_L(e)}",
-"TP*RBL": "{#Control_L(f)}",
-"TKPW*RBL": "{#Control_L(g)}",
-"H*RBL": "{#Control_L(h)}",
-"*EURBL": "{#Control_L(i)}",
-"SKWR*RBL": "{#Control_L(j)}",
-"K*RBL": "{#Control_L(k)}",
-"HR*RBL": "{#Control_L(l)}",
-"PH*RBL": "{#Control_L(m)}",
-"TPH*RBL": "{#Control_L(n)}",
-"O*RBL": "{#Control_L(o)}",
-"P*RBL": "{#Control_L(p)}",
-"KW*RBL": "{#Control_L(q)}",
-"R*RBL": "{#Control_L(r)}",
-"S*RBL": "{#Control_L(s)}",
-"T*RBL": "{#Control_L(t)}",
-"*URBL": "{#Control_L(u)}",
-"SR*RBL": "{#Control_L(v)}",
-"W*RBL": "{#Control_L(w)}",
-"KP*RBL": "{#Control_L(x)}",
-"KWR*RBL": "{#Control_L(y)}",
-"STKPW*RBL": "{#Control_L(z)}",
-"WUZ/WUZ": "{#}"
+<span style="color: #CC9393;">"A*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(a)}"</span>,
+<span style="color: #CC9393;">"PW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(b)}"</span>,
+<span style="color: #CC9393;">"KR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(c)}"</span>,
+<span style="color: #CC9393;">"TK*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(d)}"</span>,
+<span style="color: #CC9393;">"*ERPLT"</span>: <span style="color: #CC9393;">"{#Super_L(e)}"</span>,
+<span style="color: #CC9393;">"TP*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(f)}"</span>,
+<span style="color: #CC9393;">"TKPW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(g)}"</span>,
+<span style="color: #CC9393;">"H*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(h)}"</span>,
+<span style="color: #CC9393;">"*EURPLT"</span>: <span style="color: #CC9393;">"{#Super_L(i)}"</span>,
+<span style="color: #CC9393;">"SKWR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(j)}"</span>,
+<span style="color: #CC9393;">"K*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(k)}"</span>,
+<span style="color: #CC9393;">"HR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(l)}"</span>,
+<span style="color: #CC9393;">"PH*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(m)}"</span>,
+<span style="color: #CC9393;">"TPH*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(n)}"</span>,
+<span style="color: #CC9393;">"O*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(o)}"</span>,
+<span style="color: #CC9393;">"P*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(p)}"</span>,
+<span style="color: #CC9393;">"KW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(q)}"</span>,
+<span style="color: #CC9393;">"R*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(r)}"</span>,
+<span style="color: #CC9393;">"S*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(s)}"</span>,
+<span style="color: #CC9393;">"T*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(t)}"</span>,
+<span style="color: #CC9393;">"*URPLT"</span>: <span style="color: #CC9393;">"{#Super_L(u)}"</span>,
+<span style="color: #CC9393;">"SR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(v)}"</span>,
+<span style="color: #CC9393;">"W*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(w)}"</span>,
+<span style="color: #CC9393;">"KP*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(x)}"</span>,
+<span style="color: #CC9393;">"KWR*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(y)}"</span>,
+<span style="color: #CC9393;">"STKPW*RPLT"</span>: <span style="color: #CC9393;">"{#Super_L(z)}"</span>,
+<span style="color: #CC9393;">"A*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(a))}"</span>,
+<span style="color: #CC9393;">"PW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(b))}"</span>,
+<span style="color: #CC9393;">"KR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(c))}"</span>,
+<span style="color: #CC9393;">"TK*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(d))}"</span>,
+<span style="color: #CC9393;">"*ERBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(e))}"</span>,
+<span style="color: #CC9393;">"TP*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(f))}"</span>,
+<span style="color: #CC9393;">"TKPW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(g))}"</span>,
+<span style="color: #CC9393;">"H*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(h))}"</span>,
+<span style="color: #CC9393;">"*EURBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(i))}"</span>,
+<span style="color: #CC9393;">"SKWR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(j))}"</span>,
+<span style="color: #CC9393;">"K*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(k))}"</span>,
+<span style="color: #CC9393;">"HR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(l))}"</span>,
+<span style="color: #CC9393;">"PH*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(m))}"</span>,
+<span style="color: #CC9393;">"TPH*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(n))}"</span>,
+<span style="color: #CC9393;">"O*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(o))}"</span>,
+<span style="color: #CC9393;">"P*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(p))}"</span>,
+<span style="color: #CC9393;">"KW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(q))}"</span>,
+<span style="color: #CC9393;">"R*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(r))}"</span>,
+<span style="color: #CC9393;">"S*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(s))}"</span>,
+<span style="color: #CC9393;">"T*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(t))}"</span>,
+<span style="color: #CC9393;">"*URBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(u))}"</span>,
+<span style="color: #CC9393;">"SR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(v))}"</span>,
+<span style="color: #CC9393;">"W*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(w))}"</span>,
+<span style="color: #CC9393;">"KP*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(x))}"</span>,
+<span style="color: #CC9393;">"KWR*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(y))}"</span>,
+<span style="color: #CC9393;">"STKPW*RBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(z))}"</span>,
+<span style="color: #CC9393;">"A*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(a))}"</span>,
+<span style="color: #CC9393;">"PW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(b))}"</span>,
+<span style="color: #CC9393;">"KR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(c))}"</span>,
+<span style="color: #CC9393;">"TK*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(d))}"</span>,
+<span style="color: #CC9393;">"*ERPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(e))}"</span>,
+<span style="color: #CC9393;">"TP*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(f))}"</span>,
+<span style="color: #CC9393;">"TKPW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(g))}"</span>,
+<span style="color: #CC9393;">"H*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(h))}"</span>,
+<span style="color: #CC9393;">"*EURPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(i))}"</span>,
+<span style="color: #CC9393;">"SKWR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(j))}"</span>,
+<span style="color: #CC9393;">"K*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(k))}"</span>,
+<span style="color: #CC9393;">"HR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(l))}"</span>,
+<span style="color: #CC9393;">"PH*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(m))}"</span>,
+<span style="color: #CC9393;">"TPH*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(n))}"</span>,
+<span style="color: #CC9393;">"O*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(o))}"</span>,
+<span style="color: #CC9393;">"P*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(p))}"</span>,
+<span style="color: #CC9393;">"KW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(q))}"</span>,
+<span style="color: #CC9393;">"R*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(r))}"</span>,
+<span style="color: #CC9393;">"S*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(s))}"</span>,
+<span style="color: #CC9393;">"T*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(t))}"</span>,
+<span style="color: #CC9393;">"*URPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(u))}"</span>,
+<span style="color: #CC9393;">"SR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(v))}"</span>,
+<span style="color: #CC9393;">"W*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(w))}"</span>,
+<span style="color: #CC9393;">"KP*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(x))}"</span>,
+<span style="color: #CC9393;">"KWR*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(y))}"</span>,
+<span style="color: #CC9393;">"STKPW*RPBLT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(z))}"</span>,
+<span style="color: #CC9393;">"1-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F1)}{^}"</span>,
+<span style="color: #CC9393;">"2-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F2)}{^}"</span>,
+<span style="color: #CC9393;">"3-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F3)}{^}"</span>,
+<span style="color: #CC9393;">"4-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F4)}{^}"</span>,
+<span style="color: #CC9393;">"5-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F5)}{^}"</span>,
+<span style="color: #CC9393;">"KR-6"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F6)}{^}"</span>,
+<span style="color: #CC9393;">"KR-7"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F7)}{^}"</span>,
+<span style="color: #CC9393;">"KR-8"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F8)}{^}"</span>,
+<span style="color: #CC9393;">"KR-9"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F9)}{^}"</span>,
+<span style="color: #CC9393;">"10-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F10)}{^}"</span>,
+<span style="color: #CC9393;">"11-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F11)}{^}"</span>,
+<span style="color: #CC9393;">"12-RG"</span>: <span style="color: #CC9393;">"{^}{#Control_L(F12)}{^}"</span>,
+<span style="color: #CC9393;">"A*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(a)}"</span>,
+<span style="color: #CC9393;">"PW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(b)}"</span>,
+<span style="color: #CC9393;">"KR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(c)}"</span>,
+<span style="color: #CC9393;">"TK*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(d)}"</span>,
+<span style="color: #CC9393;">"*ERBL"</span>: <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
+<span style="color: #CC9393;">"TP*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(f)}"</span>,
+<span style="color: #CC9393;">"TKPW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(g)}"</span>,
+<span style="color: #CC9393;">"H*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(h)}"</span>,
+<span style="color: #CC9393;">"*EURBL"</span>: <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
+<span style="color: #CC9393;">"SKWR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(j)}"</span>,
+<span style="color: #CC9393;">"K*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(k)}"</span>,
+<span style="color: #CC9393;">"HR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(l)}"</span>,
+<span style="color: #CC9393;">"PH*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(m)}"</span>,
+<span style="color: #CC9393;">"TPH*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(n)}"</span>,
+<span style="color: #CC9393;">"O*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(o)}"</span>,
+<span style="color: #CC9393;">"P*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(p)}"</span>,
+<span style="color: #CC9393;">"KW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(q)}"</span>,
+<span style="color: #CC9393;">"R*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(r)}"</span>,
+<span style="color: #CC9393;">"S*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(s)}"</span>,
+<span style="color: #CC9393;">"T*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(t)}"</span>,
+<span style="color: #CC9393;">"*URBL"</span>: <span style="color: #CC9393;">"{#Control_L(u)}"</span>,
+<span style="color: #CC9393;">"SR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(v)}"</span>,
+<span style="color: #CC9393;">"W*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
+<span style="color: #CC9393;">"KP*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(x)}"</span>,
+<span style="color: #CC9393;">"KWR*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(y)}"</span>,
+<span style="color: #CC9393;">"STKPW*RBL"</span>: <span style="color: #CC9393;">"{#Control_L(z)}"</span>,
+<span style="color: #CC9393;">"WUZ/WUZ"</span>: <span style="color: #CC9393;">"{#}"</span>
 }
 </pre>
 </div>
 </div>
 </div>
 </div>
+
+<div id="outline-container-orge348b64" class="outline-2">
+<h2 id="orge348b64"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
+<div id="footnotes">
+<h2 class="footnotes">Footnotes: </h2>
+<div id="text-footnotes">
+
+<div class="footdef"><sup><a id="fn.1" class="footnum" href="#fnr.1">1</a></sup> <div class="footpara"><p class="footpara">
+Technically, to a <a href="https://en.wikipedia.org/wiki/Emacs_Lisp#Example">Lisp</a> function.
+</p></div></div>
+
+<div class="footdef"><sup><a id="fn.2" class="footnum" href="#fnr.2">2</a></sup> <div class="footpara"><p class="footpara">
+"M" for "meta".  The Meta key, similar to use as the Alt key,
+existed before the Alt key.  When Emacs was first created, the Meta
+key was common and the notation stuck.
+</p></div></div>
+
+
+</div>
+</div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-17 Wed 22:01</p>
-<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+<p class="date">Created: 2021-02-20 Sat 16:23</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
 </html>

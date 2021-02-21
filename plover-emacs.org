@@ -1,32 +1,58 @@
 #+TITLE: Plover with Emacs
 #+EXPORT_FILE_NAME: ./docs/index.html
 #+STARTUP: showall
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="style.css" />
 
 * Opening bracket
+[[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
+as well as researchers and hobbiests worldwide.  Originally released
+in 1976, it is the flagship software of the [[https://www.gnu.org/philosophy/free-sw.html][GNU project]].  Like Plover,
+Emacs is community developed and allows you to run, change, and
+distribute it, more or less, however you want (as compared to
+similarly purposed software).  It has been developed for more than 40
+years and, although it might not look fancy, has countless features
+and add-ons.
+
+#+CAPTION: Screenshot of the Emacs text editor.
+[[file:./emacs.png]]
+
+Emacs works by binding every key to a programming command[fn:1].  For
+example, pressing 'a' calls the =self-insert-command= which inserts
+the character you type, 'a'.  Commands can also be bound to key
+combinations.  To change windows, you press 'Control + x + o' (notated
+=C-x o=) to call =other-window=.  Commands not bound to a key or key
+combination are accessed through an interactive process initiated with
+'Alt+x' (notated =M-x=)[fn:2].  To change windows using the
+interactive process, you would type =M-x other-window=.
+
 #+begin_src js :tangle plover-emacs.json :exports none
 {
 #+end_src
 
 * Execute extended command and Quit
 Perhaps the two most important bindings are =M-x=
-(=execute-extended-command=) and =C-g= (=keyboard-quit=).  We
-definitely want single one-handed strokes for these.  I put them on
-the right because I am right handed and want to be able to switch
-between the board and the mouse quickly.
+(=execute-extended-command=) and =C-g= (=keyboard-quit=).  They
+deserve single-handed, single strokes.
+
+For people who are right-handed, the following allow for quick access
+when using a mouse.
 
 =ULT= sounds like "Alt".
 #+begin_src js :tangle plover-emacs.json :exports code
 "ULT": "{#Alt_L(x)}",
 #+end_src
 
-=-RPB= was not taken and "control" has an 'r' and an 'n' in it.
-Honestly, there's not much of an association.  It's simply available
-and easy to write.
+The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
+much of an association.  It's simply available and easy to write.
 #+begin_src js :tangle plover-emacs.json :exports code
 "-RPB": "{#Control(g)}",
 #+end_src
 
 * COMMENT Leader
+Vim provides a key reserved for user defined functions called the
+"leader". Any key binding that starts with the leader is guaranteed to
+be available. Leader functionality is available in Emacs through
+evil-mode or general.el.
 #+begin_src js :tangle plover-emacs.json :exports code
 "KWR-RBG": "{#Page_Down}",
 #+end_src
@@ -50,7 +76,6 @@ that to differentiate the F keys.
 "2*D": "{#F12}",
 #+end_src
 
-
 * Chaining
 It's possible to chain strokes together, for lack of a better way to
 express it.  For example, in Emacs =C-x 8 m= writes =µ=.  This can be
@@ -66,6 +91,14 @@ To pass capitalized letters, you must use =Shift()=.  For example,
 #+end_src
 
 * Escape, Meta, Alt, Control, Shift
+The Escape key is distributed with Plover in the =commands.json=
+dictionary.  For completeness, let's also put it in the Emacs
+dictionary:
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TPEFBG": "{#Escape}",
+#+end_src
+
 Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
 means that we can then use the rest of the board to represent phrases
 containing that word.  For example, =THA= ("that") leaves the board
@@ -91,11 +124,6 @@ bindings can at least be expressed in multiple strokes.  For example,
 
 Of course we would want more efficient bindings than those. But the
 idea, I think, covers all the cases completely and intuitively.
-
-* Closing bracket
-#+begin_src js :tangle plover-emacs.json :exports none
-}
-#+end_src
 
 * Notes
 ** Possible bindings
@@ -227,3 +255,16 @@ From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/ma
 "WUZ/WUZ": "{#}"
 }
 #+end_src
+
+* Closing bracket
+#+begin_src js :tangle plover-emacs.json :exports none
+}
+#+end_src
+
+* Footnotes
+
+[fn:2] "M" for "meta".  The Meta key, similar to use as the Alt key,
+existed before the Alt key.  When Emacs was first created, the Meta
+key was common and the notation stuck.
+
+[fn:1] Technically, to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
