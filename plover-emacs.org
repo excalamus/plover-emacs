@@ -14,7 +14,7 @@ years and, although it might not look fancy, has countless features
 and add-ons.
 
 #+CAPTION: Screenshot of the Emacs text editor.
-[[file:./docs/emacs.png]]
+[[file:./emacs.png]]
 
 Emacs works by binding every key to a programming command[fn:1].  For
 example, pressing 'a' calls the =self-insert-command= which inserts
