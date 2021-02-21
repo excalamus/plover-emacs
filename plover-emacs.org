@@ -267,4 +267,4 @@ From DiDoesDigital [[https://github.com/didoesdigital/steno-dictionaries/blob/ma
 existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 
-[fn:1] Technically, to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
+[fn:1] Technically to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
