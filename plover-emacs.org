@@ -84,15 +84,15 @@ that to differentiate the F keys.
 It's possible to chain strokes together, for lack of a better way to
 express it.  For example, in Emacs =C-x 8 m= writes =µ=.  This can be
 achieved in Plover with:
-#+begin_src js :exports code
-"KR*EU": "{#Control_L(x) 8 m}"
-#+end_src
+#+begin_example
+{#Control_L(x) 8 m}
+#+end_example
 
 To pass capitalized letters, you must use =Shift()=.  For example,
 =C-x 8 R= writes =®=.  In Plover, this is:
-#+begin_src js :exports code :tangle no
-"KR*EU": "{#Control_L(x) 8 Shift(r)}"
-#+end_src
+#+begin_example
+{#Control_L(x) 8 Shift(r)}
+#+end_example
 
 * Escape, Meta, Alt, Control, Shift
 The Escape key is distributed with Plover in the =commands.json=
