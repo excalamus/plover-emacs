@@ -10,11 +10,11 @@ The dictionary is here:
 https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.json
 
 # A Literate Dictionary
-Using [a single source
-file](https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.org),
-it's possible to generate [a webpage explaining each entry in a Plover
-dictionary](https://excalamus.github.io/plover-emacs/).  The source
-file is made with Emacs [Org mode](https://orgmode.org/).
+With Emacs [Org mode](https://orgmode.org/), it's possible to generate
+[a webpage explaining each entry in a Plover
+dictionary](https://excalamus.github.io/plover-emacs/), as well as the
+dictionary itself, using [a single source
+file](https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.org).
 
 Org mode uses a markup syntax similar to Markdown
 (e.g. `=verbatim-text=`, `* header`, `[[http://address][links]]`,
