@@ -61,7 +61,7 @@ would do:
 ** Mapping the alphabet
 It's nearly possible to stroke the entire alphabet with the left hand.
 By defining a right hand stroke to represent a modifier, we can create
-single strokes modifiers for every letter in the alphabet.
+single stroke modifiers for every letter in the alphabet.
 
 |-----------+------------+--------|
 | Left Hand | Right Hand | Letter |
