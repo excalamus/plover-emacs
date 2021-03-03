@@ -9,8 +9,7 @@ A full explanation of each dictionary entry is here: https://excalamus.github.io
 The dictionary is here:
 https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.json
 
-# Contributing
-## A Literate Dictionary
+# A Literate Dictionary
 Using [a single source
 file](https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.org),
 it's possible to generate [a webpage explaining each entry in a Plover
