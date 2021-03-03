@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-02-23 Tue 09:03 -->
+<!-- 2021-03-02 Tue 21:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -223,17 +223,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9212873">1. Opening bracket</a></li>
-<li><a href="#orgb894ecb">2. Execute extended command and Quit</a></li>
-<li><a href="#org9c24d93">3. Function keys</a></li>
-<li><a href="#org0617ddb">4. Chaining</a></li>
-<li><a href="#org001f4ec">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org3614e4d">6. Notes</a>
+<li><a href="#orgf877d78">1. Opening bracket</a></li>
+<li><a href="#org8ac3701">2. Dictionary design</a>
 <ul>
-<li><a href="#org55c77eb">6.1. Possible bindings</a></li>
+<li><a href="#org065bb2e">2.1. Sequence chains</a></li>
+<li><a href="#orgd031f7a">2.2. Mapping the alphabet</a></li>
 </ul>
 </li>
-<li><a href="#orgf3fc071">7. Closing bracket</a></li>
+<li><a href="#org733aa7a">3. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
+<li><a href="#orgedf2dd0">4. Function keys</a></li>
+<li><a href="#orgb10cbe0">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org0edb3f1">6. Notes</a>
+<ul>
+<li><a href="#orgf827a86">6.1. Modifiers Single Stroke</a></li>
+<li><a href="#orge417894">6.2. Nimble single strokes</a></li>
+</ul>
+</li>
+<li><a href="#orgcfad6d7">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -243,8 +249,8 @@
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-org9212873" class="outline-2">
-<h2 id="org9212873"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-orgf877d78" class="outline-2">
+<h2 id="orgf877d78"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
@@ -258,7 +264,7 @@ and add-ons<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 
 
-<div id="orgef3fe36" class="figure">
+<div id="org7791fee" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
@@ -274,12 +280,265 @@ combination are accessed through an interactive process initiated with
 'Alt+x' (notated <code>M-x</code>)<sup><a id="fnr.3" class="footref" href="#fn.3">3</a></sup>.  To change windows using the
 interactive process, you would type <code>M-x other-window</code>.
 </p>
+
+<p>
+Plover works by mapping a stroke of keys to some output; a character,
+word, or some modified combination of these.  Strokes are mapped to
+outputs within a JSON file.  See the Plover GitHub wiki entry
+"<a href="https://github.com/openstenoproject/plover/wiki/Dictionary-Format">Dictionary Format</a>" for the accepted syntax.
+</p>
 </div>
 </div>
 
-<div id="outline-container-orgb894ecb" class="outline-2">
-<h2 id="orgb894ecb"><span class="section-number-2">2</span> Execute extended command and Quit</h2>
+<div id="outline-container-org8ac3701" class="outline-2">
+<h2 id="org8ac3701"><span class="section-number-2">2</span> Dictionary design</h2>
 <div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org065bb2e" class="outline-3">
+<h3 id="org065bb2e"><span class="section-number-3">2.1</span> Sequence chains</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Many Emacs commands are called through sequences.  Typically, a
+dictionary maps a stroke to a single output element (e.g. character,
+word, or phrase).  However, it's possible, to send a sequence by
+separating elements with a space.
+</p>
+
+<p>
+For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  We can write <code>µ</code> by way
+of Emacs in Plover<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> with:
+</p>
+<pre class="example" id="org2938156">
+{#Control_L(x) 8 m}
+</pre>
+
+<p>
+To pass capitalized letters, you must use <code>Shift()</code>.  For example,
+<code>C-x 8 R</code> writes <code>®</code>.  To have Plover pass the Emacs sequence, we
+would do:
+</p>
+<pre class="example" id="org94b6e5c">
+{#Control_L(x) 8 Shift(r)}
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd031f7a" class="outline-3">
+<h3 id="orgd031f7a"><span class="section-number-3">2.2</span> Mapping the alphabet</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+It's nearly possible to stroke the entire alphabet with the left hand.
+By defining a right hand stroke to represent a modifier, we can create
+single strokes modifiers for every letter in the alphabet.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Left Hand</th>
+<th scope="col" class="org-left">Right Hand</th>
+<th scope="col" class="org-left">Letter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"a"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">PW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"b"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">KR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"c"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TK</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"d"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">E</td>
+<td class="org-left">"e"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TP</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"f"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TKPW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"g"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">H</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"h"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">EU</td>
+<td class="org-left">"i"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SKWR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"j"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">K</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"k"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">HR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"l"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">PH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"m"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">TPH</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"n"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">O</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"o"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">P</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"p"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">KW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"q"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">R</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"r"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">S</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"s"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">T</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"t"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">U</td>
+<td class="org-left">"u"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">SR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"v"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">W</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"w"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">KP</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"x"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">KWR</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"y"</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-left">STKPW</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">"z"</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org733aa7a" class="outline-2">
+<h2 id="org733aa7a"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div class="outline-text-2" id="text-3">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
 (<code>execute-extended-command</code>) and <code>C-g</code> (<code>keyboard-quit</code>).  They
@@ -310,12 +569,12 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org9c24d93" class="outline-2">
-<h2 id="org9c24d93"><span class="section-number-2">3</span> Function keys</h2>
-<div class="outline-text-2" id="text-3">
+<div id="outline-container-orgedf2dd0" class="outline-2">
+<h2 id="orgedf2dd0"><span class="section-number-2">4</span> Function keys</h2>
+<div class="outline-text-2" id="text-4">
 <p>
-It doesn't seem like <code>*</code> is used at all with numbers.  So, we can use
-that to differentiate the F keys.
+It doesn't seem like <code>*</code> is used at all with numbers.  This means it
+can be used to differentiate the F keys.
 </p>
 
 <div class="org-src-container">
@@ -336,30 +595,8 @@ that to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-org0617ddb" class="outline-2">
-<h2 id="org0617ddb"><span class="section-number-2">4</span> Chaining</h2>
-<div class="outline-text-2" id="text-4">
-<p>
-It's possible to chain strokes together, for lack of a better way to
-express it.  For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  This can be
-achieved in Plover with:
-</p>
-<pre class="example" id="orgfff9ae5">
-{#Control_L(x) 8 m}
-</pre>
-
-<p>
-To pass capitalized letters, you must use <code>Shift()</code>.  For example,
-<code>C-x 8 R</code> writes <code>®</code>.  In Plover, this is:
-</p>
-<pre class="example" id="orgbc2a45b">
-{#Control_L(x) 8 Shift(r)}
-</pre>
-</div>
-</div>
-
-<div id="outline-container-org001f4ec" class="outline-2">
-<h2 id="org001f4ec"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-orgb10cbe0" class="outline-2">
+<h2 id="orgb10cbe0"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -412,22 +649,22 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-org3614e4d" class="outline-2">
-<h2 id="org3614e4d"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-org0edb3f1" class="outline-2">
+<h2 id="org0edb3f1"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org55c77eb" class="outline-3">
-<h3 id="org55c77eb"><span class="section-number-3">6.1</span> Possible bindings</h3>
+<div id="outline-container-orgf827a86" class="outline-3">
+<h3 id="orgf827a86"><span class="section-number-3">6.1</span> Modifiers Single Stroke</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
-From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>:
+From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
 </p>
 
 <ul class="org-ul">
-<li><code>*RPLT</code> as super</li>
-<li><code>*RBLT</code> as super-alt</li>
-<li><code>*RPBLT</code> as super-shift</li>
-<li><code>*RBL</code> as control</li>
+<li><code>*RPLT</code> as Super</li>
+<li><code>*RBLT</code> as Super+Alt</li>
+<li><code>*RPBLT</code> as Super+Shift</li>
+<li><code>*RBL</code> as Control</li>
 </ul>
 
 <div class="org-src-container">
@@ -554,10 +791,879 @@ From DiDoesDigital <a href="https://github.com/didoesdigital/steno-dictionaries/
 </div>
 </div>
 </div>
+
+<div id="outline-container-orge417894" class="outline-3">
+<h3 id="orge417894"><span class="section-number-3">6.2</span> Nimble single strokes</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
+</p>
+
+<ul class="org-ul">
+<li><code>-FLGT</code> for Alt</li>
+<li><code>-BLGT</code> for Control</li>
+<li><code>-RLGT</code> for Shift</li>
+<li><code>-PLGT</code> for Super</li>
+<li><code>-PBLGT</code> for Super+Control</li>
+<li><code>-FPLGT</code> for Super+Alt</li>
+<li><code>-RPLGT</code> for Super+Shift</li>
+<li><code>-FBLGT</code> for Control+Alt</li>
+<li><code>-RBLGT</code> for Control+Shift</li>
+<li><code>-FRLGT</code> for Alt+Shift</li>
+<li><code>-FPBLGT</code> for Super+Control+Alt</li>
+<li><code>-FRPLGT</code> for Super+Alt+Shift</li>
+<li><code>-FRBLGT</code> for Control+Alt+Shift</li>
+<li><code>-FRPBLGT</code> for Super+Control+Alt+Shift</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-js">{
+        <span style="color: #CC9393;">"1-8G9"</span>: <span style="color: #CC9393;">"{#F1}"</span>,
+        <span style="color: #CC9393;">"2-8G9"</span>: <span style="color: #CC9393;">"{#F2}"</span>,
+        <span style="color: #CC9393;">"3-8G9"</span>: <span style="color: #CC9393;">"{#F3}"</span>,
+        <span style="color: #CC9393;">"4-8G9"</span>: <span style="color: #CC9393;">"{#F4}"</span>,
+        <span style="color: #CC9393;">"12-8G9"</span>: <span style="color: #CC9393;">"{#F5}"</span>,
+        <span style="color: #CC9393;">"23-8G9"</span>: <span style="color: #CC9393;">"{#F6}"</span>,
+        <span style="color: #CC9393;">"34-8G9"</span>: <span style="color: #CC9393;">"{#F7}"</span>,
+        <span style="color: #CC9393;">"123-8G9"</span>: <span style="color: #CC9393;">"{#F8}"</span>,
+        <span style="color: #CC9393;">"234-8G9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
+        <span style="color: #CC9393;">"14-8G9"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
+        <span style="color: #CC9393;">"13-8G9"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
+        <span style="color: #CC9393;">"24-8G9"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
+        <span style="color: #CC9393;">"STK-P"</span>: <span style="color: #CC9393;">"{#up}"</span>,
+        <span style="color: #CC9393;">"STK-R"</span>: <span style="color: #CC9393;">"{#left}"</span>,
+        <span style="color: #CC9393;">"STK-B"</span>: <span style="color: #CC9393;">"{#down}"</span>,
+        <span style="color: #CC9393;">"STK-G"</span>: <span style="color: #CC9393;">"{#right}"</span>,
+        <span style="color: #CC9393;">"STK-RPG"</span>: <span style="color: #CC9393;">"{#page_up}"</span>,
+        <span style="color: #CC9393;">"STK-FBL"</span>: <span style="color: #CC9393;">"{#page_down}"</span>,
+        <span style="color: #CC9393;">"STK-FPL"</span>: <span style="color: #CC9393;">"{#home}"</span>,
+        <span style="color: #CC9393;">"STK-RBG"</span>: <span style="color: #CC9393;">"{#end}"</span>,
+        <span style="color: #CC9393;">"STK-RB"</span>: <span style="color: #CC9393;">"{#return}"</span>,
+        <span style="color: #CC9393;">"STK-F"</span>: <span style="color: #CC9393;">"{#backspace}"</span>,
+        <span style="color: #CC9393;">"STK-L"</span>: <span style="color: #CC9393;">"{#delete}"</span>,
+        <span style="color: #CC9393;">"STK-FR"</span>: <span style="color: #CC9393;">"{#escape}"</span>,
+        <span style="color: #CC9393;">"STK-LG"</span>: <span style="color: #CC9393;">"{#tab}"</span>,
+        <span style="color: #CC9393;">"STK-RP"</span>: <span style="color: #CC9393;">"{#slash}"</span>,
+        <span style="color: #CC9393;">"STK-PG"</span>: <span style="color: #CC9393;">"{#backslash}"</span>,
+        <span style="color: #CC9393;">"STKP"</span>: <span style="color: #CC9393;">"{#Super_L()}"</span>,
+        <span style="color: #CC9393;">"APLGT"</span>: <span style="color: #CC9393;">"{#Super_L(a)}"</span>,
+        <span style="color: #CC9393;">"PW-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(b)}"</span>,
+        <span style="color: #CC9393;">"KR-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(c)}"</span>,
+        <span style="color: #CC9393;">"TK-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(d)}"</span>,
+        <span style="color: #CC9393;">"EPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(e)}"</span>,
+        <span style="color: #CC9393;">"TP-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(f)}"</span>,
+        <span style="color: #CC9393;">"TKPW-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(g)}"</span>,
+        <span style="color: #CC9393;">"H-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(h)}"</span>,
+        <span style="color: #CC9393;">"EUPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(i)}"</span>,
+        <span style="color: #CC9393;">"SKWR-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(j)}"</span>,
+        <span style="color: #CC9393;">"K-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(k)}"</span>,
+        <span style="color: #CC9393;">"HR-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(l)}"</span>,
+        <span style="color: #CC9393;">"PH-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(m)}"</span>,
+        <span style="color: #CC9393;">"TPH-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(n)}"</span>,
+        <span style="color: #CC9393;">"OPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(o)}"</span>,
+        <span style="color: #CC9393;">"P-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(p)}"</span>,
+        <span style="color: #CC9393;">"KW-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(q)}"</span>,
+        <span style="color: #CC9393;">"R-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(r)}"</span>,
+        <span style="color: #CC9393;">"S-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(s)}"</span>,
+        <span style="color: #CC9393;">"T-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(t)}"</span>,
+        <span style="color: #CC9393;">"UPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(u)}"</span>,
+        <span style="color: #CC9393;">"SR-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(v)}"</span>,
+        <span style="color: #CC9393;">"W-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(w)}"</span>,
+        <span style="color: #CC9393;">"KP-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(x)}"</span>,
+        <span style="color: #CC9393;">"KWR-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(y)}"</span>,
+        <span style="color: #CC9393;">"STKPW-PLGT"</span>: <span style="color: #CC9393;">"{#Super_L(z)}"</span>,
+        <span style="color: #CC9393;">"1-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F1)}"</span>,
+        <span style="color: #CC9393;">"2-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F2)}"</span>,
+        <span style="color: #CC9393;">"3-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F3)}"</span>,
+        <span style="color: #CC9393;">"4-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F4)}"</span>,
+        <span style="color: #CC9393;">"12-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F5)}"</span>,
+        <span style="color: #CC9393;">"23-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F6)}"</span>,
+        <span style="color: #CC9393;">"34-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F7)}"</span>,
+        <span style="color: #CC9393;">"123-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F8)}"</span>,
+        <span style="color: #CC9393;">"234-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F9)}"</span>,
+        <span style="color: #CC9393;">"14-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F10)}"</span>,
+        <span style="color: #CC9393;">"13-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F11)}"</span>,
+        <span style="color: #CC9393;">"24-78G9"</span>: <span style="color: #CC9393;">"{#Super_L(F12)}"</span>,
+        <span style="color: #CC9393;">"STKP-P"</span>: <span style="color: #CC9393;">"{#Super_L(up)}"</span>,
+        <span style="color: #CC9393;">"STKP-R"</span>: <span style="color: #CC9393;">"{#Super_L(left)}"</span>,
+        <span style="color: #CC9393;">"STKP-B"</span>: <span style="color: #CC9393;">"{#Super_L(down)}"</span>,
+        <span style="color: #CC9393;">"STKP-G"</span>: <span style="color: #CC9393;">"{#Super_L(right)}"</span>,
+        <span style="color: #CC9393;">"STKP-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(page_up)}"</span>,
+        <span style="color: #CC9393;">"STKP-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(page_down)}"</span>,
+        <span style="color: #CC9393;">"STKP-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(home)}"</span>,
+        <span style="color: #CC9393;">"STKP-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(end)}"</span>,
+        <span style="color: #CC9393;">"STKP-RB"</span>: <span style="color: #CC9393;">"{#Super_L(return)}"</span>,
+        <span style="color: #CC9393;">"STKP-F"</span>: <span style="color: #CC9393;">"{#Super_L(backspace)}"</span>,
+        <span style="color: #CC9393;">"STKP-L"</span>: <span style="color: #CC9393;">"{#Super_L(delete)}"</span>,
+        <span style="color: #CC9393;">"STKP-FR"</span>: <span style="color: #CC9393;">"{#Super_L(escape)}"</span>,
+        <span style="color: #CC9393;">"STKP-LG"</span>: <span style="color: #CC9393;">"{#Super_L(tab)}"</span>,
+        <span style="color: #CC9393;">"STKP-RP"</span>: <span style="color: #CC9393;">"{#Super_L(slash)}"</span>,
+        <span style="color: #CC9393;">"STKP-PG"</span>: <span style="color: #CC9393;">"{#Super_L(backslash)}"</span>,
+        <span style="color: #CC9393;">"STKW"</span>: <span style="color: #CC9393;">"{#Control_L()}"</span>,
+        <span style="color: #CC9393;">"ABLGT"</span>: <span style="color: #CC9393;">"{#Control_L(a)}"</span>,
+        <span style="color: #CC9393;">"PW-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(b)}"</span>,
+        <span style="color: #CC9393;">"KR-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(c)}"</span>,
+        <span style="color: #CC9393;">"TK-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(d)}"</span>,
+        <span style="color: #CC9393;">"EBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
+        <span style="color: #CC9393;">"TP-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(f)}"</span>,
+        <span style="color: #CC9393;">"TKPW-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(g)}"</span>,
+        <span style="color: #CC9393;">"H-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(h)}"</span>,
+        <span style="color: #CC9393;">"EUBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
+        <span style="color: #CC9393;">"SKWR-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(j)}"</span>,
+        <span style="color: #CC9393;">"K-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(k)}"</span>,
+        <span style="color: #CC9393;">"HR-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(l)}"</span>,
+        <span style="color: #CC9393;">"PH-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(m)}"</span>,
+        <span style="color: #CC9393;">"TPH-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(n)}"</span>,
+        <span style="color: #CC9393;">"OBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(o)}"</span>,
+        <span style="color: #CC9393;">"P-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(p)}"</span>,
+        <span style="color: #CC9393;">"KW-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(q)}"</span>,
+        <span style="color: #CC9393;">"R-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(r)}"</span>,
+        <span style="color: #CC9393;">"S-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(s)}"</span>,
+        <span style="color: #CC9393;">"T-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(t)}"</span>,
+        <span style="color: #CC9393;">"UBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(u)}"</span>,
+        <span style="color: #CC9393;">"SR-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(v)}"</span>,
+        <span style="color: #CC9393;">"W-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
+        <span style="color: #CC9393;">"KP-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(x)}"</span>,
+        <span style="color: #CC9393;">"KWR-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(y)}"</span>,
+        <span style="color: #CC9393;">"STKPW-BLGT"</span>: <span style="color: #CC9393;">"{#Control_L(z)}"</span>,
+        <span style="color: #CC9393;">"1-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F1)}"</span>,
+        <span style="color: #CC9393;">"2-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F2)}"</span>,
+        <span style="color: #CC9393;">"3-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F3)}"</span>,
+        <span style="color: #CC9393;">"4-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F4)}"</span>,
+        <span style="color: #CC9393;">"12-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F5)}"</span>,
+        <span style="color: #CC9393;">"23-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F6)}"</span>,
+        <span style="color: #CC9393;">"34-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F7)}"</span>,
+        <span style="color: #CC9393;">"123-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F8)}"</span>,
+        <span style="color: #CC9393;">"234-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F9)}"</span>,
+        <span style="color: #CC9393;">"14-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F10)}"</span>,
+        <span style="color: #CC9393;">"13-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F11)}"</span>,
+        <span style="color: #CC9393;">"24-B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(F12)}"</span>,
+        <span style="color: #CC9393;">"STKW-P"</span>: <span style="color: #CC9393;">"{#Control_L(up)}"</span>,
+        <span style="color: #CC9393;">"STKW-R"</span>: <span style="color: #CC9393;">"{#Control_L(left)}"</span>,
+        <span style="color: #CC9393;">"STKW-B"</span>: <span style="color: #CC9393;">"{#Control_L(down)}"</span>,
+        <span style="color: #CC9393;">"STKW-G"</span>: <span style="color: #CC9393;">"{#Control_L(right)}"</span>,
+        <span style="color: #CC9393;">"STKW-RPG"</span>: <span style="color: #CC9393;">"{#Control_L(page_up)}"</span>,
+        <span style="color: #CC9393;">"STKW-FBL"</span>: <span style="color: #CC9393;">"{#Control_L(page_down)}"</span>,
+        <span style="color: #CC9393;">"STKW-FPL"</span>: <span style="color: #CC9393;">"{#Control_L(home)}"</span>,
+        <span style="color: #CC9393;">"STKW-RBG"</span>: <span style="color: #CC9393;">"{#Control_L(end)}"</span>,
+        <span style="color: #CC9393;">"STKW-RB"</span>: <span style="color: #CC9393;">"{#Control_L(return)}"</span>,
+        <span style="color: #CC9393;">"STKW-F"</span>: <span style="color: #CC9393;">"{#Control_L(backspace)}"</span>,
+        <span style="color: #CC9393;">"STKW-L"</span>: <span style="color: #CC9393;">"{#Control_L(delete)}"</span>,
+        <span style="color: #CC9393;">"STKW-FR"</span>: <span style="color: #CC9393;">"{#Control_L(escape)}"</span>,
+        <span style="color: #CC9393;">"STKW-LG"</span>: <span style="color: #CC9393;">"{#Control_L(tab)}"</span>,
+        <span style="color: #CC9393;">"STKW-RP"</span>: <span style="color: #CC9393;">"{#Control_L(slash)}"</span>,
+        <span style="color: #CC9393;">"STKW-PG"</span>: <span style="color: #CC9393;">"{#Control_L(backslash)}"</span>,
+        <span style="color: #CC9393;">"STKH"</span>: <span style="color: #CC9393;">"{#Alt_L()}"</span>,
+        <span style="color: #CC9393;">"AFLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(a)}"</span>,
+        <span style="color: #CC9393;">"PW-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(b)}"</span>,
+        <span style="color: #CC9393;">"KR-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(c)}"</span>,
+        <span style="color: #CC9393;">"TK-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(d)}"</span>,
+        <span style="color: #CC9393;">"EFLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(e)}"</span>,
+        <span style="color: #CC9393;">"TP-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(f)}"</span>,
+        <span style="color: #CC9393;">"TKPW-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(g)}"</span>,
+        <span style="color: #CC9393;">"H-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(h)}"</span>,
+        <span style="color: #CC9393;">"EUFLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(i)}"</span>,
+        <span style="color: #CC9393;">"SKWR-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(j)}"</span>,
+        <span style="color: #CC9393;">"K-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(k)}"</span>,
+        <span style="color: #CC9393;">"HR-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(l)}"</span>,
+        <span style="color: #CC9393;">"PH-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(m)}"</span>,
+        <span style="color: #CC9393;">"TPH-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(n)}"</span>,
+        <span style="color: #CC9393;">"OFLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(o)}"</span>,
+        <span style="color: #CC9393;">"P-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(p)}"</span>,
+        <span style="color: #CC9393;">"KW-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(q)}"</span>,
+        <span style="color: #CC9393;">"R-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(r)}"</span>,
+        <span style="color: #CC9393;">"S-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(s)}"</span>,
+        <span style="color: #CC9393;">"T-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(t)}"</span>,
+        <span style="color: #CC9393;">"UFLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(u)}"</span>,
+        <span style="color: #CC9393;">"SR-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(v)}"</span>,
+        <span style="color: #CC9393;">"W-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(w)}"</span>,
+        <span style="color: #CC9393;">"KP-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(x)}"</span>,
+        <span style="color: #CC9393;">"KWR-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(y)}"</span>,
+        <span style="color: #CC9393;">"STKPW-FLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(z)}"</span>,
+        <span style="color: #CC9393;">"1-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F1)}"</span>,
+        <span style="color: #CC9393;">"2-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F2)}"</span>,
+        <span style="color: #CC9393;">"3-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F3)}"</span>,
+        <span style="color: #CC9393;">"4-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F4)}"</span>,
+        <span style="color: #CC9393;">"12-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F5)}"</span>,
+        <span style="color: #CC9393;">"23-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F6)}"</span>,
+        <span style="color: #CC9393;">"34-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F7)}"</span>,
+        <span style="color: #CC9393;">"123-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F8)}"</span>,
+        <span style="color: #CC9393;">"234-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F9)}"</span>,
+        <span style="color: #CC9393;">"14-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F10)}"</span>,
+        <span style="color: #CC9393;">"13-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F11)}"</span>,
+        <span style="color: #CC9393;">"24-68G9"</span>: <span style="color: #CC9393;">"{#Alt_L(F12)}"</span>,
+        <span style="color: #CC9393;">"STKH-P"</span>: <span style="color: #CC9393;">"{#Alt_L(up)}"</span>,
+        <span style="color: #CC9393;">"STKH-R"</span>: <span style="color: #CC9393;">"{#Alt_L(left)}"</span>,
+        <span style="color: #CC9393;">"STKH-B"</span>: <span style="color: #CC9393;">"{#Alt_L(down)}"</span>,
+        <span style="color: #CC9393;">"STKH-G"</span>: <span style="color: #CC9393;">"{#Alt_L(right)}"</span>,
+        <span style="color: #CC9393;">"STKH-RPG"</span>: <span style="color: #CC9393;">"{#Alt_L(page_up)}"</span>,
+        <span style="color: #CC9393;">"STKH-FBL"</span>: <span style="color: #CC9393;">"{#Alt_L(page_down)}"</span>,
+        <span style="color: #CC9393;">"STKH-FPL"</span>: <span style="color: #CC9393;">"{#Alt_L(home)}"</span>,
+        <span style="color: #CC9393;">"STKH-RBG"</span>: <span style="color: #CC9393;">"{#Alt_L(end)}"</span>,
+        <span style="color: #CC9393;">"STKH-RB"</span>: <span style="color: #CC9393;">"{#Alt_L(return)}"</span>,
+        <span style="color: #CC9393;">"STKH-F"</span>: <span style="color: #CC9393;">"{#Alt_L(backspace)}"</span>,
+        <span style="color: #CC9393;">"STKH-L"</span>: <span style="color: #CC9393;">"{#Alt_L(delete)}"</span>,
+        <span style="color: #CC9393;">"STKH-FR"</span>: <span style="color: #CC9393;">"{#Alt_L(escape)}"</span>,
+        <span style="color: #CC9393;">"STKH-LG"</span>: <span style="color: #CC9393;">"{#Alt_L(tab)}"</span>,
+        <span style="color: #CC9393;">"STKH-RP"</span>: <span style="color: #CC9393;">"{#Alt_L(slash)}"</span>,
+        <span style="color: #CC9393;">"STKH-PG"</span>: <span style="color: #CC9393;">"{#Alt_L(backslash)}"</span>,
+        <span style="color: #CC9393;">"STKR"</span>: <span style="color: #CC9393;">"{#Shift_L()}"</span>,
+        <span style="color: #CC9393;">"ARLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(a)}"</span>,
+        <span style="color: #CC9393;">"PW-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(b)}"</span>,
+        <span style="color: #CC9393;">"KR-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(c)}"</span>,
+        <span style="color: #CC9393;">"TK-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(d)}"</span>,
+        <span style="color: #CC9393;">"ERLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(e)}"</span>,
+        <span style="color: #CC9393;">"TP-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(f)}"</span>,
+        <span style="color: #CC9393;">"TKPW-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(g)}"</span>,
+        <span style="color: #CC9393;">"H-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(h)}"</span>,
+        <span style="color: #CC9393;">"EURLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(i)}"</span>,
+        <span style="color: #CC9393;">"SKWR-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(j)}"</span>,
+        <span style="color: #CC9393;">"K-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(k)}"</span>,
+        <span style="color: #CC9393;">"HR-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(l)}"</span>,
+        <span style="color: #CC9393;">"PH-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(m)}"</span>,
+        <span style="color: #CC9393;">"TPH-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(n)}"</span>,
+        <span style="color: #CC9393;">"ORLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(o)}"</span>,
+        <span style="color: #CC9393;">"P-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(p)}"</span>,
+        <span style="color: #CC9393;">"KW-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(q)}"</span>,
+        <span style="color: #CC9393;">"R-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(r)}"</span>,
+        <span style="color: #CC9393;">"S-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(s)}"</span>,
+        <span style="color: #CC9393;">"T-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(t)}"</span>,
+        <span style="color: #CC9393;">"URLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(u)}"</span>,
+        <span style="color: #CC9393;">"SR-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(v)}"</span>,
+        <span style="color: #CC9393;">"W-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(w)}"</span>,
+        <span style="color: #CC9393;">"KP-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(x)}"</span>,
+        <span style="color: #CC9393;">"KWR-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(y)}"</span>,
+        <span style="color: #CC9393;">"STKPW-RLGT"</span>: <span style="color: #CC9393;">"{#Shift_L(z)}"</span>,
+        <span style="color: #CC9393;">"1-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F1)}"</span>,
+        <span style="color: #CC9393;">"2-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F2)}"</span>,
+        <span style="color: #CC9393;">"3-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F3)}"</span>,
+        <span style="color: #CC9393;">"4-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F4)}"</span>,
+        <span style="color: #CC9393;">"12-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F5)}"</span>,
+        <span style="color: #CC9393;">"23-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F6)}"</span>,
+        <span style="color: #CC9393;">"34-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F7)}"</span>,
+        <span style="color: #CC9393;">"123-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F8)}"</span>,
+        <span style="color: #CC9393;">"234-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F9)}"</span>,
+        <span style="color: #CC9393;">"14-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F10)}"</span>,
+        <span style="color: #CC9393;">"13-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F11)}"</span>,
+        <span style="color: #CC9393;">"24-R8G9"</span>: <span style="color: #CC9393;">"{#Shift_L(F12)}"</span>,
+        <span style="color: #CC9393;">"STKR-P"</span>: <span style="color: #CC9393;">"{#Shift_L(up)}"</span>,
+        <span style="color: #CC9393;">"STKR-R"</span>: <span style="color: #CC9393;">"{#Shift_L(left)}"</span>,
+        <span style="color: #CC9393;">"STKR-B"</span>: <span style="color: #CC9393;">"{#Shift_L(down)}"</span>,
+        <span style="color: #CC9393;">"STKR-G"</span>: <span style="color: #CC9393;">"{#Shift_L(right)}"</span>,
+        <span style="color: #CC9393;">"STKR-RPG"</span>: <span style="color: #CC9393;">"{#Shift_L(page_up)}"</span>,
+        <span style="color: #CC9393;">"STKR-FBL"</span>: <span style="color: #CC9393;">"{#Shift_L(page_down)}"</span>,
+        <span style="color: #CC9393;">"STKR-FPL"</span>: <span style="color: #CC9393;">"{#Shift_L(home)}"</span>,
+        <span style="color: #CC9393;">"STKR-RBG"</span>: <span style="color: #CC9393;">"{#Shift_L(end)}"</span>,
+        <span style="color: #CC9393;">"STKR-RB"</span>: <span style="color: #CC9393;">"{#Shift_L(return)}"</span>,
+        <span style="color: #CC9393;">"STKR-F"</span>: <span style="color: #CC9393;">"{#Shift_L(backspace)}"</span>,
+        <span style="color: #CC9393;">"STKR-L"</span>: <span style="color: #CC9393;">"{#Shift_L(delete)}"</span>,
+        <span style="color: #CC9393;">"STKR-FR"</span>: <span style="color: #CC9393;">"{#Shift_L(escape)}"</span>,
+        <span style="color: #CC9393;">"STKR-LG"</span>: <span style="color: #CC9393;">"{#Shift_L(tab)}"</span>,
+        <span style="color: #CC9393;">"STKR-RP"</span>: <span style="color: #CC9393;">"{#Shift_L(slash)}"</span>,
+        <span style="color: #CC9393;">"STKR-PG"</span>: <span style="color: #CC9393;">"{#Shift_L(backslash)}"</span>,
+        <span style="color: #CC9393;">"STKPW"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L())}"</span>,
+        <span style="color: #CC9393;">"APBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(d))}"</span>,
+        <span style="color: #CC9393;">"EPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(h))}"</span>,
+        <span style="color: #CC9393;">"EUPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(n))}"</span>,
+        <span style="color: #CC9393;">"OPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(t))}"</span>,
+        <span style="color: #CC9393;">"UPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-PBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKPW-P"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKPW-R"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKPW-B"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKPW-G"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKPW-F"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKPW-L"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKPW-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKPW-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKPH"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L())}"</span>,
+        <span style="color: #CC9393;">"AFPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(d))}"</span>,
+        <span style="color: #CC9393;">"EFPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(h))}"</span>,
+        <span style="color: #CC9393;">"EUFPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(n))}"</span>,
+        <span style="color: #CC9393;">"OFPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(t))}"</span>,
+        <span style="color: #CC9393;">"UFPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-678G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKPH-P"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKPH-R"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKPH-B"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKPH-G"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKPH-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKPH-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKPH-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKPH-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKPH-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKPH-F"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKPH-L"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKPH-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKPH-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKPH-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKPH-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKPR"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L())}"</span>,
+        <span style="color: #CC9393;">"ARPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(d))}"</span>,
+        <span style="color: #CC9393;">"ERPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(h))}"</span>,
+        <span style="color: #CC9393;">"EURPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(n))}"</span>,
+        <span style="color: #CC9393;">"ORPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(t))}"</span>,
+        <span style="color: #CC9393;">"URPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKPR-P"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKPR-R"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKPR-B"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKPR-G"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKPR-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKPR-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKPR-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKPR-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKPR-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKPR-F"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKPR-L"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKPR-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKPR-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKPR-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKPR-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Shift_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKWH"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L())}"</span>,
+        <span style="color: #CC9393;">"AFBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(d))}"</span>,
+        <span style="color: #CC9393;">"EFBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(h))}"</span>,
+        <span style="color: #CC9393;">"EUFBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(n))}"</span>,
+        <span style="color: #CC9393;">"OFBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(t))}"</span>,
+        <span style="color: #CC9393;">"UFBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-6B8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKWH-P"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKWH-R"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKWH-B"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKWH-G"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKWH-RPG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKWH-FBL"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKWH-FPL"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKWH-RBG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKWH-RB"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKWH-F"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKWH-L"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKWH-FR"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKWH-LG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKWH-RP"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKWH-PG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKWR"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L())}"</span>,
+        <span style="color: #CC9393;">"ARBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(d))}"</span>,
+        <span style="color: #CC9393;">"ERBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(h))}"</span>,
+        <span style="color: #CC9393;">"EURBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(n))}"</span>,
+        <span style="color: #CC9393;">"ORBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(t))}"</span>,
+        <span style="color: #CC9393;">"URBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKWR-P"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKWR-R"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKWR-B"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKWR-G"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKWR-RPG"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKWR-FBL"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKWR-FPL"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKWR-RBG"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKWR-RB"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKWR-F"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKWR-L"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKWR-FR"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKWR-LG"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKWR-RP"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKWR-PG"</span>: <span style="color: #CC9393;">"{#Control_L(Shift_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKHR"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L())}"</span>,
+        <span style="color: #CC9393;">"AFRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(a))}"</span>,
+        <span style="color: #CC9393;">"PW-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(b))}"</span>,
+        <span style="color: #CC9393;">"KR-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(c))}"</span>,
+        <span style="color: #CC9393;">"TK-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(d))}"</span>,
+        <span style="color: #CC9393;">"EFRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(e))}"</span>,
+        <span style="color: #CC9393;">"TP-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(f))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(g))}"</span>,
+        <span style="color: #CC9393;">"H-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(h))}"</span>,
+        <span style="color: #CC9393;">"EUFRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(i))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(j))}"</span>,
+        <span style="color: #CC9393;">"K-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(k))}"</span>,
+        <span style="color: #CC9393;">"HR-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(l))}"</span>,
+        <span style="color: #CC9393;">"PH-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(m))}"</span>,
+        <span style="color: #CC9393;">"TPH-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(n))}"</span>,
+        <span style="color: #CC9393;">"OFRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(o))}"</span>,
+        <span style="color: #CC9393;">"P-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(p))}"</span>,
+        <span style="color: #CC9393;">"KW-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(q))}"</span>,
+        <span style="color: #CC9393;">"R-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(r))}"</span>,
+        <span style="color: #CC9393;">"S-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(s))}"</span>,
+        <span style="color: #CC9393;">"T-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(t))}"</span>,
+        <span style="color: #CC9393;">"UFRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(u))}"</span>,
+        <span style="color: #CC9393;">"SR-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(v))}"</span>,
+        <span style="color: #CC9393;">"W-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(w))}"</span>,
+        <span style="color: #CC9393;">"KP-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(x))}"</span>,
+        <span style="color: #CC9393;">"KWR-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(y))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FRLGT"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(z))}"</span>,
+        <span style="color: #CC9393;">"1-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F1))}"</span>,
+        <span style="color: #CC9393;">"2-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F2))}"</span>,
+        <span style="color: #CC9393;">"3-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F3))}"</span>,
+        <span style="color: #CC9393;">"4-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F4))}"</span>,
+        <span style="color: #CC9393;">"12-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F5))}"</span>,
+        <span style="color: #CC9393;">"23-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F6))}"</span>,
+        <span style="color: #CC9393;">"34-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F7))}"</span>,
+        <span style="color: #CC9393;">"123-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F8))}"</span>,
+        <span style="color: #CC9393;">"234-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F9))}"</span>,
+        <span style="color: #CC9393;">"14-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F10))}"</span>,
+        <span style="color: #CC9393;">"13-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F11))}"</span>,
+        <span style="color: #CC9393;">"24-6R8G9"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(F12))}"</span>,
+        <span style="color: #CC9393;">"STKHR-P"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(up))}"</span>,
+        <span style="color: #CC9393;">"STKHR-R"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(left))}"</span>,
+        <span style="color: #CC9393;">"STKHR-B"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(down))}"</span>,
+        <span style="color: #CC9393;">"STKHR-G"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(right))}"</span>,
+        <span style="color: #CC9393;">"STKHR-RPG"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(page_up))}"</span>,
+        <span style="color: #CC9393;">"STKHR-FBL"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(page_down))}"</span>,
+        <span style="color: #CC9393;">"STKHR-FPL"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(home))}"</span>,
+        <span style="color: #CC9393;">"STKHR-RBG"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(end))}"</span>,
+        <span style="color: #CC9393;">"STKHR-RB"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(return))}"</span>,
+        <span style="color: #CC9393;">"STKHR-F"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(backspace))}"</span>,
+        <span style="color: #CC9393;">"STKHR-L"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(delete))}"</span>,
+        <span style="color: #CC9393;">"STKHR-FR"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(escape))}"</span>,
+        <span style="color: #CC9393;">"STKHR-LG"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(tab))}"</span>,
+        <span style="color: #CC9393;">"STKHR-RP"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(slash))}"</span>,
+        <span style="color: #CC9393;">"STKHR-PG"</span>: <span style="color: #CC9393;">"{#Alt_L(Shift_L(backslash))}"</span>,
+        <span style="color: #CC9393;">"STKPWH"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L()))}"</span>,
+        <span style="color: #CC9393;">"AFPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(a)))}"</span>,
+        <span style="color: #CC9393;">"PW-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(b)))}"</span>,
+        <span style="color: #CC9393;">"KR-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(c)))}"</span>,
+        <span style="color: #CC9393;">"TK-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(d)))}"</span>,
+        <span style="color: #CC9393;">"EFPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(e)))}"</span>,
+        <span style="color: #CC9393;">"TP-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(f)))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(g)))}"</span>,
+        <span style="color: #CC9393;">"H-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(h)))}"</span>,
+        <span style="color: #CC9393;">"EUFPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(i)))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(j)))}"</span>,
+        <span style="color: #CC9393;">"K-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(k)))}"</span>,
+        <span style="color: #CC9393;">"HR-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(l)))}"</span>,
+        <span style="color: #CC9393;">"PH-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(m)))}"</span>,
+        <span style="color: #CC9393;">"TPH-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(n)))}"</span>,
+        <span style="color: #CC9393;">"OFPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(o)))}"</span>,
+        <span style="color: #CC9393;">"P-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(p)))}"</span>,
+        <span style="color: #CC9393;">"KW-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(q)))}"</span>,
+        <span style="color: #CC9393;">"R-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(r)))}"</span>,
+        <span style="color: #CC9393;">"S-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(s)))}"</span>,
+        <span style="color: #CC9393;">"T-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(t)))}"</span>,
+        <span style="color: #CC9393;">"UFPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(u)))}"</span>,
+        <span style="color: #CC9393;">"SR-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(v)))}"</span>,
+        <span style="color: #CC9393;">"W-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(w)))}"</span>,
+        <span style="color: #CC9393;">"KP-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(x)))}"</span>,
+        <span style="color: #CC9393;">"KWR-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(y)))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(z)))}"</span>,
+        <span style="color: #CC9393;">"1-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F1)))}"</span>,
+        <span style="color: #CC9393;">"2-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F2)))}"</span>,
+        <span style="color: #CC9393;">"3-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F3)))}"</span>,
+        <span style="color: #CC9393;">"4-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F4)))}"</span>,
+        <span style="color: #CC9393;">"12-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F5)))}"</span>,
+        <span style="color: #CC9393;">"23-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F6)))}"</span>,
+        <span style="color: #CC9393;">"34-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F7)))}"</span>,
+        <span style="color: #CC9393;">"123-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F8)))}"</span>,
+        <span style="color: #CC9393;">"234-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F9)))}"</span>,
+        <span style="color: #CC9393;">"14-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F10)))}"</span>,
+        <span style="color: #CC9393;">"13-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F11)))}"</span>,
+        <span style="color: #CC9393;">"24-67B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(F12)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-P"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(up)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-R"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(left)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-B"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(down)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-G"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(right)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(page_up)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(page_down)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(home)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(end)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(return)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-F"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(backspace)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-L"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(delete)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(escape)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(tab)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(slash)))}"</span>,
+        <span style="color: #CC9393;">"STKPWH-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(backslash)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L()))}"</span>,
+        <span style="color: #CC9393;">"ARPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(a)))}"</span>,
+        <span style="color: #CC9393;">"PW-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(b)))}"</span>,
+        <span style="color: #CC9393;">"KR-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(c)))}"</span>,
+        <span style="color: #CC9393;">"TK-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(d)))}"</span>,
+        <span style="color: #CC9393;">"ERPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(e)))}"</span>,
+        <span style="color: #CC9393;">"TP-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(f)))}"</span>,
+        <span style="color: #CC9393;">"TKPW-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(g)))}"</span>,
+        <span style="color: #CC9393;">"H-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(h)))}"</span>,
+        <span style="color: #CC9393;">"EURPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(i)))}"</span>,
+        <span style="color: #CC9393;">"SKWR-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(j)))}"</span>,
+        <span style="color: #CC9393;">"K-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(k)))}"</span>,
+        <span style="color: #CC9393;">"HR-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(l)))}"</span>,
+        <span style="color: #CC9393;">"PH-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(m)))}"</span>,
+        <span style="color: #CC9393;">"TPH-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(n)))}"</span>,
+        <span style="color: #CC9393;">"ORPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(o)))}"</span>,
+        <span style="color: #CC9393;">"P-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(p)))}"</span>,
+        <span style="color: #CC9393;">"KW-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(q)))}"</span>,
+        <span style="color: #CC9393;">"R-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(r)))}"</span>,
+        <span style="color: #CC9393;">"S-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(s)))}"</span>,
+        <span style="color: #CC9393;">"T-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(t)))}"</span>,
+        <span style="color: #CC9393;">"URPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(u)))}"</span>,
+        <span style="color: #CC9393;">"SR-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(v)))}"</span>,
+        <span style="color: #CC9393;">"W-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(w)))}"</span>,
+        <span style="color: #CC9393;">"KP-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(x)))}"</span>,
+        <span style="color: #CC9393;">"KWR-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(y)))}"</span>,
+        <span style="color: #CC9393;">"STKPW-RPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(z)))}"</span>,
+        <span style="color: #CC9393;">"1-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F1)))}"</span>,
+        <span style="color: #CC9393;">"2-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F2)))}"</span>,
+        <span style="color: #CC9393;">"3-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F3)))}"</span>,
+        <span style="color: #CC9393;">"4-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F4)))}"</span>,
+        <span style="color: #CC9393;">"12-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F5)))}"</span>,
+        <span style="color: #CC9393;">"23-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F6)))}"</span>,
+        <span style="color: #CC9393;">"34-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F7)))}"</span>,
+        <span style="color: #CC9393;">"123-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F8)))}"</span>,
+        <span style="color: #CC9393;">"234-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F9)))}"</span>,
+        <span style="color: #CC9393;">"14-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F10)))}"</span>,
+        <span style="color: #CC9393;">"13-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F11)))}"</span>,
+        <span style="color: #CC9393;">"24-R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(F12)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-P"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(up)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-R"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(left)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-B"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(down)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-G"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(right)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(page_up)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(page_down)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(home)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(end)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(return)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-F"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(backspace)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-L"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(delete)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(escape)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(tab)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(slash)))}"</span>,
+        <span style="color: #CC9393;">"STKPWR-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Shift_L(backslash)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L()))}"</span>,
+        <span style="color: #CC9393;">"AFRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(a)))}"</span>,
+        <span style="color: #CC9393;">"PW-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(b)))}"</span>,
+        <span style="color: #CC9393;">"KR-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(c)))}"</span>,
+        <span style="color: #CC9393;">"TK-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(d)))}"</span>,
+        <span style="color: #CC9393;">"EFRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(e)))}"</span>,
+        <span style="color: #CC9393;">"TP-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(f)))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(g)))}"</span>,
+        <span style="color: #CC9393;">"H-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(h)))}"</span>,
+        <span style="color: #CC9393;">"EUFRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(i)))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(j)))}"</span>,
+        <span style="color: #CC9393;">"K-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(k)))}"</span>,
+        <span style="color: #CC9393;">"HR-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(l)))}"</span>,
+        <span style="color: #CC9393;">"PH-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(m)))}"</span>,
+        <span style="color: #CC9393;">"TPH-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(n)))}"</span>,
+        <span style="color: #CC9393;">"OFRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(o)))}"</span>,
+        <span style="color: #CC9393;">"P-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(p)))}"</span>,
+        <span style="color: #CC9393;">"KW-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(q)))}"</span>,
+        <span style="color: #CC9393;">"R-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(r)))}"</span>,
+        <span style="color: #CC9393;">"S-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(s)))}"</span>,
+        <span style="color: #CC9393;">"T-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(t)))}"</span>,
+        <span style="color: #CC9393;">"UFRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(u)))}"</span>,
+        <span style="color: #CC9393;">"SR-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(v)))}"</span>,
+        <span style="color: #CC9393;">"W-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(w)))}"</span>,
+        <span style="color: #CC9393;">"KP-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(x)))}"</span>,
+        <span style="color: #CC9393;">"KWR-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(y)))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FRPLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(z)))}"</span>,
+        <span style="color: #CC9393;">"1-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F1)))}"</span>,
+        <span style="color: #CC9393;">"2-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F2)))}"</span>,
+        <span style="color: #CC9393;">"3-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F3)))}"</span>,
+        <span style="color: #CC9393;">"4-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F4)))}"</span>,
+        <span style="color: #CC9393;">"12-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F5)))}"</span>,
+        <span style="color: #CC9393;">"23-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F6)))}"</span>,
+        <span style="color: #CC9393;">"34-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F7)))}"</span>,
+        <span style="color: #CC9393;">"123-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F8)))}"</span>,
+        <span style="color: #CC9393;">"234-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F9)))}"</span>,
+        <span style="color: #CC9393;">"14-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F10)))}"</span>,
+        <span style="color: #CC9393;">"13-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F11)))}"</span>,
+        <span style="color: #CC9393;">"24-6R78G9"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(F12)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-P"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(up)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-R"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(left)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-B"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(down)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-G"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(right)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(page_up)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(page_down)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(home)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(end)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(return)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-F"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(backspace)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-L"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(delete)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(escape)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(tab)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(slash)))}"</span>,
+        <span style="color: #CC9393;">"STKPHR-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Alt_L(Shift_L(backslash)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L()))}"</span>,
+        <span style="color: #CC9393;">"AFRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(a)))}"</span>,
+        <span style="color: #CC9393;">"PW-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(b)))}"</span>,
+        <span style="color: #CC9393;">"KR-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(c)))}"</span>,
+        <span style="color: #CC9393;">"TK-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(d)))}"</span>,
+        <span style="color: #CC9393;">"EFRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(e)))}"</span>,
+        <span style="color: #CC9393;">"TP-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(f)))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(g)))}"</span>,
+        <span style="color: #CC9393;">"H-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(h)))}"</span>,
+        <span style="color: #CC9393;">"EUFRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(i)))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(j)))}"</span>,
+        <span style="color: #CC9393;">"K-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(k)))}"</span>,
+        <span style="color: #CC9393;">"HR-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(l)))}"</span>,
+        <span style="color: #CC9393;">"PH-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(m)))}"</span>,
+        <span style="color: #CC9393;">"TPH-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(n)))}"</span>,
+        <span style="color: #CC9393;">"OFRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(o)))}"</span>,
+        <span style="color: #CC9393;">"P-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(p)))}"</span>,
+        <span style="color: #CC9393;">"KW-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(q)))}"</span>,
+        <span style="color: #CC9393;">"R-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(r)))}"</span>,
+        <span style="color: #CC9393;">"S-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(s)))}"</span>,
+        <span style="color: #CC9393;">"T-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(t)))}"</span>,
+        <span style="color: #CC9393;">"UFRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(u)))}"</span>,
+        <span style="color: #CC9393;">"SR-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(v)))}"</span>,
+        <span style="color: #CC9393;">"W-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(w)))}"</span>,
+        <span style="color: #CC9393;">"KP-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(x)))}"</span>,
+        <span style="color: #CC9393;">"KWR-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(y)))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FRBLGT"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(z)))}"</span>,
+        <span style="color: #CC9393;">"1-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F1)))}"</span>,
+        <span style="color: #CC9393;">"2-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F2)))}"</span>,
+        <span style="color: #CC9393;">"3-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F3)))}"</span>,
+        <span style="color: #CC9393;">"4-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F4)))}"</span>,
+        <span style="color: #CC9393;">"12-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F5)))}"</span>,
+        <span style="color: #CC9393;">"23-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F6)))}"</span>,
+        <span style="color: #CC9393;">"34-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F7)))}"</span>,
+        <span style="color: #CC9393;">"123-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F8)))}"</span>,
+        <span style="color: #CC9393;">"234-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F9)))}"</span>,
+        <span style="color: #CC9393;">"14-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F10)))}"</span>,
+        <span style="color: #CC9393;">"13-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F11)))}"</span>,
+        <span style="color: #CC9393;">"24-6RB8G9"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(F12)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-P"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(up)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-R"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(left)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-B"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(down)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-G"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(right)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-RPG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(page_up)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-FBL"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(page_down)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-FPL"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(home)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-RBG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(end)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-RB"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(return)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-F"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(backspace)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-L"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(delete)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-FR"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(escape)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-LG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(tab)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-RP"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(slash)))}"</span>,
+        <span style="color: #CC9393;">"STKWHR-PG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(backslash)))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L())))}"</span>,
+        <span style="color: #CC9393;">"AFRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(a))))}"</span>,
+        <span style="color: #CC9393;">"PW-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(b))))}"</span>,
+        <span style="color: #CC9393;">"KR-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(c))))}"</span>,
+        <span style="color: #CC9393;">"TK-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(d))))}"</span>,
+        <span style="color: #CC9393;">"EFRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(e))))}"</span>,
+        <span style="color: #CC9393;">"TP-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(f))))}"</span>,
+        <span style="color: #CC9393;">"TKPW-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(g))))}"</span>,
+        <span style="color: #CC9393;">"H-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(h))))}"</span>,
+        <span style="color: #CC9393;">"EUFRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(i))))}"</span>,
+        <span style="color: #CC9393;">"SKWR-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(j))))}"</span>,
+        <span style="color: #CC9393;">"K-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(k))))}"</span>,
+        <span style="color: #CC9393;">"HR-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(l))))}"</span>,
+        <span style="color: #CC9393;">"PH-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(m))))}"</span>,
+        <span style="color: #CC9393;">"TPH-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(n))))}"</span>,
+        <span style="color: #CC9393;">"OFRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(o))))}"</span>,
+        <span style="color: #CC9393;">"P-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(p))))}"</span>,
+        <span style="color: #CC9393;">"KW-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(q))))}"</span>,
+        <span style="color: #CC9393;">"R-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(r))))}"</span>,
+        <span style="color: #CC9393;">"S-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(s))))}"</span>,
+        <span style="color: #CC9393;">"T-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(t))))}"</span>,
+        <span style="color: #CC9393;">"UFRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(u))))}"</span>,
+        <span style="color: #CC9393;">"SR-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(v))))}"</span>,
+        <span style="color: #CC9393;">"W-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(w))))}"</span>,
+        <span style="color: #CC9393;">"KP-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(x))))}"</span>,
+        <span style="color: #CC9393;">"KWR-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(y))))}"</span>,
+        <span style="color: #CC9393;">"STKPW-FRPBLGT"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(z))))}"</span>,
+        <span style="color: #CC9393;">"1-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F1))))}"</span>,
+        <span style="color: #CC9393;">"2-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F2))))}"</span>,
+        <span style="color: #CC9393;">"3-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F3))))}"</span>,
+        <span style="color: #CC9393;">"4-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F4))))}"</span>,
+        <span style="color: #CC9393;">"12-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F5))))}"</span>,
+        <span style="color: #CC9393;">"23-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F6))))}"</span>,
+        <span style="color: #CC9393;">"34-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F7))))}"</span>,
+        <span style="color: #CC9393;">"123-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F8))))}"</span>,
+        <span style="color: #CC9393;">"234-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F9))))}"</span>,
+        <span style="color: #CC9393;">"14-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F10))))}"</span>,
+        <span style="color: #CC9393;">"13-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F11))))}"</span>,
+        <span style="color: #CC9393;">"24-6R7B8G9"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(F12))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-P"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(up))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-R"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(left))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-B"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(down))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-G"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(right))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-RPG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(page_up))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-FBL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(page_down))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-FPL"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(home))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-RBG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(end))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-RB"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(return))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-F"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(backspace))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-L"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(delete))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-FR"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(escape))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-LG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(tab))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-RP"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(slash))))}"</span>,
+        <span style="color: #CC9393;">"STKPWHR-PG"</span>: <span style="color: #CC9393;">"{#Super_L(Control_L(Alt_L(Shift_L(backslash))))}"</span>
+}
+</pre>
+</div>
+</div>
+</div>
 </div>
 
-<div id="outline-container-orgf3fc071" class="outline-2">
-<h2 id="orgf3fc071"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-orgcfad6d7" class="outline-2">
+<h2 id="orgcfad6d7"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -581,11 +1687,17 @@ existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+Of course, this isn't a practical examlpe.  If we really wanted
+to write "µ" with Plover, we would use a stroke that directly maps to
+"µ".
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-02-23 Tue 09:03</p>
+<p class="date">Created: 2021-03-02 Tue 21:32</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
