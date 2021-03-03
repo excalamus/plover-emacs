@@ -42,7 +42,7 @@ outputs within a JSON file.  See the Plover GitHub wiki entry
 ** Sequence chains
 Many Emacs commands are called through sequences.  Typically, a
 dictionary maps a stroke to a single output element (e.g. character,
-word, or phrase).  However, it's possible, to send a sequence by
+word, or phrase).  However, it's possible to send a sequence by
 separating elements with a space.
 
 For example, in Emacs =C-x 8 m= writes =µ=.  We can write =µ= by way

@@ -3,11 +3,12 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-02 Tue 21:32 -->
+<!-- 2021-03-02 Tue 21:51 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
 <meta name="generator" content="Org mode" />
+<meta name="author" content="unknown" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
   .title  { text-align: center;
@@ -223,23 +224,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgf877d78">1. Opening bracket</a></li>
-<li><a href="#org8ac3701">2. Dictionary design</a>
+<li><a href="#orgc920988">1. Opening bracket</a></li>
+<li><a href="#org736be05">2. Dictionary design</a>
 <ul>
-<li><a href="#org065bb2e">2.1. Sequence chains</a></li>
-<li><a href="#orgd031f7a">2.2. Mapping the alphabet</a></li>
+<li><a href="#org24f3487">2.1. Sequence chains</a></li>
+<li><a href="#orge882946">2.2. Mapping the alphabet</a></li>
 </ul>
 </li>
-<li><a href="#org733aa7a">3. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
-<li><a href="#orgedf2dd0">4. Function keys</a></li>
-<li><a href="#orgb10cbe0">5. Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#org0edb3f1">6. Notes</a>
+<li><a href="#org5460c82">3. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
+<li><a href="#orgaecd9ec">4. Function keys</a></li>
+<li><a href="#org3652448">5. Escape, Meta, Alt, Control, Shift</a></li>
+<li><a href="#org3cf7db4">6. Notes</a>
 <ul>
-<li><a href="#orgf827a86">6.1. Modifiers Single Stroke</a></li>
-<li><a href="#orge417894">6.2. Nimble single strokes</a></li>
+<li><a href="#orge85a68c">6.1. Modifiers Single Stroke</a></li>
+<li><a href="#org9f91819">6.2. Nimble single strokes</a></li>
 </ul>
 </li>
-<li><a href="#orgcfad6d7">7. Closing bracket</a></li>
+<li><a href="#orgd232173">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -249,8 +250,8 @@
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-orgf877d78" class="outline-2">
-<h2 id="orgf877d78"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-orgc920988" class="outline-2">
+<h2 id="orgc920988"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="https://www.gnu.org/software/emacs/">Emacs</a> is a text editor/word processor used by programmers and authors,
@@ -264,7 +265,7 @@ and add-ons<sup><a id="fnr.1" class="footref" href="#fn.1">1</a></sup>.
 </p>
 
 
-<div id="org7791fee" class="figure">
+<div id="org9989cad" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screenshot of the Emacs text editor.</p>
@@ -290,17 +291,17 @@ outputs within a JSON file.  See the Plover GitHub wiki entry
 </div>
 </div>
 
-<div id="outline-container-org8ac3701" class="outline-2">
-<h2 id="org8ac3701"><span class="section-number-2">2</span> Dictionary design</h2>
+<div id="outline-container-org736be05" class="outline-2">
+<h2 id="org736be05"><span class="section-number-2">2</span> Dictionary design</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org065bb2e" class="outline-3">
-<h3 id="org065bb2e"><span class="section-number-3">2.1</span> Sequence chains</h3>
+<div id="outline-container-org24f3487" class="outline-3">
+<h3 id="org24f3487"><span class="section-number-3">2.1</span> Sequence chains</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Many Emacs commands are called through sequences.  Typically, a
 dictionary maps a stroke to a single output element (e.g. character,
-word, or phrase).  However, it's possible, to send a sequence by
+word, or phrase).  However, it's possible to send a sequence by
 separating elements with a space.
 </p>
 
@@ -308,7 +309,7 @@ separating elements with a space.
 For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  We can write <code>µ</code> by way
 of Emacs in Plover<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup> with:
 </p>
-<pre class="example" id="org2938156">
+<pre class="example" id="org7535535">
 {#Control_L(x) 8 m}
 </pre>
 
@@ -317,14 +318,14 @@ To pass capitalized letters, you must use <code>Shift()</code>.  For example,
 <code>C-x 8 R</code> writes <code>®</code>.  To have Plover pass the Emacs sequence, we
 would do:
 </p>
-<pre class="example" id="org94b6e5c">
+<pre class="example" id="org81f54d3">
 {#Control_L(x) 8 Shift(r)}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-orgd031f7a" class="outline-3">
-<h3 id="orgd031f7a"><span class="section-number-3">2.2</span> Mapping the alphabet</h3>
+<div id="outline-container-orge882946" class="outline-3">
+<h3 id="orge882946"><span class="section-number-3">2.2</span> Mapping the alphabet</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 It's nearly possible to stroke the entire alphabet with the left hand.
@@ -536,8 +537,8 @@ single strokes modifiers for every letter in the alphabet.
 </div>
 </div>
 
-<div id="outline-container-org733aa7a" class="outline-2">
-<h2 id="org733aa7a"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div id="outline-container-org5460c82" class="outline-2">
+<h2 id="org5460c82"><span class="section-number-2">3</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -569,8 +570,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-orgedf2dd0" class="outline-2">
-<h2 id="orgedf2dd0"><span class="section-number-2">4</span> Function keys</h2>
+<div id="outline-container-orgaecd9ec" class="outline-2">
+<h2 id="orgaecd9ec"><span class="section-number-2">4</span> Function keys</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  This means it
@@ -595,8 +596,8 @@ can be used to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-orgb10cbe0" class="outline-2">
-<h2 id="orgb10cbe0"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org3652448" class="outline-2">
+<h2 id="org3652448"><span class="section-number-2">5</span> Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -649,12 +650,12 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-org0edb3f1" class="outline-2">
-<h2 id="org0edb3f1"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-org3cf7db4" class="outline-2">
+<h2 id="org3cf7db4"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgf827a86" class="outline-3">
-<h3 id="orgf827a86"><span class="section-number-3">6.1</span> Modifiers Single Stroke</h3>
+<div id="outline-container-orge85a68c" class="outline-3">
+<h3 id="orge85a68c"><span class="section-number-3">6.1</span> Modifiers Single Stroke</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
@@ -792,8 +793,8 @@ From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries
 </div>
 </div>
 
-<div id="outline-container-orge417894" class="outline-3">
-<h3 id="orge417894"><span class="section-number-3">6.2</span> Nimble single strokes</h3>
+<div id="outline-container-org9f91819" class="outline-3">
+<h3 id="org9f91819"><span class="section-number-3">6.2</span> Nimble single strokes</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
@@ -1662,8 +1663,8 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 
-<div id="outline-container-orgcfad6d7" class="outline-2">
-<h2 id="orgcfad6d7"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-orgd232173" class="outline-2">
+<h2 id="orgd232173"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -1697,7 +1698,8 @@ to write "µ" with Plover, we would use a stroke that directly maps to
 </div>
 </div></div>
 <div id="postamble" class="status">
-<p class="date">Created: 2021-03-02 Tue 21:32</p>
+<p class="author">Author: unknown</p>
+<p class="date">Created: 2021-03-02 Tue 21:51</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
