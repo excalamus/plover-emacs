@@ -1199,7 +1199,7 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
 
 * Footnotes
 
-[fn:4] Of course, this isn't a practical examlpe.  If we really wanted
+[fn:4] Of course, this isn't a practical example.  If we really wanted
 to write "µ" with Plover, we would use a stroke that directly maps to
 "µ".
 
