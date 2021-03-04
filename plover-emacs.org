@@ -38,7 +38,7 @@ interactive process, you would type =M-x other-window=.
 This document defines, literally, a dictionary for using Plover with
 Emacs.  Explanations of concepts and rationale are provided for each
 set of entries.  The intent is to make using Plover with Emacs as
-simple as possible, while teaching how users to adjust the system to
+simple as possible, while teaching users how to adjust the system to
 their needs.  Basic familiarity with both systems is assumed.  If you
 are not familiar with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover
 wiki]].  If you are not familiar with Emacs and want to learn it, check
@@ -86,9 +86,9 @@ keyboard.  This is useful when phonetic patterns don't make sense or
 aren't practical.  Because shape patterns are spatially oriented,
 associations can be made through transformations (e.g. rotation,
 translation) of the shape. For example, the [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]]
-uses the pattern technique.  Page Up and Page Down are mapped to
-=-RPG= and =-FBL= because the pattern they make looks like up and down
-arrows.
+dictionary uses the pattern technique.  Page Up and Page Down are
+mapped to =-RPG= and =-FBL= because the pattern they make looks like
+up and down arrows.
 
 ** Mode prefix
 A pseudo "mode" can be defined by prefixing all related commands with
@@ -170,50 +170,57 @@ alphabet.
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift
-The Escape key is distributed with Plover in the =commands.json=
-dictionary.  For completeness, let's also put it in the Emacs
-dictionary:
-
-#+begin_src js :tangle plover-emacs.json :exports code
-"TPEFBG": "{#Escape}",
-#+end_src
-
 Can take advantage of the right hand rule to define modifiers for each
-letter of the alphabet.  For completeness, we can mirror the shape to
-give a left hand prefix.
+letter of the alphabet.  If the shape is mirrored on the left hand
+side, this gives a prefix that allows us to leverage the WASD, Page
+Up/Page Down, and Home/End right hand concepts from [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform
+Movement]] dictionary.
 
- STKPWHRAO*EUFRPBLGTSDZ
+"Super bit" is the top left.
 
-http://shapecatcher.com/
-
-⠈⠅.⠅⠁
+"Shift bit" is the bottom left.
 
 Notice how the shapes combine:
 
-| L Pattern | Left hand | Modifier        | Right Hand | R Pattern |
-|-----------+-----------+-----------------+------------+-----------|
-| ⠴         | =KPW=     | Control         | =-PBG=     | ⠦         |
-| ⠲         | =TPW=     | Alt             | =-PBL=     | ⠖         |
-| ⠶         | =TKPW=    | Control + Alt   | =-PBLG=    | ⠶         |
-| ∴         | =KPR=     | Shift           | =-RPG=     | ∴         |
-| .:.       | =KPWR=    | Control + Shift | =-RPBG=    | .:.       |
-| ⠈⠅.       | =TPWR=    | Alt + Shift     | =-RPBL=    | .⠅⠁       |
+| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
+|-----------+-----------+-----------------------+------------+-----------|
+| ⠴         | =KPW=     | Control               | =-PBG=     | ⠦         |
+| ⠲         | =TPW=     | Alt                   | =-PBL=     | ⠖         |
+| ⠶_        | =TKPW=    | Control + Alt         | =-PBLG=    | _⠶       |
+| ∴         | =KPR=     | Shift                 | =-RPG=     | ∴         |
+| .:.       | =KPWR=    | Control + Shift       | =-RPBG=    | .:.       |
+| ⠈⠅.       | =TPWR=    | Alt + Shift           | =-RPBL=    | .⠅⠁       |
+| ::.       | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | .::       |
+
 
 Super isn't used often with Emacs.  However, it is possible (and
 others may find the pattern useful).
 
-| L Pattern | Left hand | Modifier        | Right Hand | R Pattern |
-|-----------+-----------+-----------------+------------+-----------|
-| ∵         | =TWH=     | Super           | =-FBL=     | ∵         |
-| .⠅⠁       | =KPWH=    | Super + Control | =-FPBG=    | ⠈⠅.       |
-| ⠈⠅⠁       | =TPWH=    | Super + Alt     | =-FPBL=    | ⠈⠅⠁       |
+| L Pattern | Left hand | Modifier                      | Right Hand | R Pattern |
+|-----------+-----------+-------------------------------+------------+-----------|
+| ∵         | =TWH=     | Super                         | =-FBL=     | ∵         |
+| .⠅⠁       | =KPWH=    | Control + Super               | =-FPBG=    | ⠈⠅.       |
+| ⠈⠅⠁       | =TPWH=    | Alt + Super                   | =-FPBL=    | ⠈⠅⠁       |
+| _⠶        | =PWHR=    | Shift + Super                 | =-FRPB=    | ⠶_        |
+| ⠅⠅⠈       | =TKPWH=   | Control + Alt + Super         | =-FPBLG=   | ⠈⠅⠅       |
+| .::       | =KPWHR=   | Control + Shift + Super       | =-FRPBG=   | ::.       |
+| ⠈⠅⠅       | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | ⠅⠅⠈       |
+| :::       | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | :::       |
 
 
-This pattern doesn't hold.  It would compose to Control+Alt...
-"Super bit" is the top left.
+The Escape key is distributed with Plover in the =commands.json=
+dictionary as =TPEFBG=.  However, it's a little contorted for how
+often it's used with Evil/Vim.  In Emacs, Escape also functions as
+Meta when in the terminal, so it's probably a good idea to give it a
+binding that's more accessible.  We could just translate the Alt
+pattern over (⠲_), given the Escape/Alt relationship.  That feels awkward
+to me and, since I am also a vim/evil user, I want a stronger feeling
+binding:
 
-"Shift bit" is the bottom right.
-
+#+begin_src js :tangle plover-emacs.json :exports code
+"STW": "{#Escape}",
+"-BLS": "{#Escape}",
+#+end_src
 
 * TODO Execute extended command and Quit
 Perhaps the two most important bindings are =M-x=
@@ -263,6 +270,81 @@ can be used to differentiate the F keys.
 #+end_src
 
 * Notes
+** Cross Platform Movement
+From Ted Morin: [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]]
+
+#+begin_quote
+Movement
+
+Like the Plover default dictionary, you activate movement keys by
+using STPH- and then select the movement key with the right hand, as
+below.
+
+Use -R, -P, -B, and -G for left, up, down, and right.
+
+In addition, page up and down are arrows made with the right hand:
+Page Up is -RPG (up arrow). Page Down is -FBL (down arrow).
+
+Home is -FPL (all three fingers up), End is -RBG (all three fingers
+down.)
+
+Finally, -RB is Control(Left), -BG is Control(Right). These jump words
+left and right on Windows and Linux. For Mac, add an asterisk, and *RB
+will make Option(Left), and *BG will make Option(Right).  Selection
+
+To add Shift to any of the above (which will select text that you move
+over), use SKWR- instead of STPH-.  Utility
+
+Included for convenient is a set of arrow keys with the Super key
+(Windows/Meta/Command depending on OS). On Windows, this will snap
+windows to the sides of screens, maximize, and minimize them. On Mac,
+you can jump to the beginning or end of lines or files. On Linux, the
+behavior varies. To use this, it’s simply KPH* (command) and the four
+arrows.  Deletion
+
+Finally, I have a delete-word stroke for when Plover runs out of
+buffer. Simply #* on Windows & Linux; I tend to use right index finger
+for the asterisk, and the middle right finger for the number bar. On
+Mac, I just use *F or *6 if I accidentally hit the number bar.
+#+end_quote
+
+#+begin_src js :exports code
+{
+"#*": "{#Control_L(BackSpace)}",
+"*6": "{#Alt_L(BackSpace)}",
+"*F": "{#Alt_L(BackSpace)}",
+"KPH*B": "{#Super_L(Down)}",
+"KPH*G": "{#Super_L(Right)}",
+"KPH*P": "{#Super_L(Up)}",
+"KPH*R": "{#Super_L(Left)}",
+"SKWR*BG": "{#Alt_L(Shift_L(Right))}",
+"SKWR*RB": "{#Alt_L(Shift_L(Left))}",
+"SKWR-B": "{#Shift_L(Down)}",
+"SKWR-BG": "{#Control_L(Shift_L(Right))}",
+"SKWR-FBL": "{#Shift_L(Page_Down)}",
+"SKWR-FPL": "{#Shift_L(Home)}",
+"SKWR-G": "{#Shift_L(Right)}",
+"SKWR-P": "{#Shift_L(Up)}",
+"SKWR-R": "{#Shift_L(Left)}",
+"SKWR-RB": "{#Control_L(Shift_L(Left))}",
+"SKWR-RBG": "{#Shift_L(End)}",
+"SKWR-RPG": "{#Shift_L(Page_Up)}",
+"STPH*BG": "{#Alt_L(Right)}",
+"STPH*RB": "{#Alt_L(Left)}",
+"STPH-B": "{#Down}",
+"STPH-BG": "{#Control_L(Right)}",
+"STPH-FBL": "{#Page_Down}",
+"STPH-FP": "{#Control_L(Super_L(Left))}",
+"STPH-FPL": "{#Home}",
+"STPH-G": "{#Right}",
+"STPH-P": "{#Up}",
+"STPH-R": "{#Left}",
+"STPH-RB": "{#Control_L(Left)}",
+"STPH-RBG": "{#End}",
+"STPH-RPG": "{#Page_Up}"
+}
+#+end_src
+
 ** Modifiers Single Stroke
 From DiDoesDigital: [[https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json][modifiers-single-stroke]]
 
