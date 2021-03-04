@@ -1287,11 +1287,11 @@ idea, I think, covers all the cases completely and intuitively.
 
 * Footnotes
 
-[fn:3] For example, the code blocks shown on this web page are directly
-used to generate the Plover dictionary.  Further, this web page is
-itself generated using Emacs.  All of this happens from a single
-source file.  We could even go so far as to host this web page with
-Emacs if we wanted :)
+[fn:3] For example, the code blocks shown on this web page are
+directly used to generate the Plover dictionary.  Further, this web
+page is itself generated using Emacs.  All of this happens from a
+single source file.  We could even go so far as to host this web page
+with Emacs if we wanted :)
 
 [fn:2] "M" for "meta".  The Meta key, similar to use as the Alt key,
 existed before the Alt key.  When Emacs was first created, the Meta
