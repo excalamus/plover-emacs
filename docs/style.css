@@ -188,13 +188,16 @@ div.org-center p{
     text-align: center;
 }
 
-table, tr {
-    border-top: 1px solid;
-    border-bottom: 1px solid;
-    border-left: 1px solid;
-    border-right: 1px solid;
-
-    text-align: left;
+table {
     width: 100%;
-    margin-bottom: 1.5rem;
+    border: 1px solid;
+}
+
+td {
+    border: 1px solid;
+    vertical-align: middle;
+}
+
+td.org-left {
+    text-align: center;
 }
