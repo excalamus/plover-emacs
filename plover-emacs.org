@@ -8,12 +8,14 @@
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
 
 * Opening bracket
-[[http://www.openstenoproject.org/plover/][Plover]] is a libre software engine for stenography.  Stenography is
-fast (over 240 wpm), ergonomic, and flexible.  Plover converts a
-stroke of keys to some output such as a character, word, or some
-modified combination of these.  Strokes are mapped to outputs within a
-dictionary (JSON) file.  See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary
-Format]]" for accepted syntax.
+[[http://www.openstenoproject.org/plover/][Plover]] is a libre software engine for stenography.  Stenography is a
+fast (over 240 wpm), ergonomic, and flexible way to "type".  Although
+invented before computers, stenography turns out to be a superb input
+method for computing.  Plover converts a stroke of keys to some output
+such as a character, word, or modified combination of these.  Stroke
+mappings are defined within a dictionary file, typically JSON.  See
+the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]" for the dictionary
+syntax.
 
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
 as well as researchers and hobbyists worldwide.  Originally released
