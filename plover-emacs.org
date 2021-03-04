@@ -8,16 +8,22 @@
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
 
 * Opening bracket
+[[http://www.openstenoproject.org/plover/][Plover]] is a libre software engine for stenography.  Stenography is
+fast (over 240 wpm), ergonomic, and flexible.  Plover converts a
+stroke of keys to some output such as a character, word, or some
+modified combination of these.  Strokes are mapped to outputs within a
+dictionary (JSON) file.  See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary
+Format]]" for accepted syntax.
+
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
-as well as researchers and hobbiests worldwide.  Originally released
+as well as researchers and hobbyists worldwide.  Originally released
 in 1976, it is the flagship software of the [[https://www.gnu.org/philosophy/free-sw.html][GNU project]].  Like Plover,
 Emacs is community developed and allows you to run, change, and
-distribute it, more or less, however you want (as compared to
-similarly purposed software).  It has been developed for more than 40
-years and, although it might not look fancy, has countless features
-and add-ons[fn:3].
+distribute it, more or less, however you want.  It has been developed
+for more than 40 years and, although modest in appearance, boasts
+countless features and add-ons[fn:3].
 
-#+CAPTION: Screenshot of the Emacs text editor.
+#+CAPTION: Screen shot of the Emacs text editor.
 [[file:./emacs.png]]
 
 Emacs works by binding every key to a programming command[fn:1].  For
@@ -29,39 +35,83 @@ combination are accessed through an interactive process initiated with
 'Alt+x' (notated =M-x=)[fn:2].  To change windows using the
 interactive process, you would type =M-x other-window=.
 
-Plover works by mapping a stroke of keys to some output; a character,
-word, or some modified combination of these.  Strokes are mapped to
-outputs within a JSON file.  See the Plover GitHub wiki entry
-"[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]" for the accepted syntax.
+This document defines, literally, a dictionary for using Plover with
+Emacs.  Explanations of concepts and rationale are provided for each
+set of entries.  The intent is to make using Plover with Emacs as
+simple as possible, while teaching how users to adjust the system to
+their needs.  Basic familiarity with both systems is assumed.  If you
+are not familiar with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover
+wiki]].  If you are not familiar with Emacs and want to learn it, check
+out the [[https://www.gnu.org/software/emacs/tour/][guided tour]].
 
 #+begin_src js :tangle plover-emacs.json :exports none
 {
 #+end_src
 
-* Dictionary design
+* Dictionary design principles
 ** Sequence chains
-Many Emacs commands are called through sequences.  Typically, a
+Many Emacs commands are called through sequences.  Typically, a Plover
 dictionary maps a stroke to a single output element (e.g. character,
-word, or phrase).  However, it's possible, to send a sequence by
-separating elements with a space.
+word, or phrase).  However, it's possible, to send a sequence in
+Plover by separating elements with a space.
 
-For example, in Emacs =C-x 8 m= writes =�=.  We can write =�= by way
-of Emacs in Plover[fn:4] with:
+For example, in Emacs =C-x 8 m= writes =µ=.  Send the sequence =C-x 8
+m= using Plover with:
 #+begin_example
 {#Control_L(x) 8 m}
 #+end_example
 
-To pass capitalized letters, you must use =Shift()=.  For example,
-=C-x 8 R= writes =�=.  To have Plover pass the Emacs sequence, we
-would do:
+Some Emacs sequences require capital letters.  Use =Shift()= to do
+this.  For example, =C-x 8 R= writes =®= in Emacs.  To have Plover
+send this, use:
 #+begin_example
 {#Control_L(x) 8 Shift(r)}
 #+end_example
 
-** Mapping the alphabet
-It's nearly possible to stroke the entire alphabet with the left hand.
-By defining a right hand stroke to represent a modifier, we can create
-single strokes modifiers for every letter in the alphabet.
+Sequence chains can also happen within a modifier definition.  To
+export an Org document to HTML, the command =C-c C-e h h= is used.
+This would be handled in Plover with:
+#+begin_example
+{#Control_L(c e) h h}
+#+end_example
+
+** Patterns
+Mirabai points out in her [[http://plover.stenoknight.com/2010/06/steno-101-lesson-zero.html][Steno 101]] series that stenography can be
+thought of as a phonetic-mnemonic system.  We associate a phonetic
+sound to a set of keyboard keys to help us remember what they map to.
+This phonetic pattern helps define a system for human languages.
+
+Another pattern is to define a stroke by the shape it makes on the
+keyboard.  This is useful when phonetic patterns don't make sense or
+aren't practical.  Because shape patterns are spatially oriented,
+associations can be made through transformations (e.g. rotation,
+translation) of the shape. For example, the [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]]
+uses the pattern technique.  Page Up and Page Down are mapped to
+=-RPG= and =-FBL= because the pattern they make looks like up and down
+arrows.
+
+** Mode prefix
+A pseudo "mode" can be defined by prefixing all related commands with
+the same pattern.  Select a key cluster and either append keys to that
+shape pattern or begin a multi-stroke command with it.
+
+Mark Kislingbury uses this approach when he [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words
+on the left.  For example, =THA= ("that") leaves the board open for
+phrases like "that was", "that will", "that had", etc. by adding a
+single key.  =THA= acts as a "mode" for all phrases beginning with
+"that".
+
+The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary also uses the prefix technique.
+=STPH-= is used as a prefix for all subsequent movement related
+commands.  Since =-R= corresponds to "a" (the left arrow key in [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD)]],
+the command =STPH-R= means "move left".
+
+** Right hand rule
+It's nearly possible to write the entire alphabet left handed.  All
+letters but "e" (=E=), "i" (=EU=), and "u" (=U=) can be written with a
+left hand key.  By defining a right hand stroke that excludes the =E=
+and =U= keys, we can create single strokes for every letter in the
+alphabet.
 
 |-----------+------------+--------|
 | Left Hand | Right Hand | Letter |
@@ -119,6 +169,52 @@ single strokes modifiers for every letter in the alphabet.
 | STKPW     |            | "z"    |
 |-----------+------------+--------|
 
+* Emacs: Escape, Meta, Alt, Control, Shift
+The Escape key is distributed with Plover in the =commands.json=
+dictionary.  For completeness, let's also put it in the Emacs
+dictionary:
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TPEFBG": "{#Escape}",
+#+end_src
+
+Can take advantage of the right hand rule to define modifiers for each
+letter of the alphabet.  For completeness, we can mirror the shape to
+give a left hand prefix.
+
+ STKPWHRAO*EUFRPBLGTSDZ
+
+http://shapecatcher.com/
+
+⠈⠅.⠅⠁
+
+Notice how the shapes combine:
+
+| L Pattern | Left hand | Modifier        | Right Hand | R Pattern |
+|-----------+-----------+-----------------+------------+-----------|
+| ⠴         | =KPW=     | Control         | =-PBG=     | ⠦         |
+| ⠲         | =TPW=     | Alt             | =-PBL=     | ⠖         |
+| ⠶         | =TKPW=    | Control + Alt   | =-PBLG=    | ⠶         |
+| ∴         | =KPR=     | Shift           | =-RPG=     | ∴         |
+| .:.       | =KPWR=    | Control + Shift | =-RPBG=    | .:.       |
+| ⠈⠅.       | =TPWR=    | Alt + Shift     | =-RPBL=    | .⠅⠁       |
+
+Super isn't used often with Emacs.  However, it is possible (and
+others may find the pattern useful).
+
+| L Pattern | Left hand | Modifier        | Right Hand | R Pattern |
+|-----------+-----------+-----------------+------------+-----------|
+| ∵         | =TWH=     | Super           | =-FBL=     | ∵         |
+| .⠅⠁       | =KPWH=    | Super + Control | =-FPBG=    | ⠈⠅.       |
+| ⠈⠅⠁       | =TPWH=    | Super + Alt     | =-FPBL=    | ⠈⠅⠁       |
+
+
+This pattern doesn't hold.  It would compose to Control+Alt...
+"Super bit" is the top left.
+
+"Shift bit" is the bottom right.
+
+
 * TODO Execute extended command and Quit
 Perhaps the two most important bindings are =M-x=
 (=execute-extended-command=) and =C-g= (=keyboard-quit=).  They
@@ -165,41 +261,6 @@ can be used to differentiate the F keys.
 "1*D": "{#F11}",
 "2*D": "{#F12}",
 #+end_src
-
-* Escape, Meta, Alt, Control, Shift
-The Escape key is distributed with Plover in the =commands.json=
-dictionary.  For completeness, let's also put it in the Emacs
-dictionary:
-
-#+begin_src js :tangle plover-emacs.json :exports code
-"TPEFBG": "{#Escape}",
-#+end_src
-
-Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
-means that we can then use the rest of the board to represent phrases
-containing that word.  For example, =THA= ("that") leaves the board
-open for phrases like "that was", "that will", "that had", etc. by
-adding a single key.
-
-We can use this principle with =SH= (Shift), =KR= (Control), and =PH=
-(Meta/Alt).  By default, =SH= is "shh", =PH= is "pH", and =KR= is
-"consider".  All of these strokes are far more important than their
-default mappings.  Additionally, =KHR= is also mapped to "consider".
-This means we can apprehend each stroke without much penalty to the
-overall Plover theory.
-
-This should mean we can write commands in a way that simulates holding
-a modifier key.
-
-The idea is to map all Emacs bindings to chains.  In this way, all
-bindings can at least be expressed in multiple strokes.  For example,
-
-- =C-x f= would be =KR/T-PLZ/F=
-- =C-c C-c= would be =KR/KR*/KR/KR*=
-- etc.
-
-Of course we would want more efficient bindings than those. But the
-idea, I think, covers all the cases completely and intuitively.
 
 * Notes
 ** Modifiers Single Stroke
@@ -1192,6 +1253,33 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
 }
 #+end_src
 
+** Leftovers
+Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
+means that we can then use the rest of the board to represent phrases
+containing that word.  For example, =THA= ("that") leaves the board
+open for phrases like "that was", "that will", "that had", etc. by
+adding a single key.
+
+We can use this principle with =SH= (Shift), =KR= (Control), and =PH=
+(Meta/Alt).  By default, =SH= is "shh", =PH= is "pH", and =KR= is
+"consider".  All of these strokes are far more important than their
+default mappings.  Additionally, =KHR= is also mapped to "consider".
+This means we can apprehend each stroke without much penalty to the
+overall Plover theory.
+
+This should mean we can write commands in a way that simulates holding
+a modifier key.
+
+The idea is to map all Emacs bindings to chains.  In this way, all
+bindings can at least be expressed in multiple strokes.  For example,
+
+- =C-x f= would be =KR/T-PLZ/F=
+- =C-c C-c= would be =KR/KR*/KR/KR*=
+- etc.
+
+Of course we would want more efficient bindings than those. But the
+idea, I think, covers all the cases completely and intuitively.
+
 * Closing bracket
 #+begin_src js :tangle plover-emacs.json :exports none
 }
@@ -1199,14 +1287,10 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
 
 * Footnotes
 
-[fn:4] Of course, this isn't a practical examlpe.  If we really wanted
-to write "�" with Plover, we would use a stroke that directly maps to
-"�".
-
-[fn:3] For example, the code blocks shown on this webpage are directly
-used to generate the Plover dictionary.  Further, this webpage is
+[fn:3] For example, the code blocks shown on this web page are directly
+used to generate the Plover dictionary.  Further, this web page is
 itself generated using Emacs.  All of this happens from a single
-source file.  We could even go so far as to host this webpage with
+source file.  We could even go so far as to host this web page with
 Emacs if we wanted :)
 
 [fn:2] "M" for "meta".  The Meta key, similar to use as the Alt key,
