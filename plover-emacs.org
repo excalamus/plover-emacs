@@ -8,14 +8,12 @@
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
 
 * Opening bracket
-[[http://www.openstenoproject.org/plover/][Plover]] is a libre software engine for stenography.  Stenography is a
-fast (over 240 wpm), ergonomic, and flexible way to "type".  Although
-invented before computers, stenography turns out to be a superb input
-method for computing.  Plover converts a stroke of keys to some output
-such as a character, word, or modified combination of these.  Stroke
-mappings are defined within a dictionary file, typically JSON.  See
-the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]" for the dictionary
-syntax.
+[[http://www.openstenoproject.org/plover/][Plover]] is a libre software engine for stenography.  It provides a
+computer input method which is fast (over 240 wpm), ergonomic, and
+flexible.  Plover converts a stroke of keys to a character, word,
+phrase, or command.  Strokes are defined within a dictionary file,
+typically JSON.  See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]"
+for details.
 
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
 as well as researchers and hobbyists worldwide.  Originally released
@@ -30,21 +28,20 @@ countless features and add-ons[fn:3].
 
 Emacs works by binding every key to a programming command[fn:1].  For
 example, pressing 'a' calls the =self-insert-command= which inserts
-the character you type, 'a'.  Commands can also be bound to key
-combinations.  To change windows, you press 'Control + x + o' (notated
+the character typed, 'a'.  Commands can also be bound to key
+combinations.  To change windows, press 'Control + x + o' (notated
 =C-x o=) to call =other-window=.  Commands not bound to a key or key
 combination are accessed through an interactive process initiated with
 'Alt+x' (notated =M-x=)[fn:2].  To change windows using the
-interactive process, you would type =M-x other-window=.
+interactive process, type =M-x other-window=.
 
 This document defines, literally, a dictionary for using Plover with
 Emacs.  Explanations of concepts and rationale are provided for each
 set of entries.  The intent is to make using Plover with Emacs as
-simple as possible, while teaching users how to adjust the system to
-their needs.  Basic familiarity with both systems is assumed.  If you
-are not familiar with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover
-wiki]].  If you are not familiar with Emacs and want to learn it, check
-out the [[https://www.gnu.org/software/emacs/tour/][guided tour]].
+simple as possible, while teaching users how to modify the system.
+Basic familiarity with Ploved and Emacs is assumed.  If you're not
+familiar with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover wiki]].  To
+get started with Emacs, check out the [[https://www.gnu.org/software/emacs/tour/][guided tour]].
 
 #+begin_src js :tangle plover-emacs.json :exports none
 {
@@ -78,10 +75,11 @@ This would be handled in Plover with:
 #+end_example
 
 ** Patterns
-Mirabai points out in her [[http://plover.stenoknight.com/2010/06/steno-101-lesson-zero.html][Steno 101]] series that stenography can be
-thought of as a phonetic-mnemonic system.  We associate a phonetic
-sound to a set of keyboard keys to help us remember what they map to.
-This phonetic pattern helps define a system for human languages.
+Mirabai Knight, founder of the Open Steno Project, points out in her
+[[http://plover.stenoknight.com/2010/06/steno-101-lesson-zero.html][Steno 101]] series that stenography can be thought of as a
+phonetic-mnemonic system.  We associate a phonetic sound to a set of
+keyboard keys to help us remember what they correspond to.  This
+phonetic pattern helps define a system for human languages.
 
 Another pattern is to define a stroke by the shape it makes on the
 keyboard.  This is useful when phonetic patterns don't make sense or
@@ -97,11 +95,11 @@ A pseudo "mode" can be defined by prefixing all related commands with
 the same pattern.  Select a key cluster and either append keys to that
 shape pattern or begin a multi-stroke command with it.
 
-Mark Kislingbury uses this approach when he [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words
-on the left.  For example, =THA= ("that") leaves the board open for
-phrases like "that was", "that will", "that had", etc. by adding a
-single key.  =THA= acts as a "mode" for all phrases beginning with
-"that".
+Mark Kislingbury, record holder for fastest writer in the world, uses
+this approach when he [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  For
+example, =THA= ("that") leaves the board open for phrases like "that
+was", "that will", "that had", etc. by adding a single key.  =THA=
+acts as a "mode" for all phrases beginning with "that".
 
 The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary also uses the prefix technique.
 =STPH-= is used as a prefix for all subsequent movement related
