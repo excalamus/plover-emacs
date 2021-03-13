@@ -5,6 +5,14 @@
 
 ----------------
 
+#+begin_quote
+ATTENTION: This document and the corresponding dictionary are under
+active development!  How active?  Check the [[https://github.com/excalamus/plover-emacs][repo]].  To be notified of
+changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the repository.
+
+In the meantime, I hope you find something useful!
+#+end_quote
+
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
 
 * Opening bracket
