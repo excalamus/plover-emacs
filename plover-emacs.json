@@ -1,8 +1,12 @@
 {
 
+"STW": "{#Escape}",
+"-BLS": "{#Escape}",
+
 "ULT": "{#Alt_L(x)}",
 
 "-RPB": "{#Control(g)}",
+"mixed"
 
 "*": "{#F1}",
 "2*": "{#F2}",
@@ -17,6 +21,6 @@
 "1*D": "{#F11}",
 "2*D": "{#F12}",
 
-"TPEFBG": "{#Escape}",
-
 }
+
+"mixed"

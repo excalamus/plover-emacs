@@ -39,7 +39,7 @@ This document defines, literally, a dictionary for using Plover with
 Emacs.  Explanations of concepts and rationale are provided for each
 set of entries.  The intent is to make using Plover with Emacs as
 simple as possible, while teaching users how to modify the system.
-Basic familiarity with Ploved and Emacs is assumed.  If you're not
+Basic familiarity with Plover and Emacs is assumed.  If you're not
 familiar with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover wiki]].  To
 get started with Emacs, check out the [[https://www.gnu.org/software/emacs/tour/][guided tour]].
 
@@ -206,6 +206,523 @@ others may find the pattern useful).
 | .::       | =KPWHR=   | Control + Shift + Super       | =-FRPBG=   | ::.       |
 | ⠈⠅⠅       | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | ⠅⠅⠈       |
 | :::       | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | :::       |
+
+We can auto generate all these combinations using Emacs Lisp.
+
+#+name: generated
+#+begin_src emacs-lisp :lexical t :tangle plover-emacs.json :results value verbatim :exports both
+;; still under development
+;; scratch/lisp.el
+
+(defun ctl (x)
+  (format "Control(%s)" x))
+
+(defun alt (x)
+  (format "Alt(%s)" x))
+
+(defun shf (x)
+  (format "Shift(%s)" x))
+
+(defun sup (x)
+  (format "Super(%s)" x))
+
+(defun cmd (x)
+  (format "{#%s}" x))
+
+(defvar steno-order "STKPWHRAO*EUFRPBLGTSDZ")
+
+(defun steno< (a b)
+  (< (search a steno-order) (search b steno-order)))
+
+(defun steno-sort (x)
+  (apply #'concat
+         (sort (split-string x "" t) 'steno<)))
+
+(defun right-hand-p (x)
+  (let* ((right-keys '("E" "U" "F" "R" "P" "B" "L" "G" "T" "S" "D" "Z"))
+        (x (if (string-equal (substring x 0 1) "-")
+               (substring x 1)
+             x))
+        (split (split-string x "" t)))
+    (subsetp split right-keys :test #'string-equal)))
+
+(defun left-hand-p (x)
+  (let* ((left-keys '("S" "T" "K" "P" "W" "H" "R" "A" "O" ))
+        (x (if (string-equal (substring x 0 1) "-")
+               (substring x 1)
+             x))
+        (split (split-string x "" t)))
+    (subsetp split left-keys :test #'string-equal)))
+
+;; ;; todo
+;; ;; generalize this for RHS/LHS "pseudo modes"; will need modifer alist?
+;; (defun json (s c)
+;;   (let (
+;;         (stroke (if (left-hand-p s)
+;;                     (concat "" s)
+;;                     )
+;;   (format "\"%s\": \"%s\"," s c))
+
+(defun json (s c)
+  (format "\"%s\": \"%s\"," s c))
+
+;; https://www.public.asu.edu/~huanliu/AI04S/Lisp_Assignment_Solutions.html
+(defun powerset(lst)
+  (if (null lst)
+    '(nil)
+    (let ((ps (powerset (cdr lst))))
+      (append ps (mapcar #'(lambda (x) (cons (car lst) x)) ps)))))
+
+;; (cdr (powerset '(1 2 3 4)))
+;; (nil (4) (3) (3 4) (2) (2 4) (2 3) (2 3 4) (1) (1 4) (1 3) (1 3 4) ...)
+
+;; ANSI Common Lisp p.110
+(defun compose (fns)
+  (destructuring-bind (fn1 . cdr) (reverse fns)
+    #'(lambda (&rest args)
+        (reduce #'(lambda (v f) (funcall f v))
+                cdr
+                :initial-value (apply fn1 args)))))
+
+;; (mapcar (compose '(list round sqrt))
+;;         '(4 9 16 25))
+
+;; (mapcar (compose '(sqrt))
+;;         '(4 9 16 25))
+
+(defun apply-functions (fns lst)
+  (mapcan #'(lambda (x) (mapcar x lst)) fns))
+
+;; (defun apply-functions (fns lst)
+;;   (mapcan
+;;    #'(lambda (x)
+;;        (mapcar (compose (list #'cmd x)) lst))
+;;           fns))
+
+(let* ((alphabet-alist
+       '(("a" . "A") ("b" . "PW") ("c" . "KR") ("d" . "TK") ("e" . "-E")
+         ("f" . "TP") ("g" . "TKPW") ("h" . "H") ("i" . "-EU") ("j" . "SKWR")
+         ("k" . "K") ("l" . "HR") ("m" . "PH") ("n" . "TPH") ("o" . "O")
+         ("p" . "P") ("q" . "KW") ("r" . "R") ("s" . "S") ("t" . "T")
+         ("u" . "-U") ("v" . "SR") ("w" . "W") ("x" . "KP") ("y" . "KWR")
+         ("z" . "STKPW")))
+       (alphabet (mapcar 'car alphabet-alist))
+       (strokes (mapcar 'cdr alphabet-alist))
+       (modifiers '(ctl alt shf sup))
+       (powerset-fns (mapcar 'compose (cdr (powerset modifiers))))
+       (cmded-fns (mapcar
+               #'(lambda (x) (compose (list #'cmd x)))
+               powerset-fns))
+       (commands (apply-functions cmded-fns alphabet))
+       (repeats (/ (length commands) (length strokes)))  ;
+       (repeated (apply 'append (make-list repeats strokes)))
+       (dictionary (seq-mapn #'json repeated commands)))
+  (setq result "")
+  (cl-loop for entry in dictionary do
+           (setq result (concat result entry "\n")))
+  result)
+
+;; There are 2^n elements in a powerset.  Since we drop the empty set,
+;; there are 2^4-1=15 powerset functions.  This means for the two
+;; lists to be of equal length, we need 15 copies of the alphabet.
+;; Since each of powerset function is applied to the whole alphabet,
+;; there are 15 * 26 = 390 total commands.
+#+end_src
+
+#+RESULTS: generated
+#+begin_example
+"\"A\": \"{#Super(a)}\",
+\"PW\": \"{#Super(b)}\",
+\"KR\": \"{#Super(c)}\",
+\"TK\": \"{#Super(d)}\",
+\"-E\": \"{#Super(e)}\",
+\"TP\": \"{#Super(f)}\",
+\"TKPW\": \"{#Super(g)}\",
+\"H\": \"{#Super(h)}\",
+\"-EU\": \"{#Super(i)}\",
+\"SKWR\": \"{#Super(j)}\",
+\"K\": \"{#Super(k)}\",
+\"HR\": \"{#Super(l)}\",
+\"PH\": \"{#Super(m)}\",
+\"TPH\": \"{#Super(n)}\",
+\"O\": \"{#Super(o)}\",
+\"P\": \"{#Super(p)}\",
+\"KW\": \"{#Super(q)}\",
+\"R\": \"{#Super(r)}\",
+\"S\": \"{#Super(s)}\",
+\"T\": \"{#Super(t)}\",
+\"-U\": \"{#Super(u)}\",
+\"SR\": \"{#Super(v)}\",
+\"W\": \"{#Super(w)}\",
+\"KP\": \"{#Super(x)}\",
+\"KWR\": \"{#Super(y)}\",
+\"STKPW\": \"{#Super(z)}\",
+\"A\": \"{#Shift(a)}\",
+\"PW\": \"{#Shift(b)}\",
+\"KR\": \"{#Shift(c)}\",
+\"TK\": \"{#Shift(d)}\",
+\"-E\": \"{#Shift(e)}\",
+\"TP\": \"{#Shift(f)}\",
+\"TKPW\": \"{#Shift(g)}\",
+\"H\": \"{#Shift(h)}\",
+\"-EU\": \"{#Shift(i)}\",
+\"SKWR\": \"{#Shift(j)}\",
+\"K\": \"{#Shift(k)}\",
+\"HR\": \"{#Shift(l)}\",
+\"PH\": \"{#Shift(m)}\",
+\"TPH\": \"{#Shift(n)}\",
+\"O\": \"{#Shift(o)}\",
+\"P\": \"{#Shift(p)}\",
+\"KW\": \"{#Shift(q)}\",
+\"R\": \"{#Shift(r)}\",
+\"S\": \"{#Shift(s)}\",
+\"T\": \"{#Shift(t)}\",
+\"-U\": \"{#Shift(u)}\",
+\"SR\": \"{#Shift(v)}\",
+\"W\": \"{#Shift(w)}\",
+\"KP\": \"{#Shift(x)}\",
+\"KWR\": \"{#Shift(y)}\",
+\"STKPW\": \"{#Shift(z)}\",
+\"A\": \"{#Shift(Super(a))}\",
+\"PW\": \"{#Shift(Super(b))}\",
+\"KR\": \"{#Shift(Super(c))}\",
+\"TK\": \"{#Shift(Super(d))}\",
+\"-E\": \"{#Shift(Super(e))}\",
+\"TP\": \"{#Shift(Super(f))}\",
+\"TKPW\": \"{#Shift(Super(g))}\",
+\"H\": \"{#Shift(Super(h))}\",
+\"-EU\": \"{#Shift(Super(i))}\",
+\"SKWR\": \"{#Shift(Super(j))}\",
+\"K\": \"{#Shift(Super(k))}\",
+\"HR\": \"{#Shift(Super(l))}\",
+\"PH\": \"{#Shift(Super(m))}\",
+\"TPH\": \"{#Shift(Super(n))}\",
+\"O\": \"{#Shift(Super(o))}\",
+\"P\": \"{#Shift(Super(p))}\",
+\"KW\": \"{#Shift(Super(q))}\",
+\"R\": \"{#Shift(Super(r))}\",
+\"S\": \"{#Shift(Super(s))}\",
+\"T\": \"{#Shift(Super(t))}\",
+\"-U\": \"{#Shift(Super(u))}\",
+\"SR\": \"{#Shift(Super(v))}\",
+\"W\": \"{#Shift(Super(w))}\",
+\"KP\": \"{#Shift(Super(x))}\",
+\"KWR\": \"{#Shift(Super(y))}\",
+\"STKPW\": \"{#Shift(Super(z))}\",
+\"A\": \"{#Alt(a)}\",
+\"PW\": \"{#Alt(b)}\",
+\"KR\": \"{#Alt(c)}\",
+\"TK\": \"{#Alt(d)}\",
+\"-E\": \"{#Alt(e)}\",
+\"TP\": \"{#Alt(f)}\",
+\"TKPW\": \"{#Alt(g)}\",
+\"H\": \"{#Alt(h)}\",
+\"-EU\": \"{#Alt(i)}\",
+\"SKWR\": \"{#Alt(j)}\",
+\"K\": \"{#Alt(k)}\",
+\"HR\": \"{#Alt(l)}\",
+\"PH\": \"{#Alt(m)}\",
+\"TPH\": \"{#Alt(n)}\",
+\"O\": \"{#Alt(o)}\",
+\"P\": \"{#Alt(p)}\",
+\"KW\": \"{#Alt(q)}\",
+\"R\": \"{#Alt(r)}\",
+\"S\": \"{#Alt(s)}\",
+\"T\": \"{#Alt(t)}\",
+\"-U\": \"{#Alt(u)}\",
+\"SR\": \"{#Alt(v)}\",
+\"W\": \"{#Alt(w)}\",
+\"KP\": \"{#Alt(x)}\",
+\"KWR\": \"{#Alt(y)}\",
+\"STKPW\": \"{#Alt(z)}\",
+\"A\": \"{#Alt(Super(a))}\",
+\"PW\": \"{#Alt(Super(b))}\",
+\"KR\": \"{#Alt(Super(c))}\",
+\"TK\": \"{#Alt(Super(d))}\",
+\"-E\": \"{#Alt(Super(e))}\",
+\"TP\": \"{#Alt(Super(f))}\",
+\"TKPW\": \"{#Alt(Super(g))}\",
+\"H\": \"{#Alt(Super(h))}\",
+\"-EU\": \"{#Alt(Super(i))}\",
+\"SKWR\": \"{#Alt(Super(j))}\",
+\"K\": \"{#Alt(Super(k))}\",
+\"HR\": \"{#Alt(Super(l))}\",
+\"PH\": \"{#Alt(Super(m))}\",
+\"TPH\": \"{#Alt(Super(n))}\",
+\"O\": \"{#Alt(Super(o))}\",
+\"P\": \"{#Alt(Super(p))}\",
+\"KW\": \"{#Alt(Super(q))}\",
+\"R\": \"{#Alt(Super(r))}\",
+\"S\": \"{#Alt(Super(s))}\",
+\"T\": \"{#Alt(Super(t))}\",
+\"-U\": \"{#Alt(Super(u))}\",
+\"SR\": \"{#Alt(Super(v))}\",
+\"W\": \"{#Alt(Super(w))}\",
+\"KP\": \"{#Alt(Super(x))}\",
+\"KWR\": \"{#Alt(Super(y))}\",
+\"STKPW\": \"{#Alt(Super(z))}\",
+\"A\": \"{#Alt(Shift(a))}\",
+\"PW\": \"{#Alt(Shift(b))}\",
+\"KR\": \"{#Alt(Shift(c))}\",
+\"TK\": \"{#Alt(Shift(d))}\",
+\"-E\": \"{#Alt(Shift(e))}\",
+\"TP\": \"{#Alt(Shift(f))}\",
+\"TKPW\": \"{#Alt(Shift(g))}\",
+\"H\": \"{#Alt(Shift(h))}\",
+\"-EU\": \"{#Alt(Shift(i))}\",
+\"SKWR\": \"{#Alt(Shift(j))}\",
+\"K\": \"{#Alt(Shift(k))}\",
+\"HR\": \"{#Alt(Shift(l))}\",
+\"PH\": \"{#Alt(Shift(m))}\",
+\"TPH\": \"{#Alt(Shift(n))}\",
+\"O\": \"{#Alt(Shift(o))}\",
+\"P\": \"{#Alt(Shift(p))}\",
+\"KW\": \"{#Alt(Shift(q))}\",
+\"R\": \"{#Alt(Shift(r))}\",
+\"S\": \"{#Alt(Shift(s))}\",
+\"T\": \"{#Alt(Shift(t))}\",
+\"-U\": \"{#Alt(Shift(u))}\",
+\"SR\": \"{#Alt(Shift(v))}\",
+\"W\": \"{#Alt(Shift(w))}\",
+\"KP\": \"{#Alt(Shift(x))}\",
+\"KWR\": \"{#Alt(Shift(y))}\",
+\"STKPW\": \"{#Alt(Shift(z))}\",
+\"A\": \"{#Alt(Shift(Super(a)))}\",
+\"PW\": \"{#Alt(Shift(Super(b)))}\",
+\"KR\": \"{#Alt(Shift(Super(c)))}\",
+\"TK\": \"{#Alt(Shift(Super(d)))}\",
+\"-E\": \"{#Alt(Shift(Super(e)))}\",
+\"TP\": \"{#Alt(Shift(Super(f)))}\",
+\"TKPW\": \"{#Alt(Shift(Super(g)))}\",
+\"H\": \"{#Alt(Shift(Super(h)))}\",
+\"-EU\": \"{#Alt(Shift(Super(i)))}\",
+\"SKWR\": \"{#Alt(Shift(Super(j)))}\",
+\"K\": \"{#Alt(Shift(Super(k)))}\",
+\"HR\": \"{#Alt(Shift(Super(l)))}\",
+\"PH\": \"{#Alt(Shift(Super(m)))}\",
+\"TPH\": \"{#Alt(Shift(Super(n)))}\",
+\"O\": \"{#Alt(Shift(Super(o)))}\",
+\"P\": \"{#Alt(Shift(Super(p)))}\",
+\"KW\": \"{#Alt(Shift(Super(q)))}\",
+\"R\": \"{#Alt(Shift(Super(r)))}\",
+\"S\": \"{#Alt(Shift(Super(s)))}\",
+\"T\": \"{#Alt(Shift(Super(t)))}\",
+\"-U\": \"{#Alt(Shift(Super(u)))}\",
+\"SR\": \"{#Alt(Shift(Super(v)))}\",
+\"W\": \"{#Alt(Shift(Super(w)))}\",
+\"KP\": \"{#Alt(Shift(Super(x)))}\",
+\"KWR\": \"{#Alt(Shift(Super(y)))}\",
+\"STKPW\": \"{#Alt(Shift(Super(z)))}\",
+\"A\": \"{#Control(a)}\",
+\"PW\": \"{#Control(b)}\",
+\"KR\": \"{#Control(c)}\",
+\"TK\": \"{#Control(d)}\",
+\"-E\": \"{#Control(e)}\",
+\"TP\": \"{#Control(f)}\",
+\"TKPW\": \"{#Control(g)}\",
+\"H\": \"{#Control(h)}\",
+\"-EU\": \"{#Control(i)}\",
+\"SKWR\": \"{#Control(j)}\",
+\"K\": \"{#Control(k)}\",
+\"HR\": \"{#Control(l)}\",
+\"PH\": \"{#Control(m)}\",
+\"TPH\": \"{#Control(n)}\",
+\"O\": \"{#Control(o)}\",
+\"P\": \"{#Control(p)}\",
+\"KW\": \"{#Control(q)}\",
+\"R\": \"{#Control(r)}\",
+\"S\": \"{#Control(s)}\",
+\"T\": \"{#Control(t)}\",
+\"-U\": \"{#Control(u)}\",
+\"SR\": \"{#Control(v)}\",
+\"W\": \"{#Control(w)}\",
+\"KP\": \"{#Control(x)}\",
+\"KWR\": \"{#Control(y)}\",
+\"STKPW\": \"{#Control(z)}\",
+\"A\": \"{#Control(Super(a))}\",
+\"PW\": \"{#Control(Super(b))}\",
+\"KR\": \"{#Control(Super(c))}\",
+\"TK\": \"{#Control(Super(d))}\",
+\"-E\": \"{#Control(Super(e))}\",
+\"TP\": \"{#Control(Super(f))}\",
+\"TKPW\": \"{#Control(Super(g))}\",
+\"H\": \"{#Control(Super(h))}\",
+\"-EU\": \"{#Control(Super(i))}\",
+\"SKWR\": \"{#Control(Super(j))}\",
+\"K\": \"{#Control(Super(k))}\",
+\"HR\": \"{#Control(Super(l))}\",
+\"PH\": \"{#Control(Super(m))}\",
+\"TPH\": \"{#Control(Super(n))}\",
+\"O\": \"{#Control(Super(o))}\",
+\"P\": \"{#Control(Super(p))}\",
+\"KW\": \"{#Control(Super(q))}\",
+\"R\": \"{#Control(Super(r))}\",
+\"S\": \"{#Control(Super(s))}\",
+\"T\": \"{#Control(Super(t))}\",
+\"-U\": \"{#Control(Super(u))}\",
+\"SR\": \"{#Control(Super(v))}\",
+\"W\": \"{#Control(Super(w))}\",
+\"KP\": \"{#Control(Super(x))}\",
+\"KWR\": \"{#Control(Super(y))}\",
+\"STKPW\": \"{#Control(Super(z))}\",
+\"A\": \"{#Control(Shift(a))}\",
+\"PW\": \"{#Control(Shift(b))}\",
+\"KR\": \"{#Control(Shift(c))}\",
+\"TK\": \"{#Control(Shift(d))}\",
+\"-E\": \"{#Control(Shift(e))}\",
+\"TP\": \"{#Control(Shift(f))}\",
+\"TKPW\": \"{#Control(Shift(g))}\",
+\"H\": \"{#Control(Shift(h))}\",
+\"-EU\": \"{#Control(Shift(i))}\",
+\"SKWR\": \"{#Control(Shift(j))}\",
+\"K\": \"{#Control(Shift(k))}\",
+\"HR\": \"{#Control(Shift(l))}\",
+\"PH\": \"{#Control(Shift(m))}\",
+\"TPH\": \"{#Control(Shift(n))}\",
+\"O\": \"{#Control(Shift(o))}\",
+\"P\": \"{#Control(Shift(p))}\",
+\"KW\": \"{#Control(Shift(q))}\",
+\"R\": \"{#Control(Shift(r))}\",
+\"S\": \"{#Control(Shift(s))}\",
+\"T\": \"{#Control(Shift(t))}\",
+\"-U\": \"{#Control(Shift(u))}\",
+\"SR\": \"{#Control(Shift(v))}\",
+\"W\": \"{#Control(Shift(w))}\",
+\"KP\": \"{#Control(Shift(x))}\",
+\"KWR\": \"{#Control(Shift(y))}\",
+\"STKPW\": \"{#Control(Shift(z))}\",
+\"A\": \"{#Control(Shift(Super(a)))}\",
+\"PW\": \"{#Control(Shift(Super(b)))}\",
+\"KR\": \"{#Control(Shift(Super(c)))}\",
+\"TK\": \"{#Control(Shift(Super(d)))}\",
+\"-E\": \"{#Control(Shift(Super(e)))}\",
+\"TP\": \"{#Control(Shift(Super(f)))}\",
+\"TKPW\": \"{#Control(Shift(Super(g)))}\",
+\"H\": \"{#Control(Shift(Super(h)))}\",
+\"-EU\": \"{#Control(Shift(Super(i)))}\",
+\"SKWR\": \"{#Control(Shift(Super(j)))}\",
+\"K\": \"{#Control(Shift(Super(k)))}\",
+\"HR\": \"{#Control(Shift(Super(l)))}\",
+\"PH\": \"{#Control(Shift(Super(m)))}\",
+\"TPH\": \"{#Control(Shift(Super(n)))}\",
+\"O\": \"{#Control(Shift(Super(o)))}\",
+\"P\": \"{#Control(Shift(Super(p)))}\",
+\"KW\": \"{#Control(Shift(Super(q)))}\",
+\"R\": \"{#Control(Shift(Super(r)))}\",
+\"S\": \"{#Control(Shift(Super(s)))}\",
+\"T\": \"{#Control(Shift(Super(t)))}\",
+\"-U\": \"{#Control(Shift(Super(u)))}\",
+\"SR\": \"{#Control(Shift(Super(v)))}\",
+\"W\": \"{#Control(Shift(Super(w)))}\",
+\"KP\": \"{#Control(Shift(Super(x)))}\",
+\"KWR\": \"{#Control(Shift(Super(y)))}\",
+\"STKPW\": \"{#Control(Shift(Super(z)))}\",
+\"A\": \"{#Control(Alt(a))}\",
+\"PW\": \"{#Control(Alt(b))}\",
+\"KR\": \"{#Control(Alt(c))}\",
+\"TK\": \"{#Control(Alt(d))}\",
+\"-E\": \"{#Control(Alt(e))}\",
+\"TP\": \"{#Control(Alt(f))}\",
+\"TKPW\": \"{#Control(Alt(g))}\",
+\"H\": \"{#Control(Alt(h))}\",
+\"-EU\": \"{#Control(Alt(i))}\",
+\"SKWR\": \"{#Control(Alt(j))}\",
+\"K\": \"{#Control(Alt(k))}\",
+\"HR\": \"{#Control(Alt(l))}\",
+\"PH\": \"{#Control(Alt(m))}\",
+\"TPH\": \"{#Control(Alt(n))}\",
+\"O\": \"{#Control(Alt(o))}\",
+\"P\": \"{#Control(Alt(p))}\",
+\"KW\": \"{#Control(Alt(q))}\",
+\"R\": \"{#Control(Alt(r))}\",
+\"S\": \"{#Control(Alt(s))}\",
+\"T\": \"{#Control(Alt(t))}\",
+\"-U\": \"{#Control(Alt(u))}\",
+\"SR\": \"{#Control(Alt(v))}\",
+\"W\": \"{#Control(Alt(w))}\",
+\"KP\": \"{#Control(Alt(x))}\",
+\"KWR\": \"{#Control(Alt(y))}\",
+\"STKPW\": \"{#Control(Alt(z))}\",
+\"A\": \"{#Control(Alt(Super(a)))}\",
+\"PW\": \"{#Control(Alt(Super(b)))}\",
+\"KR\": \"{#Control(Alt(Super(c)))}\",
+\"TK\": \"{#Control(Alt(Super(d)))}\",
+\"-E\": \"{#Control(Alt(Super(e)))}\",
+\"TP\": \"{#Control(Alt(Super(f)))}\",
+\"TKPW\": \"{#Control(Alt(Super(g)))}\",
+\"H\": \"{#Control(Alt(Super(h)))}\",
+\"-EU\": \"{#Control(Alt(Super(i)))}\",
+\"SKWR\": \"{#Control(Alt(Super(j)))}\",
+\"K\": \"{#Control(Alt(Super(k)))}\",
+\"HR\": \"{#Control(Alt(Super(l)))}\",
+\"PH\": \"{#Control(Alt(Super(m)))}\",
+\"TPH\": \"{#Control(Alt(Super(n)))}\",
+\"O\": \"{#Control(Alt(Super(o)))}\",
+\"P\": \"{#Control(Alt(Super(p)))}\",
+\"KW\": \"{#Control(Alt(Super(q)))}\",
+\"R\": \"{#Control(Alt(Super(r)))}\",
+\"S\": \"{#Control(Alt(Super(s)))}\",
+\"T\": \"{#Control(Alt(Super(t)))}\",
+\"-U\": \"{#Control(Alt(Super(u)))}\",
+\"SR\": \"{#Control(Alt(Super(v)))}\",
+\"W\": \"{#Control(Alt(Super(w)))}\",
+\"KP\": \"{#Control(Alt(Super(x)))}\",
+\"KWR\": \"{#Control(Alt(Super(y)))}\",
+\"STKPW\": \"{#Control(Alt(Super(z)))}\",
+\"A\": \"{#Control(Alt(Shift(a)))}\",
+\"PW\": \"{#Control(Alt(Shift(b)))}\",
+\"KR\": \"{#Control(Alt(Shift(c)))}\",
+\"TK\": \"{#Control(Alt(Shift(d)))}\",
+\"-E\": \"{#Control(Alt(Shift(e)))}\",
+\"TP\": \"{#Control(Alt(Shift(f)))}\",
+\"TKPW\": \"{#Control(Alt(Shift(g)))}\",
+\"H\": \"{#Control(Alt(Shift(h)))}\",
+\"-EU\": \"{#Control(Alt(Shift(i)))}\",
+\"SKWR\": \"{#Control(Alt(Shift(j)))}\",
+\"K\": \"{#Control(Alt(Shift(k)))}\",
+\"HR\": \"{#Control(Alt(Shift(l)))}\",
+\"PH\": \"{#Control(Alt(Shift(m)))}\",
+\"TPH\": \"{#Control(Alt(Shift(n)))}\",
+\"O\": \"{#Control(Alt(Shift(o)))}\",
+\"P\": \"{#Control(Alt(Shift(p)))}\",
+\"KW\": \"{#Control(Alt(Shift(q)))}\",
+\"R\": \"{#Control(Alt(Shift(r)))}\",
+\"S\": \"{#Control(Alt(Shift(s)))}\",
+\"T\": \"{#Control(Alt(Shift(t)))}\",
+\"-U\": \"{#Control(Alt(Shift(u)))}\",
+\"SR\": \"{#Control(Alt(Shift(v)))}\",
+\"W\": \"{#Control(Alt(Shift(w)))}\",
+\"KP\": \"{#Control(Alt(Shift(x)))}\",
+\"KWR\": \"{#Control(Alt(Shift(y)))}\",
+\"STKPW\": \"{#Control(Alt(Shift(z)))}\",
+\"A\": \"{#Control(Alt(Shift(Super(a))))}\",
+\"PW\": \"{#Control(Alt(Shift(Super(b))))}\",
+\"KR\": \"{#Control(Alt(Shift(Super(c))))}\",
+\"TK\": \"{#Control(Alt(Shift(Super(d))))}\",
+\"-E\": \"{#Control(Alt(Shift(Super(e))))}\",
+\"TP\": \"{#Control(Alt(Shift(Super(f))))}\",
+\"TKPW\": \"{#Control(Alt(Shift(Super(g))))}\",
+\"H\": \"{#Control(Alt(Shift(Super(h))))}\",
+\"-EU\": \"{#Control(Alt(Shift(Super(i))))}\",
+\"SKWR\": \"{#Control(Alt(Shift(Super(j))))}\",
+\"K\": \"{#Control(Alt(Shift(Super(k))))}\",
+\"HR\": \"{#Control(Alt(Shift(Super(l))))}\",
+\"PH\": \"{#Control(Alt(Shift(Super(m))))}\",
+\"TPH\": \"{#Control(Alt(Shift(Super(n))))}\",
+\"O\": \"{#Control(Alt(Shift(Super(o))))}\",
+\"P\": \"{#Control(Alt(Shift(Super(p))))}\",
+\"KW\": \"{#Control(Alt(Shift(Super(q))))}\",
+\"R\": \"{#Control(Alt(Shift(Super(r))))}\",
+\"S\": \"{#Control(Alt(Shift(Super(s))))}\",
+\"T\": \"{#Control(Alt(Shift(Super(t))))}\",
+\"-U\": \"{#Control(Alt(Shift(Super(u))))}\",
+\"SR\": \"{#Control(Alt(Shift(Super(v))))}\",
+\"W\": \"{#Control(Alt(Shift(Super(w))))}\",
+\"KP\": \"{#Control(Alt(Shift(Super(x))))}\",
+\"KWR\": \"{#Control(Alt(Shift(Super(y))))}\",
+\"STKPW\": \"{#Control(Alt(Shift(Super(z))))}\",
+"
+#+end_example
 
 
 The Escape key is distributed with Plover in the =commands.json=
@@ -1363,7 +1880,8 @@ Of course we would want more efficient bindings than those. But the
 idea, I think, covers all the cases completely and intuitively.
 
 * Closing bracket
-#+begin_src js :tangle plover-emacs.json :exports none
+#+begin_src js :tangle plover-emacs.json :exports none :noweb yes
+<<generated>>
 }
 #+end_src
 
