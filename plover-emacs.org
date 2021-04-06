@@ -7,10 +7,8 @@
 
 #+begin_quote
 ATTENTION: This document and the corresponding dictionary are under
-active development!  How active?  Check the [[https://github.com/excalamus/plover-emacs][repo]].  To be notified of
-changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the repository.
-
-In the meantime, I hope you find something useful!
+active development!  To be notified of changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the
+[[https://github.com/excalamus/plover-emacs][repository]].
 #+end_quote
 
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
@@ -115,9 +113,9 @@ commands.  Since =-R= corresponds to "a" (the left arrow key in [[https://en.wik
 the command =STPH-R= means "move left".
 
 ** Right hand rule
-It's nearly possible to write the entire alphabet left handed.  All
-letters but "e" (=E=), "i" (=EU=), and "u" (=U=) can be written with a
-left hand key.  By defining a right hand stroke that excludes the =E=
+It's possible to write nearly the entire alphabet left handed.  All
+letters but "e" (=E=), "i" (=EU=), and "u" (=U=) can be written with
+the left hand.  By defining a right hand stroke that excludes the =E=
 and =U= keys, we can create single strokes for every letter in the
 alphabet.
 
@@ -178,11 +176,17 @@ alphabet.
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift
-Can take advantage of the right hand rule to define modifiers for each
-letter of the alphabet.  If the shape is mirrored on the left hand
-side, this gives a prefix that allows us to leverage the WASD, Page
-Up/Page Down, and Home/End right hand concepts from [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform
-Movement]] dictionary.
+Emacs makes extensive use of modifier keys.  It's for this reason that
+Emacs presents a challenge for Plover theory.  How can modified
+letters, including combinations of modifiers, memorably coexist
+alongside established natural language steno definitions?
+
+The solution is to apply the right hand rule for each letter of the
+alphabet.
+
+Further, the shape can be mirrored on the left hand side,
+to give a prefix for use with Left, Up, Down, Right, Page Up/Page
+Down, and Home/End[fn:4].
 
 "Super bit" is the top left.
 
@@ -215,7 +219,155 @@ others may find the pattern useful).
 | ⠈⠅⠅       | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | ⠅⠅⠈       |
 | :::       | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | :::       |
 
-We can auto generate all these combinations using Emacs Lisp.
+** Control
+| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
+|-----------+-----------+-----------------------+------------+-----------|
+| ⠴         | =KPW=     | Control               | =-PBG=     | ⠦         |
+
+The right-hand Control form, =-PBG=, looks like an "L".
+
+The main challenge with =-PBG= as a binding is that it contains the
+=-G= key, used for ={^ing}= in some single-stroke words (=TK-PBG= for
+"defining"; =TP-PBG= for "financing"; =TKPW-PBG= for "gunning";
+=K-PBG= for "conditioning"; =HR-PBG= for "listening"; =PH-PBG= for
+"machining"; =R-PBG= for "reasoning"; =S-PBG= for "seasoning"; =T-PBG=
+for "continuing"; =W-PBG= for "winning"; and =KP-PBG= for
+"examining").
+
+Default alternate forms can preserve the single-stroke for some
+(=HR-FPB= and =HR-FPBG= for "listen" and "listening"; =AO*E-PBG= for
+"Inc.") whereas others can have a new single-stroke defined (=W*PB=
+for "winning").
+
+Unfortunately, the others incur a one-stroke penalty and require the
+alternate =/G= form to add "-ing" (=TK-PB/G= for "defining"; =TP-PB/G=
+for "financing"; =TPKW-PB/G= for "gunning"; =K-PB/G= for
+"conditioning"; =PH-PB/G= for "machining"; =R-PB/G= for "reasoning";
+=S-PB/G= for "seasoning"; =T-PB/G= for "continuing"; and =KP-PB/G= for
+"examining").  This is easy to remember, so is hopefully a fair
+compromise.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TK-PBG": "{#Control_L(d)}",
+"TP-PBG": "{#Control_L(f)}",
+"TKPW-PBG": "{#Control_L(g)}",
+"EU-PBG": "{#Control_L(i)}",
+"K-PBG": "{#Control_L(k)}",
+"HR-PBG": "{#Control_L(l)}",
+"PH-PBG": "{#Control_L(m)}",
+"R-PBG": "{#Control_L(r)}",
+"S-PBG": "{#Control_L(s)}",
+"T-PBG": "{#Control_L(t)}",
+"W-PBG": "{#Control_L(w)}",
+"W*PB": "winning",
+"KP-PBG": "{#Control_L(x)}",
+#+end_src
+
+Several strokes can be safely co-opted because they aren't words,
+are undefined, or aren't proper (=A-PBG= for "Ang"; =PW-PBG= for
+"beening"; =KR-PBG= for "CNing"; =H-PBG= for "ing"; =SKWR-PBG= is
+undefined; =TPH-PBG= for "undering"; =O-PBG= for "-ing on"; =P-PBG=
+"opinioning"; =KW-PBG= is undefined; =SR-PBG= for "haven'ting";
+=KWR-PBG= for "I knowing"; and =STKPW-PBG= is undefined).  =U-PBG= is
+"you think" which, outside of a quotation, is probably bad manners
+while =O-PBG= is an unfortunate loss.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"A-PBG": "{#Control_L(a)}",
+"PW-PBG": "{#Control_L(b)}",
+"KR-PBG": "{#Control_L(c)}",
+"SKWR-PBG": "{#Control_L(j)}",
+"TPH-PBG": "{#Control_L(n)}",
+"O-PBG": "{#Control_L(o)}",
+"P-PBG": "{#Control_L(p)}",
+"KW-PBG": "{#Control_L(q)}",
+"U-PBG": "{#Control_L(u)}",
+"SR-PBG": "{#Control_L(v)}",
+"KWR-PBG": "{#Control_L(y)}",
+"STKPW-PBG": "{#Control_L(z)}",
+#+end_src
+
+The most challenging to replace is =E-PBG= (for "edge"). It is
+completely clobbered.  There is nothing similar nearby and the
+alternate spelling (=E-PBLG=) is also clobbered by
+Control+Alt. Instead, =E-GD= is used for "edge", supplanting
+"egged". =-EG/D= replaces "egged".
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"-PBG": "{#Control_L()}",
+"E-PBG": "{#Control_L(e)}",
+"-EGD": "edge",
+"-EG/D": "egged",
+#+end_src
+
+** Alt
+| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
+|-----------+-----------+-----------------------+------------+-----------|
+| ⠲         | =TPW=     | Alt                   | =-PBL=     | ⠖         |
+
+The right-hand Alt form, =-PBL=, looks like a "T".
+
+Several default bindings will need new definitions.  This is most
+easily done using =*=.
+
+| original definition | old binding | new binding |
+|---------------------+-------------+-------------|
+| "Alan"              | A-PBL       | A*PBL       |
+| "{^ential}"         | EPBL        | *EPBL       |
+| "conditional"       | K-PBL       | K*PBL       |
+| "reasonable"        | R-PBL       | R*PBL       |
+| "seasonal"          | S-PBL       | S*PBL       |
+| "continual"         | T-PBL       | T*PBL       |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"-PBL": "{#Alt_L()}",
+"A-PBL": "{#Alt_L(a)}",
+"A*PBL": "Alan",
+"EPBL": "{#Alt_L(e)}",
+"*EPBL": "{^ential}",
+"K-PBL": "{#Alt_L(k)}",
+"K*PBL": "conditional",
+"R-PBL": "{#Alt_L(r)}",
+"R*PBL": "reasonable",
+"S-PBL": "{#Alt_L(s)}",
+"S*PBL": "seasonal",
+"T-PBL": "{#Alt_L(t)}",
+"T*PBL": "continual",
+#+end_src
+Other bindings have alternate single-stroke forms and are overwritten.
+
+| original definition | old form | alternate form |
+|---------------------+----------+----------------|
+| "financial"         | F-PBL    | TP-PBGS        |
+| "only"              | O-PBL    | OE-PBL         |
+
+The remaining bindings present no conflict.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"PW-PBL": "{#Alt_L(b)}",
+"KR-PBL": "{#Alt_L(c)}",
+"TK-PBL": "{#Alt_L(d)}",
+"TP-PBL": "{#Alt_L(f)}",
+"TKPW-PBL": "{#Alt_L(g)}",
+"H-PBL": "{#Alt_L(h)}",
+"EUPBL": "{#Alt_L(i)}",
+"SKWR-PBL": "{#Alt_L(j)}",
+"HR-PBL": "{#Alt_L(l)}",
+"PH-PBL": "{#Alt_L(m)}",
+"TPH-PBL": "{#Alt_L(n)}",
+"O-PBL": "{#Alt_L(o)}",
+"P-PBL": "{#Alt_L(p)}",
+"KW-PBL": "{#Alt_L(q)}",
+"UPBL": "{#Alt_L(u)}",
+"SR-PBL": "{#Alt_L(v)}",
+"W-PBL": "{#Alt_L(w)}",
+"KP-PBL": "{#Alt_L(x)}",
+"KWR-PBL": "{#Alt_L(y)}",
+"STKPW-PBL": "{#Alt_L(z)}",
+#+end_src
+
+
+# We can auto generate all these combinations using Emacs Lisp.
 
 #+name: generated
 #+begin_src emacs-lisp :lexical t :tangle plover-emacs.json :results value verbatim :exports both
@@ -1859,6 +2011,9 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
         "STKPWHR-PG": "{#Super_L(Control_L(Alt_L(Shift_L(backslash))))}"
 }
 #+end_src
+** Resources
+- https://plover.goeswhere.com/
+- https://stenoknight.com/plover/ploverlookup/
 
 ** Leftovers
 Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
@@ -1894,6 +2049,8 @@ idea, I think, covers all the cases completely and intuitively.
 #+end_src
 
 * Footnotes
+
+[fn:4] See [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]].
 
 [fn:3] For example, the code blocks shown on this web page are
 directly used to generate the Plover dictionary.  Further, this web

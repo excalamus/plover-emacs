@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-03-12 Fri 23:51 -->
+<!-- 2021-04-05 Mon 22:17 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -224,27 +224,33 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgb387548">1. Opening bracket</a></li>
-<li><a href="#orgade6649">2. Dictionary design principles</a>
+<li><a href="#org2eb2dc0">1. Opening bracket</a></li>
+<li><a href="#orgd248977">2. Dictionary design principles</a>
 <ul>
-<li><a href="#org66face3">2.1. Sequence chains</a></li>
-<li><a href="#org86d726c">2.2. Patterns</a></li>
-<li><a href="#orge4abbdb">2.3. Mode prefix</a></li>
-<li><a href="#orgec871ff">2.4. Right hand rule</a></li>
+<li><a href="#org693cf46">2.1. Sequence chains</a></li>
+<li><a href="#org7dba3d5">2.2. Patterns</a></li>
+<li><a href="#orgaedb63e">2.3. Mode prefix</a></li>
+<li><a href="#org4ceaa27">2.4. Right hand rule</a></li>
 </ul>
 </li>
-<li><a href="#orgf0d6abe">3. Emacs: Escape, Meta, Alt, Control, Shift</a></li>
-<li><a href="#orga54a498">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
-<li><a href="#orgbd0bd2b">5. Function keys</a></li>
-<li><a href="#org6438833">6. Notes</a>
+<li><a href="#org931376e">3. Emacs: Escape, Meta, Alt, Control, Shift</a>
 <ul>
-<li><a href="#orgc2a56d1">6.1. Cross Platform Movement</a></li>
-<li><a href="#orgf74ddfc">6.2. Modifiers Single Stroke</a></li>
-<li><a href="#org2b5f5b3">6.3. Nimble single strokes</a></li>
-<li><a href="#org58b01f2">6.4. Leftovers</a></li>
+<li><a href="#orgff37da8">3.1. Control</a></li>
+<li><a href="#org3187d6e">3.2. Alt</a></li>
 </ul>
 </li>
-<li><a href="#orgb5dd7e1">7. Closing bracket</a></li>
+<li><a href="#orgc2ac937">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
+<li><a href="#org1a93b60">5. Function keys</a></li>
+<li><a href="#orge8d9ac3">6. Notes</a>
+<ul>
+<li><a href="#org8bb7dc4">6.1. Cross Platform Movement</a></li>
+<li><a href="#orgbcda55f">6.2. Modifiers Single Stroke</a></li>
+<li><a href="#org71cdbbf">6.3. Nimble single strokes</a></li>
+<li><a href="#org5664efe">6.4. Resources</a></li>
+<li><a href="#orgd885865">6.5. Leftovers</a></li>
+</ul>
+</li>
+<li><a href="#orge657487">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -253,12 +259,8 @@
 <blockquote>
 <p>
 ATTENTION: This document and the corresponding dictionary are under
-active development!  How active?  Check the <a href="https://github.com/excalamus/plover-emacs">repo</a>.  To be notified of
-changes, <a href="https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do">star or watch</a> the repository.
-</p>
-
-<p>
-In the meantime, I hope you find something useful!
+active development!  To be notified of changes, <a href="https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do">star or watch</a> the
+<a href="https://github.com/excalamus/plover-emacs">repository</a>.
 </p>
 </blockquote>
 
@@ -266,8 +268,8 @@ In the meantime, I hope you find something useful!
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-orgb387548" class="outline-2">
-<h2 id="orgb387548"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org2eb2dc0" class="outline-2">
+<h2 id="org2eb2dc0"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="http://www.openstenoproject.org/plover/">Plover</a> is a libre software engine for stenography.  It provides a
@@ -289,7 +291,7 @@ countless features and add-ons<sup><a id="fnr.1" class="footref" href="#fn.1">1<
 </p>
 
 
-<div id="org0d1fc5c" class="figure">
+<div id="org3355e18" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screen shot of the Emacs text editor.</p>
@@ -318,12 +320,12 @@ get started with Emacs, check out the <a href="https://www.gnu.org/software/emac
 </div>
 </div>
 
-<div id="outline-container-orgade6649" class="outline-2">
-<h2 id="orgade6649"><span class="section-number-2">2</span> Dictionary design principles</h2>
+<div id="outline-container-orgd248977" class="outline-2">
+<h2 id="orgd248977"><span class="section-number-2">2</span> Dictionary design principles</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org66face3" class="outline-3">
-<h3 id="org66face3"><span class="section-number-3">2.1</span> Sequence chains</h3>
+<div id="outline-container-org693cf46" class="outline-3">
+<h3 id="org693cf46"><span class="section-number-3">2.1</span> Sequence chains</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Many Emacs commands are called through sequences.  Typically, a Plover
@@ -336,7 +338,7 @@ Plover by separating elements with a space.
 For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  Send the sequence <code>C-x 8
 m</code> using Plover with:
 </p>
-<pre class="example" id="org3fc41c0">
+<pre class="example" id="orgec7d279">
 {#Control_L(x) 8 m}
 </pre>
 
@@ -345,7 +347,7 @@ Some Emacs sequences require capital letters.  Use <code>Shift()</code> to do
 this.  For example, <code>C-x 8 R</code> writes <code>®</code> in Emacs.  To have Plover
 send this, use:
 </p>
-<pre class="example" id="org874e196">
+<pre class="example" id="org167f12d">
 {#Control_L(x) 8 Shift(r)}
 </pre>
 
@@ -354,14 +356,14 @@ Sequence chains can also happen within a modifier definition.  To
 export an Org document to HTML, the command <code>C-c C-e h h</code> is used.
 This would be handled in Plover with:
 </p>
-<pre class="example" id="orgb0c184c">
+<pre class="example" id="orgc7e4a9f">
 {#Control_L(c e) h h}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org86d726c" class="outline-3">
-<h3 id="org86d726c"><span class="section-number-3">2.2</span> Patterns</h3>
+<div id="outline-container-org7dba3d5" class="outline-3">
+<h3 id="org7dba3d5"><span class="section-number-3">2.2</span> Patterns</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Mirabai Knight, founder of the Open Steno Project, points out in her
@@ -384,8 +386,8 @@ up and down arrows.
 </div>
 </div>
 
-<div id="outline-container-orge4abbdb" class="outline-3">
-<h3 id="orge4abbdb"><span class="section-number-3">2.3</span> Mode prefix</h3>
+<div id="outline-container-orgaedb63e" class="outline-3">
+<h3 id="orgaedb63e"><span class="section-number-3">2.3</span> Mode prefix</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 A pseudo "mode" can be defined by prefixing all related commands with
@@ -410,13 +412,13 @@ the command <code>STPH-R</code> means "move left".
 </div>
 </div>
 
-<div id="outline-container-orgec871ff" class="outline-3">
-<h3 id="orgec871ff"><span class="section-number-3">2.4</span> Right hand rule</h3>
+<div id="outline-container-org4ceaa27" class="outline-3">
+<h3 id="org4ceaa27"><span class="section-number-3">2.4</span> Right hand rule</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
-It's nearly possible to write the entire alphabet left handed.  All
-letters but "e" (<code>E</code>), "i" (<code>EU</code>), and "u" (<code>U</code>) can be written with a
-left hand key.  By defining a right hand stroke that excludes the <code>E</code>
+It's possible to write nearly the entire alphabet left handed.  All
+letters but "e" (<code>E</code>), "i" (<code>EU</code>), and "u" (<code>U</code>) can be written with
+the left hand.  By defining a right hand stroke that excludes the <code>E</code>
 and <code>U</code> keys, we can create single strokes for every letter in the
 alphabet.
 </p>
@@ -625,15 +627,25 @@ alphabet.
 </div>
 </div>
 
-<div id="outline-container-orgf0d6abe" class="outline-2">
-<h2 id="orgf0d6abe"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org931376e" class="outline-2">
+<h2 id="org931376e"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-3">
 <p>
-Can take advantage of the right hand rule to define modifiers for each
-letter of the alphabet.  If the shape is mirrored on the left hand
-side, this gives a prefix that allows us to leverage the WASD, Page
-Up/Page Down, and Home/End right hand concepts from <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform
-Movement</a> dictionary.
+Emacs makes extensive use of modifier keys.  It's for this reason that
+Emacs presents a challenge for Plover theory.  How can modified
+letters, including combinations of modifiers, memorably coexist
+alongside established natural language steno definitions?
+</p>
+
+<p>
+The solution is to apply the right hand rule for each letter of the
+alphabet.
+</p>
+
+<p>
+Further, the shape can be mirrored on the left hand side,
+to give a prefix for use with Left, Up, Down, Right, Page Up/Page
+Down, and Home/End<sup><a id="fnr.4" class="footref" href="#fn.4">4</a></sup>.
 </p>
 
 <p>
@@ -825,13 +837,323 @@ others may find the pattern useful).
 </tr>
 </tbody>
 </table>
+</div>
+
+<div id="outline-container-orgff37da8" class="outline-3">
+<h3 id="orgff37da8"><span class="section-number-3">3.1</span> Control</h3>
+<div class="outline-text-3" id="text-3-1">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">L Pattern</th>
+<th scope="col" class="org-left">Left hand</th>
+<th scope="col" class="org-left">Modifier</th>
+<th scope="col" class="org-left">Right Hand</th>
+<th scope="col" class="org-left">R Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">⠴</td>
+<td class="org-left"><code>KPW</code></td>
+<td class="org-left">Control</td>
+<td class="org-left"><code>-PBG</code></td>
+<td class="org-left">⠦</td>
+</tr>
+</tbody>
+</table>
 
 <p>
-We can auto generate all these combinations using Emacs Lisp.
+The right-hand Control form, <code>-PBG</code>, looks like an "L".
+</p>
+
+<p>
+The main challenge with <code>-PBG</code> as a binding is that it contains the
+<code>-G</code> key, used for <code>{^ing}</code> in some single-stroke words (<code>TK-PBG</code> for
+"defining"; <code>TP-PBG</code> for "financing"; <code>TKPW-PBG</code> for "gunning";
+<code>K-PBG</code> for "conditioning"; <code>HR-PBG</code> for "listening"; <code>PH-PBG</code> for
+"machining"; <code>R-PBG</code> for "reasoning"; <code>S-PBG</code> for "seasoning"; <code>T-PBG</code>
+for "continuing"; <code>W-PBG</code> for "winning"; and <code>KP-PBG</code> for
+"examining").
+</p>
+
+<p>
+Default alternate forms can preserve the single-stroke for some
+(<code>HR-FPB</code> and <code>HR-FPBG</code> for "listen" and "listening"; <code>AO*E-PBG</code> for
+"Inc.") whereas others can have a new single-stroke defined (<code>W*PB</code>
+for "winning").
+</p>
+
+<p>
+Unfortunately, the others incur a one-stroke penalty and require the
+alternate <code>/G</code> form to add "-ing" (<code>TK-PB/G</code> for "defining"; <code>TP-PB/G</code>
+for "financing"; <code>TPKW-PB/G</code> for "gunning"; <code>K-PB/G</code> for
+"conditioning"; <code>PH-PB/G</code> for "machining"; <code>R-PB/G</code> for "reasoning";
+<code>S-PB/G</code> for "seasoning"; <code>T-PB/G</code> for "continuing"; and <code>KP-PB/G</code> for
+"examining").  This is easy to remember, so is hopefully a fair
+compromise.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgcebb5b4"><span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">still under development</span>
+<pre class="src src-js"><span style="color: #CC9393;">"TK-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(d)}"</span>,
+<span style="color: #CC9393;">"TP-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(f)}"</span>,
+<span style="color: #CC9393;">"TKPW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(g)}"</span>,
+<span style="color: #CC9393;">"EU-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
+<span style="color: #CC9393;">"K-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(k)}"</span>,
+<span style="color: #CC9393;">"HR-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(l)}"</span>,
+<span style="color: #CC9393;">"PH-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(m)}"</span>,
+<span style="color: #CC9393;">"R-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(r)}"</span>,
+<span style="color: #CC9393;">"S-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(s)}"</span>,
+<span style="color: #CC9393;">"T-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(t)}"</span>,
+<span style="color: #CC9393;">"W-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
+<span style="color: #CC9393;">"W*PB"</span>: <span style="color: #CC9393;">"winning"</span>,
+<span style="color: #CC9393;">"KP-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(x)}"</span>,
+</pre>
+</div>
+
+<p>
+Several strokes can be safely co-opted because they aren't words,
+are undefined, or aren't proper (<code>A-PBG</code> for "Ang"; <code>PW-PBG</code> for
+"beening"; <code>KR-PBG</code> for "CNing"; <code>H-PBG</code> for "ing"; <code>SKWR-PBG</code> is
+undefined; <code>TPH-PBG</code> for "undering"; <code>O-PBG</code> for "-ing on"; <code>P-PBG</code>
+"opinioning"; <code>KW-PBG</code> is undefined; <code>SR-PBG</code> for "haven'ting";
+<code>KWR-PBG</code> for "I knowing"; and <code>STKPW-PBG</code> is undefined).  <code>U-PBG</code> is
+"you think" which, outside of a quotation, is probably bad manners
+while <code>O-PBG</code> is an unfortunate loss.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"A-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(a)}"</span>,
+<span style="color: #CC9393;">"PW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(b)}"</span>,
+<span style="color: #CC9393;">"KR-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(c)}"</span>,
+<span style="color: #CC9393;">"SKWR-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(j)}"</span>,
+<span style="color: #CC9393;">"TPH-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(n)}"</span>,
+<span style="color: #CC9393;">"O-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(o)}"</span>,
+<span style="color: #CC9393;">"P-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(p)}"</span>,
+<span style="color: #CC9393;">"KW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(q)}"</span>,
+<span style="color: #CC9393;">"U-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(u)}"</span>,
+<span style="color: #CC9393;">"SR-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(v)}"</span>,
+<span style="color: #CC9393;">"KWR-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(y)}"</span>,
+<span style="color: #CC9393;">"STKPW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(z)}"</span>,
+</pre>
+</div>
+
+<p>
+The most challenging to replace is <code>E-PBG</code> (for "edge"). It is
+completely clobbered.  There is nothing similar nearby and the
+alternate spelling (<code>E-PBLG</code>) is also clobbered by
+Control+Alt. Instead, <code>E-GD</code> is used for "edge", supplanting
+"egged". <code>-EG/D</code> replaces "egged".
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"-PBG"</span>: <span style="color: #CC9393;">"{#Control_L()}"</span>,
+<span style="color: #CC9393;">"E-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
+<span style="color: #CC9393;">"-EGD"</span>: <span style="color: #CC9393;">"edge"</span>,
+<span style="color: #CC9393;">"-EG/D"</span>: <span style="color: #CC9393;">"egged"</span>,
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org3187d6e" class="outline-3">
+<h3 id="org3187d6e"><span class="section-number-3">3.2</span> Alt</h3>
+<div class="outline-text-3" id="text-3-2">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">L Pattern</th>
+<th scope="col" class="org-left">Left hand</th>
+<th scope="col" class="org-left">Modifier</th>
+<th scope="col" class="org-left">Right Hand</th>
+<th scope="col" class="org-left">R Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">⠲</td>
+<td class="org-left"><code>TPW</code></td>
+<td class="org-left">Alt</td>
+<td class="org-left"><code>-PBL</code></td>
+<td class="org-left">⠖</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The right-hand Alt form, <code>-PBL</code>, looks like a "T".
+</p>
+
+<p>
+Several default bindings will need new definitions.  This is most
+easily done using <code>*</code>.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">old binding</th>
+<th scope="col" class="org-left">new binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"Alan"</td>
+<td class="org-left">A-PBL</td>
+<td class="org-left">A*PBL</td>
+</tr>
+
+<tr>
+<td class="org-left">"{<sup>ential</sup>}"</td>
+<td class="org-left">EPBL</td>
+<td class="org-left">*EPBL</td>
+</tr>
+
+<tr>
+<td class="org-left">"conditional"</td>
+<td class="org-left">K-PBL</td>
+<td class="org-left">K*PBL</td>
+</tr>
+
+<tr>
+<td class="org-left">"reasonable"</td>
+<td class="org-left">R-PBL</td>
+<td class="org-left">R*PBL</td>
+</tr>
+
+<tr>
+<td class="org-left">"seasonal"</td>
+<td class="org-left">S-PBL</td>
+<td class="org-left">S*PBL</td>
+</tr>
+
+<tr>
+<td class="org-left">"continual"</td>
+<td class="org-left">T-PBL</td>
+<td class="org-left">T*PBL</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L()}"</span>,
+<span style="color: #CC9393;">"A-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(a)}"</span>,
+<span style="color: #CC9393;">"A*PBL"</span>: <span style="color: #CC9393;">"Alan"</span>,
+<span style="color: #CC9393;">"EPBL"</span>: <span style="color: #CC9393;">"{#Alt_L(e)}"</span>,
+<span style="color: #CC9393;">"*EPBL"</span>: <span style="color: #CC9393;">"{^ential}"</span>,
+<span style="color: #CC9393;">"K-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(k)}"</span>,
+<span style="color: #CC9393;">"K*PBL"</span>: <span style="color: #CC9393;">"conditional"</span>,
+<span style="color: #CC9393;">"R-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(r)}"</span>,
+<span style="color: #CC9393;">"R*PBL"</span>: <span style="color: #CC9393;">"reasonable"</span>,
+<span style="color: #CC9393;">"S-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(s)}"</span>,
+<span style="color: #CC9393;">"S*PBL"</span>: <span style="color: #CC9393;">"seasonal"</span>,
+<span style="color: #CC9393;">"T-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(t)}"</span>,
+<span style="color: #CC9393;">"T*PBL"</span>: <span style="color: #CC9393;">"continual"</span>,
+</pre>
+</div>
+<p>
+Other bindings have alternate single-stroke forms and are overwritten.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">old form</th>
+<th scope="col" class="org-left">alternate form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"financial"</td>
+<td class="org-left">F-PBL</td>
+<td class="org-left">TP-PBGS</td>
+</tr>
+
+<tr>
+<td class="org-left">"only"</td>
+<td class="org-left">O-PBL</td>
+<td class="org-left">OE-PBL</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The remaining bindings present no conflict.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"PW-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(b)}"</span>,
+<span style="color: #CC9393;">"KR-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(c)}"</span>,
+<span style="color: #CC9393;">"TK-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(d)}"</span>,
+<span style="color: #CC9393;">"TP-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(f)}"</span>,
+<span style="color: #CC9393;">"TKPW-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(g)}"</span>,
+<span style="color: #CC9393;">"H-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(h)}"</span>,
+<span style="color: #CC9393;">"EUPBL"</span>: <span style="color: #CC9393;">"{#Alt_L(i)}"</span>,
+<span style="color: #CC9393;">"SKWR-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(j)}"</span>,
+<span style="color: #CC9393;">"HR-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(l)}"</span>,
+<span style="color: #CC9393;">"PH-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(m)}"</span>,
+<span style="color: #CC9393;">"TPH-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(n)}"</span>,
+<span style="color: #CC9393;">"O-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(o)}"</span>,
+<span style="color: #CC9393;">"P-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(p)}"</span>,
+<span style="color: #CC9393;">"KW-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(q)}"</span>,
+<span style="color: #CC9393;">"UPBL"</span>: <span style="color: #CC9393;">"{#Alt_L(u)}"</span>,
+<span style="color: #CC9393;">"SR-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(v)}"</span>,
+<span style="color: #CC9393;">"W-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(w)}"</span>,
+<span style="color: #CC9393;">"KP-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(x)}"</span>,
+<span style="color: #CC9393;">"KWR-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(y)}"</span>,
+<span style="color: #CC9393;">"STKPW-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(z)}"</span>,
+</pre>
+</div>
+
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp" id="orgfe19aba"><span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">still under development</span>
 <span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">scratch/lisp.el</span>
 
 (<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">ctl</span> (x)
@@ -950,7 +1272,7 @@ We can auto generate all these combinations using Emacs Lisp.
 </pre>
 </div>
 
-<pre class="example" id="org2e445db">
+<pre class="example" id="orgcd6e488">
 "\"A\": \"{#Super(a)}\",
 \"PW\": \"{#Super(b)}\",
 \"KR\": \"{#Super(c)}\",
@@ -1363,9 +1685,10 @@ binding:
 </div>
 </div>
 </div>
+</div>
 
-<div id="outline-container-orga54a498" class="outline-2">
-<h2 id="orga54a498"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div id="outline-container-orgc2ac937" class="outline-2">
+<h2 id="orgc2ac937"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -1397,8 +1720,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-orgbd0bd2b" class="outline-2">
-<h2 id="orgbd0bd2b"><span class="section-number-2">5</span> Function keys</h2>
+<div id="outline-container-org1a93b60" class="outline-2">
+<h2 id="org1a93b60"><span class="section-number-2">5</span> Function keys</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  This means it
@@ -1423,12 +1746,12 @@ can be used to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-org6438833" class="outline-2">
-<h2 id="org6438833"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-orge8d9ac3" class="outline-2">
+<h2 id="orge8d9ac3"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgc2a56d1" class="outline-3">
-<h3 id="orgc2a56d1"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
+<div id="outline-container-org8bb7dc4" class="outline-3">
+<h3 id="org8bb7dc4"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From Ted Morin: <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a>
@@ -1527,8 +1850,8 @@ Mac, I just use *F or *6 if I accidentally hit the number bar.
 </div>
 </div>
 
-<div id="outline-container-orgf74ddfc" class="outline-3">
-<h3 id="orgf74ddfc"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
+<div id="outline-container-orgbcda55f" class="outline-3">
+<h3 id="orgbcda55f"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
@@ -1666,8 +1989,8 @@ From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries
 </div>
 </div>
 
-<div id="outline-container-org2b5f5b3" class="outline-3">
-<h3 id="org2b5f5b3"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
+<div id="outline-container-org71cdbbf" class="outline-3">
+<h3 id="org71cdbbf"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
@@ -2534,10 +2857,19 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 </div>
-
-<div id="outline-container-org58b01f2" class="outline-3">
-<h3 id="org58b01f2"><span class="section-number-3">6.4</span> Leftovers</h3>
+<div id="outline-container-org5664efe" class="outline-3">
+<h3 id="org5664efe"><span class="section-number-3">6.4</span> Resources</h3>
 <div class="outline-text-3" id="text-6-4">
+<ul class="org-ul">
+<li><a href="https://plover.goeswhere.com/">https://plover.goeswhere.com/</a></li>
+<li><a href="https://stenoknight.com/plover/ploverlookup/">https://stenoknight.com/plover/ploverlookup/</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd885865" class="outline-3">
+<h3 id="orgd885865"><span class="section-number-3">6.5</span> Leftovers</h3>
+<div class="outline-text-3" id="text-6-5">
 <p>
 Mark Kislingbury <a href="http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf">advises</a> to put small words on the left.  Steno order
 means that we can then use the rest of the board to represent phrases
@@ -2579,8 +2911,8 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-orgb5dd7e1" class="outline-2">
-<h2 id="orgb5dd7e1"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-orge657487" class="outline-2">
+<h2 id="orge657487"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -2604,12 +2936,16 @@ existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 </p></div></div>
 
+<div class="footdef"><sup><a id="fn.4" class="footnum" href="#fnr.4">4</a></sup> <div class="footpara"><p class="footpara">
+See <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a>.
+</p></div></div>
+
 
 </div>
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: unknown</p>
-<p class="date">Created: 2021-03-12 Fri 23:51</p>
+<p class="date">Created: 2021-04-05 Mon 22:17</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
