@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-04-05 Mon 22:17 -->
+<!-- 2021-04-06 Tue 19:45 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -224,33 +224,35 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org2eb2dc0">1. Opening bracket</a></li>
-<li><a href="#orgd248977">2. Dictionary design principles</a>
+<li><a href="#org4d3b9cd">1. Opening bracket</a></li>
+<li><a href="#orgdbefd5f">2. Dictionary design principles</a>
 <ul>
-<li><a href="#org693cf46">2.1. Sequence chains</a></li>
-<li><a href="#org7dba3d5">2.2. Patterns</a></li>
-<li><a href="#orgaedb63e">2.3. Mode prefix</a></li>
-<li><a href="#org4ceaa27">2.4. Right hand rule</a></li>
+<li><a href="#org7a9d7f6">2.1. Sequence chains</a></li>
+<li><a href="#orgeffc999">2.2. Patterns</a></li>
+<li><a href="#org453cd36">2.3. Mode prefix</a></li>
+<li><a href="#org4734af5">2.4. Right hand rule</a></li>
 </ul>
 </li>
-<li><a href="#org931376e">3. Emacs: Escape, Meta, Alt, Control, Shift</a>
+<li><a href="#org1dcb0d1">3. Emacs: Escape, Meta, Alt, Control, Shift</a>
 <ul>
-<li><a href="#orgff37da8">3.1. Control</a></li>
-<li><a href="#org3187d6e">3.2. Alt</a></li>
+<li><a href="#org5eea3d7">3.1. Control </a></li>
+<li><a href="#org96d8922">3.2. Alt</a></li>
+<li><a href="#org98484bc">3.3. Control + Alt</a></li>
+<li><a href="#org6a0dad3">3.4. Escape</a></li>
 </ul>
 </li>
-<li><a href="#orgc2ac937">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
-<li><a href="#org1a93b60">5. Function keys</a></li>
-<li><a href="#orge8d9ac3">6. Notes</a>
+<li><a href="#org4aa17c5">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
+<li><a href="#org78ce0a4">5. Function keys</a></li>
+<li><a href="#org75798a2">6. Notes</a>
 <ul>
-<li><a href="#org8bb7dc4">6.1. Cross Platform Movement</a></li>
-<li><a href="#orgbcda55f">6.2. Modifiers Single Stroke</a></li>
-<li><a href="#org71cdbbf">6.3. Nimble single strokes</a></li>
-<li><a href="#org5664efe">6.4. Resources</a></li>
-<li><a href="#orgd885865">6.5. Leftovers</a></li>
+<li><a href="#org9efd6e8">6.1. Cross Platform Movement</a></li>
+<li><a href="#orgecd8cdf">6.2. Modifiers Single Stroke</a></li>
+<li><a href="#orgc8bd0c0">6.3. Nimble single strokes</a></li>
+<li><a href="#org4ab7531">6.4. Resources</a></li>
+<li><a href="#org7f86630">6.5. Leftovers</a></li>
 </ul>
 </li>
-<li><a href="#orge657487">7. Closing bracket</a></li>
+<li><a href="#org9d38b66">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -268,8 +270,8 @@ active development!  To be notified of changes, <a href="https://webapps.stackex
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-org2eb2dc0" class="outline-2">
-<h2 id="org2eb2dc0"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org4d3b9cd" class="outline-2">
+<h2 id="org4d3b9cd"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="http://www.openstenoproject.org/plover/">Plover</a> is a libre software engine for stenography.  It provides a
@@ -291,7 +293,7 @@ countless features and add-ons<sup><a id="fnr.1" class="footref" href="#fn.1">1<
 </p>
 
 
-<div id="org3355e18" class="figure">
+<div id="orgc00e6e0" class="figure">
 <p><img src="./emacs.png" alt="emacs.png" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Screen shot of the Emacs text editor.</p>
@@ -320,12 +322,12 @@ get started with Emacs, check out the <a href="https://www.gnu.org/software/emac
 </div>
 </div>
 
-<div id="outline-container-orgd248977" class="outline-2">
-<h2 id="orgd248977"><span class="section-number-2">2</span> Dictionary design principles</h2>
+<div id="outline-container-orgdbefd5f" class="outline-2">
+<h2 id="orgdbefd5f"><span class="section-number-2">2</span> Dictionary design principles</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org693cf46" class="outline-3">
-<h3 id="org693cf46"><span class="section-number-3">2.1</span> Sequence chains</h3>
+<div id="outline-container-org7a9d7f6" class="outline-3">
+<h3 id="org7a9d7f6"><span class="section-number-3">2.1</span> Sequence chains</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Many Emacs commands are called through sequences.  Typically, a Plover
@@ -338,7 +340,7 @@ Plover by separating elements with a space.
 For example, in Emacs <code>C-x 8 m</code> writes <code>µ</code>.  Send the sequence <code>C-x 8
 m</code> using Plover with:
 </p>
-<pre class="example" id="orgec7d279">
+<pre class="example" id="org2a454de">
 {#Control_L(x) 8 m}
 </pre>
 
@@ -347,7 +349,7 @@ Some Emacs sequences require capital letters.  Use <code>Shift()</code> to do
 this.  For example, <code>C-x 8 R</code> writes <code>®</code> in Emacs.  To have Plover
 send this, use:
 </p>
-<pre class="example" id="org167f12d">
+<pre class="example" id="org89b2fcc">
 {#Control_L(x) 8 Shift(r)}
 </pre>
 
@@ -356,14 +358,14 @@ Sequence chains can also happen within a modifier definition.  To
 export an Org document to HTML, the command <code>C-c C-e h h</code> is used.
 This would be handled in Plover with:
 </p>
-<pre class="example" id="orgc7e4a9f">
+<pre class="example" id="org6e22585">
 {#Control_L(c e) h h}
 </pre>
 </div>
 </div>
 
-<div id="outline-container-org7dba3d5" class="outline-3">
-<h3 id="org7dba3d5"><span class="section-number-3">2.2</span> Patterns</h3>
+<div id="outline-container-orgeffc999" class="outline-3">
+<h3 id="orgeffc999"><span class="section-number-3">2.2</span> Patterns</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Mirabai Knight, founder of the Open Steno Project, points out in her
@@ -386,8 +388,8 @@ up and down arrows.
 </div>
 </div>
 
-<div id="outline-container-orgaedb63e" class="outline-3">
-<h3 id="orgaedb63e"><span class="section-number-3">2.3</span> Mode prefix</h3>
+<div id="outline-container-org453cd36" class="outline-3">
+<h3 id="org453cd36"><span class="section-number-3">2.3</span> Mode prefix</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 A pseudo "mode" can be defined by prefixing all related commands with
@@ -412,8 +414,8 @@ the command <code>STPH-R</code> means "move left".
 </div>
 </div>
 
-<div id="outline-container-org4ceaa27" class="outline-3">
-<h3 id="org4ceaa27"><span class="section-number-3">2.4</span> Right hand rule</h3>
+<div id="outline-container-org4734af5" class="outline-3">
+<h3 id="org4734af5"><span class="section-number-3">2.4</span> Right hand rule</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 It's possible to write nearly the entire alphabet left handed.  All
@@ -627,8 +629,8 @@ alphabet.
 </div>
 </div>
 
-<div id="outline-container-org931376e" class="outline-2">
-<h2 id="org931376e"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-org1dcb0d1" class="outline-2">
+<h2 id="org1dcb0d1"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Emacs makes extensive use of modifier keys.  It's for this reason that
@@ -839,8 +841,8 @@ others may find the pattern useful).
 </table>
 </div>
 
-<div id="outline-container-orgff37da8" class="outline-3">
-<h3 id="orgff37da8"><span class="section-number-3">3.1</span> Control</h3>
+<div id="outline-container-org5eea3d7" class="outline-3">
+<h3 id="org5eea3d7"><span class="section-number-3">3.1</span> Control <a id="orgca0a4b6"></a></h3>
 <div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -969,8 +971,8 @@ Control+Alt. Instead, <code>E-GD</code> is used for "edge", supplanting
 </div>
 </div>
 
-<div id="outline-container-org3187d6e" class="outline-3">
-<h3 id="org3187d6e"><span class="section-number-3">3.2</span> Alt</h3>
+<div id="outline-container-org96d8922" class="outline-3">
+<h3 id="org96d8922"><span class="section-number-3">3.2</span> Alt</h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1072,8 +1074,7 @@ easily done using <code>*</code>.
 </table>
 
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L()}"</span>,
-<span style="color: #CC9393;">"A-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(a)}"</span>,
+<pre class="src src-js"><span style="color: #CC9393;">"A-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(a)}"</span>,
 <span style="color: #CC9393;">"A*PBL"</span>: <span style="color: #CC9393;">"Alan"</span>,
 <span style="color: #CC9393;">"EPBL"</span>: <span style="color: #CC9393;">"{#Alt_L(e)}"</span>,
 <span style="color: #CC9393;">"*EPBL"</span>: <span style="color: #CC9393;">"{^ential}"</span>,
@@ -1087,6 +1088,7 @@ easily done using <code>*</code>.
 <span style="color: #CC9393;">"T*PBL"</span>: <span style="color: #CC9393;">"continual"</span>,
 </pre>
 </div>
+
 <p>
 Other bindings have alternate single-stroke forms and are overwritten.
 </p>
@@ -1150,523 +1152,235 @@ The remaining bindings present no conflict.
 <span style="color: #CC9393;">"STKPW-PBL"</span>: <span style="color: #CC9393;">"{#Alt_L(z)}"</span>,
 </pre>
 </div>
+</div>
+</div>
 
+<div id="outline-container-org98484bc" class="outline-3">
+<h3 id="org98484bc"><span class="section-number-3">3.3</span> Control + Alt</h3>
+<div class="outline-text-3" id="text-3-3">
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">L Pattern</th>
+<th scope="col" class="org-left">Left hand</th>
+<th scope="col" class="org-left">Modifier</th>
+<th scope="col" class="org-left">Right Hand</th>
+<th scope="col" class="org-left">R Pattern</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">⠴</td>
+<td class="org-left"><code>KPW</code></td>
+<td class="org-left">Control</td>
+<td class="org-left"><code>-PBG</code></td>
+<td class="org-left">⠦</td>
+</tr>
+
+<tr>
+<td class="org-left">⠲</td>
+<td class="org-left"><code>TPW</code></td>
+<td class="org-left">Alt</td>
+<td class="org-left"><code>-PBL</code></td>
+<td class="org-left">⠖</td>
+</tr>
+
+<tr>
+<td class="org-left">⠶_</td>
+<td class="org-left"><code>TKPW</code></td>
+<td class="org-left">Control + Alt</td>
+<td class="org-left"><code>-PBLG</code></td>
+<td class="org-left">_⠶</td>
+</tr>
+</tbody>
+</table>
+
+<p>
+The Control + Alt form is a combination of the Control and Alt forms.
+</p>
+
+<p>
+The right hand form <code>-PBLG</code> is the "j" sound within Plover theory.
+This causes a clash with several default words.  The solution is to
+rebind them to a <code>*</code> form.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">old binding</th>
+<th scope="col" class="org-left">new binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"{\<sup>age</sup>}"</td>
+<td class="org-left">A-PBLG</td>
+<td class="org-left">A*EUPBLG</td>
+</tr>
+
+<tr>
+<td class="org-left">"bandage"</td>
+<td class="org-left">PW-PBLG</td>
+<td class="org-left">PW*PBLG</td>
+</tr>
+
+<tr>
+<td class="org-left">"CJ"</td>
+<td class="org-left">KR-PBLG</td>
+<td class="org-left">KR*PBLG</td>
+</tr>
+
+<tr>
+<td class="org-left">"edge"</td>
+<td class="org-left">EPBLG</td>
+<td class="org-left">See <a href="#orgca0a4b6">Control</a></td>
+</tr>
+
+<tr>
+<td class="org-left">"image"</td>
+<td class="org-left">EUPBLG</td>
+<td class="org-left">*EUPBLG</td>
+</tr>
+
+<tr>
+<td class="org-left">"emergency"</td>
+<td class="org-left">PH-PBLG</td>
+<td class="org-left">PH*PBLG</td>
+</tr>
+
+<tr>
+<td class="org-left">"engine"</td>
+<td class="org-left">TPH-PBLG</td>
+<td class="org-left">TPH*PBLG</td>
+</tr>
+</tbody>
+</table>
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp" id="orgfe19aba"><span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">still under development</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">scratch/lisp.el</span>
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">ctl</span> (x)
-  (format <span style="color: #CC9393;">"Control(%s)"</span> x))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">alt</span> (x)
-  (format <span style="color: #CC9393;">"Alt(%s)"</span> x))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">shf</span> (x)
-  (format <span style="color: #CC9393;">"Shift(%s)"</span> x))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">sup</span> (x)
-  (format <span style="color: #CC9393;">"Super(%s)"</span> x))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">cmd</span> (x)
-  (format <span style="color: #CC9393;">"{#%s}"</span> x))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defvar</span> <span style="color: #DFAF8F;">steno-order</span> <span style="color: #CC9393;">"STKPWHRAO*EUFRPBLGTSDZ"</span>)
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">steno&lt;</span> (a b)
-  (&lt; (search a steno-order) (search b steno-order)))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">steno-sort</span> (x)
-  (apply #'concat
-         (sort (split-string x <span style="color: #CC9393;">""</span> t) 'steno&lt;)))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">right-hand-p</span> (x)
-  (<span style="color: #F0DFAF; font-weight: bold;">let*</span> ((right-keys '(<span style="color: #CC9393;">"E"</span> <span style="color: #CC9393;">"U"</span> <span style="color: #CC9393;">"F"</span> <span style="color: #CC9393;">"R"</span> <span style="color: #CC9393;">"P"</span> <span style="color: #CC9393;">"B"</span> <span style="color: #CC9393;">"L"</span> <span style="color: #CC9393;">"G"</span> <span style="color: #CC9393;">"T"</span> <span style="color: #CC9393;">"S"</span> <span style="color: #CC9393;">"D"</span> <span style="color: #CC9393;">"Z"</span>))
-        (x (<span style="color: #F0DFAF; font-weight: bold;">if</span> (string-equal (substring x 0 1) <span style="color: #CC9393;">"-"</span>)
-               (substring x 1)
-             x))
-        (split (split-string x <span style="color: #CC9393;">""</span> t)))
-    (subsetp split right-keys <span style="color: #DCDCCC; font-weight: bold;">:test</span> #'string-equal)))
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">left-hand-p</span> (x)
-  (<span style="color: #F0DFAF; font-weight: bold;">let*</span> ((left-keys '(<span style="color: #CC9393;">"S"</span> <span style="color: #CC9393;">"T"</span> <span style="color: #CC9393;">"K"</span> <span style="color: #CC9393;">"P"</span> <span style="color: #CC9393;">"W"</span> <span style="color: #CC9393;">"H"</span> <span style="color: #CC9393;">"R"</span> <span style="color: #CC9393;">"A"</span> <span style="color: #CC9393;">"O"</span> ))
-        (x (<span style="color: #F0DFAF; font-weight: bold;">if</span> (string-equal (substring x 0 1) <span style="color: #CC9393;">"-"</span>)
-               (substring x 1)
-             x))
-        (split (split-string x <span style="color: #CC9393;">""</span> t)))
-    (subsetp split left-keys <span style="color: #DCDCCC; font-weight: bold;">:test</span> #'string-equal)))
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">;; todo</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">;; generalize this for RHS/LHS "pseudo modes"; will need modifer alist?</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(defun json (s c)</span>
-<span style="color: #5F7F5F;">;;   </span><span style="color: #7F9F7F;">(let (</span>
-<span style="color: #5F7F5F;">;;         </span><span style="color: #7F9F7F;">(stroke (if (left-hand-p s)</span>
-<span style="color: #5F7F5F;">;;                     </span><span style="color: #7F9F7F;">(concat "" s)</span>
-<span style="color: #5F7F5F;">;;                     </span><span style="color: #7F9F7F;">)</span>
-<span style="color: #5F7F5F;">;;   </span><span style="color: #7F9F7F;">(format "\"%s\": \"%s\"," s c))</span>
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">json</span> (s c)
-  (format <span style="color: #CC9393;">"\"%s\": \"%s\","</span> s c))
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">https://www.public.asu.edu/~huanliu/AI04S/Lisp_Assignment_Solutions.html</span>
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">powerset</span>(lst)
-  (<span style="color: #F0DFAF; font-weight: bold;">if</span> (null lst)
-    '(nil)
-    (<span style="color: #F0DFAF; font-weight: bold;">let</span> ((ps (powerset (cdr lst))))
-      (append ps (mapcar #'(lambda (x) (cons (car lst) x)) ps)))))
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(cdr (powerset '(1 2 3 4)))</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(nil (4) (3) (3 4) (2) (2 4) (2 3) (2 3 4) (1) (1 4) (1 3) (1 3 4) ...)</span>
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">ANSI Common Lisp p.110</span>
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">compose</span> (fns)
-  (<span style="color: #F0DFAF; font-weight: bold;">destructuring-bind</span> (fn1 . cdr) (reverse fns)
-    #'(lambda (<span style="color: #7CB8BB;">&amp;rest</span> args)
-        (reduce #'(lambda (v f) (funcall f v))
-                cdr
-                <span style="color: #DCDCCC; font-weight: bold;">:initial-value</span> (apply fn1 args)))))
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(mapcar (compose '(list round sqrt))</span>
-<span style="color: #5F7F5F;">;;         </span><span style="color: #7F9F7F;">'(4 9 16 25))</span>
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(mapcar (compose '(sqrt))</span>
-<span style="color: #5F7F5F;">;;         </span><span style="color: #7F9F7F;">'(4 9 16 25))</span>
-
-(<span style="color: #F0DFAF; font-weight: bold;">defun</span> <span style="color: #93E0E3;">apply-functions</span> (fns lst)
-  (mapcan #'(lambda (x) (mapcar x lst)) fns))
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">(defun apply-functions (fns lst)</span>
-<span style="color: #5F7F5F;">;;   </span><span style="color: #7F9F7F;">(mapcan</span>
-<span style="color: #5F7F5F;">;;    </span><span style="color: #7F9F7F;">#'(lambda (x)</span>
-<span style="color: #5F7F5F;">;;        </span><span style="color: #7F9F7F;">(mapcar (compose (list #'cmd x)) lst))</span>
-<span style="color: #5F7F5F;">;;           </span><span style="color: #7F9F7F;">fns))</span>
-
-(<span style="color: #F0DFAF; font-weight: bold;">let*</span> ((alphabet-alist
-       '((<span style="color: #CC9393;">"a"</span> . <span style="color: #CC9393;">"A"</span>) (<span style="color: #CC9393;">"b"</span> . <span style="color: #CC9393;">"PW"</span>) (<span style="color: #CC9393;">"c"</span> . <span style="color: #CC9393;">"KR"</span>) (<span style="color: #CC9393;">"d"</span> . <span style="color: #CC9393;">"TK"</span>) (<span style="color: #CC9393;">"e"</span> . <span style="color: #CC9393;">"-E"</span>)
-         (<span style="color: #CC9393;">"f"</span> . <span style="color: #CC9393;">"TP"</span>) (<span style="color: #CC9393;">"g"</span> . <span style="color: #CC9393;">"TKPW"</span>) (<span style="color: #CC9393;">"h"</span> . <span style="color: #CC9393;">"H"</span>) (<span style="color: #CC9393;">"i"</span> . <span style="color: #CC9393;">"-EU"</span>) (<span style="color: #CC9393;">"j"</span> . <span style="color: #CC9393;">"SKWR"</span>)
-         (<span style="color: #CC9393;">"k"</span> . <span style="color: #CC9393;">"K"</span>) (<span style="color: #CC9393;">"l"</span> . <span style="color: #CC9393;">"HR"</span>) (<span style="color: #CC9393;">"m"</span> . <span style="color: #CC9393;">"PH"</span>) (<span style="color: #CC9393;">"n"</span> . <span style="color: #CC9393;">"TPH"</span>) (<span style="color: #CC9393;">"o"</span> . <span style="color: #CC9393;">"O"</span>)
-         (<span style="color: #CC9393;">"p"</span> . <span style="color: #CC9393;">"P"</span>) (<span style="color: #CC9393;">"q"</span> . <span style="color: #CC9393;">"KW"</span>) (<span style="color: #CC9393;">"r"</span> . <span style="color: #CC9393;">"R"</span>) (<span style="color: #CC9393;">"s"</span> . <span style="color: #CC9393;">"S"</span>) (<span style="color: #CC9393;">"t"</span> . <span style="color: #CC9393;">"T"</span>)
-         (<span style="color: #CC9393;">"u"</span> . <span style="color: #CC9393;">"-U"</span>) (<span style="color: #CC9393;">"v"</span> . <span style="color: #CC9393;">"SR"</span>) (<span style="color: #CC9393;">"w"</span> . <span style="color: #CC9393;">"W"</span>) (<span style="color: #CC9393;">"x"</span> . <span style="color: #CC9393;">"KP"</span>) (<span style="color: #CC9393;">"y"</span> . <span style="color: #CC9393;">"KWR"</span>)
-         (<span style="color: #CC9393;">"z"</span> . <span style="color: #CC9393;">"STKPW"</span>)))
-       (alphabet (mapcar 'car alphabet-alist))
-       (strokes (mapcar 'cdr alphabet-alist))
-       (modifiers '(ctl alt shf sup))
-       (powerset-fns (mapcar 'compose (cdr (powerset modifiers))))
-       (cmded-fns (mapcar
-               #'(lambda (x) (compose (list #'cmd x)))
-               powerset-fns))
-       (commands (apply-functions cmded-fns alphabet))
-       (repeats (/ (length commands) (length strokes)))  <span style="color: #5F7F5F;">;</span>
-       (repeated (apply 'append (make-list repeats strokes)))
-       (dictionary (seq-mapn #'json repeated commands)))
-  (<span style="color: #F0DFAF; font-weight: bold;">setq</span> result <span style="color: #CC9393;">""</span>)
-  (<span style="color: #F0DFAF; font-weight: bold;">cl-loop</span> for entry in dictionary do
-           (<span style="color: #F0DFAF; font-weight: bold;">setq</span> result (concat result entry <span style="color: #CC9393;">"\n"</span>)))
-  result)
-
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">There are 2^n elements in a powerset.  Since we drop the empty set,</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">there are 2^4-1=15 powerset functions.  This means for the two</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">lists to be of equal length, we need 15 copies of the alphabet.</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">Since each of powerset function is applied to the whole alphabet,</span>
-<span style="color: #5F7F5F;">;; </span><span style="color: #7F9F7F;">there are 15 * 26 = 390 total commands.</span>
+<pre class="src src-js"><span style="color: #CC9393;">"A-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(a))}"</span>,
+<span style="color: #CC9393;">"A*EUPBLG"</span>: <span style="color: #CC9393;">"{^age}"</span>,
+<span style="color: #CC9393;">"PW-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(b))}"</span>,
+<span style="color: #CC9393;">"PW*PBLG"</span>: <span style="color: #CC9393;">"bandage"</span>,
+<span style="color: #CC9393;">"KR-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(c))}"</span>,
+<span style="color: #CC9393;">"KR*PBLG"</span>: <span style="color: #CC9393;">"CJ"</span>,
+<span style="color: #CC9393;">"EPBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(e))}"</span>,
+<span style="color: #CC9393;">"EU-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(i))}"</span>,
+<span style="color: #CC9393;">"*EUPBLG"</span>: <span style="color: #CC9393;">"image"</span>,
+<span style="color: #CC9393;">"PH-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(m))}"</span>,
+<span style="color: #CC9393;">"PH*PBLG"</span>: <span style="color: #CC9393;">"emergency"</span>,
+<span style="color: #CC9393;">"TPH-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(n))}"</span>,
+<span style="color: #CC9393;">"TPH*PBLG"</span>: <span style="color: #CC9393;">"engine"</span>,
 </pre>
 </div>
 
-<pre class="example" id="orgcd6e488">
-"\"A\": \"{#Super(a)}\",
-\"PW\": \"{#Super(b)}\",
-\"KR\": \"{#Super(c)}\",
-\"TK\": \"{#Super(d)}\",
-\"-E\": \"{#Super(e)}\",
-\"TP\": \"{#Super(f)}\",
-\"TKPW\": \"{#Super(g)}\",
-\"H\": \"{#Super(h)}\",
-\"-EU\": \"{#Super(i)}\",
-\"SKWR\": \"{#Super(j)}\",
-\"K\": \"{#Super(k)}\",
-\"HR\": \"{#Super(l)}\",
-\"PH\": \"{#Super(m)}\",
-\"TPH\": \"{#Super(n)}\",
-\"O\": \"{#Super(o)}\",
-\"P\": \"{#Super(p)}\",
-\"KW\": \"{#Super(q)}\",
-\"R\": \"{#Super(r)}\",
-\"S\": \"{#Super(s)}\",
-\"T\": \"{#Super(t)}\",
-\"-U\": \"{#Super(u)}\",
-\"SR\": \"{#Super(v)}\",
-\"W\": \"{#Super(w)}\",
-\"KP\": \"{#Super(x)}\",
-\"KWR\": \"{#Super(y)}\",
-\"STKPW\": \"{#Super(z)}\",
-\"A\": \"{#Shift(a)}\",
-\"PW\": \"{#Shift(b)}\",
-\"KR\": \"{#Shift(c)}\",
-\"TK\": \"{#Shift(d)}\",
-\"-E\": \"{#Shift(e)}\",
-\"TP\": \"{#Shift(f)}\",
-\"TKPW\": \"{#Shift(g)}\",
-\"H\": \"{#Shift(h)}\",
-\"-EU\": \"{#Shift(i)}\",
-\"SKWR\": \"{#Shift(j)}\",
-\"K\": \"{#Shift(k)}\",
-\"HR\": \"{#Shift(l)}\",
-\"PH\": \"{#Shift(m)}\",
-\"TPH\": \"{#Shift(n)}\",
-\"O\": \"{#Shift(o)}\",
-\"P\": \"{#Shift(p)}\",
-\"KW\": \"{#Shift(q)}\",
-\"R\": \"{#Shift(r)}\",
-\"S\": \"{#Shift(s)}\",
-\"T\": \"{#Shift(t)}\",
-\"-U\": \"{#Shift(u)}\",
-\"SR\": \"{#Shift(v)}\",
-\"W\": \"{#Shift(w)}\",
-\"KP\": \"{#Shift(x)}\",
-\"KWR\": \"{#Shift(y)}\",
-\"STKPW\": \"{#Shift(z)}\",
-\"A\": \"{#Shift(Super(a))}\",
-\"PW\": \"{#Shift(Super(b))}\",
-\"KR\": \"{#Shift(Super(c))}\",
-\"TK\": \"{#Shift(Super(d))}\",
-\"-E\": \"{#Shift(Super(e))}\",
-\"TP\": \"{#Shift(Super(f))}\",
-\"TKPW\": \"{#Shift(Super(g))}\",
-\"H\": \"{#Shift(Super(h))}\",
-\"-EU\": \"{#Shift(Super(i))}\",
-\"SKWR\": \"{#Shift(Super(j))}\",
-\"K\": \"{#Shift(Super(k))}\",
-\"HR\": \"{#Shift(Super(l))}\",
-\"PH\": \"{#Shift(Super(m))}\",
-\"TPH\": \"{#Shift(Super(n))}\",
-\"O\": \"{#Shift(Super(o))}\",
-\"P\": \"{#Shift(Super(p))}\",
-\"KW\": \"{#Shift(Super(q))}\",
-\"R\": \"{#Shift(Super(r))}\",
-\"S\": \"{#Shift(Super(s))}\",
-\"T\": \"{#Shift(Super(t))}\",
-\"-U\": \"{#Shift(Super(u))}\",
-\"SR\": \"{#Shift(Super(v))}\",
-\"W\": \"{#Shift(Super(w))}\",
-\"KP\": \"{#Shift(Super(x))}\",
-\"KWR\": \"{#Shift(Super(y))}\",
-\"STKPW\": \"{#Shift(Super(z))}\",
-\"A\": \"{#Alt(a)}\",
-\"PW\": \"{#Alt(b)}\",
-\"KR\": \"{#Alt(c)}\",
-\"TK\": \"{#Alt(d)}\",
-\"-E\": \"{#Alt(e)}\",
-\"TP\": \"{#Alt(f)}\",
-\"TKPW\": \"{#Alt(g)}\",
-\"H\": \"{#Alt(h)}\",
-\"-EU\": \"{#Alt(i)}\",
-\"SKWR\": \"{#Alt(j)}\",
-\"K\": \"{#Alt(k)}\",
-\"HR\": \"{#Alt(l)}\",
-\"PH\": \"{#Alt(m)}\",
-\"TPH\": \"{#Alt(n)}\",
-\"O\": \"{#Alt(o)}\",
-\"P\": \"{#Alt(p)}\",
-\"KW\": \"{#Alt(q)}\",
-\"R\": \"{#Alt(r)}\",
-\"S\": \"{#Alt(s)}\",
-\"T\": \"{#Alt(t)}\",
-\"-U\": \"{#Alt(u)}\",
-\"SR\": \"{#Alt(v)}\",
-\"W\": \"{#Alt(w)}\",
-\"KP\": \"{#Alt(x)}\",
-\"KWR\": \"{#Alt(y)}\",
-\"STKPW\": \"{#Alt(z)}\",
-\"A\": \"{#Alt(Super(a))}\",
-\"PW\": \"{#Alt(Super(b))}\",
-\"KR\": \"{#Alt(Super(c))}\",
-\"TK\": \"{#Alt(Super(d))}\",
-\"-E\": \"{#Alt(Super(e))}\",
-\"TP\": \"{#Alt(Super(f))}\",
-\"TKPW\": \"{#Alt(Super(g))}\",
-\"H\": \"{#Alt(Super(h))}\",
-\"-EU\": \"{#Alt(Super(i))}\",
-\"SKWR\": \"{#Alt(Super(j))}\",
-\"K\": \"{#Alt(Super(k))}\",
-\"HR\": \"{#Alt(Super(l))}\",
-\"PH\": \"{#Alt(Super(m))}\",
-\"TPH\": \"{#Alt(Super(n))}\",
-\"O\": \"{#Alt(Super(o))}\",
-\"P\": \"{#Alt(Super(p))}\",
-\"KW\": \"{#Alt(Super(q))}\",
-\"R\": \"{#Alt(Super(r))}\",
-\"S\": \"{#Alt(Super(s))}\",
-\"T\": \"{#Alt(Super(t))}\",
-\"-U\": \"{#Alt(Super(u))}\",
-\"SR\": \"{#Alt(Super(v))}\",
-\"W\": \"{#Alt(Super(w))}\",
-\"KP\": \"{#Alt(Super(x))}\",
-\"KWR\": \"{#Alt(Super(y))}\",
-\"STKPW\": \"{#Alt(Super(z))}\",
-\"A\": \"{#Alt(Shift(a))}\",
-\"PW\": \"{#Alt(Shift(b))}\",
-\"KR\": \"{#Alt(Shift(c))}\",
-\"TK\": \"{#Alt(Shift(d))}\",
-\"-E\": \"{#Alt(Shift(e))}\",
-\"TP\": \"{#Alt(Shift(f))}\",
-\"TKPW\": \"{#Alt(Shift(g))}\",
-\"H\": \"{#Alt(Shift(h))}\",
-\"-EU\": \"{#Alt(Shift(i))}\",
-\"SKWR\": \"{#Alt(Shift(j))}\",
-\"K\": \"{#Alt(Shift(k))}\",
-\"HR\": \"{#Alt(Shift(l))}\",
-\"PH\": \"{#Alt(Shift(m))}\",
-\"TPH\": \"{#Alt(Shift(n))}\",
-\"O\": \"{#Alt(Shift(o))}\",
-\"P\": \"{#Alt(Shift(p))}\",
-\"KW\": \"{#Alt(Shift(q))}\",
-\"R\": \"{#Alt(Shift(r))}\",
-\"S\": \"{#Alt(Shift(s))}\",
-\"T\": \"{#Alt(Shift(t))}\",
-\"-U\": \"{#Alt(Shift(u))}\",
-\"SR\": \"{#Alt(Shift(v))}\",
-\"W\": \"{#Alt(Shift(w))}\",
-\"KP\": \"{#Alt(Shift(x))}\",
-\"KWR\": \"{#Alt(Shift(y))}\",
-\"STKPW\": \"{#Alt(Shift(z))}\",
-\"A\": \"{#Alt(Shift(Super(a)))}\",
-\"PW\": \"{#Alt(Shift(Super(b)))}\",
-\"KR\": \"{#Alt(Shift(Super(c)))}\",
-\"TK\": \"{#Alt(Shift(Super(d)))}\",
-\"-E\": \"{#Alt(Shift(Super(e)))}\",
-\"TP\": \"{#Alt(Shift(Super(f)))}\",
-\"TKPW\": \"{#Alt(Shift(Super(g)))}\",
-\"H\": \"{#Alt(Shift(Super(h)))}\",
-\"-EU\": \"{#Alt(Shift(Super(i)))}\",
-\"SKWR\": \"{#Alt(Shift(Super(j)))}\",
-\"K\": \"{#Alt(Shift(Super(k)))}\",
-\"HR\": \"{#Alt(Shift(Super(l)))}\",
-\"PH\": \"{#Alt(Shift(Super(m)))}\",
-\"TPH\": \"{#Alt(Shift(Super(n)))}\",
-\"O\": \"{#Alt(Shift(Super(o)))}\",
-\"P\": \"{#Alt(Shift(Super(p)))}\",
-\"KW\": \"{#Alt(Shift(Super(q)))}\",
-\"R\": \"{#Alt(Shift(Super(r)))}\",
-\"S\": \"{#Alt(Shift(Super(s)))}\",
-\"T\": \"{#Alt(Shift(Super(t)))}\",
-\"-U\": \"{#Alt(Shift(Super(u)))}\",
-\"SR\": \"{#Alt(Shift(Super(v)))}\",
-\"W\": \"{#Alt(Shift(Super(w)))}\",
-\"KP\": \"{#Alt(Shift(Super(x)))}\",
-\"KWR\": \"{#Alt(Shift(Super(y)))}\",
-\"STKPW\": \"{#Alt(Shift(Super(z)))}\",
-\"A\": \"{#Control(a)}\",
-\"PW\": \"{#Control(b)}\",
-\"KR\": \"{#Control(c)}\",
-\"TK\": \"{#Control(d)}\",
-\"-E\": \"{#Control(e)}\",
-\"TP\": \"{#Control(f)}\",
-\"TKPW\": \"{#Control(g)}\",
-\"H\": \"{#Control(h)}\",
-\"-EU\": \"{#Control(i)}\",
-\"SKWR\": \"{#Control(j)}\",
-\"K\": \"{#Control(k)}\",
-\"HR\": \"{#Control(l)}\",
-\"PH\": \"{#Control(m)}\",
-\"TPH\": \"{#Control(n)}\",
-\"O\": \"{#Control(o)}\",
-\"P\": \"{#Control(p)}\",
-\"KW\": \"{#Control(q)}\",
-\"R\": \"{#Control(r)}\",
-\"S\": \"{#Control(s)}\",
-\"T\": \"{#Control(t)}\",
-\"-U\": \"{#Control(u)}\",
-\"SR\": \"{#Control(v)}\",
-\"W\": \"{#Control(w)}\",
-\"KP\": \"{#Control(x)}\",
-\"KWR\": \"{#Control(y)}\",
-\"STKPW\": \"{#Control(z)}\",
-\"A\": \"{#Control(Super(a))}\",
-\"PW\": \"{#Control(Super(b))}\",
-\"KR\": \"{#Control(Super(c))}\",
-\"TK\": \"{#Control(Super(d))}\",
-\"-E\": \"{#Control(Super(e))}\",
-\"TP\": \"{#Control(Super(f))}\",
-\"TKPW\": \"{#Control(Super(g))}\",
-\"H\": \"{#Control(Super(h))}\",
-\"-EU\": \"{#Control(Super(i))}\",
-\"SKWR\": \"{#Control(Super(j))}\",
-\"K\": \"{#Control(Super(k))}\",
-\"HR\": \"{#Control(Super(l))}\",
-\"PH\": \"{#Control(Super(m))}\",
-\"TPH\": \"{#Control(Super(n))}\",
-\"O\": \"{#Control(Super(o))}\",
-\"P\": \"{#Control(Super(p))}\",
-\"KW\": \"{#Control(Super(q))}\",
-\"R\": \"{#Control(Super(r))}\",
-\"S\": \"{#Control(Super(s))}\",
-\"T\": \"{#Control(Super(t))}\",
-\"-U\": \"{#Control(Super(u))}\",
-\"SR\": \"{#Control(Super(v))}\",
-\"W\": \"{#Control(Super(w))}\",
-\"KP\": \"{#Control(Super(x))}\",
-\"KWR\": \"{#Control(Super(y))}\",
-\"STKPW\": \"{#Control(Super(z))}\",
-\"A\": \"{#Control(Shift(a))}\",
-\"PW\": \"{#Control(Shift(b))}\",
-\"KR\": \"{#Control(Shift(c))}\",
-\"TK\": \"{#Control(Shift(d))}\",
-\"-E\": \"{#Control(Shift(e))}\",
-\"TP\": \"{#Control(Shift(f))}\",
-\"TKPW\": \"{#Control(Shift(g))}\",
-\"H\": \"{#Control(Shift(h))}\",
-\"-EU\": \"{#Control(Shift(i))}\",
-\"SKWR\": \"{#Control(Shift(j))}\",
-\"K\": \"{#Control(Shift(k))}\",
-\"HR\": \"{#Control(Shift(l))}\",
-\"PH\": \"{#Control(Shift(m))}\",
-\"TPH\": \"{#Control(Shift(n))}\",
-\"O\": \"{#Control(Shift(o))}\",
-\"P\": \"{#Control(Shift(p))}\",
-\"KW\": \"{#Control(Shift(q))}\",
-\"R\": \"{#Control(Shift(r))}\",
-\"S\": \"{#Control(Shift(s))}\",
-\"T\": \"{#Control(Shift(t))}\",
-\"-U\": \"{#Control(Shift(u))}\",
-\"SR\": \"{#Control(Shift(v))}\",
-\"W\": \"{#Control(Shift(w))}\",
-\"KP\": \"{#Control(Shift(x))}\",
-\"KWR\": \"{#Control(Shift(y))}\",
-\"STKPW\": \"{#Control(Shift(z))}\",
-\"A\": \"{#Control(Shift(Super(a)))}\",
-\"PW\": \"{#Control(Shift(Super(b)))}\",
-\"KR\": \"{#Control(Shift(Super(c)))}\",
-\"TK\": \"{#Control(Shift(Super(d)))}\",
-\"-E\": \"{#Control(Shift(Super(e)))}\",
-\"TP\": \"{#Control(Shift(Super(f)))}\",
-\"TKPW\": \"{#Control(Shift(Super(g)))}\",
-\"H\": \"{#Control(Shift(Super(h)))}\",
-\"-EU\": \"{#Control(Shift(Super(i)))}\",
-\"SKWR\": \"{#Control(Shift(Super(j)))}\",
-\"K\": \"{#Control(Shift(Super(k)))}\",
-\"HR\": \"{#Control(Shift(Super(l)))}\",
-\"PH\": \"{#Control(Shift(Super(m)))}\",
-\"TPH\": \"{#Control(Shift(Super(n)))}\",
-\"O\": \"{#Control(Shift(Super(o)))}\",
-\"P\": \"{#Control(Shift(Super(p)))}\",
-\"KW\": \"{#Control(Shift(Super(q)))}\",
-\"R\": \"{#Control(Shift(Super(r)))}\",
-\"S\": \"{#Control(Shift(Super(s)))}\",
-\"T\": \"{#Control(Shift(Super(t)))}\",
-\"-U\": \"{#Control(Shift(Super(u)))}\",
-\"SR\": \"{#Control(Shift(Super(v)))}\",
-\"W\": \"{#Control(Shift(Super(w)))}\",
-\"KP\": \"{#Control(Shift(Super(x)))}\",
-\"KWR\": \"{#Control(Shift(Super(y)))}\",
-\"STKPW\": \"{#Control(Shift(Super(z)))}\",
-\"A\": \"{#Control(Alt(a))}\",
-\"PW\": \"{#Control(Alt(b))}\",
-\"KR\": \"{#Control(Alt(c))}\",
-\"TK\": \"{#Control(Alt(d))}\",
-\"-E\": \"{#Control(Alt(e))}\",
-\"TP\": \"{#Control(Alt(f))}\",
-\"TKPW\": \"{#Control(Alt(g))}\",
-\"H\": \"{#Control(Alt(h))}\",
-\"-EU\": \"{#Control(Alt(i))}\",
-\"SKWR\": \"{#Control(Alt(j))}\",
-\"K\": \"{#Control(Alt(k))}\",
-\"HR\": \"{#Control(Alt(l))}\",
-\"PH\": \"{#Control(Alt(m))}\",
-\"TPH\": \"{#Control(Alt(n))}\",
-\"O\": \"{#Control(Alt(o))}\",
-\"P\": \"{#Control(Alt(p))}\",
-\"KW\": \"{#Control(Alt(q))}\",
-\"R\": \"{#Control(Alt(r))}\",
-\"S\": \"{#Control(Alt(s))}\",
-\"T\": \"{#Control(Alt(t))}\",
-\"-U\": \"{#Control(Alt(u))}\",
-\"SR\": \"{#Control(Alt(v))}\",
-\"W\": \"{#Control(Alt(w))}\",
-\"KP\": \"{#Control(Alt(x))}\",
-\"KWR\": \"{#Control(Alt(y))}\",
-\"STKPW\": \"{#Control(Alt(z))}\",
-\"A\": \"{#Control(Alt(Super(a)))}\",
-\"PW\": \"{#Control(Alt(Super(b)))}\",
-\"KR\": \"{#Control(Alt(Super(c)))}\",
-\"TK\": \"{#Control(Alt(Super(d)))}\",
-\"-E\": \"{#Control(Alt(Super(e)))}\",
-\"TP\": \"{#Control(Alt(Super(f)))}\",
-\"TKPW\": \"{#Control(Alt(Super(g)))}\",
-\"H\": \"{#Control(Alt(Super(h)))}\",
-\"-EU\": \"{#Control(Alt(Super(i)))}\",
-\"SKWR\": \"{#Control(Alt(Super(j)))}\",
-\"K\": \"{#Control(Alt(Super(k)))}\",
-\"HR\": \"{#Control(Alt(Super(l)))}\",
-\"PH\": \"{#Control(Alt(Super(m)))}\",
-\"TPH\": \"{#Control(Alt(Super(n)))}\",
-\"O\": \"{#Control(Alt(Super(o)))}\",
-\"P\": \"{#Control(Alt(Super(p)))}\",
-\"KW\": \"{#Control(Alt(Super(q)))}\",
-\"R\": \"{#Control(Alt(Super(r)))}\",
-\"S\": \"{#Control(Alt(Super(s)))}\",
-\"T\": \"{#Control(Alt(Super(t)))}\",
-\"-U\": \"{#Control(Alt(Super(u)))}\",
-\"SR\": \"{#Control(Alt(Super(v)))}\",
-\"W\": \"{#Control(Alt(Super(w)))}\",
-\"KP\": \"{#Control(Alt(Super(x)))}\",
-\"KWR\": \"{#Control(Alt(Super(y)))}\",
-\"STKPW\": \"{#Control(Alt(Super(z)))}\",
-\"A\": \"{#Control(Alt(Shift(a)))}\",
-\"PW\": \"{#Control(Alt(Shift(b)))}\",
-\"KR\": \"{#Control(Alt(Shift(c)))}\",
-\"TK\": \"{#Control(Alt(Shift(d)))}\",
-\"-E\": \"{#Control(Alt(Shift(e)))}\",
-\"TP\": \"{#Control(Alt(Shift(f)))}\",
-\"TKPW\": \"{#Control(Alt(Shift(g)))}\",
-\"H\": \"{#Control(Alt(Shift(h)))}\",
-\"-EU\": \"{#Control(Alt(Shift(i)))}\",
-\"SKWR\": \"{#Control(Alt(Shift(j)))}\",
-\"K\": \"{#Control(Alt(Shift(k)))}\",
-\"HR\": \"{#Control(Alt(Shift(l)))}\",
-\"PH\": \"{#Control(Alt(Shift(m)))}\",
-\"TPH\": \"{#Control(Alt(Shift(n)))}\",
-\"O\": \"{#Control(Alt(Shift(o)))}\",
-\"P\": \"{#Control(Alt(Shift(p)))}\",
-\"KW\": \"{#Control(Alt(Shift(q)))}\",
-\"R\": \"{#Control(Alt(Shift(r)))}\",
-\"S\": \"{#Control(Alt(Shift(s)))}\",
-\"T\": \"{#Control(Alt(Shift(t)))}\",
-\"-U\": \"{#Control(Alt(Shift(u)))}\",
-\"SR\": \"{#Control(Alt(Shift(v)))}\",
-\"W\": \"{#Control(Alt(Shift(w)))}\",
-\"KP\": \"{#Control(Alt(Shift(x)))}\",
-\"KWR\": \"{#Control(Alt(Shift(y)))}\",
-\"STKPW\": \"{#Control(Alt(Shift(z)))}\",
-\"A\": \"{#Control(Alt(Shift(Super(a))))}\",
-\"PW\": \"{#Control(Alt(Shift(Super(b))))}\",
-\"KR\": \"{#Control(Alt(Shift(Super(c))))}\",
-\"TK\": \"{#Control(Alt(Shift(Super(d))))}\",
-\"-E\": \"{#Control(Alt(Shift(Super(e))))}\",
-\"TP\": \"{#Control(Alt(Shift(Super(f))))}\",
-\"TKPW\": \"{#Control(Alt(Shift(Super(g))))}\",
-\"H\": \"{#Control(Alt(Shift(Super(h))))}\",
-\"-EU\": \"{#Control(Alt(Shift(Super(i))))}\",
-\"SKWR\": \"{#Control(Alt(Shift(Super(j))))}\",
-\"K\": \"{#Control(Alt(Shift(Super(k))))}\",
-\"HR\": \"{#Control(Alt(Shift(Super(l))))}\",
-\"PH\": \"{#Control(Alt(Shift(Super(m))))}\",
-\"TPH\": \"{#Control(Alt(Shift(Super(n))))}\",
-\"O\": \"{#Control(Alt(Shift(Super(o))))}\",
-\"P\": \"{#Control(Alt(Shift(Super(p))))}\",
-\"KW\": \"{#Control(Alt(Shift(Super(q))))}\",
-\"R\": \"{#Control(Alt(Shift(Super(r))))}\",
-\"S\": \"{#Control(Alt(Shift(Super(s))))}\",
-\"T\": \"{#Control(Alt(Shift(Super(t))))}\",
-\"-U\": \"{#Control(Alt(Shift(Super(u))))}\",
-\"SR\": \"{#Control(Alt(Shift(Super(v))))}\",
-\"W\": \"{#Control(Alt(Shift(Super(w))))}\",
-\"KP\": \"{#Control(Alt(Shift(Super(x))))}\",
-\"KWR\": \"{#Control(Alt(Shift(Super(y))))}\",
-\"STKPW\": \"{#Control(Alt(Shift(Super(z))))}\",
-"
+<p>
+A number of silly words are defined in the default dictionary by
+happenstance. These can be safely overwritten. All others were
+undefined.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">stroke</th>
+<th scope="col" class="org-left">silly default</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">A*EUPBLG</td>
+<td class="org-left">anal{\<sup>ing</sup>}</td>
+</tr>
+
+<tr>
+<td class="org-left">F-PBLG</td>
+<td class="org-left">"financialing"</td>
+</tr>
+
+<tr>
+<td class="org-left">K-PBLG</td>
+<td class="org-left">"conditionaling"</td>
+</tr>
+
+<tr>
+<td class="org-left">O-PBLG</td>
+<td class="org-left">"onlying"</td>
+</tr>
+
+<tr>
+<td class="org-left">R-PBLG</td>
+<td class="org-left">"reasonabling"</td>
+</tr>
+
+<tr>
+<td class="org-left">S-PBLG</td>
+<td class="org-left">"seasonaling"</td>
+</tr>
+
+<tr>
+<td class="org-left">T-PBLG</td>
+<td class="org-left">"continualing"</td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"TK-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(d))}"</span>,
+<span style="color: #CC9393;">"TP-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(f))}"</span>,
+<span style="color: #CC9393;">"TKPW-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(g))}"</span>,
+<span style="color: #CC9393;">"H-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(h))}"</span>,
+<span style="color: #CC9393;">"SKWR-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(j))}"</span>,
+<span style="color: #CC9393;">"K-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(k))}"</span>,
+<span style="color: #CC9393;">"O-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(o))}"</span>,
+<span style="color: #CC9393;">"P-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(p))}"</span>,
+<span style="color: #CC9393;">"KW-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(q))}"</span>,
+<span style="color: #CC9393;">"R-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(r))}"</span>,
+<span style="color: #CC9393;">"S-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(s))}"</span>,
+<span style="color: #CC9393;">"T-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(t))}"</span>,
+<span style="color: #CC9393;">"UPBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(u))}"</span>,
+<span style="color: #CC9393;">"SR-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(v))}"</span>,
+<span style="color: #CC9393;">"W-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(w))}"</span>,
+<span style="color: #CC9393;">"KP-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(x))}"</span>,
+<span style="color: #CC9393;">"KWR-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(y))}"</span>,
+<span style="color: #CC9393;">"STKPW-PBLG"</span>: <span style="color: #CC9393;">"{#Control_L(Alt_L(z))}"</span>,
 </pre>
-
-
+</div>
+</div>
+</div>
+<div id="outline-container-org6a0dad3" class="outline-3">
+<h3 id="org6a0dad3"><span class="section-number-3">3.4</span> Escape</h3>
+<div class="outline-text-3" id="text-3-4">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
 dictionary as <code>TPEFBG</code>.  However, it's a little contorted for how
@@ -1687,8 +1401,8 @@ binding:
 </div>
 </div>
 
-<div id="outline-container-orgc2ac937" class="outline-2">
-<h2 id="orgc2ac937"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div id="outline-container-org4aa17c5" class="outline-2">
+<h2 id="org4aa17c5"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -1720,8 +1434,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-org1a93b60" class="outline-2">
-<h2 id="org1a93b60"><span class="section-number-2">5</span> Function keys</h2>
+<div id="outline-container-org78ce0a4" class="outline-2">
+<h2 id="org78ce0a4"><span class="section-number-2">5</span> Function keys</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  This means it
@@ -1746,12 +1460,12 @@ can be used to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-orge8d9ac3" class="outline-2">
-<h2 id="orge8d9ac3"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-org75798a2" class="outline-2">
+<h2 id="org75798a2"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org8bb7dc4" class="outline-3">
-<h3 id="org8bb7dc4"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
+<div id="outline-container-org9efd6e8" class="outline-3">
+<h3 id="org9efd6e8"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From Ted Morin: <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a>
@@ -1850,8 +1564,8 @@ Mac, I just use *F or *6 if I accidentally hit the number bar.
 </div>
 </div>
 
-<div id="outline-container-orgbcda55f" class="outline-3">
-<h3 id="orgbcda55f"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
+<div id="outline-container-orgecd8cdf" class="outline-3">
+<h3 id="orgecd8cdf"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
@@ -1989,8 +1703,8 @@ From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries
 </div>
 </div>
 
-<div id="outline-container-org71cdbbf" class="outline-3">
-<h3 id="org71cdbbf"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
+<div id="outline-container-orgc8bd0c0" class="outline-3">
+<h3 id="orgc8bd0c0"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
@@ -2857,8 +2571,8 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 </div>
-<div id="outline-container-org5664efe" class="outline-3">
-<h3 id="org5664efe"><span class="section-number-3">6.4</span> Resources</h3>
+<div id="outline-container-org4ab7531" class="outline-3">
+<h3 id="org4ab7531"><span class="section-number-3">6.4</span> Resources</h3>
 <div class="outline-text-3" id="text-6-4">
 <ul class="org-ul">
 <li><a href="https://plover.goeswhere.com/">https://plover.goeswhere.com/</a></li>
@@ -2867,8 +2581,8 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 
-<div id="outline-container-orgd885865" class="outline-3">
-<h3 id="orgd885865"><span class="section-number-3">6.5</span> Leftovers</h3>
+<div id="outline-container-org7f86630" class="outline-3">
+<h3 id="org7f86630"><span class="section-number-3">6.5</span> Leftovers</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 Mark Kislingbury <a href="http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf">advises</a> to put small words on the left.  Steno order
@@ -2911,8 +2625,8 @@ idea, I think, covers all the cases completely and intuitively.
 </div>
 </div>
 
-<div id="outline-container-orge657487" class="outline-2">
-<h2 id="orge657487"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org9d38b66" class="outline-2">
+<h2 id="org9d38b66"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -2945,7 +2659,7 @@ See <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platfo
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: unknown</p>
-<p class="date">Created: 2021-04-05 Mon 22:17</p>
+<p class="date">Created: 2021-04-06 Tue 19:45</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
