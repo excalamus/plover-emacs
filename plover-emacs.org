@@ -219,7 +219,7 @@ others may find the pattern useful).
 | ⠈⠅⠅       | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | ⠅⠅⠈       |
 | :::       | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | :::       |
 
-** Control
+** Control <<control>>
 | L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
 |-----------+-----------+-----------------------+------------+-----------|
 | ⠴         | =KPW=     | Control               | =-PBG=     | ⠦         |
@@ -320,7 +320,6 @@ easily done using =*=.
 | "continual"         | T-PBL       | T*PBL       |
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"-PBL": "{#Alt_L()}",
 "A-PBL": "{#Alt_L(a)}",
 "A*PBL": "Alan",
 "EPBL": "{#Alt_L(e)}",
@@ -334,6 +333,7 @@ easily done using =*=.
 "T-PBL": "{#Alt_L(t)}",
 "T*PBL": "continual",
 #+end_src
+
 Other bindings have alternate single-stroke forms and are overwritten.
 
 | original definition | old form | alternate form |
@@ -366,7 +366,80 @@ The remaining bindings present no conflict.
 "STKPW-PBL": "{#Alt_L(z)}",
 #+end_src
 
+* Control + Alt
 
+| L Pattern | Left hand | Modifier      | Right Hand | R Pattern |
+|-----------+-----------+---------------+------------+-----------|
+| ⠴         | =KPW=     | Control       | =-PBG=     | ⠦         |
+| ⠲         | =TPW=     | Alt           | =-PBL=     | ⠖         |
+| ⠶_        | =TKPW=    | Control + Alt | =-PBLG=    | _⠶        |
+
+The Control + Alt form is a combination of the Control and Alt forms.
+
+The right hand form =-PBLG= is the "j" sound within Plover theory.
+This causes a clash with several default words.  The solution is to
+rebind them to a =*= form.
+
+| original definition | old binding | new binding |
+|---------------------+-------------+-------------|
+| "{\^age}"           | A-PBLG      | A*EUPBLG    |
+| "bandage"           | PW-PBLG     | PW*PBLG     |
+| "CJ"                | KR-PBLG     | KR*PBLG     |
+| "edge"              | EPBLG       | See [[control][Control]] |
+| "image"             | EUPBLG      | *EUPBLG     |
+| "emergency"         | PH-PBLG     | PH*PBLG     |
+| "engine"            | TPH-PBLG    | TPH*PBLG    |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"A-PBLG": "{#Control_L(Alt_L(a))}",
+"A*EUPBLG": "{^age}",
+"PW-PBLG": "{#Control_L(Alt_L(b))}",
+"PW*PBLG": "bandage",
+"KR-PBLG": "{#Control_L(Alt_L(c))}",
+"KR*PBLG": "CJ",
+"EPBLG": "{#Control_L(Alt_L(e))}",
+"EU-PBLG": "{#Control_L(Alt_L(i))}",
+"*EUPBLG": "image",
+"PH-PBLG": "{#Control_L(Alt_L(m))}",
+"PH*PBLG": "emergency",
+"TPH-PBLG": "{#Control_L(Alt_L(n))}",
+"TPH*PBLG": "engine",
+#+end_src
+
+A number of silly words are defined in the default dictionary by
+happenstance. These can be safely overwritten. All others were
+undefined.
+
+| stroke   | silly default    |
+|----------+------------------|
+| A*EUPBLG | anal{\^ing}      |
+| F-PBLG   | "financialing"   |
+| K-PBLG   | "conditionaling" |
+| O-PBLG   | "onlying"        |
+| R-PBLG   | "reasonabling"   |
+| S-PBLG   | "seasonaling"    |
+| T-PBLG   | "continualing"   |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TK-PBLG": "{#Control_L(Alt_L(d))}",
+"TP-PBLG": "{#Control_L(Alt_L(f))}",
+"TKPW-PBLG": "{#Control_L(Alt_L(g))}",
+"H-PBLG": "{#Control_L(Alt_L(h))}",
+"SKWR-PBLG": "{#Control_L(Alt_L(j))}",
+"K-PBLG": "{#Control_L(Alt_L(k))}",
+"O-PBLG": "{#Control_L(Alt_L(o))}",
+"P-PBLG": "{#Control_L(Alt_L(p))}",
+"KW-PBLG": "{#Control_L(Alt_L(q))}",
+"R-PBLG": "{#Control_L(Alt_L(r))}",
+"S-PBLG": "{#Control_L(Alt_L(s))}",
+"T-PBLG": "{#Control_L(Alt_L(t))}",
+"UPBLG": "{#Control_L(Alt_L(u))}",
+"SR-PBLG": "{#Control_L(Alt_L(v))}",
+"W-PBLG": "{#Control_L(Alt_L(w))}",
+"KP-PBLG": "{#Control_L(Alt_L(x))}",
+"KWR-PBLG": "{#Control_L(Alt_L(y))}",
+"STKPW-PBLG": "{#Control_L(Alt_L(z))}",
+#+end_src
 # We can auto generate all these combinations using Emacs Lisp.
 
 #+name: generated
