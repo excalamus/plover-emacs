@@ -32,7 +32,6 @@
 "-EGD": "edge",
 "-EG/D": "egged",
 
-"-PBL": "{#Alt_L()}",
 "A-PBL": "{#Alt_L(a)}",
 "A*PBL": "Alan",
 "EPBL": "{#Alt_L(e)}",
@@ -67,6 +66,39 @@
 "KWR-PBL": "{#Alt_L(y)}",
 "STKPW-PBL": "{#Alt_L(z)}",
 
+"A-PBLG": "{#Control_L(Alt_L(a))}",
+"A*EUPBLG": "{^age}",
+"PW-PBLG": "{#Control_L(Alt_L(b))}",
+"PW*PBLG": "bandage",
+"KR-PBLG": "{#Control_L(Alt_L(c))}",
+"KR*PBLG": "CJ",
+"EPBLG": "{#Control_L(Alt_L(e))}",
+"EU-PBLG": "{#Control_L(Alt_L(i))}",
+"*EUPBLG": "image",
+"PH-PBLG": "{#Control_L(Alt_L(m))}",
+"PH*PBLG": "emergency",
+"TPH-PBLG": "{#Control_L(Alt_L(n))}",
+"TPH*PBLG": "engine",
+
+"TK-PBLG": "{#Control_L(Alt_L(d))}",
+"TP-PBLG": "{#Control_L(Alt_L(f))}",
+"TKPW-PBLG": "{#Control_L(Alt_L(g))}",
+"H-PBLG": "{#Control_L(Alt_L(h))}",
+"SKWR-PBLG": "{#Control_L(Alt_L(j))}",
+"K-PBLG": "{#Control_L(Alt_L(k))}",
+"O-PBLG": "{#Control_L(Alt_L(o))}",
+"P-PBLG": "{#Control_L(Alt_L(p))}",
+"KW-PBLG": "{#Control_L(Alt_L(q))}",
+"R-PBLG": "{#Control_L(Alt_L(r))}",
+"S-PBLG": "{#Control_L(Alt_L(s))}",
+"T-PBLG": "{#Control_L(Alt_L(t))}",
+"UPBLG": "{#Control_L(Alt_L(u))}",
+"SR-PBLG": "{#Control_L(Alt_L(v))}",
+"W-PBLG": "{#Control_L(Alt_L(w))}",
+"KP-PBLG": "{#Control_L(Alt_L(x))}",
+"KWR-PBLG": "{#Control_L(Alt_L(y))}",
+"STKPW-PBLG": "{#Control_L(Alt_L(z))}",
+
 "STW": "{#Escape}",
 "-BLS": "{#Escape}",
 
@@ -87,237 +119,4 @@
 "1*D": "{#F11}",
 "2*D": "{#F12}",
 
-;; still under development
-;; scratch/lisp.el
-
-(defun ctl (x)
-  (format "Control(%s)" x))
-
-(defun alt (x)
-  (format "Alt(%s)" x))
-
-(defun shf (x)
-  (format "Shift(%s)" x))
-
-(defun sup (x)
-  (format "Super(%s)" x))
-
-(defun cmd (x)
-  (format "{#%s}" x))
-
-(defvar steno-order "STKPWHRAO*EUFRPBLGTSDZ")
-
-(defun steno< (a b)
-  (< (search a steno-order) (search b steno-order)))
-
-(defun steno-sort (x)
-  (apply #'concat
-         (sort (split-string x "" t) 'steno<)))
-
-(defun right-hand-p (x)
-  (let* ((right-keys '("E" "U" "F" "R" "P" "B" "L" "G" "T" "S" "D" "Z"))
-        (x (if (string-equal (substring x 0 1) "-")
-               (substring x 1)
-             x))
-        (split (split-string x "" t)))
-    (subsetp split right-keys :test #'string-equal)))
-
-(defun left-hand-p (x)
-  (let* ((left-keys '("S" "T" "K" "P" "W" "H" "R" "A" "O" ))
-        (x (if (string-equal (substring x 0 1) "-")
-               (substring x 1)
-             x))
-        (split (split-string x "" t)))
-    (subsetp split left-keys :test #'string-equal)))
-
-;; ;; todo
-;; ;; generalize this for RHS/LHS "pseudo modes"; will need modifer alist?
-;; (defun json (s c)
-;;   (let (
-;;         (stroke (if (left-hand-p s)
-;;                     (concat "" s)
-;;                     )
-;;   (format "\"%s\": \"%s\"," s c))
-
-(defun json (s c)
-  (format "\"%s\": \"%s\"," s c))
-
-;; https://www.public.asu.edu/~huanliu/AI04S/Lisp_Assignment_Solutions.html
-(defun powerset(lst)
-  (if (null lst)
-    '(nil)
-    (let ((ps (powerset (cdr lst))))
-      (append ps (mapcar #'(lambda (x) (cons (car lst) x)) ps)))))
-
-;; (cdr (powerset '(1 2 3 4)))
-;; (nil (4) (3) (3 4) (2) (2 4) (2 3) (2 3 4) (1) (1 4) (1 3) (1 3 4) ...)
-
-;; ANSI Common Lisp p.110
-(defun compose (fns)
-  (destructuring-bind (fn1 . cdr) (reverse fns)
-    #'(lambda (&rest args)
-        (reduce #'(lambda (v f) (funcall f v))
-                cdr
-                :initial-value (apply fn1 args)))))
-
-;; (mapcar (compose '(list round sqrt))
-;;         '(4 9 16 25))
-
-;; (mapcar (compose '(sqrt))
-;;         '(4 9 16 25))
-
-(defun apply-functions (fns lst)
-  (mapcan #'(lambda (x) (mapcar x lst)) fns))
-
-;; (defun apply-functions (fns lst)
-;;   (mapcan
-;;    #'(lambda (x)
-;;        (mapcar (compose (list #'cmd x)) lst))
-;;           fns))
-
-(let* ((alphabet-alist
-       '(("a" . "A") ("b" . "PW") ("c" . "KR") ("d" . "TK") ("e" . "-E")
-         ("f" . "TP") ("g" . "TKPW") ("h" . "H") ("i" . "-EU") ("j" . "SKWR")
-         ("k" . "K") ("l" . "HR") ("m" . "PH") ("n" . "TPH") ("o" . "O")
-         ("p" . "P") ("q" . "KW") ("r" . "R") ("s" . "S") ("t" . "T")
-         ("u" . "-U") ("v" . "SR") ("w" . "W") ("x" . "KP") ("y" . "KWR")
-         ("z" . "STKPW")))
-       (alphabet (mapcar 'car alphabet-alist))
-       (strokes (mapcar 'cdr alphabet-alist))
-       (modifiers '(ctl alt shf sup))
-       (powerset-fns (mapcar 'compose (cdr (powerset modifiers))))
-       (cmded-fns (mapcar
-               #'(lambda (x) (compose (list #'cmd x)))
-               powerset-fns))
-       (commands (apply-functions cmded-fns alphabet))
-       (repeats (/ (length commands) (length strokes)))  ;
-       (repeated (apply 'append (make-list repeats strokes)))
-       (dictionary (seq-mapn #'json repeated commands)))
-  (setq result "")
-  (cl-loop for entry in dictionary do
-           (setq result (concat result entry "\n")))
-  result)
-
-;; There are 2^n elements in a powerset.  Since we drop the empty set,
-;; there are 2^4-1=15 powerset functions.  This means for the two
-;; lists to be of equal length, we need 15 copies of the alphabet.
-;; Since each of powerset function is applied to the whole alphabet,
-;; there are 15 * 26 = 390 total commands.
 }
-
-;; still under development
-;; scratch/lisp.el
-
-(defun ctl (x)
-  (format "Control(%s)" x))
-
-(defun alt (x)
-  (format "Alt(%s)" x))
-
-(defun shf (x)
-  (format "Shift(%s)" x))
-
-(defun sup (x)
-  (format "Super(%s)" x))
-
-(defun cmd (x)
-  (format "{#%s}" x))
-
-(defvar steno-order "STKPWHRAO*EUFRPBLGTSDZ")
-
-(defun steno< (a b)
-  (< (search a steno-order) (search b steno-order)))
-
-(defun steno-sort (x)
-  (apply #'concat
-         (sort (split-string x "" t) 'steno<)))
-
-(defun right-hand-p (x)
-  (let* ((right-keys '("E" "U" "F" "R" "P" "B" "L" "G" "T" "S" "D" "Z"))
-        (x (if (string-equal (substring x 0 1) "-")
-               (substring x 1)
-             x))
-        (split (split-string x "" t)))
-    (subsetp split right-keys :test #'string-equal)))
-
-(defun left-hand-p (x)
-  (let* ((left-keys '("S" "T" "K" "P" "W" "H" "R" "A" "O" ))
-        (x (if (string-equal (substring x 0 1) "-")
-               (substring x 1)
-             x))
-        (split (split-string x "" t)))
-    (subsetp split left-keys :test #'string-equal)))
-
-;; ;; todo
-;; ;; generalize this for RHS/LHS "pseudo modes"; will need modifer alist?
-;; (defun json (s c)
-;;   (let (
-;;         (stroke (if (left-hand-p s)
-;;                     (concat "" s)
-;;                     )
-;;   (format "\"%s\": \"%s\"," s c))
-
-(defun json (s c)
-  (format "\"%s\": \"%s\"," s c))
-
-;; https://www.public.asu.edu/~huanliu/AI04S/Lisp_Assignment_Solutions.html
-(defun powerset(lst)
-  (if (null lst)
-    '(nil)
-    (let ((ps (powerset (cdr lst))))
-      (append ps (mapcar #'(lambda (x) (cons (car lst) x)) ps)))))
-
-;; (cdr (powerset '(1 2 3 4)))
-;; (nil (4) (3) (3 4) (2) (2 4) (2 3) (2 3 4) (1) (1 4) (1 3) (1 3 4) ...)
-
-;; ANSI Common Lisp p.110
-(defun compose (fns)
-  (destructuring-bind (fn1 . cdr) (reverse fns)
-    #'(lambda (&rest args)
-        (reduce #'(lambda (v f) (funcall f v))
-                cdr
-                :initial-value (apply fn1 args)))))
-
-;; (mapcar (compose '(list round sqrt))
-;;         '(4 9 16 25))
-
-;; (mapcar (compose '(sqrt))
-;;         '(4 9 16 25))
-
-(defun apply-functions (fns lst)
-  (mapcan #'(lambda (x) (mapcar x lst)) fns))
-
-;; (defun apply-functions (fns lst)
-;;   (mapcan
-;;    #'(lambda (x)
-;;        (mapcar (compose (list #'cmd x)) lst))
-;;           fns))
-
-(let* ((alphabet-alist
-       '(("a" . "A") ("b" . "PW") ("c" . "KR") ("d" . "TK") ("e" . "-E")
-         ("f" . "TP") ("g" . "TKPW") ("h" . "H") ("i" . "-EU") ("j" . "SKWR")
-         ("k" . "K") ("l" . "HR") ("m" . "PH") ("n" . "TPH") ("o" . "O")
-         ("p" . "P") ("q" . "KW") ("r" . "R") ("s" . "S") ("t" . "T")
-         ("u" . "-U") ("v" . "SR") ("w" . "W") ("x" . "KP") ("y" . "KWR")
-         ("z" . "STKPW")))
-       (alphabet (mapcar 'car alphabet-alist))
-       (strokes (mapcar 'cdr alphabet-alist))
-       (modifiers '(ctl alt shf sup))
-       (powerset-fns (mapcar 'compose (cdr (powerset modifiers))))
-       (cmded-fns (mapcar
-               #'(lambda (x) (compose (list #'cmd x)))
-               powerset-fns))
-       (commands (apply-functions cmded-fns alphabet))
-       (repeats (/ (length commands) (length strokes)))  ;
-       (repeated (apply 'append (make-list repeats strokes)))
-       (dictionary (seq-mapn #'json repeated commands)))
-  (setq result "")
-  (cl-loop for entry in dictionary do
-           (setq result (concat result entry "\n")))
-  result)
-
-;; There are 2^n elements in a powerset.  Since we drop the empty set,
-;; there are 2^4-1=15 powerset functions.  This means for the two
-;; lists to be of equal length, we need 15 copies of the alphabet.
-;; Since each of powerset function is applied to the whole alphabet,
-;; there are 15 * 26 = 390 total commands.

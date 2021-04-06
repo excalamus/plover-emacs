@@ -440,6 +440,7 @@ undefined.
 "KWR-PBLG": "{#Control_L(Alt_L(y))}",
 "STKPW-PBLG": "{#Control_L(Alt_L(z))}",
 #+end_src
+
 ** Escape
 
 The Escape key is distributed with Plover in the =commands.json=
