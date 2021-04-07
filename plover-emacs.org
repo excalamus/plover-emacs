@@ -198,7 +198,7 @@ Notice how the shapes combine:
 |-----------+-----------+-----------------------+------------+-----------|
 | ⠴         | =KPW=     | Control               | =-PBG=     | ⠦         |
 | ⠲         | =TPW=     | Alt                   | =-PBL=     | ⠖         |
-| ⠶_        | =TKPW=    | Control + Alt         | =-PBLG=    | _⠶       |
+| ⠶_        | =TKPW=    | Control + Alt         | =-PBLG=    | _⠶        |
 | ∴         | =KPR=     | Shift                 | =-RPG=     | ∴         |
 | .:.       | =KPWR=    | Control + Shift       | =-RPBG=    | .:.       |
 | ⠈⠅.       | =TPWR=    | Alt + Shift           | =-RPBL=    | .⠅⠁       |
@@ -336,10 +336,10 @@ easily done using =*=.
 
 Other bindings have alternate single-stroke forms and are overwritten.
 
-| original definition | old form | alternate form |
-|---------------------+----------+----------------|
-| "financial"         | F-PBL    | TP-PBGS        |
-| "only"              | O-PBL    | OE-PBL         |
+| old form | original definition | alternate form |
+|----------+---------------------+----------------|
+| F-PBL    | "financial"         | TP-PBGS        |
+| O-PBL    | "only"              | OE-PBL         |
 
 The remaining bindings present no conflict.
 
@@ -441,8 +441,64 @@ undefined.
 "STKPW-PBLG": "{#Control_L(Alt_L(z))}",
 #+end_src
 
-** Escape
+** Shift
+| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
+|-----------+-----------+-----------------------+------------+-----------|
+| ∴         | =KPR=     | Shift                 | =-RPG=     | ∴         |
 
+The Shift form looks like an up-arrow.
+
+There is an "ing" clash as with the other forms containing =G=.
+Fortunately, there is an alternate form.
+
+| old form | original definition | alternate form |
+|----------+---------------------+----------------|
+| O-RPG    | "reporting"         | RO-RPG         |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"O-RPG": "{#Shift_L(o)}",
+#+end_src
+
+The remaining letters correspond to silly words in the default
+dictionary or are undefined.
+
+| stroke | silly default |
+|--------+---------------|
+| A-RPG  | "arping"      |
+| ERPG   | "he wering"   |
+| EURPG  | "i wering"    |
+| T-RPG  | "it wering"   |
+| URPG   | "you wering"  |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"A-RPG"    : "{#Shift_L(a)}",
+"PW-RPG"   : "{#Shift_L(b)}",
+"KR-RPG"   : "{#Shift_L(c)}",
+"TK-RPG"   : "{#Shift_L(d)}",
+"ERPG"     : "{#Shift_L(e)}",
+"TP-RPG"   : "{#Shift_L(f)}",
+"TKPW-RPG" : "{#Shift_L(g)}",
+"H-RPG"    : "{#Shift_L(h)}",
+"EURPG"    : "{#Shift_L(i)}",
+"SKWR-RPG" : "{#Shift_L(j)}",
+"K-RPG"    : "{#Shift_L(k)}",
+"HR-RPG"   : "{#Shift_L(l)}",
+"PH-RPG"   : "{#Shift_L(m)}",
+"TPH-RPG"  : "{#Shift_L(n)}",
+"P-RPG"    : "{#Shift_L(p)}",
+"KW-RPG"   : "{#Shift_L(q)}",
+"R-RPG"    : "{#Shift_L(r)}",
+"S-RPG"    : "{#Shift_L(s)}",
+"T-RPG"    : "{#Shift_L(t)}",
+"URPG"     : "{#Shift_L(u)}",
+"SR-RPG"   : "{#Shift_L(v)}",
+"W-RPG"    : "{#Shift_L(w)}",
+"KP-RPG"   : "{#Shift_L(x)}",
+"KWR-RPG"  : "{#Shift_L(y)}",
+"STKPW-RPG": "{#Shift_L(z)}",
+#+end_src
+
+** Escape
 The Escape key is distributed with Plover in the =commands.json=
 dictionary as =TPEFBG=.  However, it's a little contorted for how
 often it's used with Evil/Vim.  In Emacs, Escape also functions as
