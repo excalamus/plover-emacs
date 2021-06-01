@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-05-31 Mon 23:20 -->
+<!-- 2021-05-31 Mon 23:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -235,36 +235,37 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orged377b8">1. Opening bracket</a></li>
-<li><a href="#org72de954">2. Dictionary design principles</a>
+<li><a href="#org604bd8c">1. Opening bracket</a></li>
+<li><a href="#orgd31b010">2. Dictionary design principles</a>
 <ul>
-<li><a href="#org2e71c16">2.1. Sequence chains</a></li>
-<li><a href="#org9a46c2b">2.2. Patterns</a></li>
-<li><a href="#orga45e0b9">2.3. Mode prefix</a></li>
-<li><a href="#org0871f42">2.4. Right hand rule</a></li>
+<li><a href="#org9ca4e73">2.1. Sequence chains</a></li>
+<li><a href="#org0985586">2.2. Patterns</a></li>
+<li><a href="#orgba2cecb">2.3. Mode prefix</a></li>
+<li><a href="#org9c3887a">2.4. Right hand rule</a></li>
 </ul>
 </li>
-<li><a href="#org54f45f3">3. Emacs: Escape, Meta, Alt, Control, Shift</a>
+<li><a href="#orgfc9c2ae">3. Emacs: Escape, Meta, Alt, Control, Shift</a>
 <ul>
-<li><a href="#org2687199">3.1. Control </a></li>
-<li><a href="#org103b770">3.2. Alt</a></li>
-<li><a href="#org0e076f3">3.3. Control + Alt</a></li>
-<li><a href="#org2c00e2f">3.4. Shift</a></li>
-<li><a href="#org9d975e0">3.5. Escape</a></li>
+<li><a href="#org68f3e60">3.1. Control </a></li>
+<li><a href="#org1fd4fe4">3.2. Alt</a></li>
+<li><a href="#orgead9f41">3.3. Control + Alt</a></li>
+<li><a href="#orgcd95563">3.4. Shift</a></li>
+<li><a href="#org282cf50">3.5. Escape</a></li>
 </ul>
 </li>
-<li><a href="#org285dba8">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
-<li><a href="#orga520e1e">5. Function keys</a></li>
-<li><a href="#orgb016574">6. Notes</a>
+<li><a href="#orge704cbd">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
+<li><a href="#org649df8a">5. Function keys</a></li>
+<li><a href="#orge2b141f">6. Notes</a>
 <ul>
-<li><a href="#org4cdca08">6.1. Cross Platform Movement</a></li>
-<li><a href="#orgd929451">6.2. Modifiers Single Stroke</a></li>
-<li><a href="#org5f43c70">6.3. Nimble single strokes</a></li>
-<li><a href="#orgea7067d">6.4. Resources</a></li>
-<li><a href="#org24dc632">6.5. Leftovers</a></li>
+<li><a href="#orgafc1590">6.1. Cross Platform Movement</a></li>
+<li><a href="#org6d8998f">6.2. Modifiers Single Stroke</a></li>
+<li><a href="#orge3dadde">6.3. Nimble single strokes</a></li>
+<li><a href="#org7ae3ad2">6.4. Resources</a></li>
+<li><a href="#orgf224d3a">6.5. Leftovers</a></li>
+<li><a href="#orgf93936f">6.6. Image generation</a></li>
 </ul>
 </li>
-<li><a href="#org41ba005">7. Closing bracket</a></li>
+<li><a href="#org35d7480">7. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -282,8 +283,8 @@ active development!  To be notified of changes, <a href="https://webapps.stackex
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-orged377b8" class="outline-2">
-<h2 id="orged377b8"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org604bd8c" class="outline-2">
+<h2 id="org604bd8c"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 <a href="http://www.openstenoproject.org/plover/">Plover</a> is a libre software engine for stenography.  It provides a
@@ -334,12 +335,12 @@ get started with Emacs, check out the <a href="https://www.gnu.org/software/emac
 </div>
 </div>
 
-<div id="outline-container-org72de954" class="outline-2">
-<h2 id="org72de954"><span class="section-number-2">2</span> Dictionary design principles</h2>
+<div id="outline-container-orgd31b010" class="outline-2">
+<h2 id="orgd31b010"><span class="section-number-2">2</span> Dictionary design principles</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org2e71c16" class="outline-3">
-<h3 id="org2e71c16"><span class="section-number-3">2.1</span> Sequence chains</h3>
+<div id="outline-container-org9ca4e73" class="outline-3">
+<h3 id="org9ca4e73"><span class="section-number-3">2.1</span> Sequence chains</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Many Emacs commands are called through sequences.  Typically, a Plover
@@ -376,8 +377,8 @@ This would be handled in Plover with:
 </div>
 </div>
 
-<div id="outline-container-org9a46c2b" class="outline-3">
-<h3 id="org9a46c2b"><span class="section-number-3">2.2</span> Patterns</h3>
+<div id="outline-container-org0985586" class="outline-3">
+<h3 id="org0985586"><span class="section-number-3">2.2</span> Patterns</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 Mirabai Knight, founder of the Open Steno Project, points out in her
@@ -400,8 +401,8 @@ up and down arrows.
 </div>
 </div>
 
-<div id="outline-container-orga45e0b9" class="outline-3">
-<h3 id="orga45e0b9"><span class="section-number-3">2.3</span> Mode prefix</h3>
+<div id="outline-container-orgba2cecb" class="outline-3">
+<h3 id="orgba2cecb"><span class="section-number-3">2.3</span> Mode prefix</h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 A pseudo "mode" can be defined by prefixing all related commands with
@@ -426,8 +427,8 @@ the command <code>STPH-R</code> means "move left".
 </div>
 </div>
 
-<div id="outline-container-org0871f42" class="outline-3">
-<h3 id="org0871f42"><span class="section-number-3">2.4</span> Right hand rule</h3>
+<div id="outline-container-org9c3887a" class="outline-3">
+<h3 id="org9c3887a"><span class="section-number-3">2.4</span> Right hand rule</h3>
 <div class="outline-text-3" id="text-2-4">
 <p>
 It's possible to write nearly the entire alphabet left handed.  All
@@ -641,8 +642,8 @@ alphabet.
 </div>
 </div>
 
-<div id="outline-container-org54f45f3" class="outline-2">
-<h2 id="org54f45f3"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
+<div id="outline-container-orgfc9c2ae" class="outline-2">
+<h2 id="orgfc9c2ae"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Emacs makes extensive use of modifier keys.  It's for this reason that
@@ -858,8 +859,8 @@ others may find the pattern useful).
 </table>
 </div>
 
-<div id="outline-container-org2687199" class="outline-3">
-<h3 id="org2687199"><span class="section-number-3">3.1</span> Control <a id="org6f5c66f"></a></h3>
+<div id="outline-container-org68f3e60" class="outline-3">
+<h3 id="org68f3e60"><span class="section-number-3">3.1</span> Control <a id="org60cfec7"></a></h3>
 <div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -988,8 +989,8 @@ Control+Alt. Instead, <code>E-GD</code> is used for "edge", supplanting
 </div>
 </div>
 
-<div id="outline-container-org103b770" class="outline-3">
-<h3 id="org103b770"><span class="section-number-3">3.2</span> Alt</h3>
+<div id="outline-container-org1fd4fe4" class="outline-3">
+<h3 id="org1fd4fe4"><span class="section-number-3">3.2</span> Alt</h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1172,8 +1173,8 @@ The remaining bindings present no conflict.
 </div>
 </div>
 
-<div id="outline-container-org0e076f3" class="outline-3">
-<h3 id="org0e076f3"><span class="section-number-3">3.3</span> Control + Alt</h3>
+<div id="outline-container-orgead9f41" class="outline-3">
+<h3 id="orgead9f41"><span class="section-number-3">3.3</span> Control + Alt</h3>
 <div class="outline-text-3" id="text-3-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1274,7 +1275,7 @@ rebind them to a <code>*</code> form.
 <tr>
 <td class="org-left">"edge"</td>
 <td class="org-left">EPBLG</td>
-<td class="org-left">See <a href="#org6f5c66f">Control</a></td>
+<td class="org-left">See <a href="#org60cfec7">Control</a></td>
 </tr>
 
 <tr>
@@ -1396,8 +1397,8 @@ undefined.
 </div>
 </div>
 
-<div id="outline-container-org2c00e2f" class="outline-3">
-<h3 id="org2c00e2f"><span class="section-number-3">3.4</span> Shift</h3>
+<div id="outline-container-orgcd95563" class="outline-3">
+<h3 id="orgcd95563"><span class="section-number-3">3.4</span> Shift</h3>
 <div class="outline-text-3" id="text-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1551,8 +1552,8 @@ dictionary or are undefined.
 </div>
 </div>
 
-<div id="outline-container-org9d975e0" class="outline-3">
-<h3 id="org9d975e0"><span class="section-number-3">3.5</span> Escape</h3>
+<div id="outline-container-org282cf50" class="outline-3">
+<h3 id="org282cf50"><span class="section-number-3">3.5</span> Escape</h3>
 <div class="outline-text-3" id="text-3-5">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
@@ -1574,8 +1575,8 @@ binding:
 </div>
 </div>
 
-<div id="outline-container-org285dba8" class="outline-2">
-<h2 id="org285dba8"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div id="outline-container-orge704cbd" class="outline-2">
+<h2 id="orge704cbd"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Perhaps the two most important bindings are <code>M-x</code>
@@ -1607,8 +1608,8 @@ much of an association.  It's simply available and easy to write.
 </div>
 </div>
 
-<div id="outline-container-orga520e1e" class="outline-2">
-<h2 id="orga520e1e"><span class="section-number-2">5</span> Function keys</h2>
+<div id="outline-container-org649df8a" class="outline-2">
+<h2 id="org649df8a"><span class="section-number-2">5</span> Function keys</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 It doesn't seem like <code>*</code> is used at all with numbers.  This means it
@@ -1633,12 +1634,12 @@ can be used to differentiate the F keys.
 </div>
 </div>
 
-<div id="outline-container-orgb016574" class="outline-2">
-<h2 id="orgb016574"><span class="section-number-2">6</span> Notes</h2>
+<div id="outline-container-orge2b141f" class="outline-2">
+<h2 id="orge2b141f"><span class="section-number-2">6</span> Notes</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-org4cdca08" class="outline-3">
-<h3 id="org4cdca08"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
+<div id="outline-container-orgafc1590" class="outline-3">
+<h3 id="orgafc1590"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
 <div class="outline-text-3" id="text-6-1">
 <p>
 From Ted Morin: <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a>
@@ -1737,8 +1738,8 @@ Mac, I just use *F or *6 if I accidentally hit the number bar.
 </div>
 </div>
 
-<div id="outline-container-orgd929451" class="outline-3">
-<h3 id="orgd929451"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
+<div id="outline-container-org6d8998f" class="outline-3">
+<h3 id="org6d8998f"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
 <div class="outline-text-3" id="text-6-2">
 <p>
 From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
@@ -1876,8 +1877,8 @@ From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries
 </div>
 </div>
 
-<div id="outline-container-org5f43c70" class="outline-3">
-<h3 id="org5f43c70"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
+<div id="outline-container-orge3dadde" class="outline-3">
+<h3 id="orge3dadde"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
 <div class="outline-text-3" id="text-6-3">
 <p>
 From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
@@ -2744,8 +2745,8 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 </div>
-<div id="outline-container-orgea7067d" class="outline-3">
-<h3 id="orgea7067d"><span class="section-number-3">6.4</span> Resources</h3>
+<div id="outline-container-org7ae3ad2" class="outline-3">
+<h3 id="org7ae3ad2"><span class="section-number-3">6.4</span> Resources</h3>
 <div class="outline-text-3" id="text-6-4">
 <ul class="org-ul">
 <li><a href="https://plover.goeswhere.com/">https://plover.goeswhere.com/</a></li>
@@ -2754,8 +2755,8 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 
-<div id="outline-container-org24dc632" class="outline-3">
-<h3 id="org24dc632"><span class="section-number-3">6.5</span> Leftovers</h3>
+<div id="outline-container-orgf224d3a" class="outline-3">
+<h3 id="orgf224d3a"><span class="section-number-3">6.5</span> Leftovers</h3>
 <div class="outline-text-3" id="text-6-5">
 <p>
 Mark Kislingbury <a href="http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf">advises</a> to put small words on the left.  Steno order
@@ -2796,10 +2797,35 @@ idea, I think, covers all the cases completely and intuitively.
 </p>
 </div>
 </div>
+
+<div id="outline-container-orgf93936f" class="outline-3">
+<h3 id="orgf93936f"><span class="section-number-3">6.6</span> Image generation</h3>
+<div class="outline-text-3" id="text-6-6">
+<p>
+Use <a href="http://www.keyboard-layout-editor.com">http://www.keyboard-layout-editor.com</a>
+</p>
+
+<p>
+Upload "steno-(keyboard-layout-editor.com).json" on the Raw Data tab.
+</p>
+
+<p>
+Download as PNG, remove background in GIMP with magic tool. Resize to
+20%.  Remove fuzzy border with magic tool.  Export as.
+</p>
+
+<p>
+Turquise (too bright): #00d4d4
+Gray: #9E9E9E
+Red: #d40000
+Yellow: #bcbf00
+</p>
+</div>
+</div>
 </div>
 
-<div id="outline-container-org41ba005" class="outline-2">
-<h2 id="org41ba005"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org35d7480" class="outline-2">
+<h2 id="org35d7480"><span class="section-number-2">7</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -2832,7 +2858,7 @@ See <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platfo
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: ahab</p>
-<p class="date">Created: 2021-05-31 Mon 23:20</p>
+<p class="date">Created: 2021-05-31 Mon 23:31</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

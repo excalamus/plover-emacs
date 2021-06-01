@@ -1659,6 +1659,19 @@ bindings can at least be expressed in multiple strokes.  For example,
 Of course we would want more efficient bindings than those. But the
 idea, I think, covers all the cases completely and intuitively.
 
+** Image generation
+Use http://www.keyboard-layout-editor.com
+
+Upload "steno-(keyboard-layout-editor.com).json" on the Raw Data tab.
+
+Download as PNG, remove background in GIMP with magic tool. Resize to
+20%.  Remove fuzzy border with magic tool.  Export as.
+
+Turquise (too bright): #00d4d4
+Gray: #9E9E9E
+Red: #d40000
+Yellow: #bcbf00
+
 * Closing bracket
 #+begin_src js :tangle plover-emacs.json :exports none :noweb yes
 <<generated>>
