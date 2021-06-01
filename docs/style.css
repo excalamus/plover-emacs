@@ -77,7 +77,7 @@ nav {
 @media screen and (max-width: 27.5rem) {
 
     .flexcontainer div {
-        text-align: right;
+	text-align: right;
     }
 }
 
@@ -90,12 +90,12 @@ nav {
     text-align: left;
 }
 
-img {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1rem 0.5rem 0.5rem 1rem;
-}
+/* img { */
+/*     max-width: 100%; */
+/*     height: auto; */
+/*     display: block; */
+/*     /\* margin: 1rem 0.5rem 0.5rem 1rem; *\/ */
+/* } */
 
 #img-float {
     float: left;
@@ -123,7 +123,7 @@ img {
 
 @media (orientation: landscape) {
     #content, #preamble, #postamble {
-        max-width: 65%;
+	max-width: 65%;
     }
 }
 
