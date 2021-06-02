@@ -90,12 +90,15 @@ nav {
     text-align: left;
 }
 
-/* img { */
-/*     max-width: 100%; */
-/*     height: auto; */
-/*     display: block; */
-/*     /\* margin: 1rem 0.5rem 0.5rem 1rem; *\/ */
-/* } */
+img {
+    /* display: inline-block; */
+    vertical-align: middle;
+    /* text-align: center; */
+    /* max-width: 100%; */
+    /* height: auto; */
+    /* display: block; */
+    /* margin: 1rem 0.5rem 0.5rem 1rem; */
+}
 
 #img-float {
     float: left;

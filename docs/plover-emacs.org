@@ -5,6 +5,11 @@
 
 ----------------
 
+# todo Explain Shift
+# todo explain C-S
+# todo explain M-S
+# ...
+
 #+begin_quote
 ATTENTION: This document and the corresponding dictionary are under
 active development!  To be notified of changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the
@@ -27,18 +32,18 @@ in 1976, it is the flagship software of the [[https://www.gnu.org/philosophy/fre
 Emacs is community developed and allows you to run, change, and
 distribute it, more or less, however you want.  It has been developed
 for more than 40 years and, although modest in appearance, boasts
-countless features and add-ons[fn:3].
+countless features and add-ons[fn:1].
 
 #+CAPTION: Screen shot of the Emacs text editor.
 [[file:./emacs.png]]
 
-Emacs works by binding every key to a programming command[fn:1].  For
+Emacs works by binding every key to a programming command[fn:2].  For
 example, pressing 'a' calls the =self-insert-command= which inserts
 the character typed, 'a'.  Commands can also be bound to key
 combinations.  To change windows, press 'Control + x + o' (notated
 =C-x o=) to call =other-window=.  Commands not bound to a key or key
 combination are accessed through an interactive process initiated with
-'Alt+x' (notated =M-x=)[fn:2].  To change windows using the
+'Alt+x' (notated =M-x=)[fn:3].  To change windows using the
 interactive process, type =M-x other-window=.
 
 This document defines, literally, a dictionary for using Plover with
@@ -54,14 +59,16 @@ get started with Emacs, check out the [[https://www.gnu.org/software/emacs/tour/
 #+end_src
 
 * Dictionary design principles
-** Sequence chains
+** Sequence chains <<sequence_chains>>
+# TODO this example is contrived.  Is there a better one?
+
 Many Emacs commands are called through sequences.  Typically, a Plover
 dictionary maps a stroke to a single output element (e.g. character,
 word, or phrase).  However, it's possible, to send a sequence in
 Plover by separating elements with a space.
 
 For example, in Emacs =C-x 8 m= writes =µ=.  Send the sequence =C-x 8
-m= using Plover with:
+m= using Plover with[fn:4]:
 #+begin_example
 {#Control_L(x) 8 m}
 #+end_example
@@ -80,23 +87,26 @@ This would be handled in Plover with:
 {#Control_L(c e) h h}
 #+end_example
 
-** Patterns
+** Patterns <<patterns>>
 Mirabai Knight, founder of the Open Steno Project, points out in her
 [[http://plover.stenoknight.com/2010/06/steno-101-lesson-zero.html][Steno 101]] series that stenography can be thought of as a
-phonetic-mnemonic system.  We associate a phonetic sound to a set of
-keyboard keys to help us remember what they correspond to.  This
-phonetic pattern helps define a system for human languages.
+phonetic-mnemonic system.  Phonetics are the "ooh" and "aah" sounds
+that make up spoken language.  A mnemonic strings these together in
+ways that naturally correspond to words or phrases.  For example, =TK=
+represents a "duh" sound, =AO= an "Oh?" sound, and =-R= an "err".
+String these together and =TKAO-R= corresponds to "door".  Swaths of
+human language are represented with speech patterns.
 
 Another pattern is to define a stroke by the shape it makes on the
 keyboard.  This is useful when phonetic patterns don't make sense or
 aren't practical.  Because shape patterns are spatially oriented,
-associations can be made through transformations (e.g. rotation,
-translation) of the shape. For example, the [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]]
-dictionary uses the pattern technique.  Page Up and Page Down are
-mapped to =-RPG= and =-FBL= because the pattern they make looks like
-up and down arrows.
+associations can be made through transformations (i.e. rotation and
+translation) of the shape. The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary uses
+shape patterns.  Page Up and Page Down are mapped to =-RPG=
+([[./img/-rpg.png]]) and =-FBL= ([[./img/-fbl.png]]) because the patterns they
+make look like up and down arrows.
 
-** Mode prefix
+** Mode prefix <<mode_prefix>>
 A pseudo "mode" can be defined by prefixing all related commands with
 the same pattern.  Select a key cluster and either append keys to that
 shape pattern or begin a multi-stroke command with it.
@@ -112,12 +122,11 @@ The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_move
 commands.  Since =-R= corresponds to "a" (the left arrow key in [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD)]],
 the command =STPH-R= means "move left".
 
-** Right hand rule
+** Right hand rule <<right_hand_rule>>
 It's possible to write nearly the entire alphabet left handed.  All
-letters but "e" (=E=), "i" (=EU=), and "u" (=U=) can be written with
-the left hand.  By defining a right hand stroke that excludes the =E=
-and =U= keys, we can create single strokes for every letter in the
-alphabet.
+letters but "e" (=E=), "i" (=EU=), and "u" (=U=) are written with the
+left hand.  A single stroke for every letter in the alphabet is made
+by defining a right hand stroke that excludes the =E= and =U= keys.
 
 |-----------+------------+--------|
 | Left Hand | Right Hand | Letter |
@@ -176,20 +185,20 @@ alphabet.
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift
-Emacs makes extensive use of modifier keys.  It's for this reason that
-Emacs presents a challenge for Plover theory.  How can modified
-letters, including combinations of modifiers, memorably coexist
-alongside established natural language steno definitions?
+Emacs makes extensive use of modifier keys.  This presents a challenge
+for Plover theory: how can modified letters, including combinations of
+modifiers, memorably coexist alongside established natural language
+steno definitions?
 
-The solution is to apply the right hand rule for each letter of the
-alphabet.
+The solution is to apply the [[right_hand_rule][right hand rule]] for each letter of the
+alphabet. The idea extends: mirroring the shape to the left hand side
+yields a [[mode_prefix][mode prefix]].  The principles of [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] then
+apply for Left, Up, Down, Right, Page Up/Page Down, and Home/End.
 
-Further, the shape can be mirrored on the left hand side,
-to give a prefix for use with Left, Up, Down, Right, Page Up/Page
-Down, and Home/End[fn:4].
-
-
-Notice how the shapes combine:
+The patterns are applied below.  Notice how the shapes combine.  The
+keys used for Control and Alt are the same keys used for Control +
+Alt.  The keys used for Shift and Alt are the same as for Alt + Shift.
+And so on.
 
 | L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
 |-----------------+-----------+-----------------------+------------+------------------|
@@ -201,15 +210,15 @@ Notice how the shapes combine:
 | [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
 | [[./img/tkpwr.png]] | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | [[./img/-rpblg.png]] |
 
-If =KPW= or =-PBG= is taken as a 'base' shape, notice how Shift is
-always the same key.  On the right hand side, the "Shift bit" is the
-bottom left (=-R=).  Similarly, the "Super bit" is the top left
-(=-F=).
+Another trick is that Shift always includes the same key for a given
+side (right or left). On the right-hand-side, the "Shift bit" is the
+lower left key (=-R=); on the left it's the lower right key (=R=).
+Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
 
 [[./img/super-shift-bits.png]]
 
-Super isn't used often with Emacs.  However, it is possible (and
-others may find the pattern useful).
+Super isn't used often with Emacs.  However, the principles still
+apply.  Super is included for completeness.
 
 | L Pattern        | Left hand | Modifier                      | Right Hand | R Pattern         |
 |------------------+-----------+-------------------------------+------------+-------------------|
@@ -222,20 +231,24 @@ others may find the pattern useful).
 | [[./img/tpwhr.png]]  | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | [[./img/-frpbl.png]]  |
 | [[./img/tkpwhr.png]] | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | [[./img/-frpblg.png]] |
 
+These patterns are combined with the [[right_hand_rule][Right Hand Rule]] to provide
+comprehensive modifier coverage within Plover theory.  Detailed
+description of each modifier combination are given below.
+
 ** Control <<control>>
-| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
-|-----------+-----------+-----------------------+------------+-----------|
-| ⠴         | =KPW=     | Control               | =-PBG=     | ⠦         |
+# todo convert paragraphs to tables, like with the Alt section
+| L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
+|---------------+-----------+----------+------------+----------------|
+| [[./img/kpw.png]] | =KPW=     | Control  | =-PBG=     | [[./img/-pbg.png]] |
 
 The right-hand Control form, =-PBG=, looks like an "L".
 
-The main challenge with =-PBG= as a binding is that it contains the
-=-G= key, used for ={^ing}= in some single-stroke words (=TK-PBG= for
-"defining"; =TP-PBG= for "financing"; =TKPW-PBG= for "gunning";
-=K-PBG= for "conditioning"; =HR-PBG= for "listening"; =PH-PBG= for
-"machining"; =R-PBG= for "reasoning"; =S-PBG= for "seasoning"; =T-PBG=
-for "continuing"; =W-PBG= for "winning"; and =KP-PBG= for
-"examining").
+The main challenge with =-PBG= is that it contains the =-G= key, used
+for ={^ing}= in some single-stroke words (=TK-PBG= for "defining";
+=TP-PBG= for "financing"; =TKPW-PBG= for "gunning"; =K-PBG= for
+"conditioning"; =HR-PBG= for "listening"; =PH-PBG= for "machining";
+=R-PBG= for "reasoning"; =S-PBG= for "seasoning"; =T-PBG= for
+"continuing"; =W-PBG= for "winning"; and =KP-PBG= for "examining").
 
 Default alternate forms can preserve the single-stroke for some
 (=HR-FPB= and =HR-FPBG= for "listen" and "listening"; =AO*E-PBG= for
@@ -247,7 +260,7 @@ alternate =/G= form to add "-ing" (=TK-PB/G= for "defining"; =TP-PB/G=
 for "financing"; =TPKW-PB/G= for "gunning"; =K-PB/G= for
 "conditioning"; =PH-PB/G= for "machining"; =R-PB/G= for "reasoning";
 =S-PB/G= for "seasoning"; =T-PB/G= for "continuing"; and =KP-PB/G= for
-"examining").  This is easy to remember, so is hopefully a fair
+"examining").  This is easy to remember, so hopefully it's a fair
 compromise.
 
 #+begin_src js :tangle plover-emacs.json :exports code
@@ -304,9 +317,9 @@ Control+Alt. Instead, =E-GD= is used for "edge", supplanting
 #+end_src
 
 ** Alt
-| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
-|-----------+-----------+-----------------------+------------+-----------|
-| ⠲         | =TPW=     | Alt                   | =-PBL=     | ⠖         |
+| L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
+|---------------+-----------+----------+------------+----------------|
+| [[./img/tpw.png]] | =TPW=     | Alt      | =-PBL=     | [[./img/-pbl.png]] |
 
 The right-hand Alt form, =-PBL=, looks like a "T".
 
@@ -371,11 +384,11 @@ The remaining bindings present no conflict.
 
 ** Control + Alt
 
-| L Pattern | Left hand | Modifier      | Right Hand | R Pattern |
-|-----------+-----------+---------------+------------+-----------|
-| ⠴         | =KPW=     | Control       | =-PBG=     | ⠦         |
-| ⠲         | =TPW=     | Alt           | =-PBL=     | ⠖         |
-| ⠶_        | =TKPW=    | Control + Alt | =-PBLG=    | _⠶        |
+| L Pattern      | Left hand | Modifier      | Right Hand | R Pattern       |
+|----------------+-----------+---------------+------------+-----------------|
+| [[./img/kpw.png]]  | =KPW=     | Control       | =-PBG=     | [[./img/-pbg.png]]  |
+| [[./img/tpw.png]]  | =TPW=     | Alt           | =-PBL=     | [[./img/-pbl.png]]  |
+| [[./img/tkpw.png]] | =TKPW=    | Control + Alt | =-PBLG=    | [[./img/-pblg.png]] |
 
 The Control + Alt form is a combination of the Control and Alt forms.
 
@@ -445,9 +458,9 @@ undefined.
 #+end_src
 
 ** Shift
-| L Pattern | Left hand | Modifier              | Right Hand | R Pattern |
-|-----------+-----------+-----------------------+------------+-----------|
-| ∴         | =KPR=     | Shift                 | =-RPG=     | ∴         |
+| L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
+|---------------+-----------+----------+------------+----------------|
+| [[./img/kpr.png]] | =KPR=     | Shift    | =-RPG=     | [[./img/-rpg.png]] |
 
 The Shift form looks like an up-arrow.
 
@@ -1680,16 +1693,16 @@ Yellow: #bcbf00
 
 * Footnotes
 
-[fn:4] See [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]].
-
-[fn:3] For example, the code blocks shown on this web page are
+[fn:1] For example, the code blocks shown on this web page are
 directly used to generate the Plover dictionary.  Further, this web
 page is itself generated using Emacs.  All of this happens from a
 single source file.  We could even go so far as to host this web page
 with Emacs if we wanted :)
 
-[fn:2] "M" for "meta".  The Meta key, similar to use as the Alt key,
+[fn:2] Technically to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
+
+[fn:3] "M" for "meta".  The Meta key, similar to use as the Alt key,
 existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 
-[fn:1] Technically to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
+[fn:4] Of course, it's possible to send 'µ' directly with Plover.
