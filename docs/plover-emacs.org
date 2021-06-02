@@ -118,9 +118,9 @@ was", "that will", "that had", etc. by adding a single key.  =THA=
 acts as a "mode" for all phrases beginning with "that".
 
 The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary also uses the prefix technique.
-=STPH-= is used as a prefix for all subsequent movement related
-commands.  Since =-R= corresponds to "a" (the left arrow key in [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD)]],
-the command =STPH-R= means "move left".
+=STPH-= is the movement prefix.  The =-R= key corresponds to "a" key
+of [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD]], which in turn corresponds to the left arrow key.  Therefore,
+=STPH-R= means "move left".
 
 ** Right hand rule <<right_hand_rule>>
 It's possible to write nearly the entire alphabet left handed.  All
