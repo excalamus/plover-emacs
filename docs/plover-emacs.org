@@ -233,7 +233,7 @@ apply.  Super is included for completeness.
 
 These patterns are combined with the [[right_hand_rule][Right Hand Rule]] to provide
 comprehensive modifier coverage within Plover theory.  Detailed
-description of each modifier combination are given below.
+descriptions of each modifier combination are given below.
 
 ** Control <<control>>
 # todo convert paragraphs to tables, like with the Alt section
@@ -263,6 +263,20 @@ for "financing"; =TPKW-PB/G= for "gunning"; =K-PB/G= for
 "examining").  This is easy to remember, so hopefully it's a fair
 compromise.
 
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "defining"          | TK-PBG        |                |
+| "financing"         | TP-PBG        |                |
+| "gunning"           | TKPW-PBG      |                |
+| "conditioning"      | K-PBG         |                |
+| "listening"         | HR-PBG        |                |
+| "machining"         | PH-PBG        |                |
+| "reasoning"         | R-PBG         |                |
+| "seasoning"         | S-PBG         |                |
+| "continuing"        | T-PBG         |                |
+| "winning"           | W-PBG         |                |
+| "examining"         | KP-PBG        |                |
+
 #+begin_src js :tangle plover-emacs.json :exports code
 "TK-PBG": "{#Control_L(d)}",
 "TP-PBG": "{#Control_L(f)}",
@@ -288,6 +302,8 @@ undefined; =TPH-PBG= for "undering"; =O-PBG= for "-ing on"; =P-PBG=
 "you think" which, outside of a quotation, is probably bad manners
 while =O-PBG= is an unfortunate loss.
 
+| stroke   | silly default    |
+
 #+begin_src js :tangle plover-emacs.json :exports code
 "A-PBG": "{#Control_L(a)}",
 "PW-PBG": "{#Control_L(b)}",
@@ -308,6 +324,8 @@ completely clobbered.  There is nothing similar nearby and the
 alternate spelling (=E-PBLG=) is also clobbered by
 Control+Alt. Instead, =E-GD= is used for "edge", supplanting
 "egged". =-EG/D= replaces "egged".
+
+| original definition | old binding | new binding |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "-PBG": "{#Control_L()}",
@@ -352,10 +370,10 @@ easily done using =*=.
 
 Other bindings have alternate single-stroke forms and are overwritten.
 
-| old form | original definition | alternate form |
-|----------+---------------------+----------------|
-| F-PBL    | "financial"         | TP-PBGS        |
-| O-PBL    | "only"              | OE-PBL         |
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "financial"         | F-PBL         | TP-PBGS        |
+| "only"              | O-PBL         | OE-PBL         |
 
 The remaining bindings present no conflict.
 
@@ -467,9 +485,9 @@ The Shift form looks like an up-arrow.
 There is an "ing" clash as with the other forms containing =G=.
 Fortunately, there is an alternate form.
 
-| old form | original definition | alternate form |
-|----------+---------------------+----------------|
-| O-RPG    | "reporting"         | RO-RPG         |
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "reporting"         | O-RPG         | RO-RPG         |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "O-RPG": "{#Shift_L(o)}",
