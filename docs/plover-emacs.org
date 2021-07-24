@@ -216,7 +216,8 @@ memorably coexist alongside established natural language steno
 definitions?
 #+end_quote
 
-The solution is to use [[right-hand-rule][right hand rule]] as a [[mode-prefix][mode prefix]].
+The solution is to define a [[mode-prefix][mode prefix]] which obeys the [[right-hand-rule][right hand
+rule]].
 
 This is detailed below.  Notice how the shapes combine (through
 composition).  The keys used for [[control][Control]] and [[alt][Alt]] are the same keys
