@@ -244,38 +244,25 @@ descriptions of each modifier combination are given below.
 The right-hand Control form, =-PBG=, looks like an "L".
 
 The main challenge with =-PBG= is that it contains the =-G= key, used
-for ={^ing}= in some single-stroke words (=TK-PBG= for "defining";
-=TP-PBG= for "financing"; =TKPW-PBG= for "gunning"; =K-PBG= for
-"conditioning"; =HR-PBG= for "listening"; =PH-PBG= for "machining";
-=R-PBG= for "reasoning"; =S-PBG= for "seasoning"; =T-PBG= for
-"continuing"; =W-PBG= for "winning"; and =KP-PBG= for "examining").
-
-Default alternate forms can preserve the single-stroke for some
-(=HR-FPB= and =HR-FPBG= for "listen" and "listening"; =AO*E-PBG= for
-"Inc.") whereas others can have a new single-stroke defined (=W*PB=
-for "winning").
-
-Unfortunately, the others incur a one-stroke penalty and require the
-alternate =/G= form to add "-ing" (=TK-PB/G= for "defining"; =TP-PB/G=
-for "financing"; =TPKW-PB/G= for "gunning"; =K-PB/G= for
-"conditioning"; =PH-PB/G= for "machining"; =R-PB/G= for "reasoning";
-=S-PB/G= for "seasoning"; =T-PB/G= for "continuing"; and =KP-PB/G= for
-"examining").  This is easy to remember, so hopefully it's a fair
-compromise.
+for ={^ing}=.  Default alternate forms can preserve a single-stroke
+form for some, like =HR-FPBG= for "listening" when using =HR-FPB= for
+"listen" and =AO*E-PBG= for "Inc.".  Unfortunately, others must incur
+one-stroke penalty of the alternate =/G= form.  The alternate is easy
+to remember, so hopefully it's a fair compromise.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
-| "defining"          | TK-PBG        |                |
-| "financing"         | TP-PBG        |                |
-| "gunning"           | TKPW-PBG      |                |
-| "conditioning"      | K-PBG         |                |
-| "listening"         | HR-PBG        |                |
-| "machining"         | PH-PBG        |                |
-| "reasoning"         | R-PBG         |                |
-| "seasoning"         | S-PBG         |                |
-| "continuing"        | T-PBG         |                |
-| "winning"           | W-PBG         |                |
-| "examining"         | KP-PBG        |                |
+| "listening"         | HR-PBG        | HR-FPBG        |
+| "Inc."              | EU-PBG        | AO*E-PBG       |
+| "defining"          | TK-PBG        | TK-PB/G        |
+| "financing"         | TP-PBG        | TP-PB/G        |
+| "gunning"           | TKPW-PBG      | TPKW-PB/G      |
+| "conditioning"      | K-PBG         | K-PB/G         |
+| "machining"         | PH-PBG        | PH-PB/G        |
+| "reasoning"         | R-PBG         | R-PB/G         |
+| "seasoning"         | S-PBG         | S-PB/G         |
+| "continuing"        | T-PBG         | T-PB/G         |
+| "examining"         | KP-PBG        | KP-PB/G        |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "TK-PBG": "{#Control_L(d)}",
@@ -289,8 +276,17 @@ compromise.
 "S-PBG": "{#Control_L(s)}",
 "T-PBG": "{#Control_L(t)}",
 "W-PBG": "{#Control_L(w)}",
-"W*PB": "winning",
 "KP-PBG": "{#Control_L(x)}",
+#+end_src
+
+"Winning" requires a new single-stroke definition.
+
+| original definition | old binding | new binding |
+|---------------------+-------------+-------------|
+| "winning"           | W-PBG       | W*PB        |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"W*PB": "winning",
 #+end_src
 
 Several strokes can be safely co-opted because they aren't words,
