@@ -57,7 +57,7 @@ familiarity with Plover and Emacs is assumed.  If you're not familiar
 with Plover and want to learn it, visit the [[https://github.com/openstenoproject/plover/wiki/Learning-Stenography][Plover wiki]].  To get
 started with Emacs, check out the [[https://www.gnu.org/software/emacs/tour/][guided tour]].
 
-#+begin_src js :tangle plover-emacs.json :exports none
+#+begin_src js :tangle ../plover-emacs.json :exports none
 {
 #+end_src
 
@@ -270,7 +270,7 @@ descriptions of each modifier combination are given below.
 
 The right-hand Control form, =-PBG=, looks like an "L".
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "KPW" : "{#Control_L()}",
 "-PBG": "{#Control_L()}",
 #+end_src
@@ -295,7 +295,7 @@ append "-ing".
 | "continuing"        | =T-PBG=       | =T-PB/G=       |
 | "examining"         | =KP-PBG=      | =KP-PB/G=      |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TK-PBG"  : "{#Control_L(d)}",
 "TP-PBG"  : "{#Control_L(f)}",
 "TKPW-PBG": "{#Control_L(g)}",
@@ -333,7 +333,7 @@ outside of a quotation and likely doesn't need a replacement (that
 /is/ what you think, right?).  A replacement for =O-PBG= ("-ing on")
 may be useful but is not provided.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-PBG"    : "{#Control_L(a)}",
 "PW-PBG"   : "{#Control_L(b)}",
 "KR-PBG"   : "{#Control_L(c)}",
@@ -360,7 +360,7 @@ requires a new single-stroke definition.
 | "egged"             | =E-GD=      | =-EG/D=     |
 | "winning"           | =W-PBG=     | =W*PB=      |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "E-PBG" : "{#Control_L(e)}",
 "-EGD"  : "edge",
 "-EG/D" : "egged",
@@ -375,7 +375,7 @@ requires a new single-stroke definition.
 
 The right-hand Alt form, =-PBL=, looks like a "T".
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TPW" : "{#Alt_L()}",
 "-PBL": "{#Alt_L()}",
 #+end_src
@@ -392,7 +392,7 @@ done using =*=.
 | "seasonal"          | =S-PBL=     | =S*PBL=     |
 | "continual"         | =T-PBL=     | =T*PBL=     |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-PBL": "{#Alt_L(a)}",
 "A*PBL": "Alan",
 "EPBL" : "{#Alt_L(e)}",
@@ -416,7 +416,7 @@ Other bindings have alternate single-stroke forms and are overwritten.
 
 The remaining bindings present no conflicts.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "PW-PBL"   : "{#Alt_L(b)}",
 "KR-PBL"   : "{#Alt_L(c)}",
 "TK-PBL"   : "{#Alt_L(d)}",
@@ -448,7 +448,7 @@ The remaining bindings present no conflicts.
 
 The Control + Alt form is a combination of the [[control][Control]] and [[alt][Alt]] forms.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TKPW" : "{#Control_L(Alt_L())}",
 "-PBLG": "{#Control_L(Alt_L())}",
 #+end_src
@@ -467,7 +467,7 @@ rebind them to a =*= form.
 | "emergency"         | =PH-PBLG=   | =PH*PBLG=   |
 | "engine"            | =TPH-PBLG=  | =TPH*PBLG=  |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-PBLG"  : "{#Control_L(Alt_L(a))}",
 "A*EUPBLG": "{^age}",
 "PW-PBLG" : "{#Control_L(Alt_L(b))}",
@@ -497,7 +497,7 @@ undefined.
 | =S-PBLG=   | "seasonaling"    |
 | =T-PBLG=   | "continualing"   |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TK-PBLG"   : "{#Control_L(Alt_L(d))}",
 "TP-PBLG"   : "{#Control_L(Alt_L(f))}",
 "TKPW-PBLG" : "{#Control_L(Alt_L(g))}",
@@ -525,7 +525,7 @@ undefined.
 
 The Shift form looks like an up-arrow.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "KPR" : "{#Shift_L()}",
 "-RPG": "{#Shift_L()}",
 #+end_src
@@ -537,7 +537,7 @@ Fortunately, there is an alternate form.
 |---------------------+---------------+----------------|
 | "reporting"         | =O-RPG=       | =RO-RPG=       |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "O-RPG": "{#Shift_L(o)}",
 #+end_src
 
@@ -553,7 +553,7 @@ conflict.
 | =T-RPG= | "it wering"   |
 | =URPG=  | "you wering"  |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-RPG"    : "{#Shift_L(a)}",
 "PW-RPG"   : "{#Shift_L(b)}",
 "KR-RPG"   : "{#Shift_L(c)}",
@@ -590,7 +590,7 @@ conflict.
 
 The Control + Shift from is a combination of the [[control][Control]] and [[shift][Shift]] forms.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "KPWR" : "{#Control_L(Shift_L())}",
 "-RPBG": "{#Control_L(Shift_L())}",
 #+end_src
@@ -605,7 +605,7 @@ Several words require use of their alternate form:
 | "orange"            | =O-RPBG=      | =O/RAPBG=      |
 | "surgeon general"   | =S-RPBG=      | =S*RPBG=       |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-RPBG": "{#Control_L(Shift_L(a))}",
 "EURPBG": "{#Control_L(Shift_L(i))}",
 "K-RPBG": "{#Control_L(Shift_L(k))}",
@@ -619,7 +619,7 @@ One word requires a new binding:
 |---------------------+-------------+-------------|
 | "earning"           | =ERPBG=     | =*ERPBG=    |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "ERPBG": "{#Control_L(Shift_L(e))}",
 "*ERPBG": "earning",
 #+end_src
@@ -634,7 +634,7 @@ silly.
 | =PH-PRBG= | "miranda warning"[fn:5] |
 | =U-RPBG=  | "urning"                |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "PW-RPBG"   : "{#Control_L(Shift_L(b))}",
 "KR-RPBG"   : "{#Control_L(Shift_L(c))}",
 "TK-RPBG"   : "{#Control_L(Shift_L(d))}",
@@ -666,7 +666,7 @@ silly.
 
 The Alt + Shift form is a combination of the [[alt][Alt]] and [[shift][Shift]] form.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TPWR"  : "{#Alt_L(Shift_L())}",
 "-RPBL" : "{#Alt_L(Shift_L())}",
 #+end_src
@@ -680,7 +680,7 @@ conflict has a viable alternative form already defined.
 | "alternatively"     | =HR-RPBL=     | =HR-RPBLT=     |
 | "original"          | =O-RPBL=      | =O-RPBLG=      |
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "TP-RPBL" : "{#Alt_L(Shift_L(f))}",
 "HR-RPBL" : "{#Alt_L(Shift_L(l))}",
 "O-RPBL"  : "{#Alt_L(Shift_L(o))}",
@@ -688,7 +688,7 @@ conflict has a viable alternative form already defined.
 
 There are no other conflicts with the Plover standard dictionary.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "A-RPBL"     : "{#Alt_L(Shift_L(a))}",
 "PW-RPBL"    : "{#Alt_L(Shift_L(b))}",
 "KR-RPBL"    : "{#Alt_L(Shift_L(c))}",
@@ -724,7 +724,7 @@ pattern over (⠲_), given the Escape/Alt relationship.  That feels awkward
 to me and, since I am also a vim/evil user, I want a stronger feeling
 binding:
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "STW": "{#Escape}",
 "-BLS": "{#Escape}",
 #+end_src
@@ -738,13 +738,13 @@ For people who are right-handed, the following allow for quick access
 when using a mouse.
 
 =ULT= sounds like "Alt".
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "ULT": "{#Alt_L(x)}",
 #+end_src
 
 The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
 much of an association.  It's simply available and easy to write.
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "-RPB": "{#Control(g)}",
 #+end_src
 
@@ -753,7 +753,7 @@ Vim provides a key reserved for user defined functions called the
 "leader". Any key binding that starts with the leader is guaranteed to
 be available. Leader functionality is available in Emacs through
 evil-mode or general.el.
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "KWR-RBG": "{#Page_Down}",
 #+end_src
 
@@ -761,7 +761,7 @@ evil-mode or general.el.
 It doesn't seem like =*= is used at all with numbers.  This means it
 can be used to differentiate the F keys.
 
-#+begin_src js :tangle plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports code
 "*": "{#F1}",
 "2*": "{#F2}",
 "3*": "{#F3}",
@@ -1887,7 +1887,7 @@ Red: #d40000
 Yellow: #bcbf00
 
 * Closing bracket
-#+begin_src js :tangle plover-emacs.json :exports none :noweb yes
+#+begin_src js :tangle ../plover-emacs.json :exports none :noweb yes
 <<generated>>
 }
 #+end_src
