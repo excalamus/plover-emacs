@@ -64,15 +64,15 @@ started with Emacs, check out the [[https://www.gnu.org/software/emacs/tour/][gu
 * Dictionary design principles
 Stenography works by mapping a set of steno keys to some output
 characters or actions.  The mapping is often times one-to-many.  A
-steno theory unifies a set of mappings within a cohesive conceptual
-framework.  It is the stenographer's dictionary which captures the
-essense of the theory.  A dictionary defines the rule(s) for a
-mapping.  Stenographers have complete liberty to modify a theory
-through updates to their dictionaries.  What follows are common
-techniques used to design dictionaries and formulate theories.
+steno theory unifies a set of mappings by providing a cohesive
+conceptual framework.  A dictionary defines the rule(s) for a
+mapping. It is the stenographer's dictionary which captures the
+essense of the theory.  Stenographers have complete liberty to modify
+a theory through updates to their dictionaries.  What follows are
+common techniques used to design dictionaries and formulate theories.
 
-** Sequence chains <<sequence_chains>>
-# TODO this example is contrived.  Is there a better one?
+** TODO Sequence chains <<sequence_chains>>
+# this example is contrived.  Is there a better one?
 
 Many Emacs commands are called through sequences.  Typically, a Plover
 dictionary maps a stroke to a single output element (e.g. character,
