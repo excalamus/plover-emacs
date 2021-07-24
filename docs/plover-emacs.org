@@ -255,20 +255,19 @@ single-stroke, as with "listening" and "Inc.".  Unfortunately, other
 words must incur a one-stroke penalty by requiring the use of =/G= to
 append "-ing".
 
-#+caption: Strokes co-opted by =Control= with alternate form
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
-| "listening"         | HR-PBG        | HR-FPBG        |
-| "Inc."              | EU-PBG        | AO*E-PBG       |
-| "defining"          | TK-PBG        | TK-PB/G        |
-| "financing"         | TP-PBG        | TP-PB/G        |
-| "gunning"           | TKPW-PBG      | TPKW-PB/G      |
-| "conditioning"      | K-PBG         | K-PB/G         |
-| "machining"         | PH-PBG        | PH-PB/G        |
-| "reasoning"         | R-PBG         | R-PB/G         |
-| "seasoning"         | S-PBG         | S-PB/G         |
-| "continuing"        | T-PBG         | T-PB/G         |
-| "examining"         | KP-PBG        | KP-PB/G        |
+| "listening"         | =HR-PBG=      | =HR-FPBG=      |
+| "Inc."              | =EU-PBG=      | =AO*E-PBG=     |
+| "defining"          | =TK-PBG=      | =TK-PB/G=      |
+| "financing"         | =TP-PBG=      | =TP-PB/G=      |
+| "gunning"           | =TKPW-PBG=    | =TPKW-PB/G=    |
+| "conditioning"      | =K-PBG=       | =K-PB/G=       |
+| "machining"         | =PH-PBG=      | =PH-PB/G=      |
+| "reasoning"         | =R-PBG=       | =R-PB/G=       |
+| "seasoning"         | =S-PBG=       | =S-PB/G=       |
+| "continuing"        | =T-PBG=       | =T-PB/G=       |
+| "examining"         | =KP-PBG=      | =KP-PB/G=      |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "TK-PBG"  : "{#Control_L(d)}",
@@ -287,7 +286,6 @@ append "-ing".
 Several strokes can be safely co-opted because they aren't words, are
 undefined, or aren't proper.
 
-#+caption: Strokes overwritten and unreplaced by =Control=
 | stroke      | silly default |
 |-------------+---------------|
 | =A-PBG=     | "Ang"         |
@@ -330,12 +328,11 @@ similar nearby to use.  Instead, =E-GD= is used for "edge",
 supplanting "egged" which recieves the new binding =-EG/D=.  "Winning"
 requires a new single-stroke definition.
 
-#+caption: New definitons related to =Control=
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
 | "edge"              | =E-PBG=     | =-E-GD=     |
 | "egged"             | =E-GD=      | =-EG/D=     |
-| "winning"           | W-PBG       | W*PB        |
+| "winning"           | =W-PBG=     | =W*PB=      |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "E-PBG" : "{#Control_L(e)}",
@@ -352,22 +349,27 @@ requires a new single-stroke definition.
 
 The right-hand Alt form, =-PBL=, looks like a "T".
 
-Several default bindings will need new definitions.  This is most
-easily done using =*=.
+#+begin_src js :tangle plover-emacs.json :exports code
+"TPW" : "{#Alt_L()}",
+"-PBL": "{#Alt_L()}",
+#+end_src
+
+Several default bindings require new definitions.  This is most easily
+done using =*=.
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
-| "Alan"              | A-PBL       | A*PBL       |
-| "{^ential}"         | EPBL        | *EPBL       |
-| "conditional"       | K-PBL       | K*PBL       |
-| "reasonable"        | R-PBL       | R*PBL       |
-| "seasonal"          | S-PBL       | S*PBL       |
-| "continual"         | T-PBL       | T*PBL       |
+| "Alan"              | =A-PBL=     | =A*PBL=     |
+| "{^ential}"         | =EPBL=      | =*EPBL=     |
+| "conditional"       | =K-PBL=     | =K*PBL=     |
+| "reasonable"        | =R-PBL=     | =R*PBL=     |
+| "seasonal"          | =S-PBL=     | =S*PBL=     |
+| "continual"         | =T-PBL=     | =T*PBL=     |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "A-PBL": "{#Alt_L(a)}",
 "A*PBL": "Alan",
-"EPBL": "{#Alt_L(e)}",
+"EPBL" : "{#Alt_L(e)}",
 "*EPBL": "{^ential}",
 "K-PBL": "{#Alt_L(k)}",
 "K*PBL": "conditional",
@@ -383,36 +385,35 @@ Other bindings have alternate single-stroke forms and are overwritten.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
-| "financial"         | F-PBL         | TP-PBGS        |
-| "only"              | O-PBL         | OE-PBL         |
+| "financial"         | =F-PBL=       | =TP-PBGS=      |
+| "only"              | =O-PBL=       | =OE-PBL=       |
 
-The remaining bindings present no conflict.
+The remaining bindings present no conflicts.
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"PW-PBL": "{#Alt_L(b)}",
-"KR-PBL": "{#Alt_L(c)}",
-"TK-PBL": "{#Alt_L(d)}",
-"TP-PBL": "{#Alt_L(f)}",
-"TKPW-PBL": "{#Alt_L(g)}",
-"H-PBL": "{#Alt_L(h)}",
-"EUPBL": "{#Alt_L(i)}",
-"SKWR-PBL": "{#Alt_L(j)}",
-"HR-PBL": "{#Alt_L(l)}",
-"PH-PBL": "{#Alt_L(m)}",
-"TPH-PBL": "{#Alt_L(n)}",
-"O-PBL": "{#Alt_L(o)}",
-"P-PBL": "{#Alt_L(p)}",
-"KW-PBL": "{#Alt_L(q)}",
-"UPBL": "{#Alt_L(u)}",
-"SR-PBL": "{#Alt_L(v)}",
-"W-PBL": "{#Alt_L(w)}",
-"KP-PBL": "{#Alt_L(x)}",
-"KWR-PBL": "{#Alt_L(y)}",
+"PW-PBL"   : "{#Alt_L(b)}",
+"KR-PBL"   : "{#Alt_L(c)}",
+"TK-PBL"   : "{#Alt_L(d)}",
+"TP-PBL"   : "{#Alt_L(f)}",
+"TKPW-PBL" : "{#Alt_L(g)}",
+"H-PBL"    : "{#Alt_L(h)}",
+"EUPBL"    : "{#Alt_L(i)}",
+"SKWR-PBL" : "{#Alt_L(j)}",
+"HR-PBL"   : "{#Alt_L(l)}",
+"PH-PBL"   : "{#Alt_L(m)}",
+"TPH-PBL"  : "{#Alt_L(n)}",
+"O-PBL"    : "{#Alt_L(o)}",
+"P-PBL"    : "{#Alt_L(p)}",
+"KW-PBL"   : "{#Alt_L(q)}",
+"UPBL"     : "{#Alt_L(u)}",
+"SR-PBL"   : "{#Alt_L(v)}",
+"W-PBL"    : "{#Alt_L(w)}",
+"KP-PBL"   : "{#Alt_L(x)}",
+"KWR-PBL"  : "{#Alt_L(y)}",
 "STKPW-PBL": "{#Alt_L(z)}",
 #+end_src
 
 ** Control + Alt
-
 | L Pattern      | Left hand | Modifier      | Right Hand | R Pattern       |
 |----------------+-----------+---------------+------------+-----------------|
 | [[./img/kpw.png]]  | =KPW=     | Control       | =-PBG=     | [[./img/-pbg.png]]  |
@@ -421,32 +422,37 @@ The remaining bindings present no conflict.
 
 The Control + Alt form is a combination of the Control and Alt forms.
 
+#+begin_src js :tangle plover-emacs.json :exports code
+"TKPW" : "{#Control_L(Alt_L())}",
+"-PBLG": "{#Control_L(Alt_L())}",
+#+end_src
+
 The right hand form =-PBLG= is the "j" sound within Plover theory.
 This causes a clash with several default words.  The solution is to
 rebind them to a =*= form.
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
-| "{\^age}"           | A-PBLG      | A*EUPBLG    |
-| "bandage"           | PW-PBLG     | PW*PBLG     |
-| "CJ"                | KR-PBLG     | KR*PBLG     |
-| "edge"              | EPBLG       | See [[control][Control]] |
-| "image"             | EUPBLG      | *EUPBLG     |
-| "emergency"         | PH-PBLG     | PH*PBLG     |
-| "engine"            | TPH-PBLG    | TPH*PBLG    |
+| "{\^age}"           | =A-PBLG=    | =A*EUPBLG=  |
+| "bandage"           | =PW-PBLG=   | =PW*PBLG=   |
+| "CJ"                | =KR-PBLG=   | =KR*PBLG=   |
+| "edge"              | =EPBLG=     | See [[control][Control]] |
+| "image"             | =EUPBLG=    | =*EUPBLG=   |
+| "emergency"         | =PH-PBLG=   | =PH*PBLG=   |
+| "engine"            | =TPH-PBLG=  | =TPH*PBLG=  |
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"A-PBLG": "{#Control_L(Alt_L(a))}",
+"A-PBLG"  : "{#Control_L(Alt_L(a))}",
 "A*EUPBLG": "{^age}",
-"PW-PBLG": "{#Control_L(Alt_L(b))}",
-"PW*PBLG": "bandage",
-"KR-PBLG": "{#Control_L(Alt_L(c))}",
-"KR*PBLG": "CJ",
-"EPBLG": "{#Control_L(Alt_L(e))}",
-"EU-PBLG": "{#Control_L(Alt_L(i))}",
-"*EUPBLG": "image",
-"PH-PBLG": "{#Control_L(Alt_L(m))}",
-"PH*PBLG": "emergency",
+"PW-PBLG" : "{#Control_L(Alt_L(b))}",
+"PW*PBLG" : "bandage",
+"KR-PBLG" : "{#Control_L(Alt_L(c))}",
+"KR*PBLG" : "CJ",
+"EPBLG"   : "{#Control_L(Alt_L(e))}",
+"EU-PBLG" : "{#Control_L(Alt_L(i))}",
+"*EUPBLG" : "image",
+"PH-PBLG" : "{#Control_L(Alt_L(m))}",
+"PH*PBLG" : "emergency",
 "TPH-PBLG": "{#Control_L(Alt_L(n))}",
 "TPH*PBLG": "engine",
 #+end_src
@@ -455,34 +461,34 @@ A number of silly words are defined in the default dictionary by
 happenstance. These can be safely overwritten. All others were
 undefined.
 
-| stroke   | silly default    |
-|----------+------------------|
-| A*EUPBLG | anal{\^ing}      |
-| F-PBLG   | "financialing"   |
-| K-PBLG   | "conditionaling" |
-| O-PBLG   | "onlying"        |
-| R-PBLG   | "reasonabling"   |
-| S-PBLG   | "seasonaling"    |
-| T-PBLG   | "continualing"   |
+| stroke     | silly default    |
+|------------+------------------|
+| =A*EUPBLG= | anal{\^ing}      |
+| =F-PBLG=   | "financialing"   |
+| =K-PBLG=   | "conditionaling" |
+| =O-PBLG=   | "onlying"        |
+| =R-PBLG=   | "reasonabling"   |
+| =S-PBLG=   | "seasonaling"    |
+| =T-PBLG=   | "continualing"   |
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"TK-PBLG": "{#Control_L(Alt_L(d))}",
-"TP-PBLG": "{#Control_L(Alt_L(f))}",
-"TKPW-PBLG": "{#Control_L(Alt_L(g))}",
-"H-PBLG": "{#Control_L(Alt_L(h))}",
-"SKWR-PBLG": "{#Control_L(Alt_L(j))}",
-"K-PBLG": "{#Control_L(Alt_L(k))}",
-"O-PBLG": "{#Control_L(Alt_L(o))}",
-"P-PBLG": "{#Control_L(Alt_L(p))}",
-"KW-PBLG": "{#Control_L(Alt_L(q))}",
-"R-PBLG": "{#Control_L(Alt_L(r))}",
-"S-PBLG": "{#Control_L(Alt_L(s))}",
-"T-PBLG": "{#Control_L(Alt_L(t))}",
-"UPBLG": "{#Control_L(Alt_L(u))}",
-"SR-PBLG": "{#Control_L(Alt_L(v))}",
-"W-PBLG": "{#Control_L(Alt_L(w))}",
-"KP-PBLG": "{#Control_L(Alt_L(x))}",
-"KWR-PBLG": "{#Control_L(Alt_L(y))}",
+"TK-PBLG"   : "{#Control_L(Alt_L(d))}",
+"TP-PBLG"   : "{#Control_L(Alt_L(f))}",
+"TKPW-PBLG" : "{#Control_L(Alt_L(g))}",
+"H-PBLG"    : "{#Control_L(Alt_L(h))}",
+"SKWR-PBLG" : "{#Control_L(Alt_L(j))}",
+"K-PBLG"    : "{#Control_L(Alt_L(k))}",
+"O-PBLG"    : "{#Control_L(Alt_L(o))}",
+"P-PBLG"    : "{#Control_L(Alt_L(p))}",
+"KW-PBLG"   : "{#Control_L(Alt_L(q))}",
+"R-PBLG"    : "{#Control_L(Alt_L(r))}",
+"S-PBLG"    : "{#Control_L(Alt_L(s))}",
+"T-PBLG"    : "{#Control_L(Alt_L(t))}",
+"UPBLG"     : "{#Control_L(Alt_L(u))}",
+"SR-PBLG"   : "{#Control_L(Alt_L(v))}",
+"W-PBLG"    : "{#Control_L(Alt_L(w))}",
+"KP-PBLG"   : "{#Control_L(Alt_L(x))}",
+"KWR-PBLG"  : "{#Control_L(Alt_L(y))}",
 "STKPW-PBLG": "{#Control_L(Alt_L(z))}",
 #+end_src
 
