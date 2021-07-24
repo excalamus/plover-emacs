@@ -10,6 +10,9 @@
 # todo explain M-S
 # ...
 
+# Define left hand prefixes! (or address why its not necessary to do
+# so for every letter modification)
+
 #+begin_quote
 ATTENTION: This document and the corresponding dictionary are under
 active development!  To be notified of changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the
@@ -106,10 +109,10 @@ shape patterns.  Page Up and Page Down are mapped to =-RPG=
 ([[./img/-rpg.png]]) and =-FBL= ([[./img/-fbl.png]]) because the patterns they
 make look like up and down arrows.
 
-** Mode prefixes <<mode_prefix>>
+** Mode prefixes <<mode-prefix>>
 A pseudo "mode" can be defined by prefixing all related commands with
-the same pattern.  There are two ways to do this.  Either append keys
-to a shape pattern (thus achieving single stroke) or define a
+the same pattern.  There are two ways to do this.  Either adjoin keys
+to a shape pattern (thus maintaining a single stroke) or define a
 multi-stroke command whose first stroke is the pattern.
 
 Mark Kislingbury, record holder for fastest writer in the world, uses
@@ -126,7 +129,7 @@ movement prefix.  The =-R= key corresponds to "a" key of [[https://en.wikipedia.
 navigaton (which in turn corresponds to the left arrow key).
 Therefore, =STPH-R= means "move left".
 
-** Right hand rule <<right_hand_rule>>
+** Right hand rule <<right-hand-rule>>
 Observe that all letters but "e" (=E=), "i" (=EU=), and "u" (=U=)
 appear before =*= in the [[https://sites.google.com/site/learnplover/lesson-2-steno-order][steno order]].  This means it's possible to
 write nearly the entire English alphabet with only the left hand.  In
@@ -204,21 +207,24 @@ alphabet can be made by using a right hand pattern that excludes the
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift
-Emacs makes extensive use of modifier keys.  This presents a challenge
-steno theoretical challenge: how can modified letters (including
-combinations of modifiers) memorably coexist alongside established
-natural language steno definitions?
+Emacs makes extensive use of modifier keys.  This presents a
+steno-theoretical challenge:
 
-The solution is to apply the [[right_hand_rule][right hand rule]] for each letter of the
-alphabet. The idea extends: mirroring the shape to the left hand side
-yields a [[mode_prefix][mode prefix]].  The principles of [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] which
-apply for Left, Up, Down, Right, Page Up/Page Down, and Home/End
-extend to the entire alphabet.
+#+begin_quote
+How can modified letters (including combinations of modifiers)
+memorably coexist alongside established natural language steno
+definitions?
+#+end_quote
 
-The patterns are applied below.  Notice how the shapes combine.  The
-keys used for [[control][Control]] and [[alt][Alt]] are the same keys used for [[control-alt][Control +
-Alt.]]  The keys used for [[shift][Shift]] and [[alt][Alt]] are the same as for [[alt-shift][Alt + Shift]].
-And so on.
+The solution is to use [[right-hand-rule][right hand rule]] as a [[mode-prefix][mode prefix]].
+
+This is detailed below.  Notice how the shapes combine (through
+composition).  The keys used for [[control][Control]] and [[alt][Alt]] are the same keys
+used for [[control-alt][Control + Alt.]]  The keys used for [[shift][Shift]] and [[alt][Alt]] are the same
+as for [[alt-shift][Alt + Shift]].  And so on.
+
+Further, the shapes can be mirrored to either side of the board to
+yield more possible strokes.
 
 | L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
 |-----------------+-----------+-----------------------+------------+------------------|
@@ -230,15 +236,16 @@ And so on.
 | [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
 | [[./img/tkpwr.png]] | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | [[./img/-rpblg.png]] |
 
-Another trick is that Shift always includes the same key for a given
-side (right or left). On the right-hand-side, the "Shift bit" is the
-lower left key (=-R=); on the left it's the lower right key (=R=).
-Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
+A trick to help remembering is that Shift always includes the same key
+for a given side (right or left). On the right-hand-side, the "Shift
+bit" is the lower left key (=-R=); on the left it's the lower right
+key (=R=).  Similarly, the "Super bit" is top left (=-F=) or top right
+(=H=).
 
 [[./img/super-shift-bits.png]]
 
 Super isn't used often with Emacs.  However, the principles still
-apply and are applied for completeness.
+apply and are included for completeness.
 
 | L Pattern        | Left hand | Modifier                      | Right Hand | R Pattern         |
 |------------------+-----------+-------------------------------+------------+-------------------|
@@ -251,7 +258,7 @@ apply and are applied for completeness.
 | [[./img/tpwhr.png]]  | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | [[./img/-frpbl.png]]  |
 | [[./img/tkpwhr.png]] | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | [[./img/-frpblg.png]] |
 
-These patterns are combined with the [[right_hand_rule][Right Hand Rule]] to provide
+These patterns are combined with the [[right-hand-rule][Right Hand Rule]] to provide
 comprehensive modifier coverage within the Plover theory.  Detailed
 descriptions of each modifier combination are given below.
 
@@ -609,7 +616,7 @@ One word requires a new binding:
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
-| "earning"           | =EPRBG=     | =*EPRBG=    |
+| "earning"           | =ERPBG=     | =*ERPBG=    |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "ERPBG": "{#Control_L(Shift_L(e))}",
@@ -619,14 +626,35 @@ One word requires a new binding:
 The remaining strokes either present no conflict or replace something
 silly.
 
-| stroke  | silly default |
-|---------+---------------|
+| stroke    | silly default           |
+|-----------+-------------------------|
+| =TP-RPBG= | "fortuning"             |
+| =H-RPBG=  | "hit-and-running"       |
+| =PH-PRBG= | "miranda warning"[fn:5] |
+| =U-RPBG=  | "urning"                |
 
 #+begin_src js :tangle plover-emacs.json :exports code
-"KPWR" : "{#Control_L(Shift_L())}",
-"-RPBG": "{#Control_L(Shift_L())}",
+"PW-RPBG"   : "{#Control_L(Shift_L(b))}",
+"KR-RPBG"   : "{#Control_L(Shift_L(c))}",
+"TK-RPBG"   : "{#Control_L(Shift_L(d))}",
+"TP-RPBG"   : "{#Control_L(Shift_L(f))}",
+"TKPW-RPBG" : "{#Control_L(Shift_L(g))}",
+"H-RPBG"    : "{#Control_L(Shift_L(h))}",
+"SKWR-RPBG" : "{#Control_L(Shift_L(j))}",
+"HR-RPBG"   : "{#Control_L(Shift_L(l))}",
+"PH-RPBG"   : "{#Control_L(Shift_L(m))}",
+"TPH-RPBG"  : "{#Control_L(Shift_L(n))}",
+"P-RPBG"    : "{#Control_L(Shift_L(p))}",
+"KW-RPBG"   : "{#Control_L(Shift_L(q))}",
+"R-RPBG"    : "{#Control_L(Shift_L(r))}",
+"T-RPBG"    : "{#Control_L(Shift_L(t))}",
+"URPBG"     : "{#Control_L(Shift_L(u))}",
+"SR-RPBG"   : "{#Control_L(Shift_L(v))}",
+"W-RPBG"    : "{#Control_L(Shift_L(w))}",
+"KP-RPBG"   : "{#Control_L(Shift_L(x))}",
+"KWR-RPBG"  : "{#Control_L(Shift_L(y))}",
+"STKPW-RPBG": "{#Control_L(Shift_L(z))}",
 #+end_src
-
 
 ** TODO Alt + Shift <<alt-shift>>
 ** Escape
@@ -1759,6 +1787,7 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
 ** Resources
 - https://plover.goeswhere.com/
 - https://stenoknight.com/plover/ploverlookup/
+- https://github.com/EPLHREU/emily-symbols
 
 ** Leftovers
 Mark Kislingbury [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  Steno order
@@ -1821,3 +1850,6 @@ existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 
 [fn:4] Of course, it's possible to send 'µ' directly with Plover.
+
+[fn:5] Granted, nothing is really 'silly' about "miranda warning".
+It's simply uncommon outside of classrooms and courtrooms.
