@@ -6,8 +6,6 @@
 
 ----------------
 
-# todo alt
-# todo Explain Shift
 # todo explain C-S
 # todo explain M-S
 # ...
@@ -108,27 +106,39 @@ shape patterns.  Page Up and Page Down are mapped to =-RPG=
 ([[./img/-rpg.png]]) and =-FBL= ([[./img/-fbl.png]]) because the patterns they
 make look like up and down arrows.
 
-** Mode prefix <<mode_prefix>>
+** Mode prefixes <<mode_prefix>>
 A pseudo "mode" can be defined by prefixing all related commands with
-the same pattern.  Select a key cluster and either append keys to that
-shape pattern or begin a multi-stroke command with it.
+the same pattern.  There are two ways to do this.  Either append keys
+to a shape pattern (thus achieving single stroke) or define a
+multi-stroke command whose first stroke is the pattern.
 
 Mark Kislingbury, record holder for fastest writer in the world, uses
-this approach when he [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words on the left.  For
-example, =THA= ("that") leaves the board open for phrases like "that
-was", "that will", "that had", etc. by adding a single key.  =THA=
-acts as a "mode" for all phrases beginning with "that".
+the single-stroke prefix approach when he [[http://acraconference2015.weebly.com/uploads/2/1/4/4/21444166/mark_kislingbury_presentation_acra_01-23-2015.pdf][advises]] to put small words
+on the left.  For example, =THA= ("that") leaves the board open for
+phrases like "that was", "that will", "that had", etc. by adding a
+single key.  =THA= acts as a "mode" for all phrases beginning with
+"that".  Such prefixes are "built in" and require no additional
+stroke.
 
-The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary also uses the prefix technique.
-=STPH-= is the movement prefix.  The =-R= key corresponds to "a" key
-of [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD]], which in turn corresponds to the left arrow key.  Therefore,
-=STPH-R= means "move left".
+The [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary by Ted Morin also uses a
+single-stroke prefix.  In that sysetem, =STPH-= is the movement
+prefix.  The =-R= key corresponds to "a" key of [[https://en.wikipedia.org/wiki/Arrow_keys#WASD_keys][WASD]], which in turn
+corresponds to the left arrow key.  Therefore, =STPH-R= means "move
+left".
 
 ** Right hand rule <<right_hand_rule>>
-It's possible to write nearly the entire alphabet left handed.  All
-letters but "e" (=E=), "i" (=EU=), and "u" (=U=) are written with the
-left hand.  A single stroke for every letter in the alphabet is made
-by defining a right hand stroke that excludes the =E= and =U= keys.
+Observe that it's possible to write nearly the entire alphabet with
+only the left hand.  All letters but "e" (=E=), "i" (=EU=), and "u"
+(=U=) appear before =*= in the [[https://sites.google.com/site/learnplover/lesson-2-steno-order][steno order]].  In this way, the alphabet
+is "leans left".
+
+A consequence of the alphabet's tendency to lean left is:
+
+#+begin_quote
+*Right Hand Rule:* a single stroke for every letter in the alphabet
+can be made by using a right hand pattern that excludes the =E= and
+=U= keys.
+#+end_quote
 
 |-----------+------------+--------|
 | Left Hand | Right Hand | Letter |
@@ -420,7 +430,7 @@ The remaining bindings present no conflicts.
 | [[./img/tpw.png]]  | =TPW=     | Alt           | =-PBL=     | [[./img/-pbl.png]]  |
 | [[./img/tkpw.png]] | =TKPW=    | Control + Alt | =-PBLG=    | [[./img/-pblg.png]] |
 
-The Control + Alt form is a combination of the Control and Alt forms.
+The Control + Alt form is a combination of the [[control][Control]] and [[alt][Alt]] forms.
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "TKPW" : "{#Control_L(Alt_L())}",
@@ -554,6 +564,61 @@ conflict.
 "KWR-RPG"  : "{#Shift_L(y)}",
 "STKPW-RPG": "{#Shift_L(z)}",
 #+end_src
+
+** Control + Shift <<control-shift>>
+| L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
+|-----------------+-----------+-----------------------+------------+------------------|
+| [[./img/kpw.png]]   | =KPW=     | Control               | =-PBG=     | [[./img/-pbg.png]]   |
+| [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
+| [[./img/kpwr.png]]  | =KPWR=    | Control + Shift       | =-RPBG=    | [[./img/-rpbg.png]]  |
+
+The Control + Shift from is a combination of the [[control][Control]] and [[shift][Shift]] forms.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"KPWR" : "{#Control_L(Shift_L())}",
+"-RPBG": "{#Control_L(Shift_L())}",
+#+end_src
+
+Several words require use of their alternate form:
+
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "anger"             | =A-RPBG=      | =A*RPBG=       |
+| "increment"         | =EURPBG=      | =EURPBLT=      |
+| "concerning"        | =K-RPBG=      | =KERPBG=       |
+| "orange"            | =O-RPBG=      | =O/RAPBG=      |
+| "surgeon general"   | =S-RPBG=      | =S*RPBG=       |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"A-RPBG": "{#Control_L(Shift_L(a))}",
+"EURPBG": "{#Control_L(Shift_L(i))}",
+"K-RPBG": "{#Control_L(Shift_L(k))}",
+"O-RPBG": "{#Control_L(Shift_L(o))}",
+"S-RPBG": "{#Control_L(Shift_L(s))}",
+#+end_src
+
+One word requires a new binding:
+
+| original definition | old binding | new binding |
+|---------------------+-------------+-------------|
+| "earning"           | =EPRBG=     | =*EPRBG=    |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"ERPBG": "{#Control_L(Shift_L(e))}",
+"*ERPBG": "earning",
+#+end_src
+
+The remaining strokes either present no conflict or replace something
+silly.
+
+| stroke  | silly default |
+|---------+---------------|
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"KPWR" : "{#Control_L(Shift_L())}",
+"-RPBG": "{#Control_L(Shift_L())}",
+#+end_src
+
 
 ** Escape
 The Escape key is distributed with Plover in the =commands.json=
