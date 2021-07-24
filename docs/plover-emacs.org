@@ -17,6 +17,11 @@
 ATTENTION: This document and the corresponding dictionary are under
 active development!  To be notified of changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the
 [[https://github.com/excalamus/plover-emacs][repository]].
+
+Roadmap: v1.0 - control, meta/alt, shift combinations of the English alphabet
+
+Roadmap: v2.0 - control, meta/alt, shift combinations of the English
+		alphabet and symbols
 #+end_quote
 
 Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][here]].
