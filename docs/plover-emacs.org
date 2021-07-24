@@ -6,9 +6,9 @@
 
 ----------------
 
-# todo explain C-S
 # todo explain M-S
-# ...
+# todo explain M-A-S and then call it quits!
+# Escape
 
 # Define left hand prefixes! (or address why its not necessary to do
 # so for every letter modification)
@@ -206,7 +206,7 @@ alphabet can be made by using a right hand pattern that excludes the
 | STKPW     |            | "z"    |
 |-----------+------------+--------|
 
-* Emacs: Escape, Meta, Alt, Control, Shift
+* Emacs: Escape, Meta, Alt, Control, Shift <<emacs>>
 Emacs makes extensive use of modifier keys.  This presents a
 steno-theoretical challenge:
 
@@ -657,7 +657,63 @@ silly.
 "STKPW-RPBG": "{#Control_L(Shift_L(z))}",
 #+end_src
 
-** TODO Alt + Shift <<alt-shift>>
+** Alt + Shift <<alt-shift>>
+| L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
+|-----------------+-----------+-----------------------+------------+------------------|
+| [[./img/tpw.png]]   | =TPW=     | Alt                   | =-PBL=     | [[./img/-pbl.png]]   |
+| [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
+| [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
+
+The Alt + Shift form is a combination of the [[alt][Alt]] and [[shift][Shift]] form.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TPWR"  : "{#Alt_L(Shift_L())}",
+"-RPBL" : "{#Alt_L(Shift_L())}",
+#+end_src
+
+Not many conflicts occur with the Alt + Shift pattern and each
+conflict has a viable alternative form already defined.
+
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "fortunately"       | =TP-RPBL=     | =TP-RPBLT=     |
+| "alternatively"     | =HR-RPBL=     | =HR-RPBLT=     |
+| "original"          | =O-RPBL=      | =O-RPBLG=      |
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"TP-RPBL" : "{#Alt_L(Shift_L(f))}",
+"HR-RPBL" : "{#Alt_L(Shift_L(l))}",
+"O-RPBL"  : "{#Alt_L(Shift_L(o))}",
+#+end_src
+
+There are no other conflicts with the Plover standard dictionary.
+
+#+begin_src js :tangle plover-emacs.json :exports code
+"A-RPBL"     : "{#Alt_L(Shift_L(a))}",
+"PW-RPBL"    : "{#Alt_L(Shift_L(b))}",
+"KR-RPBL"    : "{#Alt_L(Shift_L(c))}",
+"TK-RPBL"    : "{#Alt_L(Shift_L(d))}",
+"ERPBL"      : "{#Alt_L(Shift_L(e))}",
+"TKPW-RPBL"  : "{#Alt_L(Shift_L(g))}",
+"H-RPBL"     : "{#Alt_L(Shift_L(h))}",
+"EURPBL"     : "{#Alt_L(Shift_L(i))}",
+"SKWR-RPBL"  : "{#Alt_L(Shift_L(j))}",
+"K-RPBL"     : "{#Alt_L(Shift_L(k))}",
+"PH-RPBL"    : "{#Alt_L(Shift_L(m))}",
+"TPH-RPBL"   : "{#Alt_L(Shift_L(n))}",
+"P-RPBL"     : "{#Alt_L(Shift_L(p))}",
+"KW-RPBL"    : "{#Alt_L(Shift_L(q))}",
+"R-RPBL"     : "{#Alt_L(Shift_L(r))}",
+"S-RPBL"     : "{#Alt_L(Shift_L(s))}",
+"T-RPBL"     : "{#Alt_L(Shift_L(t))}",
+"U-RPBL"     : "{#Alt_L(Shift_L(u))}",
+"SR-RPBL"    : "{#Alt_L(Shift_L(v))}",
+"W-RPBL"     : "{#Alt_L(Shift_L(w))}",
+"KP-RPBL"    : "{#Alt_L(Shift_L(x))}",
+"KWR-RPBL"   : "{#Alt_L(Shift_L(y))}",
+"STKPW-RPBL" : "{#Alt_L(Shift_L(z))}",
+#+end_src
+
 ** Escape
 The Escape key is distributed with Plover in the =commands.json=
 dictionary as =TPEFBG=.  However, it's a little contorted for how
