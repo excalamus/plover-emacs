@@ -492,34 +492,40 @@ undefined.
 "STKPW-PBLG": "{#Control_L(Alt_L(z))}",
 #+end_src
 
-** Shift
+** Shift <<shift>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
 |---------------+-----------+----------+------------+----------------|
 | [[./img/kpr.png]] | =KPR=     | Shift    | =-RPG=     | [[./img/-rpg.png]] |
 
 The Shift form looks like an up-arrow.
 
-There is an "ing" clash as with the other forms containing =G=.
+#+begin_src js :tangle plover-emacs.json :exports code
+"KPR" : "{#Shift_L()}",
+"-RPG": "{#Shift_L()}",
+#+end_src
+
+There is an ={^ing}= clash as with the other forms containing =G=.
 Fortunately, there is an alternate form.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
-| "reporting"         | O-RPG         | RO-RPG         |
+| "reporting"         | =O-RPG=       | =RO-RPG=       |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "O-RPG": "{#Shift_L(o)}",
 #+end_src
 
 The remaining letters correspond to silly words in the default
-dictionary or are undefined.
+dictionary or are undefined.  The remaining strokes present no
+conflict.
 
-| stroke | silly default |
-|--------+---------------|
-| A-RPG  | "arping"      |
-| ERPG   | "he wering"   |
-| EURPG  | "i wering"    |
-| T-RPG  | "it wering"   |
-| URPG   | "you wering"  |
+| stroke  | silly default |
+|---------+---------------|
+| =A-RPG= | "arping"      |
+| =ERPG=  | "he wering"   |
+| =EURPG= | "i wering"    |
+| =T-RPG= | "it wering"   |
+| =URPG=  | "you wering"  |
 
 #+begin_src js :tangle plover-emacs.json :exports code
 "A-RPG"    : "{#Shift_L(a)}",
