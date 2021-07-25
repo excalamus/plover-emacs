@@ -34,6 +34,7 @@ however, provides software and resources free of charge for anyone
 willing to learn.
 
 #+caption: Georgi: Steno For All by [[https://www.gboards.ca/product/georgi][g Heavy Industries]]
+#+attr_html: :width 100%
 file:./img/georgi.png
 
 Dedicated steno machines and any keyboard which allows simultaneous
@@ -50,6 +51,7 @@ for more than 40 years and, although modest in appearance, boasts
 countless features and add-ons[fn:2].
 
 #+CAPTION: Screen shot of the Emacs text editor.
+#+attr_html: :width 100%
 [[file:./img/emacs.png]]
 
 Emacs works by binding every key to a programming command[fn:3].  For
