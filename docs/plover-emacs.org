@@ -6,8 +6,7 @@
 
 ----------------
 
-# todo explain M-S
-# todo explain M-A-S and then call it quits!
+# todo explain C-A-S and then call it quits!
 # Escape
 
 # Define left hand prefixes! (or address why its not necessary to do
@@ -31,27 +30,26 @@ Get the Plover Emacs dictionary [[https://github.com/excalamus/plover-emacs][her
 computer input method which is fast (over 240 wpm), ergonomic, and
 flexible.  Plover converts a stroke of keys to a character, word,
 phrase, or command.  Strokes are defined within a dictionary file,
-typically JSON.  See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]"
-for details.
+typically JSON[fn:1].
 
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
 as well as researchers and hobbyists worldwide.  Originally released
 in 1976, it is the flagship software of the [[https://www.gnu.org/philosophy/free-sw.html][GNU project]].  Like Plover,
 Emacs is community developed and allows you to run, change, and
-distribute it, more or less, however you want.  It has been developed
-for more than 40 years and, although modest in appearance, boasts
-countless features and add-ons[fn:1].
+distribute it, more or less, however.  It has been developed for more
+than 40 years and, although modest in appearance, boasts countless
+features and add-ons[fn:2].
 
 #+CAPTION: Screen shot of the Emacs text editor.
 [[file:./emacs.png]]
 
-Emacs works by binding every key to a programming command[fn:2].  For
+Emacs works by binding every key to a programming command[fn:3].  For
 example, pressing 'a' calls the =self-insert-command= which inserts
 the character typed, 'a'.  Commands can also be bound to key
 combinations.  To change windows, press 'Control + x + o' (notated
 =C-x o=) to call =other-window=.  Commands not bound to a key or key
 combination are accessed through an interactive process initiated with
-'Alt+x' (notated =M-x=)[fn:3].  To change windows using the
+'Alt+x' (notated =M-x=)[fn:4].  To change windows using the
 interactive process, type =M-x other-window=.
 
 This document defines a dictionary for using Plover with Emacs.
@@ -79,13 +77,13 @@ common techniques used to design dictionaries and formulate theories.
 ** TODO Sequence chains <<sequence_chains>>
 # this example is contrived.  Is there a better one?
 
-Many Emacs commands are called through sequences.  Typically, a Plover
-dictionary maps a stroke to a single output element (e.g. character,
-word, or phrase).  However, it's possible, to send a sequence in
-Plover by separating elements with a space.
+Typically, a Plover dictionary maps a stroke to a single output
+element (e.g. character, word, or phrase).  However, it's possible, to
+specify a sequence in Plover by separating elements with a space.
+Many Emacs commands require such sequences.
 
 For example, in Emacs =C-x 8 m= writes =µ=.  Send the sequence =C-x 8
-m= using Plover with[fn:4]:
+m= using Plover with[fn:5]:
 #+begin_example
 {#Control_L(x) 8 m}
 #+end_example
@@ -645,7 +643,7 @@ silly.
 |-----------+-------------------------|
 | =TP-RPBG= | "fortuning"             |
 | =H-RPBG=  | "hit-and-running"       |
-| =PH-PRBG= | "miranda warning"[fn:5] |
+| =PH-PRBG= | "miranda warning"[fn:6] |
 | =U-RPBG=  | "urning"                |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
@@ -678,7 +676,7 @@ silly.
 | [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
 | [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
 
-The Alt + Shift form is a combination of the [[alt][Alt]] and [[shift][Shift]] form.
+The Alt + Shift form is a combination of the [[alt][Alt]] and [[shift][Shift]] forms.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "TPWR"  : "{#Alt_L(Shift_L())}",
@@ -726,6 +724,95 @@ There are no other conflicts with the Plover standard dictionary.
 "KP-RPBL"    : "{#Alt_L(Shift_L(x))}",
 "KWR-RPBL"   : "{#Alt_L(Shift_L(y))}",
 "STKPW-RPBL" : "{#Alt_L(Shift_L(z))}",
+#+end_src
+
+** Control + Alt + Shift <<control-alt-shift>>
+| L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
+|-----------------+-----------+-----------------------+------------+------------------|
+| [[./img/kpw.png]]   | =KPW=     | Control               | =-PBG=     | [[./img/-pbg.png]]   |
+| [[./img/tpw.png]]   | =TPW=     | Alt                   | =-PBL=     | [[./img/-pbl.png]]   |
+| [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
+| [[./img/tkpwr.png]] | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | [[./img/-rpblg.png]] |
+
+The Control + Alt + Shift form is a combination of the [[control][Control]], [[alt][Alt]]
+and [[shift][Shift]] forms.
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"TKPWR"  : "{#Control_L(Alt_L(Shift_L()))}",
+"-RPBLG"  : "{#Control_L(Alt_L(Shift_L()))}",
+#+end_src
+
+There are a few words which require new bindings.  The word
+"emergency" has already been defined, so the alternate binding is
+effectively lost.  Otherwise, use =*= for the new stroke.
+
+| original definition | old binding | new binding                  |
+|---------------------+-------------+------------------------------|
+| "early morning"     | =ERPBLG=    | =*ERPBLG=                    |
+| "emergency"         | =PH-RPBLG=  | =PH*PBLG= from [[control-alt][Control + Alt]] |
+| "urge"              | =URPBLG=    | =*URPBLG=                    |
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
+"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
+#+end_src
+
+Several forms are co-opted.  The alternate forms, while not great
+(most incur a one stroke penalty) are easy to remember.
+
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "arrange"           | =A-RPBLG=     | =A/RA-EUPBG=   |
+| "energy"            | =TPH-RPBLG=   | =TPH-RG=       |
+| "imgur"             | =EURPBLG=     | =EUPL/TKPW-UR= |
+| "original"          | =O-RPBLG=     | =O-ERPBLG=     |
+| "perjury"           | =P-RPBLG=     | =PR-PBLG=      |
+| "surgery"           | =S-RPBLG=     | =S*URPBLG=     |
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"A-RPBLG"      : "{#Control_L(Alt_L(Shift_L(a)))}",
+"A/RA-EUPBG"   : "arrange",
+"ERPBLG"       : "{#Control_L(Alt_L(Shift_L(e)))}",
+"TPH-RG"       : "energy",
+"EURPBLG"      : "{#Control_L(Alt_L(Shift_L(i)))}",
+"EUPL/TKPW-UR" : "imgur",
+"O-RPBLG"      : "{#Control_L(Alt_L(Shift_L(o)))}",
+"O-ERPBLG="    : "original",
+"P-RPBLG"      : "{#Control_L(Alt_L(Shift_L(p)))}",
+"PR-PBLG"      : "perjury",
+"S-RPBLG"      : "{#Control_L(Alt_L(Shift_L(s)))}",
+"S*URPBLG"     : "surgery",
+#+end_src
+
+Finally, there are a handful of silly strokes.  There are no conflicts
+otherwise.
+
+| stroke     | silly default      |
+|------------+--------------------|
+| =F-RPBLG=  | "fortunatelying"   |
+| =HR-RPBLG= | "alternativelying" |
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"PW-RPBLG"    : "{#Control_L(Alt_L(Shift_L(b)))}",
+"KR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(c)))}",
+"TK-RPBLG"    : "{#Control_L(Alt_L(Shift_L(d)))}",
+"TP-RPBLG"    : "{#Control_L(Alt_L(Shift_L(f)))}",
+"TKPW-RPBLG"  : "{#Control_L(Alt_L(Shift_L(g)))}",
+"H-RPBLG"     : "{#Control_L(Alt_L(Shift_L(h)))}",
+"SKWR-RPBLG"  : "{#Control_L(Alt_L(Shift_L(j)))}",
+"K-RPBLG"     : "{#Control_L(Alt_L(Shift_L(k)))}",
+"HR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(l)))}",
+"PH-RPBLG"    : "{#Control_L(Alt_L(Shift_L(m)))}",
+"TPH-RPBLG"   : "{#Control_L(Alt_L(Shift_L(n)))}",
+"KW-RPBLG"    : "{#Control_L(Alt_L(Shift_L(q)))}",
+"R-RPBLG"     : "{#Control_L(Alt_L(Shift_L(r)))}",
+"T-RPBLG"     : "{#Control_L(Alt_L(Shift_L(t)))}",
+"URPBLG"      : "{#Control_L(Alt_L(Shift_L(u)))}",
+"SR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(v)))}",
+"W-RPBLG"     : "{#Control_L(Alt_L(Shift_L(w)))}",
+"KP-RPBLG"    : "{#Control_L(Alt_L(Shift_L(x)))}",
+"KWR-RPBLG"   : "{#Control_L(Alt_L(Shift_L(y)))}",
+"STKPW-RPBLG" : "{#Control_L(Alt_L(Shift_L(z)))}",
 #+end_src
 
 ** Escape
@@ -1908,19 +1995,22 @@ Yellow               : #bcbf00
 
 * Footnotes
 
-[fn:1] For example, the code blocks shown on this web page are
+[fn:1] See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]" for more
+details.
+
+[fn:2] For example, the code blocks shown on this web page are
 directly used to generate the Plover dictionary.  Further, this web
 page is itself generated using Emacs.  All of this happens from a
 single source file.  We could even go so far as to host this web page
 with Emacs if we wanted :)
 
-[fn:2] Technically to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
+[fn:3] Technically to a [[https://en.wikipedia.org/wiki/Emacs_Lisp#Example][Lisp]] function.
 
-[fn:3] "M" for "meta".  The Meta key, similar to use as the Alt key,
+[fn:4] "M" for "meta".  The Meta key, similar to use as the Alt key,
 existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 
-[fn:4] Of course, it's possible to send 'µ' directly with Plover.
+[fn:5] Of course, it's possible to send 'µ' directly with Plover.
 
-[fn:5] Granted, nothing is really 'silly' about "miranda warning".
+[fn:6] Granted, nothing is really 'silly' about "miranda warning".
 It's simply uncommon outside of classrooms and courtrooms.
