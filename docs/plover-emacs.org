@@ -6,17 +6,10 @@
 
 ----------------
 
-# Escape
-
-# Define left hand prefixes! (or address why its not necessary to do
-# so for every letter modification)
-
 #+begin_quote
 ATTENTION: This document and the corresponding dictionary are under
 active development!  To be notified of changes, [[https://webapps.stackexchange.com/questions/29756/what-does-starring-a-repository-on-github-do][star or watch]] the
 [[https://github.com/excalamus/plover-emacs][repository]].
-
-Roadmap: v1.0 - control, meta/alt, shift combinations of the English alphabet
 
 Roadmap: v2.0 - control, meta/alt, shift combinations of the English
 		alphabet and symbols
@@ -234,20 +227,21 @@ the board to yield more possible strokes.
 
 The patterns don't (and can't) compose perfectly, however.  If that
 were the case, [[alt-shift][Alt + Shift]] would look like [[control-alt-shift][Control + Alt + Shift]] and
-[[control-alt-shift][Control + Alt + Shift]] would need a different form.  What that form
-would be is unclear.  Instead, [[alt-shift][Alt + Shift]] has a "Z" or an "S" shape.
+[[control-alt-shift][Control + Alt + Shift]] would need a different form.  Exactly what that
+form would be is unclear.  Instead, [[alt-shift][Alt + Shift]] has a "Z" or an "S"
+shape.
 
-To remember how the shapes compose, consider each shape as constructed
-by different "bits".  On the right-hand-side, the "Shift bit" is the
-lower left key (=-R=); on the left it's the lower right key (=R=).
-Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
-Which bits are present determine the pattern.
+To understand why [[alt-shift][Alt + Shift]] has a "Z" or an "S" shape, consider each
+shape as constructed by different "bits".  On the right-hand-side, the
+"Shift bit" is the lower left key (=-R=); on the left it's the lower
+right key (=R=).  Similarly, the "Super bit" is top left (=-F=) or top
+right (=H=). And so on.  Which bits are present determine the pattern.
 
 #+caption: Composition bits
 [[./img/super-shift-bits.png]]
 
 Super isn't used often with Emacs.  However, the principles still
-apply and are included for completeness[fn:5].
+apply.
 
 | L Pattern        | Left hand | Modifier                      | Right Hand | R Pattern         |
 |------------------+-----------+-------------------------------+------------+-------------------|
@@ -260,9 +254,15 @@ apply and are included for completeness[fn:5].
 | [[./img/tpwhr.png]]  | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | [[./img/-frpbl.png]]  |
 | [[./img/tkpwhr.png]] | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | [[./img/-frpblg.png]] |
 
-Patterns are combined with the [[right-hand-rule][Right Hand Rule]] to provide
-comprehensive modifier coverage within the standard Plover theory.
-Detailed descriptions of each modifier combination appear below.
+This dictionary combines these patterns with the [[right-hand-rule][Right Hand Rule]] to
+provide comprehensive modifier coverage within the standard Plover
+theory.  Detailed descriptions of each modifier combination appear
+below.
+
+#+begin_quote
+*ATTENTION* Only definitions for the right hand side are defined at this
+time as well as only for [[control][Control]], [[alt][Alt]], and [[shift][Shift]] combinations[fn:5].
+#+end_quote
 
 ** Control <<control>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
@@ -874,7 +874,7 @@ the function keys.
 "*9": "{#F9}",
 "10*": "{#F10}",
 "1*D": "{#F11}",
-"2*D": "{#F12}"
+"2*D": "{#F12}",
 #+end_src
 
 * Resources
@@ -2003,8 +2003,13 @@ Green                : #0eb313
 Blue                 : #00a3ff
 
 * Closing bracket
+An empty entry is given because the last entry cannot include a comma.
+
 #+begin_src js :tangle ../plover-emacs.json :exports none :noweb yes
 <<generated>>
+
+"": ""
+
 }
 #+end_src
 
@@ -2027,9 +2032,11 @@ key was common and the notation stuck.
 
 [fn:5] Dictionary definitions for Super are not provided for at this
 time.  Emacs doesn't commonly require Super and its inclusion is
-considered low priority.  For anyone interested, see [[https://github.com/excalamus/plover-emacs/blob/main/docs/notes.tar.gz][notes.tar.gz]] for
-notes detailing new strokes, alternate strokes, and silly definitions
-for each modifier combination involving Super.  Pull requests welcome.
+considered low priority.  Further, only right hand patterns are used.
+This is because there does not appear to be a need for left hand
+forms.  For anyone interested, see [[https://github.com/excalamus/plover-emacs/blob/main/docs/notes.tar.gz][notes.tar.gz]] for notes detailing
+new strokes, alternate strokes, and silly definitions for each
+modifier combination involving Super.  Pull requests welcome.
 
 [fn:6] Granted, nothing is really 'silly' about "miranda warning".
 It's simply uncommon outside of classrooms and courtrooms.
