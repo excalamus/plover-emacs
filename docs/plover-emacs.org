@@ -29,18 +29,18 @@ Stenography is the art of fast writing using shorthand.  [[http://www.openstenop
 libre software engine for stenography developed by the Open Steno
 Project.  It provides a computer input method which is speedy (over
 240 wpm), ergonomic, and flexible.  Stenography has historically been
-used only by court reporters and captioners.  The Open Steno Project,
-however, provides software and resources free of charge for anyone
+used only by court reporters and captioners.  Now, the Open Steno
+Project provides software and resources free of charge for anyone
 willing to learn.
 
 #+caption: Georgi: Steno For All by [[https://www.gboards.ca/product/georgi][g Heavy Industries]]
 #+attr_html: :width 100%
 file:./img/georgi.png
 
-Dedicated steno machines and any keyboard which allows simultaneous
-key presses can use Plover.  It works by converting a stroke of keys
-to a character, word, phrase, or command.  Strokes, and the result
-they produce, are defined within a dictionary file[fn:1].
+Dedicated steno machines and any keyboards which allow simultaneous
+key presses can use Plover.  The software works by converting a stroke
+of keys to a character, word, phrase, or command.  Strokes, and the
+result they produce, are defined within a dictionary file[fn:1].
 
 [[https://www.gnu.org/software/emacs/][Emacs]] is a text editor/word processor used by programmers and authors,
 as well as researchers and hobbyists worldwide.  Originally released
@@ -79,8 +79,8 @@ characters or actions.  The mapping is often one-to-many.  A steno
 theory unifies a set of mappings by providing a cohesive conceptual
 framework.  Rules for a mapping are stored in a lookup table called a
 dictionary. It is the stenographer's dictionary which captures the
-essense of a theory.  What follows are common techniques used to
-design dictionaries and formulate theories.
+essense of a theory.  What follows are techniques to design
+dictionaries and formulate theories.
 
 ** Phonetic and Shape Patterns <<patterns>>
 Mirabai Knight, founder of the Open Steno Project, points out in her
@@ -202,9 +202,9 @@ alphabet can be made by using a right hand pattern that excludes the
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift <<emacs>>
-Emacs makes extensive use of modifier keys.  An old joke is that Emacs
-stands for "Escape, Meta, Alt, Control, Shift".  This presents a
-steno-theoretical challenge:
+An old joke says that Emacs stands for "Escape, Meta, Alt, Control,
+Shift".  Emacs makes extensive use of modifier keys.  This fact
+presents a steno-theoretical challenge:
 
 #+begin_quote
 How can modified letters (including combinations of modifiers)
@@ -216,11 +216,11 @@ The solution is to define a [[mode-prefix][mode prefix]] which obeys the [[right
 rule]].
 
 Clever shapes are used which act as a mode for each possible modifier
-combination.  The shapes compose additively to define new shapes.
-Notice how the keys used for [[control][Control]] and [[alt][Alt]] are the same keys used
-for [[control-alt][Control + Alt.]]  The keys used for [[shift][Shift]] and [[alt][Alt]] are the same as
-for [[alt-shift][Alt + Shift]].  And so on.  The shapes can be mirrored to the other
-side of the board to yield more possible strokes.
+combination.  The shapes compose to define new shapes.  Notice how the
+keys used for [[control][Control]] and [[alt][Alt]] are the same keys used for [[control-alt][Control +
+Alt.]]  The keys in [[control][Control]], [[alt][Alt]], and [[shift][Shift]] are all in [[control-alt-shift][Control + Alt +
+Shift]].  And so on.  The shapes can be mirrored to the other side of
+the board to yield more possible strokes.
 
 | L Pattern       | Left hand | Modifier              | Right Hand | R Pattern        |
 |-----------------+-----------+-----------------------+------------+------------------|
@@ -232,12 +232,18 @@ side of the board to yield more possible strokes.
 | [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
 | [[./img/tkpwr.png]] | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | [[./img/-rpblg.png]] |
 
-A trick to help remembering how the shapes compose is to consider each
-key as part or bit of the overall pattern.  Notice that the Shift
-pattern always includes the same key mirrored appropriately for a
-given side (right or left). On the right-hand-side, the "Shift bit" is
-the lower left key (=-R=); on the left it's the lower right key (=R=).
-Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
+The patterns don't (and can't) compose perfectly, however.  If that
+were the case, [[alt-shift][Alt + Shift]] would look like [[control-alt-shift][Control + Alt + Shift]] and
+[[control-alt-shift][Control + Alt + Shift]] would need a different form.  What that form
+would be is unclear.  Instead, [[alt-shift][Alt + Shift]] has a "Z" or an "S" shape.
+
+A trick to remember how the shapes compose is to consider each key as
+a part or "bit" of the overall pattern.  Notice that the Shift pattern
+always includes the same key mirrored appropriately for the right or
+left side. On the right-hand-side, the "Shift bit" is the lower left
+key (=-R=); on the left it's the lower right key (=R=).  Similarly,
+the "Super bit" is top left (=-F=) or top right (=H=).  It the bits
+which extend the pattern.
 
 [[./img/super-shift-bits.png]]
 
@@ -256,8 +262,8 @@ apply and are included for completeness[fn:5].
 | [[./img/tkpwhr.png]] | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | [[./img/-frpblg.png]] |
 
 These patterns are combined with the [[right-hand-rule][Right Hand Rule]] to provide
-comprehensive modifier coverage within the Plover theory.  Detailed
-descriptions of each modifier combination are given below.
+comprehensive modifier coverage within the standard Plover theory.
+Detailed descriptions of each modifier combination are given below.
 
 ** Control <<control>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
@@ -1982,6 +1988,8 @@ Turquise (too bright): #00d4d4
 Gray                 : #9E9E9E
 Red                  : #d40000
 Yellow               : #bcbf00
+Green                : #0eb313
+Blue                 : #00a3ff
 
 * Closing bracket
 #+begin_src js :tangle ../plover-emacs.json :exports none :noweb yes
