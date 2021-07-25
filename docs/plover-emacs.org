@@ -240,7 +240,7 @@ Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
 [[./img/super-shift-bits.png]]
 
 Super isn't used often with Emacs.  However, the principles still
-apply and are included for completeness[fn:7].
+apply and are included for completeness[fn:5].
 
 | L Pattern        | Left hand | Modifier                      | Right Hand | R Pattern         |
 |------------------+-----------+-------------------------------+------------+-------------------|
@@ -1939,7 +1939,7 @@ specify a sequence in Plover by separating elements with a space.
 Many Emacs commands require such sequences.
 
 For example, in Emacs =C-x 8 m= writes =µ=.  Send the sequence =C-x 8
-m= using Plover with[fn:5]:
+m= using Plover with[fn:7]:
 #+begin_example
 {#Control_L(x) 8 m}
 #+end_example
@@ -1989,12 +1989,6 @@ Yellow               : #bcbf00
 
 * Footnotes
 
-[fn:7] Dictionary definitions for Super are not provided for at this
-time.  Emacs doesn't commonly require Super and, because of the amount
-of effort to define entries, its inclusion is considered low priority.
-For anyone interested, see the notes explaining new strokes, alternate
-strokes, and silly definitions.
-
 [fn:1] See the Plover GitHub wiki entry "[[https://github.com/openstenoproject/plover/wiki/Dictionary-Format][Dictionary Format]]" for more
 details.
 
@@ -2010,7 +2004,13 @@ with Emacs if we wanted :)
 existed before the Alt key.  When Emacs was first created, the Meta
 key was common and the notation stuck.
 
-[fn:5] Of course, it's possible to send 'µ' directly with Plover.
+[fn:5] Dictionary definitions for Super are not provided for at this
+time.  Emacs doesn't commonly require Super and its inclusion is
+considered low priority.  For anyone interested, see [[https://github.com/excalamus/plover-emacs/blob/main/docs/notes.tar.gz][notes.tar.gz]] for
+notes detailing new strokes, alternate strokes, and silly definitions
+for each modifier combination involving Super.  Pull requests welcome.
 
 [fn:6] Granted, nothing is really 'silly' about "miranda warning".
 It's simply uncommon outside of classrooms and courtrooms.
+
+[fn:7] Of course, it's possible to send 'µ' directly with Plover.
