@@ -6,7 +6,7 @@
 "TK-PBG"  : "{#Control_L(d)}",
 "TP-PBG"  : "{#Control_L(f)}",
 "TKPW-PBG": "{#Control_L(g)}",
-"EU-PBG"  : "{#Control_L(i)}",
+"EUPBG"   : "{#Control_L(i)}",
 "K-PBG"   : "{#Control_L(k)}",
 "HR-PBG"  : "{#Control_L(l)}",
 "PH-PBG"  : "{#Control_L(m)}",
@@ -14,6 +14,12 @@
 "S-PBG"   : "{#Control_L(s)}",
 "T-PBG"   : "{#Control_L(t)}",
 "KP-PBG"  : "{#Control_L(x)}",
+
+"EPBG"  : "{#Control_L(e)}",
+"-EGD"  : "edge",
+"-EG/D" : "egged",
+"W-PBG" : "{#Control_L(w)}",
+"W*PB"  : "winning",
 
 "A-PBG"    : "{#Control_L(a)}",
 "PW-PBG"   : "{#Control_L(b)}",
@@ -27,12 +33,6 @@
 "SR-PBG"   : "{#Control_L(v)}",
 "KWR-PBG"  : "{#Control_L(y)}",
 "STKPW-PBG": "{#Control_L(z)}",
-
-"E-PBG" : "{#Control_L(e)}",
-"-EGD"  : "edge",
-"-EG/D" : "egged",
-"W-PBG" : "{#Control_L(w)}",
-"W*PB"  : "winning",
 
 "TPW" : "{#Alt_L()}",
 "-PBL": "{#Alt_L()}",
@@ -81,7 +81,7 @@
 "KR-PBLG" : "{#Control_L(Alt_L(c))}",
 "KR*PBLG" : "CJ",
 "EPBLG"   : "{#Control_L(Alt_L(e))}",
-"EU-PBLG" : "{#Control_L(Alt_L(i))}",
+"EUPBLG"  : "{#Control_L(Alt_L(i))}",
 "*EUPBLG" : "image",
 "PH-PBLG" : "{#Control_L(Alt_L(m))}",
 "PH*PBLG" : "emergency",
@@ -205,9 +205,6 @@
 "TKPWR"  : "{#Control_L(Alt_L(Shift_L()))}",
 "-RPBLG"  : "{#Control_L(Alt_L(Shift_L()))}",
 
-"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
-"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
-
 "A-RPBLG"      : "{#Control_L(Alt_L(Shift_L(a)))}",
 "A/RA-EUPBG"   : "arrange",
 "ERPBLG"       : "{#Control_L(Alt_L(Shift_L(e)))}",
@@ -220,6 +217,9 @@
 "PR-PBLG"      : "perjury",
 "S-RPBLG"      : "{#Control_L(Alt_L(Shift_L(s)))}",
 "S*URPBLG"     : "surgery",
+
+"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
+"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
 
 "PW-RPBLG"    : "{#Control_L(Alt_L(Shift_L(b)))}",
 "KR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(c)))}",
@@ -242,12 +242,8 @@
 "KWR-RPBLG"   : "{#Control_L(Alt_L(Shift_L(y)))}",
 "STKPW-RPBLG" : "{#Control_L(Alt_L(Shift_L(z)))}",
 
-"STW": "{#Escape}",
-"-BLS": "{#Escape}",
-
-"ULT": "{#Alt_L(x)}",
-
-"-RPB": "{#Control(g)}",
+"STK" : "{#Escape}",
+"-LGT": "{#Escape}",
 
 "*": "{#F1}",
 "2*": "{#F2}",
@@ -260,6 +256,6 @@
 "*9": "{#F9}",
 "10*": "{#F10}",
 "1*D": "{#F11}",
-"2*D": "{#F12}",
+"2*D": "{#F12}"
 
 }

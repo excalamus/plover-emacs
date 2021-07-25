@@ -237,14 +237,13 @@ were the case, [[alt-shift][Alt + Shift]] would look like [[control-alt-shift][C
 [[control-alt-shift][Control + Alt + Shift]] would need a different form.  What that form
 would be is unclear.  Instead, [[alt-shift][Alt + Shift]] has a "Z" or an "S" shape.
 
-A trick to remember how the shapes compose is to consider each key as
-a part or "bit" of the overall pattern.  Notice that the Shift pattern
-always includes the same key mirrored appropriately for the right or
-left side. On the right-hand-side, the "Shift bit" is the lower left
-key (=-R=); on the left it's the lower right key (=R=).  Similarly,
-the "Super bit" is top left (=-F=) or top right (=H=).  It the bits
-which extend the pattern.
+To remember how the shapes compose, consider each shape as constructed
+by different "bits".  On the right-hand-side, the "Shift bit" is the
+lower left key (=-R=); on the left it's the lower right key (=R=).
+Similarly, the "Super bit" is top left (=-F=) or top right (=H=).
+Which bits are present determine the pattern.
 
+#+caption: Composition bits
 [[./img/super-shift-bits.png]]
 
 Super isn't used often with Emacs.  However, the principles still
@@ -261,16 +260,17 @@ apply and are included for completeness[fn:5].
 | [[./img/tpwhr.png]]  | =TPWHR=   | Alt + Shift + Super           | =-FRPBL=   | [[./img/-frpbl.png]]  |
 | [[./img/tkpwhr.png]] | =TKPWHR=  | Control + Alt + Shift + Super | =-FRPBLG=  | [[./img/-frpblg.png]] |
 
-These patterns are combined with the [[right-hand-rule][Right Hand Rule]] to provide
+Patterns are combined with the [[right-hand-rule][Right Hand Rule]] to provide
 comprehensive modifier coverage within the standard Plover theory.
-Detailed descriptions of each modifier combination are given below.
+Detailed descriptions of each modifier combination appear below.
 
 ** Control <<control>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
 |---------------+-----------+----------+------------+----------------|
 | [[./img/kpw.png]] | =KPW=     | Control  | =-PBG=     | [[./img/-pbg.png]] |
 
-The right-hand Control form, =-PBG=, looks like an "L".
+The right-hand Control form, =-PBG=, looks like an "L".  The last
+letter of "Control" is "L".
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "KPW" : "{#Control_L()}",
@@ -278,10 +278,10 @@ The right-hand Control form, =-PBG=, looks like an "L".
 #+end_src
 
 The main challenge with =-PBG= is that it contains the =-G= key, used
-for ={^ing}=.  Some default alternate forms can preserve a
-single-stroke, as with "listening" and "Inc.".  Unfortunately, other
-words must incur a one-stroke penalty by requiring the use of =/G= to
-append "-ing".
+for ={^ing}=.  Default alternate forms are used to preserve a
+single-stroke for some words, as with "listening" and "Inc.".  Other
+words incur a one-stroke penalty and require the use of =/G= to append
+"-ing".
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
@@ -301,7 +301,7 @@ append "-ing".
 "TK-PBG"  : "{#Control_L(d)}",
 "TP-PBG"  : "{#Control_L(f)}",
 "TKPW-PBG": "{#Control_L(g)}",
-"EU-PBG"  : "{#Control_L(i)}",
+"EUPBG"   : "{#Control_L(i)}",
 "K-PBG"   : "{#Control_L(k)}",
 "HR-PBG"  : "{#Control_L(l)}",
 "PH-PBG"  : "{#Control_L(m)}",
@@ -311,7 +311,27 @@ append "-ing".
 "KP-PBG"  : "{#Control_L(x)}",
 #+end_src
 
-Several strokes can be safely co-opted because they aren't words, are
+The default binding for "edge" (=E-PBG=) is completely clobbered.  The
+alternate spelling (=E-PBLG=) is co-opted by [[control-alt][Control + Alt]] and there
+is nothing similar nearby to use.  Instead, =E-GD= is used for "edge",
+supplanting "egged" which recieves the new binding =-EG/D=.  "Winning"
+uses a new single-stroke definition.
+
+| original definition | old binding | new binding |
+|---------------------+-------------+-------------|
+| "edge"              | =E-PBG=     | =-E-GD=     |
+| "egged"             | =E-GD=      | =-EG/D=     |
+| "winning"           | =W-PBG=     | =W*PB=      |
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"EPBG"  : "{#Control_L(e)}",
+"-EGD"  : "edge",
+"-EG/D" : "egged",
+"W-PBG" : "{#Control_L(w)}",
+"W*PB"  : "winning",
+#+end_src
+
+Several strokes are safely co-opted because they aren't words, are
 undefined, or aren't proper.
 
 | stroke      | silly default |
@@ -330,7 +350,7 @@ undefined, or aren't proper.
 | =STKPW-PBG= | (undefined)   |
 | =U-PBG=     | "you think"   |
 
-The last stroke, =U-PBG= for "you think", is probably bad manners
+The last stroke, =UPBG= for "you think", is probably bad manners
 outside of a quotation and likely doesn't need a replacement (that
 /is/ what you think, right?).  A replacement for =O-PBG= ("-ing on")
 may be useful but is not provided.
@@ -350,40 +370,28 @@ may be useful but is not provided.
 "STKPW-PBG": "{#Control_L(z)}",
 #+end_src
 
-The word "edge" (=E-PBG=) is completely clobbered.  The alternate
-spelling (=E-PBLG=) is co-opted by Control+Alt and there is nothing
-similar nearby to use.  Instead, =E-GD= is used for "edge",
-supplanting "egged" which recieves the new binding =-EG/D=.  "Winning"
-requires a new single-stroke definition.
-
-| original definition | old binding | new binding |
-|---------------------+-------------+-------------|
-| "edge"              | =E-PBG=     | =-E-GD=     |
-| "egged"             | =E-GD=      | =-EG/D=     |
-| "winning"           | =W-PBG=     | =W*PB=      |
-
-#+begin_src js :tangle ../plover-emacs.json :exports code
-"E-PBG" : "{#Control_L(e)}",
-"-EGD"  : "edge",
-"-EG/D" : "egged",
-"W-PBG" : "{#Control_L(w)}",
-"W*PB"  : "winning",
-#+end_src
-
 ** Alt <<alt>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
 |---------------+-----------+----------+------------+----------------|
 | [[./img/tpw.png]] | =TPW=     | Alt      | =-PBL=     | [[./img/-pbl.png]] |
 
-The right-hand Alt form, =-PBL=, looks like a "T".
+The right-hand Alt form, =-PBL=, looks like a "T".  The last letter of
+"Alt" is "T".
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "TPW" : "{#Alt_L()}",
 "-PBL": "{#Alt_L()}",
 #+end_src
 
-Several default bindings require new definitions.  This is most easily
-done using =*=.
+Alternate single-stroke forms exist and are used for "financial" and
+"only".
+
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "financial"         | =F-PBL=       | =TP-PBGS=      |
+| "only"              | =O-PBL=       | =OE-PBL=       |
+
+New bindings for several words are created using =*=.
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
@@ -408,13 +416,6 @@ done using =*=.
 "T-PBL": "{#Alt_L(t)}",
 "T*PBL": "continual",
 #+end_src
-
-Other bindings have alternate single-stroke forms and are overwritten.
-
-| original definition | co-opted form | alternate form |
-|---------------------+---------------+----------------|
-| "financial"         | =F-PBL=       | =TP-PBGS=      |
-| "only"              | =O-PBL=       | =OE-PBL=       |
 
 The remaining bindings present no conflicts.
 
@@ -448,7 +449,8 @@ The remaining bindings present no conflicts.
 | [[./img/tpw.png]]  | =TPW=     | Alt           | =-PBL=     | [[./img/-pbl.png]]  |
 | [[./img/tkpw.png]] | =TKPW=    | Control + Alt | =-PBLG=    | [[./img/-pblg.png]] |
 
-The Control + Alt form is a combination of the [[control][Control]] and [[alt][Alt]] forms.
+The [[control-alt][Control + Alt]] form is a combination of the [[control][Control]] and [[alt][Alt]] forms.
+Notice how the "Control bit" and "Alt bit" are both present.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "TKPW" : "{#Control_L(Alt_L())}",
@@ -456,8 +458,8 @@ The Control + Alt form is a combination of the [[control][Control]] and [[alt][A
 #+end_src
 
 The right hand form =-PBLG= is the "j" sound within Plover theory.
-This causes a clash with several default words.  The solution is to
-rebind them to a =*= form.
+This causes a clash with several default words.  A =*= is given to
+each default form to provide new bindings.
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
@@ -477,7 +479,7 @@ rebind them to a =*= form.
 "KR-PBLG" : "{#Control_L(Alt_L(c))}",
 "KR*PBLG" : "CJ",
 "EPBLG"   : "{#Control_L(Alt_L(e))}",
-"EU-PBLG" : "{#Control_L(Alt_L(i))}",
+"EUPBLG"  : "{#Control_L(Alt_L(i))}",
 "*EUPBLG" : "image",
 "PH-PBLG" : "{#Control_L(Alt_L(m))}",
 "PH*PBLG" : "emergency",
@@ -485,9 +487,8 @@ rebind them to a =*= form.
 "TPH*PBLG": "engine",
 #+end_src
 
-A number of silly words are defined in the default dictionary by
-happenstance. These can be safely overwritten. All others were
-undefined.
+Several silly words present in the default dictionary are overwritten
+without replacement.
 
 | stroke     | silly default    |
 |------------+------------------|
@@ -525,15 +526,15 @@ undefined.
 |---------------+-----------+----------+------------+----------------|
 | [[./img/kpr.png]] | =KPR=     | Shift    | =-RPG=     | [[./img/-rpg.png]] |
 
-The Shift form looks like an up-arrow.
+The [[shift][Shift]] form looks like an up-arrow.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "KPR" : "{#Shift_L()}",
 "-RPG": "{#Shift_L()}",
 #+end_src
 
-There is an ={^ing}= clash as with the other forms containing =G=.
-Fortunately, there is an alternate form.
+There is an ={^ing}= clash as with the other forms containing =-G=.
+Use the default alternate form.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
@@ -590,14 +591,16 @@ conflict.
 | [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
 | [[./img/kpwr.png]]  | =KPWR=    | Control + Shift       | =-RPBG=    | [[./img/-rpbg.png]]  |
 
-The Control + Shift from is a combination of the [[control][Control]] and [[shift][Shift]] forms.
+The Control + Shift from is a combination of the [[control][Control]] and [[shift][Shift]]
+forms.  Notice how the "Control bit" and "Shift bits" compose the
+overall form.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "KPWR" : "{#Control_L(Shift_L())}",
 "-RPBG": "{#Control_L(Shift_L())}",
 #+end_src
 
-Several words require use of their alternate form:
+The following words require use of their alternate form.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
@@ -615,7 +618,8 @@ Several words require use of their alternate form:
 "S-RPBG": "{#Control_L(Shift_L(s))}",
 #+end_src
 
-One word requires a new binding:
+One word, "earning", requires rebinding.  Star (=*=) is used to define
+the new stroke.
 
 | original definition | old binding | new binding |
 |---------------------+-------------+-------------|
@@ -666,14 +670,15 @@ silly.
 | [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
 | [[./img/tpwr.png]]  | =TPWR=    | Alt + Shift           | =-RPBL=    | [[./img/-rpbl.png]]  |
 
-The Alt + Shift form is a combination of the [[alt][Alt]] and [[shift][Shift]] forms.
+The [[alt-shift][Alt + Shift]] form is a combination of the [[alt][Alt]] and [[shift][Shift]] forms.
+Notice how the "Alt bit" and "Shift bit" compose the overall form.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "TPWR"  : "{#Alt_L(Shift_L())}",
 "-RPBL" : "{#Alt_L(Shift_L())}",
 #+end_src
 
-Not many conflicts occur with the Alt + Shift pattern and each
+Not many conflicts occur with the [[alt-shift][Alt + Shift]] pattern and each
 conflict has a viable alternative form already defined.
 
 | original definition | co-opted form | alternate form |
@@ -724,7 +729,7 @@ There are no other conflicts with the Plover standard dictionary.
 | [[./img/kpr.png]]   | =KPR=     | Shift                 | =-RPG=     | [[./img/-rpg.png]]   |
 | [[./img/tkpwr.png]] | =TKPWR=   | Control + Alt + Shift | =-RPBLG=   | [[./img/-rpblg.png]] |
 
-The Control + Alt + Shift form is a combination of the [[control][Control]], [[alt][Alt]]
+The [[control-alt-shift][Control + Alt + Shift]] form is a combination of the [[control][Control]], [[alt][Alt]]
 and [[shift][Shift]] forms.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
@@ -732,23 +737,8 @@ and [[shift][Shift]] forms.
 "-RPBLG"  : "{#Control_L(Alt_L(Shift_L()))}",
 #+end_src
 
-There are a few words which require new bindings.  The word
-"emergency" has already been defined, so the alternate binding is
-effectively lost.  Otherwise, use =*= for the new stroke.
-
-| original definition | old binding | new binding                  |
-|---------------------+-------------+------------------------------|
-| "early morning"     | =ERPBLG=    | =*ERPBLG=                    |
-| "emergency"         | =PH-RPBLG=  | =PH*PBLG= from [[control-alt][Control + Alt]] |
-| "urge"              | =URPBLG=    | =*URPBLG=                    |
-
-#+begin_src js :tangle ../plover-emacs.json :exports code
-"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
-"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
-#+end_src
-
-Several forms are co-opted.  The alternate forms, while not great
-(most incur a one stroke penalty) are easy to remember.
+Several forms are co-opted.  The alternate forms, some of which
+require an additional stroke, are fortunately easy to remember.
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
@@ -774,8 +764,21 @@ Several forms are co-opted.  The alternate forms, while not great
 "S*URPBLG"     : "surgery",
 #+end_src
 
-Finally, there are a handful of silly strokes.  There are no conflicts
-otherwise.
+A few words require new bindings.  The word "emergency" is defined in
+[[control-alt][Control + Alt]].  Otherwise, star (=*=) is used for new strokes.
+
+| original definition | old binding | new binding                  |
+|---------------------+-------------+------------------------------|
+| "early morning"     | =ERPBLG=    | =*ERPBLG=                    |
+| "emergency"         | =PH-RPBLG=  | =PH*PBLG= from [[control-alt][Control + Alt]] |
+| "urge"              | =URPBLG=    | =*URPBLG=                    |
+
+#+begin_src js :tangle ../plover-emacs.json :exports code
+"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
+"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
+#+end_src
+
+There are a handful of silly strokes which are overwritten.
 
 | stroke     | silly default      |
 |------------+--------------------|
@@ -807,20 +810,25 @@ otherwise.
 
 ** Escape
 The Escape key is distributed with Plover in the =commands.json=
-dictionary as =TPEFBG=.  However, it's a little contorted for how
-often it's used with Evil/Vim.  In Emacs, Escape also functions as
-Meta when in the terminal, so it's probably a good idea to give it a
-binding that's more accessible.  We could just translate the Alt
-pattern over (⠲_), given the Escape/Alt relationship.  That feels awkward
-to me and, since I am also a vim/evil user, I want a stronger feeling
-binding:
+dictionary as =TPEFBG=.  This form feels contorted and, given the
+command's importance, should have a more accessible binding.
+
+In Emacs, Escape also functions as Meta when in the terminal.  Given
+the Escape/Meta/Alt relationship, one possibility is to translate the
+Alt pattern over by one key ([[file:./img/tpw.png]] or
+[[file:./img/-pbl.png]]).  This overwrites the word "and".  However, there
+are ample alternate forms available for "and".
+
+| original definition | co-opted form | alternate form |
+|---------------------+---------------+----------------|
+| "and"               | =STK=         | =SP=           |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"STW": "{#Escape}",
-"-BLS": "{#Escape}",
+"STK" : "{#Escape}",
+"-LGT": "{#Escape}",
 #+end_src
 
-* TODO Execute extended command and Quit
+* COMMENT Execute extended command and Quit
 Perhaps the two most important bindings are =M-x=
 (=execute-extended-command=) and =C-g= (=keyboard-quit=).  They
 deserve single-handed, single strokes.
@@ -829,13 +837,13 @@ For people who are right-handed, the following allow for quick access
 when using a mouse.
 
 =ULT= sounds like "Alt".
-#+begin_src js :tangle ../plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports none
 "ULT": "{#Alt_L(x)}",
 #+end_src
 
 The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
 much of an association.  It's simply available and easy to write.
-#+begin_src js :tangle ../plover-emacs.json :exports code
+#+begin_src js :tangle ../plover-emacs.json :exports none
 "-RPB": "{#Control(g)}",
 #+end_src
 
@@ -843,14 +851,16 @@ much of an association.  It's simply available and easy to write.
 Vim provides a key reserved for user defined functions called the
 "leader". Any key binding that starts with the leader is guaranteed to
 be available. Leader functionality is available in Emacs through
-evil-mode or general.el.
-#+begin_src js :tangle ../plover-emacs.json :exports code
+packages such as [[https://github.com/emacs-evil/evil][Evil]] or [[https://github.com/noctuid/general.el][general.el]].
+
+#+begin_src js :tangle ../plover-emacs.json :exports none
 "KWR-RBG": "{#Page_Down}",
 #+end_src
 
 * Function keys
-It doesn't seem like =*= is used at all with numbers.  This means it
-can be used to differentiate the F keys.
+The function keys don't appear in the default dictionaries.  Since =*=
+is not used at all with numbers, star is used here to differentiate
+the function keys.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
 "*": "{#F1}",
@@ -864,47 +874,46 @@ can be used to differentiate the F keys.
 "*9": "{#F9}",
 "10*": "{#F10}",
 "1*D": "{#F11}",
-"2*D": "{#F12}",
+"2*D": "{#F12}"
 #+end_src
 
-* Notes
+* Resources
+The following resources were used in the design of this dictionary.
+They are included here in complete form for posterity.
+
 ** Cross Platform Movement
-From Ted Morin: [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]]
+By Ted Morin, the [[http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html][Cross Platform Movement]] dictionary provides a
+navigation scheme that works across operating systems.  The dictionary
+demonstrates a left-handed [[mode-prefix][mode prefix]].
+
+Ted explains the how the dictionary works:
 
 #+begin_quote
-Movement
 
-Like the Plover default dictionary, you activate movement keys by
-using STPH- and then select the movement key with the right hand, as
-below.
+*Movement*
+
+Like the Plover default dictionary, you activate movement keys by using STPH- and then select the movement key with the right hand, as below.
 
 Use -R, -P, -B, and -G for left, up, down, and right.
 
-In addition, page up and down are arrows made with the right hand:
-Page Up is -RPG (up arrow). Page Down is -FBL (down arrow).
+In addition, page up and down are arrows made with the right hand: Page Up is -RPG (up arrow). Page Down is -FBL (down arrow).
 
-Home is -FPL (all three fingers up), End is -RBG (all three fingers
-down.)
+Home is -FPL (all three fingers up), End is -RBG (all three fingers down.)
 
-Finally, -RB is Control(Left), -BG is Control(Right). These jump words
-left and right on Windows and Linux. For Mac, add an asterisk, and *RB
-will make Option(Left), and *BG will make Option(Right).  Selection
+Finally, -RB is Control(Left), -BG is Control(Right). These jump words left and right on Windows and Linux. For Mac, add an asterisk, and *RB will make Option(Left), and *BG will make Option(Right).  Selection
 
 To add Shift to any of the above (which will select text that you move
-over), use SKWR- instead of STPH-.  Utility
+over), use SKWR- instead of STPH-.
 
-Included for convenient is a set of arrow keys with the Super key
-(Windows/Meta/Command depending on OS). On Windows, this will snap
-windows to the sides of screens, maximize, and minimize them. On Mac,
-you can jump to the beginning or end of lines or files. On Linux, the
-behavior varies. To use this, it’s simply KPH* (command) and the four
-arrows.  Deletion
+*Utility*
 
-Finally, I have a delete-word stroke for when Plover runs out of
-buffer. Simply #* on Windows & Linux; I tend to use right index finger
-for the asterisk, and the middle right finger for the number bar. On
-Mac, I just use *F or *6 if I accidentally hit the number bar.
+Included for convenient is a set of arrow keys with the Super key (Windows/Meta/Command depending on OS). On Windows, this will snap windows to the sides of screens, maximize, and minimize them. On Mac, you can jump to the beginning or end of lines or files. On Linux, the behavior varies. To use this, it’s simply KPH* (command) and the four arrows.  Deletion
+
+Finally, I have a delete-word stroke for when Plover runs out of buffer. Simply #* on Windows & Linux; I tend to use right index finger for the asterisk, and the middle right finger for the number bar. On Mac, I just use *F or *6 if I accidentally hit the number bar.
+
 #+end_quote
+
+The dictionary is given below:
 
 #+begin_src js :exports code
 {
@@ -944,7 +953,8 @@ Mac, I just use *F or *6 if I accidentally hit the number bar.
 #+end_src
 
 ** Modifiers Single Stroke
-From DiDoesDigital: [[https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json][modifiers-single-stroke]]
+From DiDoesDigital, the [[https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json][modifiers-single-stroke]] dictionary
+demonstrates the [[right-hand-rule][Right Hand Rule]].
 
 - =*RPLT= as Super
 - =*RBLT= as Super+Alt
@@ -1074,7 +1084,8 @@ From DiDoesDigital: [[https://github.com/didoesdigital/steno-dictionaries/blob/m
 #+end_src
 
 ** Nimble single strokes
-From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json][nimble-single-strokes]]
+Joshua Grams has defined the [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json][nimble-single-strokes]] dictionary.  It too
+utilizes the [[right-hand-rule][Right Hand Rule]].
 
 - =-FLGT= for Alt
 - =-BLGT= for Control
@@ -1933,10 +1944,10 @@ From Joshua Grams: [[https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5
 }
 #+end_src
 
-** Resources
-- https://plover.goeswhere.com/
-- https://stenoknight.com/plover/ploverlookup/
-- https://github.com/EPLHREU/emily-symbols
+** Links
+- Reverse dictionary lookup: https://plover.goeswhere.com/
+- Online dict lookup: https://stenoknight.com/plover/ploverlookup/
+- Symbol writing Plover theory: https://github.com/EPLHREU/emily-symbols
 
 ** COMMENT Sequence chains <<sequence_chains>>
 # this example is contrived.  Is there a better one?

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2021-07-25 Sun 11:12 -->
+<!-- 2021-07-25 Sun 12:31 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Plover with Emacs</title>
@@ -224,37 +224,36 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgbc0376a">1. Opening bracket</a></li>
-<li><a href="#org0a7e720">2. Dictionary design principles</a>
+<li><a href="#org396ebae">1. Opening bracket</a></li>
+<li><a href="#org0343c5c">2. Dictionary design principles</a>
 <ul>
-<li><a href="#org83e569f">2.1. Phonetic and Shape Patterns </a></li>
-<li><a href="#org8c30699">2.2. Mode prefixes </a></li>
-<li><a href="#orgf07f9b5">2.3. Right hand rule </a></li>
+<li><a href="#orgb920fc8">2.1. Phonetic and Shape Patterns </a></li>
+<li><a href="#org662a398">2.2. Mode prefixes </a></li>
+<li><a href="#org5f6d22a">2.3. Right hand rule </a></li>
 </ul>
 </li>
-<li><a href="#orgdf3f4bf">3. Emacs: Escape, Meta, Alt, Control, Shift </a>
+<li><a href="#org2f7adef">3. Emacs: Escape, Meta, Alt, Control, Shift </a>
 <ul>
-<li><a href="#org6d33196">3.1. Control </a></li>
-<li><a href="#org1449fdf">3.2. Alt </a></li>
-<li><a href="#org6da3d4e">3.3. Control + Alt </a></li>
-<li><a href="#org6cb3d37">3.4. Shift </a></li>
-<li><a href="#org4a28bfa">3.5. Control + Shift </a></li>
-<li><a href="#orgf44d747">3.6. Alt + Shift </a></li>
-<li><a href="#org2dc39ff">3.7. Control + Alt + Shift </a></li>
-<li><a href="#orga685bae">3.8. Escape</a></li>
+<li><a href="#org4ef205d">3.1. Control </a></li>
+<li><a href="#orga22d73a">3.2. Alt </a></li>
+<li><a href="#orgc58b518">3.3. Control + Alt </a></li>
+<li><a href="#org3a15b47">3.4. Shift </a></li>
+<li><a href="#org326ff55">3.5. Control + Shift </a></li>
+<li><a href="#orgd29fec9">3.6. Alt + Shift </a></li>
+<li><a href="#org314a7e8">3.7. Control + Alt + Shift </a></li>
+<li><a href="#org7dd0b92">3.8. Escape</a></li>
 </ul>
 </li>
-<li><a href="#org5f72384">4. <span class="todo TODO">TODO</span> Execute extended command and Quit</a></li>
-<li><a href="#orgb799991">5. Function keys</a></li>
-<li><a href="#org86e6d0d">6. Notes</a>
+<li><a href="#orga26c349">4. Function keys</a></li>
+<li><a href="#org1b95936">5. Resources</a>
 <ul>
-<li><a href="#org8bc362e">6.1. Cross Platform Movement</a></li>
-<li><a href="#orgd664f9b">6.2. Modifiers Single Stroke</a></li>
-<li><a href="#org97f5b0d">6.3. Nimble single strokes</a></li>
-<li><a href="#org8c3743b">6.4. Resources</a></li>
+<li><a href="#org8fc404d">5.1. Cross Platform Movement</a></li>
+<li><a href="#org2fe8642">5.2. Modifiers Single Stroke</a></li>
+<li><a href="#org0c228f3">5.3. Nimble single strokes</a></li>
+<li><a href="#org4487c9b">5.4. Links</a></li>
 </ul>
 </li>
-<li><a href="#orgac3b2c7">7. Closing bracket</a></li>
+<li><a href="#org22e5bb5">6. Closing bracket</a></li>
 </ul>
 </div>
 </div>
@@ -281,8 +280,8 @@ Roadmap: v2.0 - control, meta/alt, shift combinations of the English
 Get the Plover Emacs dictionary <a href="https://github.com/excalamus/plover-emacs">here</a>.
 </p>
 
-<div id="outline-container-orgbc0376a" class="outline-2">
-<h2 id="orgbc0376a"><span class="section-number-2">1</span> Opening bracket</h2>
+<div id="outline-container-org396ebae" class="outline-2">
+<h2 id="org396ebae"><span class="section-number-2">1</span> Opening bracket</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Stenography is the art of fast writing using shorthand.  <a href="http://www.openstenoproject.org/plover/">Plover</a> is a
@@ -295,7 +294,7 @@ willing to learn.
 </p>
 
 
-<div id="org3ae9fb4" class="figure">
+<div id="org3e511f7" class="figure">
 <p><img src="./img/georgi.png" alt="georgi.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 1: </span>Georgi: Steno For All by <a href="https://www.gboards.ca/product/georgi">g Heavy Industries</a></p>
@@ -319,7 +318,7 @@ countless features and add-ons<sup><a id="fnr.2" class="footref" href="#fn.2">2<
 </p>
 
 
-<div id="org7a87ff8" class="figure">
+<div id="org6b04b93" class="figure">
 <p><img src="./img/emacs.png" alt="emacs.png" width="100%" />
 </p>
 <p><span class="figure-number">Figure 2: </span>Screen shot of the Emacs text editor.</p>
@@ -346,8 +345,8 @@ wiki</a>.  To get started with Emacs, check out the <a href="https://www.gnu.org
 </div>
 </div>
 
-<div id="outline-container-org0a7e720" class="outline-2">
-<h2 id="org0a7e720"><span class="section-number-2">2</span> Dictionary design principles</h2>
+<div id="outline-container-org0343c5c" class="outline-2">
+<h2 id="org0343c5c"><span class="section-number-2">2</span> Dictionary design principles</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 Stenography works by mapping a set of steno keys to some output
@@ -360,8 +359,8 @@ dictionaries and formulate theories.
 </p>
 </div>
 
-<div id="outline-container-org83e569f" class="outline-3">
-<h3 id="org83e569f"><span class="section-number-3">2.1</span> Phonetic and Shape Patterns <a id="orga4d6c63"></a></h3>
+<div id="outline-container-orgb920fc8" class="outline-3">
+<h3 id="orgb920fc8"><span class="section-number-3">2.1</span> Phonetic and Shape Patterns <a id="orgb2a590b"></a></h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 Mirabai Knight, founder of the Open Steno Project, points out in her
@@ -388,8 +387,8 @@ patterns they make look like up and down arrows.
 </div>
 </div>
 
-<div id="outline-container-org8c30699" class="outline-3">
-<h3 id="org8c30699"><span class="section-number-3">2.2</span> Mode prefixes <a id="org7218c23"></a></h3>
+<div id="outline-container-org662a398" class="outline-3">
+<h3 id="org662a398"><span class="section-number-3">2.2</span> Mode prefixes <a id="orgdcacee8"></a></h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 A pseudo "mode" can be defined by prefixing all related commands with
@@ -418,8 +417,8 @@ turn corresponds to the left arrow key).  Therefore, <code>STPH-R</code> means
 </div>
 </div>
 
-<div id="outline-container-orgf07f9b5" class="outline-3">
-<h3 id="orgf07f9b5"><span class="section-number-3">2.3</span> Right hand rule <a id="orgec76aae"></a></h3>
+<div id="outline-container-org5f6d22a" class="outline-3">
+<h3 id="org5f6d22a"><span class="section-number-3">2.3</span> Right hand rule <a id="org4571ee1"></a></h3>
 <div class="outline-text-3" id="text-2-3">
 <p>
 <a href="https://sites.google.com/site/learnplover/lesson-2-steno-order">Steno order</a> describes how the keys of a steno board are laid out, as
@@ -431,7 +430,7 @@ left".
 </p>
 
 <div class="org-center">
-<pre class="example" id="org820488d">
+<pre class="example" id="org45c5c0b">
 STKPWHRAO*EUFRPBLGTSDZ
 </pre>
 </div>
@@ -653,8 +652,8 @@ alphabet can be made by using a right hand pattern that excludes the
 </div>
 </div>
 
-<div id="outline-container-orgdf3f4bf" class="outline-2">
-<h2 id="orgdf3f4bf"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift <a id="orgdb34eb3"></a></h2>
+<div id="outline-container-org2f7adef" class="outline-2">
+<h2 id="org2f7adef"><span class="section-number-2">3</span> Emacs: Escape, Meta, Alt, Control, Shift <a id="orgd6231d0"></a></h2>
 <div class="outline-text-2" id="text-3">
 <p>
 An old joke says that Emacs stands for "Escape, Meta, Alt, Control,
@@ -671,15 +670,15 @@ definitions?
 </blockquote>
 
 <p>
-The solution is to define a <a href="#org7218c23">mode prefix</a> which obeys the <a href="#orgec76aae">right hand
+The solution is to define a <a href="#orgdcacee8">mode prefix</a> which obeys the <a href="#org4571ee1">right hand
 rule</a>.
 </p>
 
 <p>
 Clever shapes are used which act as a mode for each possible modifier
 combination.  The shapes compose to define new shapes.  Notice how the
-keys used for <a href="#orgb842dbb">Control</a> and <a href="#org4dfebf1">Alt</a> are the same keys used for <a href="#orga6c9f5a">Control +
-Alt.</a>  The keys in <a href="#orgb842dbb">Control</a>, <a href="#org4dfebf1">Alt</a>, and <a href="#org67c4621">Shift</a> are all in <a href="#org18b85ff">Control + Alt +
+keys used for <a href="#org8decc1a">Control</a> and <a href="#orgacac144">Alt</a> are the same keys used for <a href="#org78ee487">Control +
+Alt.</a>  The keys in <a href="#org8decc1a">Control</a>, <a href="#orgacac144">Alt</a>, and <a href="#org1f60929">Shift</a> are all in <a href="#orgf9dbe8e">Control + Alt +
 Shift</a>.  And so on.  The shapes can be mirrored to the other side of
 the board to yield more possible strokes.
 </p>
@@ -768,25 +767,24 @@ the board to yield more possible strokes.
 
 <p>
 The patterns don't (and can't) compose perfectly, however.  If that
-were the case, <a href="#orgf88e223">Alt + Shift</a> would look like <a href="#org18b85ff">Control + Alt + Shift</a> and
-<a href="#org18b85ff">Control + Alt + Shift</a> would need a different form.  What that form
-would be is unclear.  Instead, <a href="#orgf88e223">Alt + Shift</a> has a "Z" or an "S" shape.
+were the case, <a href="#orga8be63d">Alt + Shift</a> would look like <a href="#orgf9dbe8e">Control + Alt + Shift</a> and
+<a href="#orgf9dbe8e">Control + Alt + Shift</a> would need a different form.  What that form
+would be is unclear.  Instead, <a href="#orga8be63d">Alt + Shift</a> has a "Z" or an "S" shape.
 </p>
 
 <p>
-A trick to remember how the shapes compose is to consider each key as
-a part or "bit" of the overall pattern.  Notice that the Shift pattern
-always includes the same key mirrored appropriately for the right or
-left side. On the right-hand-side, the "Shift bit" is the lower left
-key (<code>-R</code>); on the left it's the lower right key (<code>R</code>).  Similarly,
-the "Super bit" is top left (<code>-F</code>) or top right (<code>H</code>).  It the bits
-which extend the pattern.
+To remember how the shapes compose, consider each shape as constructed
+by different "bits".  On the right-hand-side, the "Shift bit" is the
+lower left key (<code>-R</code>); on the left it's the lower right key (<code>R</code>).
+Similarly, the "Super bit" is top left (<code>-F</code>) or top right (<code>H</code>).
+Which bits are present determine the pattern.
 </p>
 
 
-<div id="orgd53150c" class="figure">
+<div id="orgff1a85b" class="figure">
 <p><img src="./img/super-shift-bits.png" alt="super-shift-bits.png" />
 </p>
+<p><span class="figure-number">Figure 3: </span>Composition bits</p>
 </div>
 
 <p>
@@ -885,14 +883,14 @@ apply and are included for completeness<sup><a id="fnr.5" class="footref" href="
 </table>
 
 <p>
-These patterns are combined with the <a href="#orgec76aae">Right Hand Rule</a> to provide
+Patterns are combined with the <a href="#org4571ee1">Right Hand Rule</a> to provide
 comprehensive modifier coverage within the standard Plover theory.
-Detailed descriptions of each modifier combination are given below.
+Detailed descriptions of each modifier combination appear below.
 </p>
 </div>
 
-<div id="outline-container-org6d33196" class="outline-3">
-<h3 id="org6d33196"><span class="section-number-3">3.1</span> Control <a id="orgb842dbb"></a></h3>
+<div id="outline-container-org4ef205d" class="outline-3">
+<h3 id="org4ef205d"><span class="section-number-3">3.1</span> Control <a id="org8decc1a"></a></h3>
 <div class="outline-text-3" id="text-3-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -929,7 +927,8 @@ Detailed descriptions of each modifier combination are given below.
 </table>
 
 <p>
-The right-hand Control form, <code>-PBG</code>, looks like an "L".
+The right-hand Control form, <code>-PBG</code>, looks like an "L".  The last
+letter of "Control" is "L".
 </p>
 
 <div class="org-src-container">
@@ -940,10 +939,10 @@ The right-hand Control form, <code>-PBG</code>, looks like an "L".
 
 <p>
 The main challenge with <code>-PBG</code> is that it contains the <code>-G</code> key, used
-for <code>{^ing}</code>.  Some default alternate forms can preserve a
-single-stroke, as with "listening" and "Inc.".  Unfortunately, other
-words must incur a one-stroke penalty by requiring the use of <code>/G</code> to
-append "-ing".
+for <code>{^ing}</code>.  Default alternate forms are used to preserve a
+single-stroke for some words, as with "listening" and "Inc.".  Other
+words incur a one-stroke penalty and require the use of <code>/G</code> to append
+"-ing".
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1036,7 +1035,7 @@ append "-ing".
 <pre class="src src-js"><span style="color: #CC9393;">"TK-PBG"</span>  : <span style="color: #CC9393;">"{#Control_L(d)}"</span>,
 <span style="color: #CC9393;">"TP-PBG"</span>  : <span style="color: #CC9393;">"{#Control_L(f)}"</span>,
 <span style="color: #CC9393;">"TKPW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(g)}"</span>,
-<span style="color: #CC9393;">"EU-PBG"</span>  : <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
+<span style="color: #CC9393;">"EUPBG"</span>   : <span style="color: #CC9393;">"{#Control_L(i)}"</span>,
 <span style="color: #CC9393;">"K-PBG"</span>   : <span style="color: #CC9393;">"{#Control_L(k)}"</span>,
 <span style="color: #CC9393;">"HR-PBG"</span>  : <span style="color: #CC9393;">"{#Control_L(l)}"</span>,
 <span style="color: #CC9393;">"PH-PBG"</span>  : <span style="color: #CC9393;">"{#Control_L(m)}"</span>,
@@ -1048,7 +1047,62 @@ append "-ing".
 </div>
 
 <p>
-Several strokes can be safely co-opted because they aren't words, are
+The default binding for "edge" (<code>E-PBG</code>) is completely clobbered.  The
+alternate spelling (<code>E-PBLG</code>) is co-opted by <a href="#org78ee487">Control + Alt</a> and there
+is nothing similar nearby to use.  Instead, <code>E-GD</code> is used for "edge",
+supplanting "egged" which recieves the new binding <code>-EG/D</code>.  "Winning"
+uses a new single-stroke definition.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">old binding</th>
+<th scope="col" class="org-left">new binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"edge"</td>
+<td class="org-left"><code>E-PBG</code></td>
+<td class="org-left"><code>-E-GD</code></td>
+</tr>
+
+<tr>
+<td class="org-left">"egged"</td>
+<td class="org-left"><code>E-GD</code></td>
+<td class="org-left"><code>-EG/D</code></td>
+</tr>
+
+<tr>
+<td class="org-left">"winning"</td>
+<td class="org-left"><code>W-PBG</code></td>
+<td class="org-left"><code>W*PB</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"EPBG"</span>  : <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
+<span style="color: #CC9393;">"-EGD"</span>  : <span style="color: #CC9393;">"edge"</span>,
+<span style="color: #CC9393;">"-EG/D"</span> : <span style="color: #CC9393;">"egged"</span>,
+<span style="color: #CC9393;">"W-PBG"</span> : <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
+<span style="color: #CC9393;">"W*PB"</span>  : <span style="color: #CC9393;">"winning"</span>,
+</pre>
+</div>
+
+<p>
+Several strokes are safely co-opted because they aren't words, are
 undefined, or aren't proper.
 </p>
 
@@ -1135,7 +1189,7 @@ undefined, or aren't proper.
 </table>
 
 <p>
-The last stroke, <code>U-PBG</code> for "you think", is probably bad manners
+The last stroke, <code>UPBG</code> for "you think", is probably bad manners
 outside of a quotation and likely doesn't need a replacement (that
 <i>is</i> what you think, right?).  A replacement for <code>O-PBG</code> ("-ing on")
 may be useful but is not provided.
@@ -1156,66 +1210,11 @@ may be useful but is not provided.
 <span style="color: #CC9393;">"STKPW-PBG"</span>: <span style="color: #CC9393;">"{#Control_L(z)}"</span>,
 </pre>
 </div>
-
-<p>
-The word "edge" (<code>E-PBG</code>) is completely clobbered.  The alternate
-spelling (<code>E-PBLG</code>) is co-opted by Control+Alt and there is nothing
-similar nearby to use.  Instead, <code>E-GD</code> is used for "edge",
-supplanting "egged" which recieves the new binding <code>-EG/D</code>.  "Winning"
-requires a new single-stroke definition.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">original definition</th>
-<th scope="col" class="org-left">old binding</th>
-<th scope="col" class="org-left">new binding</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">"edge"</td>
-<td class="org-left"><code>E-PBG</code></td>
-<td class="org-left"><code>-E-GD</code></td>
-</tr>
-
-<tr>
-<td class="org-left">"egged"</td>
-<td class="org-left"><code>E-GD</code></td>
-<td class="org-left"><code>-EG/D</code></td>
-</tr>
-
-<tr>
-<td class="org-left">"winning"</td>
-<td class="org-left"><code>W-PBG</code></td>
-<td class="org-left"><code>W*PB</code></td>
-</tr>
-</tbody>
-</table>
-
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"E-PBG"</span> : <span style="color: #CC9393;">"{#Control_L(e)}"</span>,
-<span style="color: #CC9393;">"-EGD"</span>  : <span style="color: #CC9393;">"edge"</span>,
-<span style="color: #CC9393;">"-EG/D"</span> : <span style="color: #CC9393;">"egged"</span>,
-<span style="color: #CC9393;">"W-PBG"</span> : <span style="color: #CC9393;">"{#Control_L(w)}"</span>,
-<span style="color: #CC9393;">"W*PB"</span>  : <span style="color: #CC9393;">"winning"</span>,
-</pre>
-</div>
 </div>
 </div>
 
-<div id="outline-container-org1449fdf" class="outline-3">
-<h3 id="org1449fdf"><span class="section-number-3">3.2</span> Alt <a id="org4dfebf1"></a></h3>
+<div id="outline-container-orga22d73a" class="outline-3">
+<h3 id="orga22d73a"><span class="section-number-3">3.2</span> Alt <a id="orgacac144"></a></h3>
 <div class="outline-text-3" id="text-3-2">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1252,7 +1251,8 @@ requires a new single-stroke definition.
 </table>
 
 <p>
-The right-hand Alt form, <code>-PBL</code>, looks like a "T".
+The right-hand Alt form, <code>-PBL</code>, looks like a "T".  The last letter of
+"Alt" is "T".
 </p>
 
 <div class="org-src-container">
@@ -1262,8 +1262,44 @@ The right-hand Alt form, <code>-PBL</code>, looks like a "T".
 </div>
 
 <p>
-Several default bindings require new definitions.  This is most easily
-done using <code>*</code>.
+Alternate single-stroke forms exist and are used for "financial" and
+"only".
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">co-opted form</th>
+<th scope="col" class="org-left">alternate form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"financial"</td>
+<td class="org-left"><code>F-PBL</code></td>
+<td class="org-left"><code>TP-PBGS</code></td>
+</tr>
+
+<tr>
+<td class="org-left">"only"</td>
+<td class="org-left"><code>O-PBL</code></td>
+<td class="org-left"><code>OE-PBL</code></td>
+</tr>
+</tbody>
+</table>
+
+<p>
+New bindings for several words are created using <code>*</code>.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1339,42 +1375,6 @@ done using <code>*</code>.
 </div>
 
 <p>
-Other bindings have alternate single-stroke forms and are overwritten.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">original definition</th>
-<th scope="col" class="org-left">co-opted form</th>
-<th scope="col" class="org-left">alternate form</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">"financial"</td>
-<td class="org-left"><code>F-PBL</code></td>
-<td class="org-left"><code>TP-PBGS</code></td>
-</tr>
-
-<tr>
-<td class="org-left">"only"</td>
-<td class="org-left"><code>O-PBL</code></td>
-<td class="org-left"><code>OE-PBL</code></td>
-</tr>
-</tbody>
-</table>
-
-<p>
 The remaining bindings present no conflicts.
 </p>
 
@@ -1404,8 +1404,8 @@ The remaining bindings present no conflicts.
 </div>
 </div>
 
-<div id="outline-container-org6da3d4e" class="outline-3">
-<h3 id="org6da3d4e"><span class="section-number-3">3.3</span> Control + Alt <a id="orga6c9f5a"></a></h3>
+<div id="outline-container-orgc58b518" class="outline-3">
+<h3 id="orgc58b518"><span class="section-number-3">3.3</span> Control + Alt <a id="org78ee487"></a></h3>
 <div class="outline-text-3" id="text-3-3">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1458,7 +1458,8 @@ The remaining bindings present no conflicts.
 </table>
 
 <p>
-The Control + Alt form is a combination of the <a href="#orgb842dbb">Control</a> and <a href="#org4dfebf1">Alt</a> forms.
+The <a href="#org78ee487">Control + Alt</a> form is a combination of the <a href="#org8decc1a">Control</a> and <a href="#orgacac144">Alt</a> forms.
+Notice how the "Control bit" and "Alt bit" are both present.
 </p>
 
 <div class="org-src-container">
@@ -1469,8 +1470,8 @@ The Control + Alt form is a combination of the <a href="#orgb842dbb">Control</a>
 
 <p>
 The right hand form <code>-PBLG</code> is the "j" sound within Plover theory.
-This causes a clash with several default words.  The solution is to
-rebind them to a <code>*</code> form.
+This causes a clash with several default words.  A <code>*</code> is given to
+each default form to provide new bindings.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1512,7 +1513,7 @@ rebind them to a <code>*</code> form.
 <tr>
 <td class="org-left">"edge"</td>
 <td class="org-left"><code>EPBLG</code></td>
-<td class="org-left">See <a href="#orgb842dbb">Control</a></td>
+<td class="org-left">See <a href="#org8decc1a">Control</a></td>
 </tr>
 
 <tr>
@@ -1543,7 +1544,7 @@ rebind them to a <code>*</code> form.
 <span style="color: #CC9393;">"KR-PBLG"</span> : <span style="color: #CC9393;">"{#Control_L(Alt_L(c))}"</span>,
 <span style="color: #CC9393;">"KR*PBLG"</span> : <span style="color: #CC9393;">"CJ"</span>,
 <span style="color: #CC9393;">"EPBLG"</span>   : <span style="color: #CC9393;">"{#Control_L(Alt_L(e))}"</span>,
-<span style="color: #CC9393;">"EU-PBLG"</span> : <span style="color: #CC9393;">"{#Control_L(Alt_L(i))}"</span>,
+<span style="color: #CC9393;">"EUPBLG"</span>  : <span style="color: #CC9393;">"{#Control_L(Alt_L(i))}"</span>,
 <span style="color: #CC9393;">"*EUPBLG"</span> : <span style="color: #CC9393;">"image"</span>,
 <span style="color: #CC9393;">"PH-PBLG"</span> : <span style="color: #CC9393;">"{#Control_L(Alt_L(m))}"</span>,
 <span style="color: #CC9393;">"PH*PBLG"</span> : <span style="color: #CC9393;">"emergency"</span>,
@@ -1553,9 +1554,8 @@ rebind them to a <code>*</code> form.
 </div>
 
 <p>
-A number of silly words are defined in the default dictionary by
-happenstance. These can be safely overwritten. All others were
-undefined.
+Several silly words present in the default dictionary are overwritten
+without replacement.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1634,8 +1634,8 @@ undefined.
 </div>
 </div>
 
-<div id="outline-container-org6cb3d37" class="outline-3">
-<h3 id="org6cb3d37"><span class="section-number-3">3.4</span> Shift <a id="org67c4621"></a></h3>
+<div id="outline-container-org3a15b47" class="outline-3">
+<h3 id="org3a15b47"><span class="section-number-3">3.4</span> Shift <a id="org1f60929"></a></h3>
 <div class="outline-text-3" id="text-3-4">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1672,7 +1672,7 @@ undefined.
 </table>
 
 <p>
-The Shift form looks like an up-arrow.
+The <a href="#org1f60929">Shift</a> form looks like an up-arrow.
 </p>
 
 <div class="org-src-container">
@@ -1682,8 +1682,8 @@ The Shift form looks like an up-arrow.
 </div>
 
 <p>
-There is an <code>{^ing}</code> clash as with the other forms containing <code>G</code>.
-Fortunately, there is an alternate form.
+There is an <code>{^ing}</code> clash as with the other forms containing <code>-G</code>.
+Use the default alternate form.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1796,8 +1796,8 @@ conflict.
 </div>
 </div>
 
-<div id="outline-container-org4a28bfa" class="outline-3">
-<h3 id="org4a28bfa"><span class="section-number-3">3.5</span> Control + Shift <a id="orgf105d17"></a></h3>
+<div id="outline-container-org326ff55" class="outline-3">
+<h3 id="org326ff55"><span class="section-number-3">3.5</span> Control + Shift <a id="orgd170deb"></a></h3>
 <div class="outline-text-3" id="text-3-5">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -1850,7 +1850,9 @@ conflict.
 </table>
 
 <p>
-The Control + Shift from is a combination of the <a href="#orgb842dbb">Control</a> and <a href="#org67c4621">Shift</a> forms.
+The Control + Shift from is a combination of the <a href="#org8decc1a">Control</a> and <a href="#org1f60929">Shift</a>
+forms.  Notice how the "Control bit" and "Shift bits" compose the
+overall form.
 </p>
 
 <div class="org-src-container">
@@ -1860,7 +1862,7 @@ The Control + Shift from is a combination of the <a href="#orgb842dbb">Control</
 </div>
 
 <p>
-Several words require use of their alternate form:
+The following words require use of their alternate form.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -1923,7 +1925,8 @@ Several words require use of their alternate form:
 </div>
 
 <p>
-One word requires a new binding:
+One word, "earning", requires rebinding.  Star (<code>*</code>) is used to define
+the new stroke.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -2026,8 +2029,8 @@ silly.
 </div>
 </div>
 
-<div id="outline-container-orgf44d747" class="outline-3">
-<h3 id="orgf44d747"><span class="section-number-3">3.6</span> Alt + Shift <a id="orgf88e223"></a></h3>
+<div id="outline-container-orgd29fec9" class="outline-3">
+<h3 id="orgd29fec9"><span class="section-number-3">3.6</span> Alt + Shift <a id="orga8be63d"></a></h3>
 <div class="outline-text-3" id="text-3-6">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2080,7 +2083,8 @@ silly.
 </table>
 
 <p>
-The Alt + Shift form is a combination of the <a href="#org4dfebf1">Alt</a> and <a href="#org67c4621">Shift</a> forms.
+The <a href="#orga8be63d">Alt + Shift</a> form is a combination of the <a href="#orgacac144">Alt</a> and <a href="#org1f60929">Shift</a> forms.
+Notice how the "Alt bit" and "Shift bit" compose the overall form.
 </p>
 
 <div class="org-src-container">
@@ -2090,7 +2094,7 @@ The Alt + Shift form is a combination of the <a href="#org4dfebf1">Alt</a> and <
 </div>
 
 <p>
-Not many conflicts occur with the Alt + Shift pattern and each
+Not many conflicts occur with the <a href="#orga8be63d">Alt + Shift</a> pattern and each
 conflict has a viable alternative form already defined.
 </p>
 
@@ -2172,8 +2176,8 @@ There are no other conflicts with the Plover standard dictionary.
 </div>
 </div>
 
-<div id="outline-container-org2dc39ff" class="outline-3">
-<h3 id="org2dc39ff"><span class="section-number-3">3.7</span> Control + Alt + Shift <a id="org18b85ff"></a></h3>
+<div id="outline-container-org314a7e8" class="outline-3">
+<h3 id="org314a7e8"><span class="section-number-3">3.7</span> Control + Alt + Shift <a id="orgf9dbe8e"></a></h3>
 <div class="outline-text-3" id="text-3-7">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -2234,8 +2238,8 @@ There are no other conflicts with the Plover standard dictionary.
 </table>
 
 <p>
-The Control + Alt + Shift form is a combination of the <a href="#orgb842dbb">Control</a>, <a href="#org4dfebf1">Alt</a>
-and <a href="#org67c4621">Shift</a> forms.
+The <a href="#orgf9dbe8e">Control + Alt + Shift</a> form is a combination of the <a href="#org8decc1a">Control</a>, <a href="#orgacac144">Alt</a>
+and <a href="#org1f60929">Shift</a> forms.
 </p>
 
 <div class="org-src-container">
@@ -2245,58 +2249,8 @@ and <a href="#org67c4621">Shift</a> forms.
 </div>
 
 <p>
-There are a few words which require new bindings.  The word
-"emergency" has already been defined, so the alternate binding is
-effectively lost.  Otherwise, use <code>*</code> for the new stroke.
-</p>
-
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">original definition</th>
-<th scope="col" class="org-left">old binding</th>
-<th scope="col" class="org-left">new binding</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left">"early morning"</td>
-<td class="org-left"><code>ERPBLG</code></td>
-<td class="org-left"><code>*ERPBLG</code></td>
-</tr>
-
-<tr>
-<td class="org-left">"emergency"</td>
-<td class="org-left"><code>PH-RPBLG</code></td>
-<td class="org-left"><code>PH*PBLG</code> from <a href="#orga6c9f5a">Control + Alt</a></td>
-</tr>
-
-<tr>
-<td class="org-left">"urge"</td>
-<td class="org-left"><code>URPBLG</code></td>
-<td class="org-left"><code>*URPBLG</code></td>
-</tr>
-</tbody>
-</table>
-
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"*ERPBLG"</span>  : <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(e)))}"</span>,
-<span style="color: #CC9393;">"*URPBLG"</span>  : <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(u)))}"</span>,
-</pre>
-</div>
-
-<p>
-Several forms are co-opted.  The alternate forms, while not great
-(most incur a one stroke penalty) are easy to remember.
+Several forms are co-opted.  The alternate forms, some of which
+require an additional stroke, are fortunately easy to remember.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -2372,8 +2326,56 @@ Several forms are co-opted.  The alternate forms, while not great
 </div>
 
 <p>
-Finally, there are a handful of silly strokes.  There are no conflicts
-otherwise.
+A few words require new bindings.  The word "emergency" is defined in
+<a href="#org78ee487">Control + Alt</a>.  Otherwise, star (<code>*</code>) is used for new strokes.
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">old binding</th>
+<th scope="col" class="org-left">new binding</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"early morning"</td>
+<td class="org-left"><code>ERPBLG</code></td>
+<td class="org-left"><code>*ERPBLG</code></td>
+</tr>
+
+<tr>
+<td class="org-left">"emergency"</td>
+<td class="org-left"><code>PH-RPBLG</code></td>
+<td class="org-left"><code>PH*PBLG</code> from <a href="#org78ee487">Control + Alt</a></td>
+</tr>
+
+<tr>
+<td class="org-left">"urge"</td>
+<td class="org-left"><code>URPBLG</code></td>
+<td class="org-left"><code>*URPBLG</code></td>
+</tr>
+</tbody>
+</table>
+
+<div class="org-src-container">
+<pre class="src src-js"><span style="color: #CC9393;">"*ERPBLG"</span>  : <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(e)))}"</span>,
+<span style="color: #CC9393;">"*URPBLG"</span>  : <span style="color: #CC9393;">"{#Control_L(Alt_L(Shift_L(u)))}"</span>,
+</pre>
+</div>
+
+<p>
+There are a handful of silly strokes which are overwritten.
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -2429,68 +2431,65 @@ otherwise.
 </div>
 </div>
 
-<div id="outline-container-orga685bae" class="outline-3">
-<h3 id="orga685bae"><span class="section-number-3">3.8</span> Escape</h3>
+<div id="outline-container-org7dd0b92" class="outline-3">
+<h3 id="org7dd0b92"><span class="section-number-3">3.8</span> Escape</h3>
 <div class="outline-text-3" id="text-3-8">
 <p>
 The Escape key is distributed with Plover in the <code>commands.json</code>
-dictionary as <code>TPEFBG</code>.  However, it's a little contorted for how
-often it's used with Evil/Vim.  In Emacs, Escape also functions as
-Meta when in the terminal, so it's probably a good idea to give it a
-binding that's more accessible.  We could just translate the Alt
-pattern over (⠲_), given the Escape/Alt relationship.  That feels awkward
-to me and, since I am also a vim/evil user, I want a stronger feeling
-binding:
+dictionary as <code>TPEFBG</code>.  This form feels contorted and, given the
+command's importance, should have a more accessible binding.
 </p>
 
+<p>
+In Emacs, Escape also functions as Meta when in the terminal.  Given
+the Escape/Meta/Alt relationship, one possibility is to translate the
+Alt pattern over by one key (<img src="./img/tpw.png" alt="tpw.png" /> or
+<img src="./img/-pbl.png" alt="-pbl.png" />).  This overwrites the word "and".  However, there
+are ample alternate forms available for "and".
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">original definition</th>
+<th scope="col" class="org-left">co-opted form</th>
+<th scope="col" class="org-left">alternate form</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">"and"</td>
+<td class="org-left"><code>STK</code></td>
+<td class="org-left"><code>SP</code></td>
+</tr>
+</tbody>
+</table>
+
 <div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"STW"</span>: <span style="color: #CC9393;">"{#Escape}"</span>,
-<span style="color: #CC9393;">"-BLS"</span>: <span style="color: #CC9393;">"{#Escape}"</span>,
+<pre class="src src-js"><span style="color: #CC9393;">"STK"</span> : <span style="color: #CC9393;">"{#Escape}"</span>,
+<span style="color: #CC9393;">"-LGT"</span>: <span style="color: #CC9393;">"{#Escape}"</span>,
 </pre>
 </div>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org5f72384" class="outline-2">
-<h2 id="org5f72384"><span class="section-number-2">4</span> <span class="todo TODO">TODO</span> Execute extended command and Quit</h2>
+<div id="outline-container-orga26c349" class="outline-2">
+<h2 id="orga26c349"><span class="section-number-2">4</span> Function keys</h2>
 <div class="outline-text-2" id="text-4">
 <p>
-Perhaps the two most important bindings are <code>M-x</code>
-(<code>execute-extended-command</code>) and <code>C-g</code> (<code>keyboard-quit</code>).  They
-deserve single-handed, single strokes.
-</p>
-
-<p>
-For people who are right-handed, the following allow for quick access
-when using a mouse.
-</p>
-
-<p>
-<code>ULT</code> sounds like "Alt".
-</p>
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"ULT"</span>: <span style="color: #CC9393;">"{#Alt_L(x)}"</span>,
-</pre>
-</div>
-
-<p>
-The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
-much of an association.  It's simply available and easy to write.
-</p>
-<div class="org-src-container">
-<pre class="src src-js"><span style="color: #CC9393;">"-RPB"</span>: <span style="color: #CC9393;">"{#Control(g)}"</span>,
-</pre>
-</div>
-</div>
-</div>
-
-<div id="outline-container-orgb799991" class="outline-2">
-<h2 id="orgb799991"><span class="section-number-2">5</span> Function keys</h2>
-<div class="outline-text-2" id="text-5">
-<p>
-It doesn't seem like <code>*</code> is used at all with numbers.  This means it
-can be used to differentiate the F keys.
+The function keys don't appear in the default dictionaries.  Since <code>*</code>
+is not used at all with numbers, star is used here to differentiate
+the function keys.
 </p>
 
 <div class="org-src-container">
@@ -2505,32 +2504,45 @@ can be used to differentiate the F keys.
 <span style="color: #CC9393;">"*9"</span>: <span style="color: #CC9393;">"{#F9}"</span>,
 <span style="color: #CC9393;">"10*"</span>: <span style="color: #CC9393;">"{#F10}"</span>,
 <span style="color: #CC9393;">"1*D"</span>: <span style="color: #CC9393;">"{#F11}"</span>,
-<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>,
+<span style="color: #CC9393;">"2*D"</span>: <span style="color: #CC9393;">"{#F12}"</span>
 </pre>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org86e6d0d" class="outline-2">
-<h2 id="org86e6d0d"><span class="section-number-2">6</span> Notes</h2>
-<div class="outline-text-2" id="text-6">
-</div>
-<div id="outline-container-org8bc362e" class="outline-3">
-<h3 id="org8bc362e"><span class="section-number-3">6.1</span> Cross Platform Movement</h3>
-<div class="outline-text-3" id="text-6-1">
+<div id="outline-container-org1b95936" class="outline-2">
+<h2 id="org1b95936"><span class="section-number-2">5</span> Resources</h2>
+<div class="outline-text-2" id="text-5">
 <p>
-From Ted Morin: <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a>
+The following resources were used in the design of this dictionary.
+They are included here in complete form for posterity.
+</p>
+</div>
+
+<div id="outline-container-org8fc404d" class="outline-3">
+<h3 id="org8fc404d"><span class="section-number-3">5.1</span> Cross Platform Movement</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+By Ted Morin, the <a href="http://www.openstenoproject.org/stenodict/dictionaries/cross_platform_movement.html">Cross Platform Movement</a> dictionary provides a
+navigation scheme that works across operating systems.  The dictionary
+demonstrates a left-handed <a href="#orgdcacee8">mode prefix</a>.
+</p>
+
+<p>
+Ted explains the how the dictionary works:
 </p>
 
 <blockquote>
 <p>
-Movement
+
 </p>
 
 <p>
-Like the Plover default dictionary, you activate movement keys by
-using STPH- and then select the movement key with the right hand, as
-below.
+<b>Movement</b>
+</p>
+
+<p>
+Like the Plover default dictionary, you activate movement keys by using STPH- and then select the movement key with the right hand, as below.
 </p>
 
 <p>
@@ -2538,42 +2550,38 @@ Use -R, -P, -B, and -G for left, up, down, and right.
 </p>
 
 <p>
-In addition, page up and down are arrows made with the right hand:
-Page Up is -RPG (up arrow). Page Down is -FBL (down arrow).
+In addition, page up and down are arrows made with the right hand: Page Up is -RPG (up arrow). Page Down is -FBL (down arrow).
 </p>
 
 <p>
-Home is -FPL (all three fingers up), End is -RBG (all three fingers
-down.)
+Home is -FPL (all three fingers up), End is -RBG (all three fingers down.)
 </p>
 
 <p>
-Finally, -RB is Control(Left), -BG is Control(Right). These jump words
-left and right on Windows and Linux. For Mac, add an asterisk, and *RB
-will make Option(Left), and *BG will make Option(Right).  Selection
+Finally, -RB is Control(Left), -BG is Control(Right). These jump words left and right on Windows and Linux. For Mac, add an asterisk, and *RB will make Option(Left), and *BG will make Option(Right).  Selection
 </p>
 
 <p>
 To add Shift to any of the above (which will select text that you move
-over), use SKWR- instead of STPH-.  Utility
+over), use SKWR- instead of STPH-.
 </p>
 
 <p>
-Included for convenient is a set of arrow keys with the Super key
-(Windows/Meta/Command depending on OS). On Windows, this will snap
-windows to the sides of screens, maximize, and minimize them. On Mac,
-you can jump to the beginning or end of lines or files. On Linux, the
-behavior varies. To use this, it’s simply KPH* (command) and the four
-arrows.  Deletion
+<b>Utility</b>
 </p>
 
 <p>
-Finally, I have a delete-word stroke for when Plover runs out of
-buffer. Simply #* on Windows &amp; Linux; I tend to use right index finger
-for the asterisk, and the middle right finger for the number bar. On
-Mac, I just use *F or *6 if I accidentally hit the number bar.
+Included for convenient is a set of arrow keys with the Super key (Windows/Meta/Command depending on OS). On Windows, this will snap windows to the sides of screens, maximize, and minimize them. On Mac, you can jump to the beginning or end of lines or files. On Linux, the behavior varies. To use this, it’s simply KPH* (command) and the four arrows.  Deletion
+</p>
+
+<p>
+Finally, I have a delete-word stroke for when Plover runs out of buffer. Simply #* on Windows &amp; Linux; I tend to use right index finger for the asterisk, and the middle right finger for the number bar. On Mac, I just use *F or *6 if I accidentally hit the number bar.
 </p>
 </blockquote>
+
+<p>
+The dictionary is given below:
+</p>
 
 <div class="org-src-container">
 <pre class="src src-js">{
@@ -2615,11 +2623,12 @@ Mac, I just use *F or *6 if I accidentally hit the number bar.
 </div>
 </div>
 
-<div id="outline-container-orgd664f9b" class="outline-3">
-<h3 id="orgd664f9b"><span class="section-number-3">6.2</span> Modifiers Single Stroke</h3>
-<div class="outline-text-3" id="text-6-2">
+<div id="outline-container-org2fe8642" class="outline-3">
+<h3 id="org2fe8642"><span class="section-number-3">5.2</span> Modifiers Single Stroke</h3>
+<div class="outline-text-3" id="text-5-2">
 <p>
-From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a>
+From DiDoesDigital, the <a href="https://github.com/didoesdigital/steno-dictionaries/blob/master/dictionaries/modifiers-single-stroke.json">modifiers-single-stroke</a> dictionary
+demonstrates the <a href="#org4571ee1">Right Hand Rule</a>.
 </p>
 
 <ul class="org-ul">
@@ -2754,11 +2763,12 @@ From DiDoesDigital: <a href="https://github.com/didoesdigital/steno-dictionaries
 </div>
 </div>
 
-<div id="outline-container-org97f5b0d" class="outline-3">
-<h3 id="org97f5b0d"><span class="section-number-3">6.3</span> Nimble single strokes</h3>
-<div class="outline-text-3" id="text-6-3">
+<div id="outline-container-org0c228f3" class="outline-3">
+<h3 id="org0c228f3"><span class="section-number-3">5.3</span> Nimble single strokes</h3>
+<div class="outline-text-3" id="text-5-3">
 <p>
-From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a>
+Joshua Grams has defined the <a href="https://gist.githubusercontent.com/JoshuaGrams/4847241da6a5678f7ee11ffccb79d583/raw/61c14180a277dd7f95a09326258a3da19698b107/nimble-single-stroke.json">nimble-single-strokes</a> dictionary.  It too
+utilizes the <a href="#org4571ee1">Right Hand Rule</a>.
 </p>
 
 <ul class="org-ul">
@@ -3623,20 +3633,20 @@ From Joshua Grams: <a href="https://gist.githubusercontent.com/JoshuaGrams/48472
 </div>
 </div>
 
-<div id="outline-container-org8c3743b" class="outline-3">
-<h3 id="org8c3743b"><span class="section-number-3">6.4</span> Resources</h3>
-<div class="outline-text-3" id="text-6-4">
+<div id="outline-container-org4487c9b" class="outline-3">
+<h3 id="org4487c9b"><span class="section-number-3">5.4</span> Links</h3>
+<div class="outline-text-3" id="text-5-4">
 <ul class="org-ul">
-<li><a href="https://plover.goeswhere.com/">https://plover.goeswhere.com/</a></li>
-<li><a href="https://stenoknight.com/plover/ploverlookup/">https://stenoknight.com/plover/ploverlookup/</a></li>
-<li><a href="https://github.com/EPLHREU/emily-symbols">https://github.com/EPLHREU/emily-symbols</a></li>
+<li>Reverse dictionary lookup: <a href="https://plover.goeswhere.com/">https://plover.goeswhere.com/</a></li>
+<li>Online dict lookup: <a href="https://stenoknight.com/plover/ploverlookup/">https://stenoknight.com/plover/ploverlookup/</a></li>
+<li>Symbol writing Plover theory: <a href="https://github.com/EPLHREU/emily-symbols">https://github.com/EPLHREU/emily-symbols</a></li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgac3b2c7" class="outline-2">
-<h2 id="orgac3b2c7"><span class="section-number-2">7</span> Closing bracket</h2>
+<div id="outline-container-org22e5bb5" class="outline-2">
+<h2 id="org22e5bb5"><span class="section-number-2">6</span> Closing bracket</h2>
 </div>
 <div id="footnotes">
 <h2 class="footnotes">Footnotes: </h2>
@@ -3683,7 +3693,7 @@ It's simply uncommon outside of classrooms and courtrooms.
 </div></div>
 <div id="postamble" class="status">
 <p class="author">Author: Ahab</p>
-<p class="date">Created: 2021-07-25 Sun 11:12</p>
+<p class="date">Created: 2021-07-25 Sun 12:31</p>
 <p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
