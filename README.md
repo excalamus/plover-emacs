@@ -12,7 +12,7 @@ https://github.com/excalamus/plover-emacs/blob/main/plover-emacs.json
 
 1. Download `plover-emacs.json`
 2. Open Plover
-3. Add the json file to Plover using `Edit > Add dictionaries > New dictionary`
+3. Add the json file to Plover using `Edit > Add dictionaries > Open dictionary`
 4. Move the dictionary to the preferred precedence order
 
 Tested with Plover 4.0.0.dev8 on [GNU Guix](https://guix.gnu.org/).
