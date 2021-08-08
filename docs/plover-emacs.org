@@ -273,8 +273,8 @@ The right-hand Control form, =-PBG=, looks like an "L".  The last
 letter of "Control" is "L".
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"KPW" : "{#Control_L()}",
-"-PBG": "{#Control_L()}",
+"KPW" : "{^}{#Control_L()}{^}",
+"-PBG": "{^}{#Control_L()}{^}",
 #+end_src
 
 The main challenge with =-PBG= is that it contains the =-G= key, used
@@ -298,17 +298,17 @@ words incur a one-stroke penalty and require the use of =/G= to append
 | "examining"         | =KP-PBG=      | =KP-PB/G=      |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TK-PBG"  : "{#Control_L(d)}",
-"TP-PBG"  : "{#Control_L(f)}",
-"TKPW-PBG": "{#Control_L(g)}",
-"EUPBG"   : "{#Control_L(i)}",
-"K-PBG"   : "{#Control_L(k)}",
-"HR-PBG"  : "{#Control_L(l)}",
-"PH-PBG"  : "{#Control_L(m)}",
-"R-PBG"   : "{#Control_L(r)}",
-"S-PBG"   : "{#Control_L(s)}",
-"T-PBG"   : "{#Control_L(t)}",
-"KP-PBG"  : "{#Control_L(x)}",
+"TK-PBG"  : "{^}{#Control_L(d)}{^}",
+"TP-PBG"  : "{^}{#Control_L(f)}{^}",
+"TKPW-PBG": "{^}{#Control_L(g)}{^}",
+"EUPBG"   : "{^}{#Control_L(i)}{^}",
+"K-PBG"   : "{^}{#Control_L(k)}{^}",
+"HR-PBG"  : "{^}{#Control_L(l)}{^}",
+"PH-PBG"  : "{^}{#Control_L(m)}{^}",
+"R-PBG"   : "{^}{#Control_L(r)}{^}",
+"S-PBG"   : "{^}{#Control_L(s)}{^}",
+"T-PBG"   : "{^}{#Control_L(t)}{^}",
+"KP-PBG"  : "{^}{#Control_L(x)}{^}",
 #+end_src
 
 The default binding for "edge" (=E-PBG=) is completely clobbered.  The
@@ -324,10 +324,10 @@ uses a new single-stroke definition.
 | "winning"           | =W-PBG=     | =W*PB=      |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"EPBG"  : "{#Control_L(e)}",
+"EPBG"  : "{^}{#Control_L(e)}{^}",
 "-EGD"  : "edge",
 "-EG/D" : "egged",
-"W-PBG" : "{#Control_L(w)}",
+"W-PBG" : "{^}{#Control_L(w)}{^}",
 "W*PB"  : "winning",
 #+end_src
 
@@ -356,18 +356,18 @@ outside of a quotation and likely doesn't need a replacement (that
 may be useful but is not provided.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-PBG"    : "{#Control_L(a)}",
-"PW-PBG"   : "{#Control_L(b)}",
-"KR-PBG"   : "{#Control_L(c)}",
-"SKWR-PBG" : "{#Control_L(j)}",
-"TPH-PBG"  : "{#Control_L(n)}",
-"O-PBG"    : "{#Control_L(o)}",
-"P-PBG"    : "{#Control_L(p)}",
-"KW-PBG"   : "{#Control_L(q)}",
-"U-PBG"    : "{#Control_L(u)}",
-"SR-PBG"   : "{#Control_L(v)}",
-"KWR-PBG"  : "{#Control_L(y)}",
-"STKPW-PBG": "{#Control_L(z)}",
+"A-PBG"    : "{^}{#Control_L(a)}{^}",
+"PW-PBG"   : "{^}{#Control_L(b)}{^}",
+"KR-PBG"   : "{^}{#Control_L(c)}{^}",
+"SKWR-PBG" : "{^}{#Control_L(j)}{^}",
+"TPH-PBG"  : "{^}{#Control_L(n)}{^}",
+"O-PBG"    : "{^}{#Control_L(o)}{^}",
+"P-PBG"    : "{^}{#Control_L(p)}{^}",
+"KW-PBG"   : "{^}{#Control_L(q)}{^}",
+"U-PBG"    : "{^}{#Control_L(u)}{^}",
+"SR-PBG"   : "{^}{#Control_L(v)}{^}",
+"KWR-PBG"  : "{^}{#Control_L(y)}{^}",
+"STKPW-PBG": "{^}{#Control_L(z)}{^}",
 #+end_src
 
 ** Alt <<alt>>
@@ -379,8 +379,8 @@ The right-hand Alt form, =-PBL=, looks like a "T".  The last letter of
 "Alt" is "T".
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TPW" : "{#Alt_L()}",
-"-PBL": "{#Alt_L()}",
+"TPW" : "{^}{#Alt_L()}{^}",
+"-PBL": "{^}{#Alt_L()}{^}",
 #+end_src
 
 Alternate single-stroke forms exist and are used for "financial" and
@@ -403,44 +403,46 @@ New bindings for several words are created using =*=.
 | "continual"         | =T-PBL=     | =T*PBL=     |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-PBL": "{#Alt_L(a)}",
+"A-PBL": "{^}{#Alt_L(a)}{^}",
 "A*PBL": "Alan",
-"EPBL" : "{#Alt_L(e)}",
-"*EPBL": "{^ential}",
-"K-PBL": "{#Alt_L(k)}",
+"EPBL" : "{^}{#Alt_L(e)}{^}",
+"*EPBL": "{^ential}{^}",
+"K-PBL": "{^}{#Alt_L(k)}{^}",
 "K*PBL": "conditional",
-"R-PBL": "{#Alt_L(r)}",
+"R-PBL": "{^}{#Alt_L(r)}{^}",
 "R*PBL": "reasonable",
-"S-PBL": "{#Alt_L(s)}",
+"S-PBL": "{^}{#Alt_L(s)}{^}",
 "S*PBL": "seasonal",
-"T-PBL": "{#Alt_L(t)}",
+"T-PBL": "{^}{#Alt_L(t)}{^}",
 "T*PBL": "continual",
 #+end_src
 
 The remaining bindings present no conflicts.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"PW-PBL"   : "{#Alt_L(b)}",
-"KR-PBL"   : "{#Alt_L(c)}",
-"TK-PBL"   : "{#Alt_L(d)}",
-"TP-PBL"   : "{#Alt_L(f)}",
-"TKPW-PBL" : "{#Alt_L(g)}",
-"H-PBL"    : "{#Alt_L(h)}",
-"EUPBL"    : "{#Alt_L(i)}",
-"SKWR-PBL" : "{#Alt_L(j)}",
-"HR-PBL"   : "{#Alt_L(l)}",
-"PH-PBL"   : "{#Alt_L(m)}",
-"TPH-PBL"  : "{#Alt_L(n)}",
-"O-PBL"    : "{#Alt_L(o)}",
-"P-PBL"    : "{#Alt_L(p)}",
-"KW-PBL"   : "{#Alt_L(q)}",
-"UPBL"     : "{#Alt_L(u)}",
-"SR-PBL"   : "{#Alt_L(v)}",
-"W-PBL"    : "{#Alt_L(w)}",
-"KP-PBL"   : "{#Alt_L(x)}",
-"KWR-PBL"  : "{#Alt_L(y)}",
-"STKPW-PBL": "{#Alt_L(z)}",
+"PW-PBL"   : "{^}{#Alt_L(b)}{^}",
+"KR-PBL"   : "{^}{#Alt_L(c)}{^}",
+"TK-PBL"   : "{^}{#Alt_L(d)}{^}",
+"TP-PBL"   : "{^}{#Alt_L(f)}{^}",
+"TKPW-PBL" : "{^}{#Alt_L(g)}{^}",
+"H-PBL"    : "{^}{#Alt_L(h)}{^}",
+"EUPBL"    : "{^}{#Alt_L(i)}{^}",
+"SKWR-PBL" : "{^}{#Alt_L(j)}{^}",
+"HR-PBL"   : "{^}{#Alt_L(l)}{^}",
+"PH-PBL"   : "{^}{#Alt_L(m)}{^}",
+"TPH-PBL"  : "{^}{#Alt_L(n)}{^}",
+"O-PBL"    : "{^}{#Alt_L(o)}{^}",
+"P-PBL"    : "{^}{#Alt_L(p)}{^}",
+"KW-PBL"   : "{^}{#Alt_L(q)}{^}",
+"UPBL"     : "{^}{#Alt_L(u)}{^}",
+"SR-PBL"   : "{^}{#Alt_L(v)}{^}",
+"W-PBL"    : "{^}{#Alt_L(w)}{^}",
+"KP-PBL"   : "{^}{#Alt_L(x)}{^}",
+"KWR-PBL"  : "{^}{#Alt_L(y)}{^}",
+"STKPW-PBL": "{^}{#Alt_L(z)}{^}",
 #+end_src
+
+
 
 ** Control + Alt <<control-alt>>
 | L Pattern      | Left hand | Modifier      | Right Hand | R Pattern       |
@@ -453,8 +455,8 @@ The [[control-alt][Control + Alt]] form is a combination of the [[control][Contr
 Notice how the "Control bit" and "Alt bit" are both present.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TKPW" : "{#Control_L(Alt_L())}",
-"-PBLG": "{#Control_L(Alt_L())}",
+"TKPW" : "{^}{#Control_L(Alt_L())}{^}",
+"-PBLG": "{^}{#Control_L(Alt_L())}{^}",
 #+end_src
 
 The right hand form =-PBLG= is the "j" sound within Plover theory.
@@ -472,18 +474,18 @@ each default form to provide new bindings.
 | "engine"            | =TPH-PBLG=  | =TPH*PBLG=  |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-PBLG"  : "{#Control_L(Alt_L(a))}",
-"A*EUPBLG": "{^age}",
-"PW-PBLG" : "{#Control_L(Alt_L(b))}",
+"A-PBLG"  : "{^}{#Control_L(Alt_L(a))}{^}",
+"A*EUPBLG": "{^age}{^}",
+"PW-PBLG" : "{^}{#Control_L(Alt_L(b))}{^}",
 "PW*PBLG" : "bandage",
-"KR-PBLG" : "{#Control_L(Alt_L(c))}",
+"KR-PBLG" : "{^}{#Control_L(Alt_L(c))}{^}",
 "KR*PBLG" : "CJ",
-"EPBLG"   : "{#Control_L(Alt_L(e))}",
-"EUPBLG"  : "{#Control_L(Alt_L(i))}",
+"EPBLG"   : "{^}{#Control_L(Alt_L(e))}{^}",
+"EUPBLG"  : "{^}{#Control_L(Alt_L(i))}{^}",
 "*EUPBLG" : "image",
-"PH-PBLG" : "{#Control_L(Alt_L(m))}",
+"PH-PBLG" : "{^}{#Control_L(Alt_L(m))}{^}",
 "PH*PBLG" : "emergency",
-"TPH-PBLG": "{#Control_L(Alt_L(n))}",
+"TPH-PBLG": "{^}{#Control_L(Alt_L(n))}{^}",
 "TPH*PBLG": "engine",
 #+end_src
 
@@ -501,24 +503,24 @@ without replacement.
 | =T-PBLG=   | "continualing"   |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TK-PBLG"   : "{#Control_L(Alt_L(d))}",
-"TP-PBLG"   : "{#Control_L(Alt_L(f))}",
-"TKPW-PBLG" : "{#Control_L(Alt_L(g))}",
-"H-PBLG"    : "{#Control_L(Alt_L(h))}",
-"SKWR-PBLG" : "{#Control_L(Alt_L(j))}",
-"K-PBLG"    : "{#Control_L(Alt_L(k))}",
-"O-PBLG"    : "{#Control_L(Alt_L(o))}",
-"P-PBLG"    : "{#Control_L(Alt_L(p))}",
-"KW-PBLG"   : "{#Control_L(Alt_L(q))}",
-"R-PBLG"    : "{#Control_L(Alt_L(r))}",
-"S-PBLG"    : "{#Control_L(Alt_L(s))}",
-"T-PBLG"    : "{#Control_L(Alt_L(t))}",
-"UPBLG"     : "{#Control_L(Alt_L(u))}",
-"SR-PBLG"   : "{#Control_L(Alt_L(v))}",
-"W-PBLG"    : "{#Control_L(Alt_L(w))}",
-"KP-PBLG"   : "{#Control_L(Alt_L(x))}",
-"KWR-PBLG"  : "{#Control_L(Alt_L(y))}",
-"STKPW-PBLG": "{#Control_L(Alt_L(z))}",
+"TK-PBLG"   : "{^}{#Control_L(Alt_L(d))}{^}",
+"TP-PBLG"   : "{^}{#Control_L(Alt_L(f))}{^}",
+"TKPW-PBLG" : "{^}{#Control_L(Alt_L(g))}{^}",
+"H-PBLG"    : "{^}{#Control_L(Alt_L(h))}{^}",
+"SKWR-PBLG" : "{^}{#Control_L(Alt_L(j))}{^}",
+"K-PBLG"    : "{^}{#Control_L(Alt_L(k))}{^}",
+"O-PBLG"    : "{^}{#Control_L(Alt_L(o))}{^}",
+"P-PBLG"    : "{^}{#Control_L(Alt_L(p))}{^}",
+"KW-PBLG"   : "{^}{#Control_L(Alt_L(q))}{^}",
+"R-PBLG"    : "{^}{#Control_L(Alt_L(r))}{^}",
+"S-PBLG"    : "{^}{#Control_L(Alt_L(s))}{^}",
+"T-PBLG"    : "{^}{#Control_L(Alt_L(t))}{^}",
+"UPBLG"     : "{^}{#Control_L(Alt_L(u))}{^}",
+"SR-PBLG"   : "{^}{#Control_L(Alt_L(v))}{^}",
+"W-PBLG"    : "{^}{#Control_L(Alt_L(w))}{^}",
+"KP-PBLG"   : "{^}{#Control_L(Alt_L(x))}{^}",
+"KWR-PBLG"  : "{^}{#Control_L(Alt_L(y))}{^}",
+"STKPW-PBLG": "{^}{#Control_L(Alt_L(z))}{^}",
 #+end_src
 
 ** Shift <<shift>>
@@ -529,8 +531,8 @@ without replacement.
 The [[shift][Shift]] form looks like an up-arrow.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"KPR" : "{#Shift_L()}",
-"-RPG": "{#Shift_L()}",
+"KPR" : "{^}{#Shift_L()}{^}",
+"-RPG": "{^}{#Shift_L()}{^}",
 #+end_src
 
 There is an ={^ing}= clash as with the other forms containing =-G=.
@@ -541,7 +543,7 @@ Use the default alternate form.
 | "reporting"         | =O-RPG=       | =RO-RPG=       |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"O-RPG": "{#Shift_L(o)}",
+"O-RPG": "{^}{#Shift_L(o)}{^}",
 #+end_src
 
 The remaining letters correspond to silly words in the default
@@ -557,31 +559,31 @@ conflict.
 | =URPG=  | "you wering"  |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-RPG"    : "{#Shift_L(a)}",
-"PW-RPG"   : "{#Shift_L(b)}",
-"KR-RPG"   : "{#Shift_L(c)}",
-"TK-RPG"   : "{#Shift_L(d)}",
-"ERPG"     : "{#Shift_L(e)}",
-"TP-RPG"   : "{#Shift_L(f)}",
-"TKPW-RPG" : "{#Shift_L(g)}",
-"H-RPG"    : "{#Shift_L(h)}",
-"EURPG"    : "{#Shift_L(i)}",
-"SKWR-RPG" : "{#Shift_L(j)}",
-"K-RPG"    : "{#Shift_L(k)}",
-"HR-RPG"   : "{#Shift_L(l)}",
-"PH-RPG"   : "{#Shift_L(m)}",
-"TPH-RPG"  : "{#Shift_L(n)}",
-"P-RPG"    : "{#Shift_L(p)}",
-"KW-RPG"   : "{#Shift_L(q)}",
-"R-RPG"    : "{#Shift_L(r)}",
-"S-RPG"    : "{#Shift_L(s)}",
-"T-RPG"    : "{#Shift_L(t)}",
-"URPG"     : "{#Shift_L(u)}",
-"SR-RPG"   : "{#Shift_L(v)}",
-"W-RPG"    : "{#Shift_L(w)}",
-"KP-RPG"   : "{#Shift_L(x)}",
-"KWR-RPG"  : "{#Shift_L(y)}",
-"STKPW-RPG": "{#Shift_L(z)}",
+"A-RPG"    : "{^}{#Shift_L(a)}{^}",
+"PW-RPG"   : "{^}{#Shift_L(b)}{^}",
+"KR-RPG"   : "{^}{#Shift_L(c)}{^}",
+"TK-RPG"   : "{^}{#Shift_L(d)}{^}",
+"ERPG"     : "{^}{#Shift_L(e)}{^}",
+"TP-RPG"   : "{^}{#Shift_L(f)}{^}",
+"TKPW-RPG" : "{^}{#Shift_L(g)}{^}",
+"H-RPG"    : "{^}{#Shift_L(h)}{^}",
+"EURPG"    : "{^}{#Shift_L(i)}{^}",
+"SKWR-RPG" : "{^}{#Shift_L(j)}{^}",
+"K-RPG"    : "{^}{#Shift_L(k)}{^}",
+"HR-RPG"   : "{^}{#Shift_L(l)}{^}",
+"PH-RPG"   : "{^}{#Shift_L(m)}{^}",
+"TPH-RPG"  : "{^}{#Shift_L(n)}{^}",
+"P-RPG"    : "{^}{#Shift_L(p)}{^}",
+"KW-RPG"   : "{^}{#Shift_L(q)}{^}",
+"R-RPG"    : "{^}{#Shift_L(r)}{^}",
+"S-RPG"    : "{^}{#Shift_L(s)}{^}",
+"T-RPG"    : "{^}{#Shift_L(t)}{^}",
+"URPG"     : "{^}{#Shift_L(u)}{^}",
+"SR-RPG"   : "{^}{#Shift_L(v)}{^}",
+"W-RPG"    : "{^}{#Shift_L(w)}{^}",
+"KP-RPG"   : "{^}{#Shift_L(x)}{^}",
+"KWR-RPG"  : "{^}{#Shift_L(y)}{^}",
+"STKPW-RPG": "{^}{#Shift_L(z)}{^}",
 #+end_src
 
 ** Control + Shift <<control-shift>>
@@ -596,8 +598,8 @@ forms.  Notice how the "Control bit" and "Shift bits" compose the
 overall form.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"KPWR" : "{#Control_L(Shift_L())}",
-"-RPBG": "{#Control_L(Shift_L())}",
+"KPWR" : "{^}{#Control_L(Shift_L())}{^}",
+"-RPBG": "{^}{#Control_L(Shift_L())}{^}",
 #+end_src
 
 The following words require use of their alternate form.
@@ -611,11 +613,11 @@ The following words require use of their alternate form.
 | "surgeon general"   | =S-RPBG=      | =S*RPBG=       |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-RPBG": "{#Control_L(Shift_L(a))}",
-"EURPBG": "{#Control_L(Shift_L(i))}",
-"K-RPBG": "{#Control_L(Shift_L(k))}",
-"O-RPBG": "{#Control_L(Shift_L(o))}",
-"S-RPBG": "{#Control_L(Shift_L(s))}",
+"A-RPBG": "{^}{#Control_L(Shift_L(a))}{^}",
+"EURPBG": "{^}{#Control_L(Shift_L(i))}{^}",
+"K-RPBG": "{^}{#Control_L(Shift_L(k))}{^}",
+"O-RPBG": "{^}{#Control_L(Shift_L(o))}{^}",
+"S-RPBG": "{^}{#Control_L(Shift_L(s))}{^}",
 #+end_src
 
 One word, "earning", requires rebinding.  Star (=*=) is used to define
@@ -626,7 +628,7 @@ the new stroke.
 | "earning"           | =ERPBG=     | =*ERPBG=    |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"ERPBG": "{#Control_L(Shift_L(e))}",
+"ERPBG": "{^}{#Control_L(Shift_L(e))}{^}",
 "*ERPBG": "earning",
 #+end_src
 
@@ -641,26 +643,26 @@ silly.
 | =U-RPBG=  | "urning"                |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"PW-RPBG"   : "{#Control_L(Shift_L(b))}",
-"KR-RPBG"   : "{#Control_L(Shift_L(c))}",
-"TK-RPBG"   : "{#Control_L(Shift_L(d))}",
-"TP-RPBG"   : "{#Control_L(Shift_L(f))}",
-"TKPW-RPBG" : "{#Control_L(Shift_L(g))}",
-"H-RPBG"    : "{#Control_L(Shift_L(h))}",
-"SKWR-RPBG" : "{#Control_L(Shift_L(j))}",
-"HR-RPBG"   : "{#Control_L(Shift_L(l))}",
-"PH-RPBG"   : "{#Control_L(Shift_L(m))}",
-"TPH-RPBG"  : "{#Control_L(Shift_L(n))}",
-"P-RPBG"    : "{#Control_L(Shift_L(p))}",
-"KW-RPBG"   : "{#Control_L(Shift_L(q))}",
-"R-RPBG"    : "{#Control_L(Shift_L(r))}",
-"T-RPBG"    : "{#Control_L(Shift_L(t))}",
-"URPBG"     : "{#Control_L(Shift_L(u))}",
-"SR-RPBG"   : "{#Control_L(Shift_L(v))}",
-"W-RPBG"    : "{#Control_L(Shift_L(w))}",
-"KP-RPBG"   : "{#Control_L(Shift_L(x))}",
-"KWR-RPBG"  : "{#Control_L(Shift_L(y))}",
-"STKPW-RPBG": "{#Control_L(Shift_L(z))}",
+"PW-RPBG"   : "{^}{#Control_L(Shift_L(b))}{^}",
+"KR-RPBG"   : "{^}{#Control_L(Shift_L(c))}{^}",
+"TK-RPBG"   : "{^}{#Control_L(Shift_L(d))}{^}",
+"TP-RPBG"   : "{^}{#Control_L(Shift_L(f))}{^}",
+"TKPW-RPBG" : "{^}{#Control_L(Shift_L(g))}{^}",
+"H-RPBG"    : "{^}{#Control_L(Shift_L(h))}{^}",
+"SKWR-RPBG" : "{^}{#Control_L(Shift_L(j))}{^}",
+"HR-RPBG"   : "{^}{#Control_L(Shift_L(l))}{^}",
+"PH-RPBG"   : "{^}{#Control_L(Shift_L(m))}{^}",
+"TPH-RPBG"  : "{^}{#Control_L(Shift_L(n))}{^}",
+"P-RPBG"    : "{^}{#Control_L(Shift_L(p))}{^}",
+"KW-RPBG"   : "{^}{#Control_L(Shift_L(q))}{^}",
+"R-RPBG"    : "{^}{#Control_L(Shift_L(r))}{^}",
+"T-RPBG"    : "{^}{#Control_L(Shift_L(t))}{^}",
+"URPBG"     : "{^}{#Control_L(Shift_L(u))}{^}",
+"SR-RPBG"   : "{^}{#Control_L(Shift_L(v))}{^}",
+"W-RPBG"    : "{^}{#Control_L(Shift_L(w))}{^}",
+"KP-RPBG"   : "{^}{#Control_L(Shift_L(x))}{^}",
+"KWR-RPBG"  : "{^}{#Control_L(Shift_L(y))}{^}",
+"STKPW-RPBG": "{^}{#Control_L(Shift_L(z))}{^}",
 #+end_src
 
 ** Alt + Shift <<alt-shift>>
@@ -674,8 +676,8 @@ The [[alt-shift][Alt + Shift]] form is a combination of the [[alt][Alt]] and [[s
 Notice how the "Alt bit" and "Shift bit" compose the overall form.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TPWR"  : "{#Alt_L(Shift_L())}",
-"-RPBL" : "{#Alt_L(Shift_L())}",
+"TPWR"  : "{^}{#Alt_L(Shift_L())}{^}",
+"-RPBL" : "{^}{#Alt_L(Shift_L())}{^}",
 #+end_src
 
 Not many conflicts occur with the [[alt-shift][Alt + Shift]] pattern and each
@@ -688,37 +690,37 @@ conflict has a viable alternative form already defined.
 | "original"          | =O-RPBL=      | =O-RPBLG=      |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TP-RPBL" : "{#Alt_L(Shift_L(f))}",
-"HR-RPBL" : "{#Alt_L(Shift_L(l))}",
-"O-RPBL"  : "{#Alt_L(Shift_L(o))}",
+"TP-RPBL" : "{^}{#Alt_L(Shift_L(f))}{^}",
+"HR-RPBL" : "{^}{#Alt_L(Shift_L(l))}{^}",
+"O-RPBL"  : "{^}{#Alt_L(Shift_L(o))}{^}",
 #+end_src
 
 There are no other conflicts with the Plover standard dictionary.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-RPBL"     : "{#Alt_L(Shift_L(a))}",
-"PW-RPBL"    : "{#Alt_L(Shift_L(b))}",
-"KR-RPBL"    : "{#Alt_L(Shift_L(c))}",
-"TK-RPBL"    : "{#Alt_L(Shift_L(d))}",
-"ERPBL"      : "{#Alt_L(Shift_L(e))}",
-"TKPW-RPBL"  : "{#Alt_L(Shift_L(g))}",
-"H-RPBL"     : "{#Alt_L(Shift_L(h))}",
-"EURPBL"     : "{#Alt_L(Shift_L(i))}",
-"SKWR-RPBL"  : "{#Alt_L(Shift_L(j))}",
-"K-RPBL"     : "{#Alt_L(Shift_L(k))}",
-"PH-RPBL"    : "{#Alt_L(Shift_L(m))}",
-"TPH-RPBL"   : "{#Alt_L(Shift_L(n))}",
-"P-RPBL"     : "{#Alt_L(Shift_L(p))}",
-"KW-RPBL"    : "{#Alt_L(Shift_L(q))}",
-"R-RPBL"     : "{#Alt_L(Shift_L(r))}",
-"S-RPBL"     : "{#Alt_L(Shift_L(s))}",
-"T-RPBL"     : "{#Alt_L(Shift_L(t))}",
-"U-RPBL"     : "{#Alt_L(Shift_L(u))}",
-"SR-RPBL"    : "{#Alt_L(Shift_L(v))}",
-"W-RPBL"     : "{#Alt_L(Shift_L(w))}",
-"KP-RPBL"    : "{#Alt_L(Shift_L(x))}",
-"KWR-RPBL"   : "{#Alt_L(Shift_L(y))}",
-"STKPW-RPBL" : "{#Alt_L(Shift_L(z))}",
+"A-RPBL"     : "{^}{#Alt_L(Shift_L(a))}{^}",
+"PW-RPBL"    : "{^}{#Alt_L(Shift_L(b))}{^}",
+"KR-RPBL"    : "{^}{#Alt_L(Shift_L(c))}{^}",
+"TK-RPBL"    : "{^}{#Alt_L(Shift_L(d))}{^}",
+"ERPBL"      : "{^}{#Alt_L(Shift_L(e))}{^}",
+"TKPW-RPBL"  : "{^}{#Alt_L(Shift_L(g))}{^}",
+"H-RPBL"     : "{^}{#Alt_L(Shift_L(h))}{^}",
+"EURPBL"     : "{^}{#Alt_L(Shift_L(i))}{^}",
+"SKWR-RPBL"  : "{^}{#Alt_L(Shift_L(j))}{^}",
+"K-RPBL"     : "{^}{#Alt_L(Shift_L(k))}{^}",
+"PH-RPBL"    : "{^}{#Alt_L(Shift_L(m))}{^}",
+"TPH-RPBL"   : "{^}{#Alt_L(Shift_L(n))}{^}",
+"P-RPBL"     : "{^}{#Alt_L(Shift_L(p))}{^}",
+"KW-RPBL"    : "{^}{#Alt_L(Shift_L(q))}{^}",
+"R-RPBL"     : "{^}{#Alt_L(Shift_L(r))}{^}",
+"S-RPBL"     : "{^}{#Alt_L(Shift_L(s))}{^}",
+"T-RPBL"     : "{^}{#Alt_L(Shift_L(t))}{^}",
+"U-RPBL"     : "{^}{#Alt_L(Shift_L(u))}{^}",
+"SR-RPBL"    : "{^}{#Alt_L(Shift_L(v))}{^}",
+"W-RPBL"     : "{^}{#Alt_L(Shift_L(w))}{^}",
+"KP-RPBL"    : "{^}{#Alt_L(Shift_L(x))}{^}",
+"KWR-RPBL"   : "{^}{#Alt_L(Shift_L(y))}{^}",
+"STKPW-RPBL" : "{^}{#Alt_L(Shift_L(z))}{^}",
 #+end_src
 
 ** Control + Alt + Shift <<control-alt-shift>>
@@ -733,8 +735,8 @@ The [[control-alt-shift][Control + Alt + Shift]] form is a combination of the [[
 and [[shift][Shift]] forms.
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"TKPWR"  : "{#Control_L(Alt_L(Shift_L()))}",
-"-RPBLG"  : "{#Control_L(Alt_L(Shift_L()))}",
+"TKPWR"  : "{^}{#Control_L(Alt_L(Shift_L()))}{^}",
+"-RPBLG"  : "{^}{#Control_L(Alt_L(Shift_L()))}{^}",
 #+end_src
 
 Several forms are co-opted.  The alternate forms, some of which
@@ -750,17 +752,17 @@ require an additional stroke, are fortunately easy to remember.
 | "surgery"           | =S-RPBLG=     | =S*URPBLG=     |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"A-RPBLG"      : "{#Control_L(Alt_L(Shift_L(a)))}",
+"A-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(a)))}{^}",
 "A/RA-EUPBG"   : "arrange",
-"ERPBLG"       : "{#Control_L(Alt_L(Shift_L(e)))}",
+"ERPBLG"       : "{^}{#Control_L(Alt_L(Shift_L(e)))}{^}",
 "TPH-RG"       : "energy",
-"EURPBLG"      : "{#Control_L(Alt_L(Shift_L(i)))}",
+"EURPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(i)))}{^}",
 "EUPL/TKPW-UR" : "imgur",
-"O-RPBLG"      : "{#Control_L(Alt_L(Shift_L(o)))}",
+"O-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(o)))}{^}",
 "O-ERPBLG="    : "original",
-"P-RPBLG"      : "{#Control_L(Alt_L(Shift_L(p)))}",
+"P-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(p)))}{^}",
 "PR-PBLG"      : "perjury",
-"S-RPBLG"      : "{#Control_L(Alt_L(Shift_L(s)))}",
+"S-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(s)))}{^}",
 "S*URPBLG"     : "surgery",
 #+end_src
 
@@ -774,8 +776,8 @@ A few words require new bindings.  The word "emergency" is defined in
 | "urge"              | =URPBLG=    | =*URPBLG=                    |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"*ERPBLG"  : "{#Control_L(Alt_L(Shift_L(e)))}",
-"*URPBLG"  : "{#Control_L(Alt_L(Shift_L(u)))}",
+"*ERPBLG"  : "{^}{#Control_L(Alt_L(Shift_L(e)))}{^}",
+"*URPBLG"  : "{^}{#Control_L(Alt_L(Shift_L(u)))}{^}",
 #+end_src
 
 There are a handful of silly strokes which are overwritten.
@@ -786,32 +788,32 @@ There are a handful of silly strokes which are overwritten.
 | =HR-RPBLG= | "alternativelying" |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"PW-RPBLG"    : "{#Control_L(Alt_L(Shift_L(b)))}",
-"KR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(c)))}",
-"TK-RPBLG"    : "{#Control_L(Alt_L(Shift_L(d)))}",
-"TP-RPBLG"    : "{#Control_L(Alt_L(Shift_L(f)))}",
-"TKPW-RPBLG"  : "{#Control_L(Alt_L(Shift_L(g)))}",
-"H-RPBLG"     : "{#Control_L(Alt_L(Shift_L(h)))}",
-"SKWR-RPBLG"  : "{#Control_L(Alt_L(Shift_L(j)))}",
-"K-RPBLG"     : "{#Control_L(Alt_L(Shift_L(k)))}",
-"HR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(l)))}",
-"PH-RPBLG"    : "{#Control_L(Alt_L(Shift_L(m)))}",
-"TPH-RPBLG"   : "{#Control_L(Alt_L(Shift_L(n)))}",
-"KW-RPBLG"    : "{#Control_L(Alt_L(Shift_L(q)))}",
-"R-RPBLG"     : "{#Control_L(Alt_L(Shift_L(r)))}",
-"T-RPBLG"     : "{#Control_L(Alt_L(Shift_L(t)))}",
-"URPBLG"      : "{#Control_L(Alt_L(Shift_L(u)))}",
-"SR-RPBLG"    : "{#Control_L(Alt_L(Shift_L(v)))}",
-"W-RPBLG"     : "{#Control_L(Alt_L(Shift_L(w)))}",
-"KP-RPBLG"    : "{#Control_L(Alt_L(Shift_L(x)))}",
-"KWR-RPBLG"   : "{#Control_L(Alt_L(Shift_L(y)))}",
-"STKPW-RPBLG" : "{#Control_L(Alt_L(Shift_L(z)))}",
+"PW-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(b)))}{^}",
+"KR-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(c)))}{^}",
+"TK-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(d)))}{^}",
+"TP-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(f)))}{^}",
+"TKPW-RPBLG"  : "{^}{#Control_L(Alt_L(Shift_L(g)))}{^}",
+"H-RPBLG"     : "{^}{#Control_L(Alt_L(Shift_L(h)))}{^}",
+"SKWR-RPBLG"  : "{^}{#Control_L(Alt_L(Shift_L(j)))}{^}",
+"K-RPBLG"     : "{^}{#Control_L(Alt_L(Shift_L(k)))}{^}",
+"HR-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(l)))}{^}",
+"PH-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(m)))}{^}",
+"TPH-RPBLG"   : "{^}{#Control_L(Alt_L(Shift_L(n)))}{^}",
+"KW-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(q)))}{^}",
+"R-RPBLG"     : "{^}{#Control_L(Alt_L(Shift_L(r)))}{^}",
+"T-RPBLG"     : "{^}{#Control_L(Alt_L(Shift_L(t)))}{^}",
+"URPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(u)))}{^}",
+"SR-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(v)))}{^}",
+"W-RPBLG"     : "{^}{#Control_L(Alt_L(Shift_L(w)))}{^}",
+"KP-RPBLG"    : "{^}{#Control_L(Alt_L(Shift_L(x)))}{^}",
+"KWR-RPBLG"   : "{^}{#Control_L(Alt_L(Shift_L(y)))}{^}",
+"STKPW-RPBLG" : "{^}{#Control_L(Alt_L(Shift_L(z)))}{^}",
 #+end_src
 
 ** Escape
 The Escape key is distributed with Plover in the =commands.json=
-dictionary as =TPEFBG=.  This form feels contorted and, given the
-command's importance, should have a more accessible binding.
+dictionary as =TPEFBG=.  This is a two hand form and, given the
+command's importance, might benefit from a one-handed binding.
 
 In Emacs, Escape also functions as Meta when in the terminal.  Given
 the Escape/Meta/Alt relationship, one possibility is to translate the
@@ -821,11 +823,11 @@ are ample alternate forms available for "and".
 
 | original definition | co-opted form | alternate form |
 |---------------------+---------------+----------------|
-| "and"               | =STK=         | =SP=           |
+| "and"               | =STK=         | =SP=, =A-ND=   |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
-"STK" : "{#Escape}",
-"-LGT": "{#Escape}",
+"STK" : "{^}{#Escape}{^}",
+"-LGT": "{^}{#Escape}{^}",
 #+end_src
 
 * COMMENT Execute extended command and Quit
@@ -844,7 +846,7 @@ when using a mouse.
 The word "control" has an 'r' and an 'n' in it.  Honestly, there's not
 much of an association.  It's simply available and easy to write.
 #+begin_src js :tangle ../plover-emacs.json :exports none
-"-RPB": "{#Control(g)}",
+"-RPB": "{^}{#Control(g)}",
 #+end_src
 
 * COMMENT Leader
@@ -2001,6 +2003,49 @@ Red                  : #d40000
 Yellow               : #bcbf00
 Green                : #0eb313
 Blue                 : #00a3ff
+
+** COMMENT Trouble shooting
+#+begin_quote
+Emily - EPL/HREU - E78 - ⠠⠑⠍⠊⠇⠽
+ —
+Today at 12:57 AM
+When you write "pie"
+You casually write "pie" + space
+So according to plover you've written 4 characters
+But emacs doesn't insert a space
+It tries to autocimplete
+So according to emacs you've written 3 characters
+When you write the second half of python
+Plover sends 3 back spaces
+Kaoffie
+ —
+Today at 12:58 AM
+But that would've been solved by using the space before option though, which it didn't
+Emily - EPL/HREU - E78 - ⠠⠑⠍⠊⠇⠽
+ —
+Today at 12:58 AM
+1: space
+2: e
+3: i
+But as emacs didn't insert the final space
+excalamus
+ —
+Today at 12:59 AM
+I have space placement after output right now
+Emily - EPL/HREU - E78 - ⠠⠑⠍⠊⠇⠽
+ —
+Today at 12:59 AM
+It deletes the p as well
+Then writes the rest of the word
+That's who the starting letter is missing
+Do space before
+
+Emily - EPL/HREU - E78 - ⠠⠑⠍⠊⠇⠽
+ —
+Today at 1:01 AM
+You may want to wrap your alt-x command with {^} on either side
+That will mean plover won't add spaces after that command
+#+end_quote
 
 * Closing bracket
 An empty entry is given because the last entry cannot include a comma.
