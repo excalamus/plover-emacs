@@ -195,8 +195,8 @@ alphabet can be made by using a right hand pattern that excludes the
 |-----------+------------+--------|
 
 * Emacs: Escape, Meta, Alt, Control, Shift <<emacs>>
-An old joke says that Emacs stands for "Escape, Meta, Alt, Control,
-Shift".  Emacs makes extensive use of modifier keys.  This fact
+Emacs makes extensive use of modifier keys.  An old joke says that
+Emacs stands for "Escape, Meta, Alt, Control, Shift".  This fact
 presents a steno-theoretical challenge:
 
 #+begin_quote
@@ -263,6 +263,15 @@ below.
 *ATTENTION* Only definitions for the right hand side are defined at this
 time as well as only for [[control][Control]], [[alt][Alt]], and [[shift][Shift]] combinations[fn:5].
 #+end_quote
+
+** Plover configuration
+Set Plover `Configure > Output > Space Placement` to "Before Output".
+
+Plover sends literal keystrokes, more or less, when a stroke is
+released[fn:6].  This includes a space before or after the output
+sequence.  If the Space Placement is set to "After Output", Emacs may
+not behave as expected depending on how the space is
+interpreted[fn:7].
 
 ** Control <<control>>
 | L Pattern     | Left hand | Modifier | Right Hand | R Pattern      |
@@ -441,7 +450,6 @@ The remaining bindings present no conflicts.
 "KWR-PBL"  : "{^}{#Alt_L(y)}{^}",
 "STKPW-PBL": "{^}{#Alt_L(z)}{^}",
 #+end_src
-
 
 
 ** Control + Alt <<control-alt>>
@@ -639,7 +647,7 @@ silly.
 |-----------+-------------------------|
 | =TP-RPBG= | "fortuning"             |
 | =H-RPBG=  | "hit-and-running"       |
-| =PH-PRBG= | "miranda warning"[fn:6] |
+| =PH-PRBG= | "miranda warning"[fn:8] |
 | =U-RPBG=  | "urning"                |
 
 #+begin_src js :tangle ../plover-emacs.json :exports code
@@ -1960,7 +1968,7 @@ specify a sequence in Plover by separating elements with a space.
 Many Emacs commands require such sequences.
 
 For example, in Emacs =C-x 8 m= writes =µ=.  Send the sequence =C-x 8
-m= using Plover with[fn:7]:
+m= using Plover with[fn:9]:
 #+begin_example
 {#Control_L(x) 8 m}
 #+end_example
@@ -2083,7 +2091,46 @@ forms.  For anyone interested, see [[https://github.com/excalamus/plover-emacs/b
 new strokes, alternate strokes, and silly definitions for each
 modifier combination involving Super.  Pull requests welcome.
 
-[fn:6] Granted, nothing is really 'silly' about "miranda warning".
+[fn:6] I don't know precisely how a stroke corresponds to the
+characters or behavior on screen.  A program like [[https://man.archlinux.org/man/xev.1][xev]] can be used to
+view what the computer see, however.
+
+[fn:7] M-x in Emacs calls `execute-extended-command`.  This command
+reads in a command name, its arguments, and then calls the command.
+Commands in Emacs are Lisp function names which are in turn symbols.
+Symbols can contain spaces, but typically don't.  For example,
+
+#+begin_example emacs-lisp
+(defun name\ with\ spaces ()
+  (interactive)
+  (message "Called a function whose name has spaces"))
+
+;; remove function
+(unintern 'name\ with\ spaces)
+#+end_example
+
+The `execute-extended-command` tries to complete the command name when
+space is pressed.  When there are no symbols whose name contain
+spaces, the completion resolves to a dash.
+
+If Space Placement is "After Output", entering commands into
+`execute-extended-command` won't always work.  To see why, consider
+`python-mode`, or PAOUE/THO-PB.  PAOUE inserts either " pie" (Before
+Output) or "pie " (After Output).  When a space is inserted before,
+Emacs tries to complete the command (the space) and shows all
+available commands.  This is immediately replaced with the string
+"pie".  What the user sees is simply "M-x pie".  The second stroke
+does two backspaces and inserts "ython", resulting in the string
+"python", as expected.  When a space is inserted after, the string
+"pie " is sent by the first stroke.  The space tries to perform a
+complete and finds nothing, resulting in "pie".  That is, Emacs has
+"M-x pie" without a space, yet Plover expects to see "M-x pie ".  On
+the second stroke, Plover sends three backspaces (to account for the
+expected trailing space) and inserts "ython".  Since Emacs only
+contains the three characters "pie", the result is "ython" and not
+"python".
+
+[fn:8] Granted, nothing is really 'silly' about "miranda warning".
 It's simply uncommon outside of classrooms and courtrooms.
 
-[fn:7] Of course, it's possible to send 'µ' directly with Plover.
+[fn:9] Of course, it's possible to send 'µ' directly with Plover.
