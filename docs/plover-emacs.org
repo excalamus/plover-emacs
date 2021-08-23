@@ -451,7 +451,6 @@ The remaining bindings present no conflicts.
 "STKPW-PBL": "{#Alt_L(z)}",
 #+end_src
 
-
 ** Control + Alt <<control-alt>>
 | L Pattern      | Left hand | Modifier      | Right Hand | R Pattern       |
 |----------------+-----------+---------------+------------+-----------------|
@@ -2053,6 +2052,16 @@ Emily - EPL/HREU - E78 - ⠠⠑⠍⠊⠇⠽
 Today at 1:01 AM
 You may want to wrap your alt-x command with  on either side
 That will mean plover won't add spaces after that command
+#+end_quote
+
+#+begin_quote
+also - i've modified what my return (enter) stroke does specifically for use in the terminal
+i make sure that my newline is attached on both sides
+as without that, the next command you write will start with a space, and in bash won't be saved to your command history
+that's also why i chose up to be the default direction for arrows...etc - to make scrolling through past commands easier :p
+
+from my "emily-magnum.json" dictionary: "H-F": "{^}\n{^}",
+"H-FPLT": "{^}.\n{^}{-|}",
 #+end_quote
 
 * Closing bracket
