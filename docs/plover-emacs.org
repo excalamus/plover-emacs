@@ -369,6 +369,7 @@ may be useful but is not provided.
 "PW-PBG"   : "{^}{#Control_L(b)}{^}",
 "KR-PBG"   : "{^}{#Control_L(c)}{^}",
 "SKWR-PBG" : "{^}{#Control_L(j)}{^}",
+"H-PBG"    : "{^}{#Control_L(h)}{^}",
 "TPH-PBG"  : "{^}{#Control_L(n)}{^}",
 "O-PBG"    : "{^}{#Control_L(o)}{^}",
 "P-PBG"    : "{^}{#Control_L(p)}{^}",
