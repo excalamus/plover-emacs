@@ -1,0 +1,22 @@
+{
+    "KPREPB": "{^}():{#Left}{#Left}",
+    "TPHO-RBG": "{#End}{^}\n{^}",
+    "PR-PB": "{^}(){#Left}{^}",
+
+    "PHO-UD"           : "Change mode?",
+    "SP-P"             : "{^}{#Space}{^}",
+    "PHO-UD/SKAEP"     : "{MODE:RESET}",
+    "PHO-UD/KA-PS"     : "{MODE:CAPS}",
+    "PHO-UD/TAO-EULT"  : "{MODE:TITLE}",
+    "PHO-UD/HROER"     : "{MODE:LOWER}",
+    "PHO-UD/K-PL"      : "{MODE:CAMEL}",
+    "PHO-UD/STPHAEUPL" : "{MODE:SNAKE}",
+    "PHO-UD/SKWRAEUPBT": "{MODE:SET_SPACE:}",
+    "PHO-UD/H-B"       : "{MODE:SET_SPACE:-}",
+    "PHO-UD/R-UND"     : "{MODE:SET_SPACE:_}",
+
+    "TK-F": "{^}def",
+    "KHR-LS": "{^}class",
+    "TK-UPBD": "____{#Left}{#Left}{^}"
+
+}
