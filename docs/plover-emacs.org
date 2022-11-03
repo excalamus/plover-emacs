@@ -375,7 +375,7 @@ but is not provided.
 "O-PBG"    : "{^}{#Control_L(o)}{^}",
 "P-PBG"    : "{^}{#Control_L(p)}{^}",
 "KW-PBG"   : "{^}{#Control_L(q)}{^}",
-"U-PBG"    : "{^}{#Control_L(u)}{^}",
+"UPBG"     : "{^}{#Control_L(u)}{^}",
 "SR-PBG"   : "{^}{#Control_L(v)}{^}",
 "KWR-PBG"  : "{^}{#Control_L(y)}{^}",
 "STKPW-PBG": "{^}{#Control_L(z)}{^}",
