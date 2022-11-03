@@ -724,7 +724,7 @@ There are no other conflicts with the Plover standard dictionary.
 "R-RPBL"     : "{^}{#Alt_L(Shift_L(r))}{^}",
 "S-RPBL"     : "{^}{#Alt_L(Shift_L(s))}{^}",
 "T-RPBL"     : "{^}{#Alt_L(Shift_L(t))}{^}",
-"U-RPBL"     : "{^}{#Alt_L(Shift_L(u))}{^}",
+"URPBL"      : "{^}{#Alt_L(Shift_L(u))}{^}",
 "SR-RPBL"    : "{^}{#Alt_L(Shift_L(v))}{^}",
 "W-RPBL"     : "{^}{#Alt_L(Shift_L(w))}{^}",
 "KP-RPBL"    : "{^}{#Alt_L(Shift_L(x))}{^}",
