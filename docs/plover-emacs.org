@@ -768,7 +768,7 @@ require an additional stroke, are fortunately easy to remember.
 "EURPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(i)))}{^}",
 "EUPL/TKPW-UR" : "imgur",
 "O-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(o)))}{^}",
-"O-ERPBLG="    : "original",
+"O-ERPBLG"     : "original",
 "P-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(p)))}{^}",
 "PR-PBLG"      : "perjury",
 "S-RPBLG"      : "{^}{#Control_L(Alt_L(Shift_L(s)))}{^}",
