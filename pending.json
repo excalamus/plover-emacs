@@ -1,3 +1,23 @@
 {
-    "O-EUPBG": "{^}{#Control_L(slash)}{^}"
+"EL": "el",
+"KHR-PBL": "{^} {#Alt_L(Shift_L(colon))} {^}",
+"KHR-RPBL": "{^} {#Alt_L(Shift_L(colon))} {^}",
+"KPH*EUPBT": "comint",
+"KPW-PBG": "{^}{#Control_L(x)}b{^}",
+"KWHR-PBG": "{^}{#Control_L(equal)}{^}",
+"KWHR-PBL": "{^}{#Alt_L(equal)}{^}",
+"OEUPBG": "{^}{#Control_L(slash)}{^}",
+"OEUPBL": "{^} {#Alt_L(slash)} {^}",
+"PHEUFR": "minibuffer",
+"PR-PBLD": "{^}{#Alt_L(period)}{^}",
+"PWHR-PBL": "{#Alt_L(Tab)}{^}",
+"PWHR-RPG": "{#Shift(tab)}{^}",
+"SET/KW*": "{^}setq",
+"SHRURP": "slurp",
+"SP-PBG": "{^}{#Control_L(space)}{^}",
+"TA*RPBG": "{#Shift(tab)}{^}",
+"TH-PBG": "{#Control_L(semicolon)}",
+"TKP-PBG": "{^}{#Control_L(x)}{#Control_L(f)}{^}",
+"TPR*PBL": "{^}{#Alt_L(braceright)}{^}",
+"TPR-PBL": "{^}{#Alt_L(braceleft)}{^}"
 }
